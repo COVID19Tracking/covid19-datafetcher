@@ -126,7 +126,7 @@
   },
   "MD": {
     "pDeaths": "DEATH_PROBABLE",
-    "deaths": "DEATH",
+    "deaths": "DEATH_CONFIRMED",
     "total_released": "RECOVERED",
     "total_hospitalized": "HOSP",
     "bedsTotal": "CURR_HOSP",
@@ -180,7 +180,7 @@
   },
   "PR": {
       "T_Muertes_Combinadas": "DEATH",
-      "T_Muertes_COVID_RD": "DEATH_CONFIRMED",
+      "T_Fatalidades": "DEATH_CONFIRMED",
       "T_Casos_Unicos": "POSITIVE",
       "T_Vent_Covid": "CURR_VENT",
       "T_Pacientes_Int_Covid": "CURR_ICU",

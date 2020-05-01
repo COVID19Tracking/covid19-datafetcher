@@ -98,7 +98,7 @@ def build_dataframe(results):
     columns=[Fields.FETCH_TIMESTAMP, Fields.TIMESTAMP,
              Fields.POSITIVE, Fields.NEGATIVE, Fields.TOTAL, Fields.PENDING,
              Fields.CURR_HOSP, Fields.HOSP, Fields.CURR_ICU, Fields.ICU, Fields.CURR_VENT,
-             Fields.DEATH, Fields.DEATH_PROBABLE,
+             Fields.DEATH, Fields.DEATH_PROBABLE, Fields.DEATH_CONFIRMED,
              Fields.RECOVERED]
     columns = [f.name for f in columns]
 
