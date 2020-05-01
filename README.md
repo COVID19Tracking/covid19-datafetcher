@@ -5,7 +5,8 @@ Fetch COVID19 data published by US states.
 This project has the scripts and data-source definitions needed to fetch COVID-19 related data (e.g., tests, cases, death) from ArcGIS data sources used by US states.
 
 
-The biggest value of this repository comes from (1) the list of state data sources and (2) the mapping that maps state-specific property name to a common terminology (e.g., `T_Pos_Count` to `POSITIVE`)
+The biggest value of this repository comes from (1) the list of state data sources and (2) the mapping that maps state-specific property name to a common terminology (e.g., `T_Pos_Count` to `POSITIVE`).
+<br />The scripts that fetch and process the data are very minimal now.
 
 
 ## Coding TODOs
