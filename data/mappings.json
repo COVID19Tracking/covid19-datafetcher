@@ -1,0 +1,197 @@
+{ "AK": {
+    "Date": "TIMESTAMP",
+    "cum_Total": "TOTAL",
+    "Hospitalized": "HOSP",
+    "Deceased": "DEATH",
+    "Cases": "POSITIVE",
+    "SUM_Pos_COVID_Vent": "CURR_VENT",
+    "SUM_Pos_COVID_PUI_Pending": "CURR_HOSP",
+    "Recovered": "RECOVERED"
+},
+  "AL": {
+      "SUM_LabTestCount": "TOTAL",
+      "SUM_CONFIRMED": "POSITIVE",
+      "SUM_DIED": "DEATH"
+  },
+  "AR": {
+      "SUM_negative": "NEGATIVE",
+      "SUM_positive": "POSITIVE",
+      "SUM_pending": "PENDING",
+      "SUM_total_tests": "TOTAL",
+      "SUM_deaths": "DEATH",
+      "SUM_Recoveries": "RECOVERED"
+  },
+  "CO": {
+      "MAX_State_Pos_Cases": "POSITIVE",
+      "MAX_State_Deaths": "DEATH",
+      "MAX_State_Number_Hospitalizations": "HOSP",
+      "MAX_State_Number_Tested": "TOTAL",
+      "MAX_Date_Data_Last_Updated": "DATE"
+      
+  },
+  "CT": {
+      "date": "DATE",
+      "cases":"POSITIVE", "hospitalizations":"HOSP", "deaths":"DEATH"
+  },
+  "FL": {
+      "SUM_T_positive": "POSITIVE",
+      "SUM_T_negative": "NEGATIVE",
+      "SUM_T_total": "TOTAL",
+      "SUM_TPending": "PENDING",
+      "SUM_TInconc": "INCONCLUSIVE[",
+      "SUM_C_HospYes_Res": "HOSP",
+      "SUM_C_FLResDeaths": "DEATH"
+  },
+  "WI": {
+    "DEATHS": "DEATH",
+    "IC_YES": "ICU",
+    "HOSP_YES": "HOSP",
+    "NEGATIVE": "NEGATIVE",
+    "POSITIVE": "POSITIVE",
+    "LoadDttm": "TIMESTAMP"
+  },
+  "VT": {
+    "current_hospitalizations": "CURR_HOSP",
+    "total_deaths": "DEATH",
+    "total_tests": "TOTAL",
+    "cumulative_positives": "POSITIVE",
+    "date": "TIMESTAMP"
+  },
+  "TX": {
+    "CumulativeFatalities": "DEATH",
+    "CumulativeCases": "POSITIVE",
+    "Date": "TIMESTAMP"
+  },
+  "SC": {
+    "SUM_Death": "DEATH",
+    "SUM_Confirmed": "POSITIVE",
+    "MAX_Date_": "TIMESTAMP"
+  },
+  "RI": {
+    "Negative_Covid_Lab_Tests": "NEGATIVE",
+    "Total_Covid_Lab_Tests": "TOTAL",
+    "Covid_Ventilator": "CURR_VENT",
+    "Covid_ICU": "CURR_ICU",
+    "Total_Hospitalized": "CURR_HOSP",
+    "Covid_Deaths": "DEATH",
+    "Covid_case": "POSITIVE",
+    "Date": "TIMESTAMP"
+  },
+  "PA": {
+    "SUM_COVID19onVents": "CURR_VENT",
+    "SUM_Deaths": "DEATH",
+    "SUM_Cases": "POSITIVE"
+  },
+  "NM": {
+    "recovered": "RECOVERED",
+    "currentHospitalizations": "CURR_HOSP",
+    "totalHospitalizations": "HOSP",
+    "deaths": "DEATH",
+    "tests": "TOTAL",
+    "cases": "POSITIVE",
+    "created": "TIMESTAMP"
+  },
+  "NJ": {
+    "total_tests_reported": "TOTAL",
+    "total_negatives": "NEGATIVE",
+    "total_deaths": "DEATH",
+    "total_positives": "POSITIVE",
+      "_date": "TIMESTAMP",
+      "recoveries": "RECOVERED"
+  },
+  "NE": {
+    "Positive": "POSITIVE",
+    "Not Detected": "NEGATIVE",
+    "Inconclusive": "INCONCLUSIVE"
+  },
+  "NC": {
+    "SUM_Deaths": "DEATH",
+    "SUM_Total": "POSITIVE",
+    "MAX_Hosp": "CURR_HOSP"
+  },
+  "MT": {
+    "SUM_TotalRecovered": "RECOVERED",
+    "SUM_HospitalizationCount": "CURR_HOSP",
+    "SUM_TotalDeaths": "DEATH",
+    "SUM_Total": "POSITIVE",
+    "MAX_LAST_UPDATE": "TIMESTAMP"
+  },
+  "MO": {
+    "SUM_Deaths": "DEATH",
+    "SUM_Cases": "POSITIVE"
+  },
+  "MN": {
+    "SUM_COVID19DTH": "DEATH",
+    "SUM_COVID19POS": "POSITIVE"
+  },
+  "MD": {
+    "pDeaths": "DEATH_PROBABLE",
+    "deaths": "DEATH",
+    "total_released": "RECOVERED",
+    "total_hospitalized": "HOSP",
+    "bedsTotal": "CURR_HOSP",
+    "bedsICU": "CURR_ICU",
+    "NegativeTests": "NEGATIVE",
+    "TotalCases": "POSITIVE",
+    "ReportDate": "TIMESTAMP"
+  },
+  "LA": {
+    "SUM_Commercial_Tests": "TOTAL",
+    "SUM_Deaths": "DEATH",
+    "SUM_Cases": "POSITIVE"
+  },
+  "KY": {
+    "ICU": "CURR_ICU",
+    "Hospitalized": "CURR_HOSP",
+    "Deceased": "DEATH",
+    "Confirmed": "POSITIVE"
+  },
+  "IN": {
+      "Tested": "TOTAL",
+      "Deaths": "DEATH",
+      "Positives": "POSITIVE",
+      "Update Text": "DATE"
+  },
+  "IL": {
+    "deaths": "DEATH",
+    "total_tested": "TOTAL",
+    "confirmed_cases": "POSITIVE"
+  },
+  "IA": {
+    "last_updated": "TIMESTAMP",
+    "PeopleTested": "TOTAL",
+    "Deceased": "DEATH",
+    "DischRecov": "RECOVERED",
+    "CurrHospitalized": "CURR_HOSP",
+    "Total_Cases": "POSITIVE"
+  },
+  "GA": {
+    "MAX_EditDate": "TIMESTAMP",
+    "SUM_COVID_Deaths": "DEATH",
+    "SUM_COVID_Cases": "POSITIVE"
+  },
+  "DE": {
+    "Last_Updated": "TIMESTAMP",
+    "Hospitalizations": "CURR_HOSP",
+    "Recovered": "RECOVERED",
+    "NegativeCOVID": "NEGATIVE",
+    "SUM_Total_Death": "DEATH",
+    "SUM_Presumptive_Positive": "POSITIVE"
+  },
+  "PR": {
+      "T_Muertes_Combinadas": "DEATH",
+      "T_Muertes_COVID_RD": "DEATH_CONFIRMED",
+      "T_Casos_Unicos": "POSITIVE",
+      "T_Vent_Covid": "CURR_VENT",
+      "T_Pacientes_Int_Covid": "CURR_ICU",
+      "T_Serologicos_Pos": "ANTIBODY_POS"
+  },
+  "MI": {
+      "SUM_F__in_Critical_Care": "CURR_ICU",
+      "SUM_F__on_Ventilators": "CURR_VENT",
+      "SUM_Inpatients": "CURR_HOSP",
+      "Recovered": "RECOVERED",
+      "Tot_Deaths": "DEATH",
+      "positives": "POSITIVE"
+  }
+}
