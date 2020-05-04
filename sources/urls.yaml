@@ -1,0 +1,231 @@
+# Format: State => [queries]
+# Query is {url: .., params: ..., type: ...}
+AK:
+- url: https://services1.arcgis.com/WzFsmainVTuD5KML/ArcGIS/rest/services/COVID_Tests/FeatureServer/0/query
+  params: {where: 1=1,
+    outFields: 'Date,cum_Total',
+    orderByFields: Date desc,
+    resultRecordCount: 1,
+    f: json}
+  type: arcgis
+- url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/COVID_Cases_public/FeatureServer/0/query
+  params: {where: Hospitalized='Y',
+    outStatistics: [{statisticType: count, onStatisticField: FID,
+        outStatisticFieldName: Hospitalized}], f: json}
+  type: arcgis
+- url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/COVID_Cases_public/FeatureServer/0/query
+  params: {where: Deceased='Y', outStatistics: [{statisticType: count, onStatisticField: FID,
+        outStatisticFieldName: Deceased}], f: json}
+  type: arcgis
+- url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/COVID_Cases_public/FeatureServer/0/query
+  params: {where: 'RecoverDate>timestamp ''2020-01-02 07:59:59''', outStatistics: [
+      {statisticType: count, onStatisticField: FID, outStatisticFieldName: Recovered}],
+    f: json}
+  type: arcgis
+- url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/COVID_Cases_public/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{statisticType: count, onStatisticField: FID,
+        outStatisticFieldName: Cases}, {statisticType: max, onStatisticField: ReportDate,
+        outStatisticFieldName: ReportDate}], f: json}
+  type: arcgis
+- url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/COVID_Hospital_Dataset_(prod)/FeatureServer/0/query
+  params: {where: Bed_Current=1, outStatistics: [{statisticType: sum, onStatisticField: Pos_COVID},
+      {statisticType: sum, onStatisticField: Pos_COVID_Vent}, {statisticType: sum,
+        onStatisticField: Pos_COVID_PUI_Pending}], f: json}
+  type: arcgis
+AL:
+- url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/COV19_Public_Dashboard_ReadOnly/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{statisticType: sum, onStatisticField: LabTestCount},
+      {statisticType: sum, onStatisticField: CONFIRMED}, {statisticType: sum, onStatisticField: DIED}],
+    f: json}
+  type: arcgis
+AR:
+- url: https://services.arcgis.com/PwY9ZuZRDiI5nXUB/arcgis/rest/services/ADH_COVID19_Positive_Test_Results/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{statisticType: sum, onStatisticField: negative},
+      {statisticType: sum, onStatisticField: positive}, {statisticType: sum, onStatisticField: pending},
+      {statisticType: sum, onStatisticField: total_tests}, {statisticType: sum, onStatisticField: deaths},
+      {statisticType: sum, onStatisticField: Recoveries}], f: json}
+  type: arcgis
+CO:
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/Colorado_COVID19_Positive_Cases/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{statisticType: max, onStatisticField: State_Pos_Cases},
+      {statisticType: max, onStatisticField: State_Deaths}, {statisticType: max, onStatisticField: State_Number_Hospitalizations},
+      {statisticType: max, onStatisticField: State_Number_Tested}, {statisticType: max,
+        onStatisticField: Date_Data_Last_Updated}], f: json}
+  type: arcgis
+CT:
+- url: https://data.ct.gov/resource/rf3k-f8fg.json
+  params: null
+  type: arcgis
+DE:
+- url: https://services1.arcgis.com/PlCPCPzGOwulHUHo/arcgis/rest/services/DEMA_COVID_County_Boundary_Time_VIEW/FeatureServer/0/query
+  params: {f: json, outStatistics: [{onStatisticField: Presumptive_Positive, statisticType: sum},
+      {onStatisticField: Total_Death, statisticType: sum}], where: NAME<>'Statewide'}
+  type: arcgis
+- url: https://services1.arcgis.com/PlCPCPzGOwulHUHo/arcgis/rest/services/DEMA_COVID_County_Boundary_Time_VIEW/FeatureServer/0/query
+  params: {where: NAME='Statewide',
+        outFields: NegativeCOVID,Recovered,Hospitalizations,CriticalCond,Last_Updated,
+        f: json
+        }
+  type: arcgis
+FL:
+- url: https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/arcgis/rest/services/Florida_COVID19_Cases/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{statisticType: sum, onStatisticField: T_positive},
+      {statisticType: sum, onStatisticField: T_negative}, {statisticType: sum, onStatisticField: T_total},
+      {statisticType: sum, onStatisticField: T_Total_Res}, {statisticType: sum, onStatisticField: TPending},
+      {statisticType: sum, onStatisticField: TInconc}, {statisticType: sum, onStatisticField: C_HospYes_Res},
+      {statisticType: sum, onStatisticField: C_HospYes_NonRes}, {statisticType: sum,
+        onStatisticField: C_NonResDeaths}, {statisticType: sum, onStatisticField: C_FLResDeaths}],
+    f: json}
+  type: arcgis
+GA:
+- url: https://services1.arcgis.com/2iUE8l8JKrP2tygQ/arcgis/rest/services/COVID_19_Cases/FeatureServer/0/query
+  params: {f: json, outStatistics: [{onStatisticField: COVID_Cases, statisticType: sum},
+      {onStatisticField: COVID_Deaths, statisticType: sum}, {onStatisticField: EditDate,
+        statisticType: max}], where: 1=1}
+  type: arcgis
+IA:
+- url: https://services.arcgis.com/vPD5PVLI6sfkZ5E4/arcgis/rest/services/IACOVID19Cases_Demographics/FeatureServer/0/query
+  params: {f: json, outFields: '*', where: 1=1}
+  type: arcgis
+IL:
+- url: http://www.dph.illinois.gov/sitefiles/COVIDTestResults.json
+  params: null
+  type: arcgis
+IN:
+- url: https://services5.arcgis.com/f2aRfVsQG7TInso2/arcgis/rest/services/Coronavirus/FeatureServer/0/query
+  params: {f: json, outFields: '*', where: Measure <> ''}
+  type: arcgis
+KY:
+- url: https://kygisserver.ky.gov/arcgis/rest/services/WGS84WM_Services/Ky_Cnty_COVID19_Cases_WGS84WM/FeatureServer/0/query
+  params: {f: json, outStatistics: [{outStatisticFieldName: Confirmed, onStatisticField: Confirmed,
+        statisticType: sum}, {outStatisticFieldName: Deceased, onStatisticField: Deceased,
+        statisticType: sum}, {outStatisticFieldName: Hospitalized, onStatisticField: Hospitalized,
+        statisticType: sum}, {outStatisticFieldName: ICU, onStatisticField: ICU, statisticType: sum}],
+    where: 1=1}
+  type: arcgis
+LA:
+- url: https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/Cases_by_Parish/FeatureServer/0/query
+  params: {f: json, outStatistics: [{onStatisticField: Cases, statisticType: sum},
+      {onStatisticField: Deaths, statisticType: sum}, {onStatisticField: State_Tests,
+        statisticType: sum}, {onStatisticField: Commercial_Tests, statisticType: sum}],
+    where: 1=1}
+  type: arcgis
+MD:
+- url: https://services.arcgis.com/njFNhDsUCentVYJW/ArcGIS/rest/services/MASTER_CaseTracker_3/FeatureServer/0/query
+  params: {f: json, resultRecordCount: 1, orderByFields: ReportDate desc, outFields: 'ReportDate,TotalCases,NegativeTests,bedsICU,bedsAcute,bedsTotal,total_hospitalized,total_released,deaths,pdeaths',
+    where: 1=1}
+  type: arcgis
+MI:
+- url: https://services5.arcgis.com/ZqUZ99cjRiEOyN05/arcgis/rest/services/COVID19_Cases_Growth_Public2/FeatureServer/0/query
+  params: {where: 1=1, outFields: 'f1 as date,f2 as negatives,f3 as positives,f5 as
+      pending,Tot_Deaths', orderByFields: f1 desc, resultRecordCount: 1, f: json}
+  type: arcgis
+- url: https://services5.arcgis.com/ZqUZ99cjRiEOyN05/ArcGIS/rest/services/COVID_Metrics/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{statisticType: sum, onStatisticField: F__in_Critical_Care},
+      {statisticType: sum, onStatisticField: F__on_Ventilators}, {statisticType: sum,
+        onStatisticField: Inpatients}], f: json}
+  type: arcgis
+- url: https://services5.arcgis.com/ZqUZ99cjRiEOyN05/arcgis/rest/services/uwyRu/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{statisticType: sum, onStatisticField: f2,
+        outStatisticFieldName: Recovered}], f: json}
+  type: arcgis
+MN:
+- url: https://services1.arcgis.com/RQG3sksSXcoDoIfj/ArcGIS/rest/services/MN_COVID19_County_Tracking_Public_View/FeatureServer/0/query
+  params: {f: json, outStatistics: [{onStatisticField: COVID19POS, statisticType: sum},
+      {onStatisticField: COVID19DTH, statisticType: sum}], where: 1=1}
+  type: arcgis
+MO:
+- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/ArcGIS/rest/services/lpha_boundry/FeatureServer/0/query
+  params: {f: json, outStatistics: [{onStatisticField: Cases, statisticType: sum},
+      {onStatisticField: Deaths, statisticType: sum}], where: 1=1}
+  type: arcgis
+MT:
+- url: https://services.arcgis.com/qnjIrwR8z5Izc0ij/arcgis/rest/services/COVID_Cases_Production_View/FeatureServer/0/query
+  params: {f: json, outStatistics: [{onStatisticField: Total, statisticType: sum},
+      {onStatisticField: TotalDeaths, statisticType: sum}, {onStatisticField: HospitalizationCount,
+        statisticType: sum}, {onStatisticField: TotalRecovered, statisticType: sum},
+      {onStatisticField: LAST_UPDATE, statisticType: max}], where: 1=1}
+  type: arcgis
+NC:
+- url: https://services.arcgis.com/iFBq2AW9XO0jYYF7/ArcGIS/rest/services/NCCovid19/FeatureServer/0/query
+  params: {f: json, outStatistics: [{onStatisticField: Hosp, statisticType: max},
+      {onStatisticField: Total, statisticType: sum}, {onStatisticField: Deaths, statisticType: sum}],
+    where: 1=1}
+  type: arcgis
+NE:
+- url: https://gis.ne.gov/Agency/rest/services/COVID19_County_Layer/MapServer/3/query
+  params: {f: json, outStatistics: [{onStatisticField: ID, statisticType: count}],
+    groupByFieldsForStatistics: lab_status, outFields: '*', where: NE_JURIS='yes'}
+  type: arcgis
+NJ:
+- url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/survey123_cb9a6e9a53ae45f6b9509a23ecdf7bcf/FeatureServer/0/query
+  params: {f: json, resultRecordCount: 1, orderByFields: _date desc, outFields: '*',
+    where: 1=1}
+  type: arcgis
+- url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/Discharges_NJHA/FeatureServer/0/query
+  params: {where: structure_measure_identifier='# of COVID Patients Discharged from
+      the Hospital (past 24 hours)', outStatistics: [{statisticType: sum, onStatisticField: value,
+        outStatisticFieldName: recoveries}, {statisticType: max, onStatisticField: survey_period}],
+    f: json}
+  type: arcgis
+NM:
+- url: https://e7p503ngy5.execute-api.us-west-2.amazonaws.com/prod/GetPublicStatewideData
+  params: null
+  type: arcgis
+PA:
+- url: https://services2.arcgis.com/xtuWQvb2YQnp0z3F/ArcGIS/rest/services/County_Case_Data_Public/FeatureServer/0/query
+  params: {f: json, outStatistics: [{onStatisticField: COVID19onVents, statisticType: sum},
+      {onStatisticField: COVID19ECMO, statisticType: sum}, {onStatisticField: COVID19Hospitalized,
+        statisticType: sum}, {onStatisticField: Cases, statisticType: sum}, {onStatisticField: Deaths,
+        statisticType: sum}], where: 1=1}
+  type: arcgis
+- url: https://services2.arcgis.com/xtuWQvb2YQnp0z3F/arcgis/rest/services/Adam_County_Summary_Table_v4/FeatureServer/0/query
+  params: { where: 1=1, f: json,
+    outStatistics: [{"statisticType":"sum","onStatisticField":"COVID_19_Patient_Counts_Total_n","outStatisticFieldName":"curr_vent"},
+{"statisticType":"sum","onStatisticField":"COVID_19_Patient_Counts_Total_2","outStatisticFieldName":"curr_hosp"},
+{"statisticType":"sum","onStatisticField":"COVID_19_Patient_Counts_Total_1","outStatisticFieldName":"ecmo"}]}
+  type: arcgis
+PR:
+- url: https://services5.arcgis.com/klquQoHA0q9zjblu/ArcGIS/rest/services/Datos_Totales/FeatureServer/0/query
+  params: {where: 1=1, outFields: 'T_Muertes_COVID_RD,T_Muertes_Combinadas,T_Pacientes_Int_Covid,T_Vent_Covid,T_Serologicos_Pos,T_Casos_Unicos,T_Molecular_Pos,T_Fatalidades',
+    f: json}
+  type: arcgis
+RI:
+- url: https://services1.arcgis.com/dkWT1XL4nglP5MLP/ArcGIS/rest/services/COVID_Public_Map_TEST/FeatureServer/2/query
+  params: {f: json, outStatistics: [{outStatisticFieldName: Date, statisticType: max,
+        onStatisticField: Date}, {outStatisticFieldName: Covid_case, statisticType: max,
+        onStatisticField: Covid_case}, {outStatisticFieldName: Covid_Deaths, statisticType: max,
+        onStatisticField: Covid_Deaths}, {outStatisticFieldName: Total_Hospitalized,
+        statisticType: max, onStatisticField: Total_Hospitalized}, {outStatisticFieldName: Covid_ICU,
+        statisticType: max, onStatisticField: Covid_ICU}, {outStatisticFieldName: Covid_Ventilator,
+        statisticType: max, onStatisticField: Covid_Ventilator}, {outStatisticFieldName: Total_Covid_Lab_Tests,
+        statisticType: max, onStatisticField: Total_Covid_Lab_Tests}, {outStatisticFieldName: Negative_Covid_Lab_Tests,
+        statisticType: max, onStatisticField: Negative_Covid_Lab_Tests}], where: City_Town
+      <> 'TOTAL'}
+  type: arcgis
+SC:
+- url: https://services2.arcgis.com/XZg2efAbaieYAXmu/arcgis/rest/services/COVID19/FeatureServer/0/query
+  params: {f: json, outStatistics: [{onStatisticField: Date_, statisticType: max},
+      {onStatisticField: Confirmed, statisticType: sum}, {onStatisticField: Recovered,
+        statisticType: sum}, {onStatisticField: Death, statisticType: sum}], where: 1=1}
+  type: arcgis
+TX:
+- url: https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/EpiCurve410_View/FeatureServer/0/query
+  params: {f: json, resultRecordCount: 1, orderByFields: Date desc, outFields: '*',
+    where: 1=1}
+  type: arcgis
+- url: https://services1.arcgis.com/d9sLvPecHnb8pMfE/arcgis/rest/services/TSA_BedAvailability_ViewTest/FeatureServer/0/query
+  params: {"where": "1=1",
+  'outStatistics': '[{"statisticType":"sum","onStatisticField":"Sum_Total_Lab_COVID","outStatisticFieldName":"curr_hosp"}]',
+  'f': 'json'}
+  type: arcgis
+VT:
+- url: https://services1.arcgis.com/BkFxaEFNwHqX3tAw/arcgis/rest/services/county_summary/FeatureServer/0/query
+  params: {f: json, resultRecordCount: 1, orderByFields: date DESC, outFields: 'date,cumulative_positives,total_tests,total_deaths,current_hospitalizations,hosp_pui,total_recovered',
+    where: 1=1}
+  type: arcgis
+WI:
+- url: https://services1.arcgis.com/ISZ89Z51ft1G16OK/ArcGIS/rest/services/COVID19_WI/FeatureServer/2/query
+  params: {f: json, outFields: 'LoadDttm,POSITIVE,NEGATIVE,HOSP_YES,IC_YES,DEATHS',
+    where: 1=1}
+  type: arcgis

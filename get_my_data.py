@@ -4,94 +4,102 @@ import pandas as pd
 import sys
 import urllib, urllib.request, json
 
-from utils import request_and_parse, request_and_parse_multi, extract_attributes, Fields
+from utils import request_and_parse, extract_attributes, Fields
 import extras as extras_module
+from sources import states
 
 
-URLS_FILE = "data/urls.json"
-QUERIES_FILE = "data/queries.json"
-MAPPINGS_FILE = "data/mappings.json"
+
 OUTPUT_FOLDER = "."
-    
-arcgis_urls = {}
-arcgis_queries = {}
-mappings = {}
-extras = {}
 
-def read_data_sources():
-    # I'm a bad person :(
-    global arcgis_urls, arcgis_queries, mappings
-    
-    arcgis_urls = json.load(open(URLS_FILE))
-    arcgis_queries = json.load(open(QUERIES_FILE))
-    mappings = json.load(open(MAPPINGS_FILE))
 
-    # extras
-    # Check the extras file and register all extra handling methods
-    extra_format = "handle_{}"
-    for state in arcgis_urls:
-        extra_name = extra_format.format(state.lower())
-        if hasattr(extras_module, extra_name):
-            extras[state] = getattr(extras_module, extra_name)
+class Fetcher(object):
+    sources = None
+    mappings = None
+    extras = None
 
-def fetch_all():
-    results = {}
-    success = 0
-    failures = []
+    def __init__(self):
+        '''Initialize source information'''
+        self.sources, self.mappings, self.extras = self._read_data_sources()
 
-    for state in sorted(arcgis_urls.keys()):
-        try:
-            res, data = fetch_state(state)
-            if res:
-                if data:
-                    results[state] = data
-                    success += 1
-                else:
-                    # failed parsing
-                    print("Failed parsing {}?".format(state))
-                    failures.append(state)
-        except Exception as e:
-            print("Failed to fetch {}".format(state), str(e))
-            failures.append(state)
+    def has_state(self, state):
+        return state in self.sources
 
-    print("Fetched data for {} states".format(success))
-    print("Failed fetching: ", failures)
-    return results
+    def _read_data_sources(self):
+        '''Returns a tuple of (sources, mappings, extras)'''
+        sources = states.read_sources()
+        mappings = states.read_mappings()
 
-def fetch_state(state):
-    ''' Fetch data for a single state, returning a tuple of 
-    (fetched_result, parsed_data)
+        extras = {}
 
-    If there's no query for the state: return (None, _)
-    '''
-    print("Fetching: ", state)
-    res = None
-    data = {}
-    
-    url = arcgis_urls.get(state)
-    query = arcgis_queries.get(state)
-    
-    if not url:
-        return res, data
-    if (isinstance(url, list)):
-        results = request_and_parse_multi(url, query)
-    else:
-        results = request_and_parse(url, query)
+        # extras
+        # Check the extras file and register all extra handling methods
+        extra_format = "handle_{}"
+        for state in sources:
+            extra_name = extra_format.format(state.lower())
+            if hasattr(extras_module, extra_name):
+                extras[state] = getattr(extras_module, extra_name)
 
-    if state in extras:
-        data = extras[state](results, mappings.get(state))
-    else:
-        if (not isinstance(results, list)):
-            results = [results]
-        for result in results:
-            partial = extract_attributes(result, mappings[state], state)
-            data.update(partial)
+        return sources, mappings, extras
 
-    _timestamp_data(data)
-    return results, data
+    def fetch_all(self):
+        results = {}
+        success = 0
+        failures = []
 
-def _timestamp_data(data):
-    data[Fields.FETCH_TIMESTAMP.name] = datetime.now().timestamp()
+        for state in sorted(self.sources.keys()):
+            try:
+                res, data = self.fetch_state(state)
+                if res:
+                    if data:
+                        results[state] = data
+                        success += 1
+                    else:
+                        # failed parsing
+                        print("Failed parsing {}?".format(state))
+                        failures.append(state)
+            except Exception as e:
+                print("Failed to fetch {}".format(state), str(e))
+                failures.append(state)
+
+        print("Fetched data for {} states".format(success))
+        print("Failed fetching: ", failures)
+        return results
+
+    def fetch_state(self, state):
+        ''' Fetch data for a single state, returning a tuple of
+        (fetched_result, parsed_data)
+
+        If there's no query for the state: return (None, _)
+        '''
+        print("Fetching: ", state)
+        res = None
+        data = {}
+
+        queries = self.sources[state]
+        if not queries:
+            return res, data
+
+        results = []
+        for query in queries:
+            try:
+                res = request_and_parse(query['url'], query['params'])
+                results.append(res)
+            except Exception as e:
+                print(state, ": failed to fetch ", query['url'], str(e))
+
+        if state in self.extras:
+            data = self.extras[state](results, self.mappings.get(state))
+        else:
+            for result in results:
+                partial = extract_attributes(result, self.mappings[state], state)
+                data.update(partial)
+
+        self._timestamp_data(data)
+        return results, data
+
+    def _timestamp_data(self, data):
+        data[Fields.FETCH_TIMESTAMP.name] = datetime.now().timestamp()
 
 
 def build_dataframe(results):
@@ -111,58 +119,27 @@ def build_dataframe(results):
     return df
 
 
-def gen_user_link(state):
-    url = arcgis_urls[state]
-    query = arcgis_queries.get(state)
-    if query:
-        query['f'] = 'html'
-        url = "{}?{}".format(url, urllib.parse.urlencode(query))
-    return url
-
-
-# def extract_attributes(res, mapping, debug_state = None):
-#     '''Uses mapping to extract attributes from `res`
-#     Retruns tagged attributes
-#     '''
-#     features = 'features'
-#     attributes = 'attributes'
-#     tagged_attributes = {}
-#     if features in res and len(res[features]) > 0:        
-#         if attributes in res[features][0]:
-#             attribs = res[features][0][attributes]
-#             for k, v in attribs.items():
-#                 if k in mapping:
-#                     tagged_attributes[mapping[k]] = v
-#                 else:
-#                     # report value without mapping
-#                     print("[{}] Field {} has no mapping".format(debug_state, k))
-#     return tagged_attributes
-
-
-def glue(state = None):
+def main(state = None):
     if state:
         print("Fetching ", state)
     else:
         print("Fetching all")
-    
-    read_data_sources()
-    
+
+    fetcher = Fetcher()
     results = {}
-    if state and state in arcgis_urls:
-        _, data = fetch_state(state)
+    if state and fetcher.has_state(state):
+        _, data = fetcher.fetch_state(state)
         results[state] = data
     else:
-        results = fetch_all()
+        results = fetcher.fetch_all()
 
     # This will also store a CSV
     df = build_dataframe(results)
     print(df)
-    
 
 if __name__ == "__main__":
-    print("Version: ", sys.version_info)    
+    print("Version: ", sys.version_info)
 
     # read command line args, but don't bother too much
     state = sys.argv[1] if len(sys.argv) > 1 else None
-    glue(state)
-        
+    main(state)

@@ -1,0 +1,172 @@
+AK:
+  Cases: POSITIVE
+  Date: TIMESTAMP
+  Deceased: DEATH
+  Hospitalized: HOSP
+  Recovered: RECOVERED
+  SUM_Pos_COVID_PUI_Pending: CURR_HOSP
+  SUM_Pos_COVID_Vent: CURR_VENT
+  cum_Total: TOTAL
+AL:
+  SUM_CONFIRMED: POSITIVE
+  SUM_DIED: DEATH
+  SUM_LabTestCount: TOTAL
+AR:
+  SUM_Recoveries: RECOVERED
+  SUM_deaths: DEATH
+  SUM_negative: NEGATIVE
+  SUM_pending: PENDING
+  SUM_positive: POSITIVE
+  SUM_total_tests: TOTAL
+CO:
+  MAX_Date_Data_Last_Updated: DATE
+  MAX_State_Deaths: DEATH
+  MAX_State_Number_Hospitalizations: HOSP
+  MAX_State_Number_Tested: TOTAL
+  MAX_State_Pos_Cases: POSITIVE
+CT:
+  cases: POSITIVE
+  date: DATE
+  deaths: DEATH
+  hospitalizations: HOSP
+DE:
+  Hospitalizations: CURR_HOSP
+  Last_Updated: TIMESTAMP
+  NegativeCOVID: NEGATIVE
+  Recovered: RECOVERED
+  SUM_Presumptive_Positive: POSITIVE
+  SUM_Total_Death: DEATH
+FL:
+  SUM_C_FLResDeaths: DEATH
+  SUM_C_HospYes_Res: HOSP
+  SUM_TInconc: INCONCLUSIVE[
+  SUM_TPending: PENDING
+  SUM_T_negative: NEGATIVE
+  SUM_T_positive: POSITIVE
+  SUM_T_total: TOTAL
+GA:
+  MAX_EditDate: TIMESTAMP
+  SUM_COVID_Cases: POSITIVE
+  SUM_COVID_Deaths: DEATH
+IA:
+  CurrHospitalized: CURR_HOSP
+  Deceased: DEATH
+  DischRecov: RECOVERED
+  PeopleTested: TOTAL
+  Total_Cases: POSITIVE
+  last_updated: TIMESTAMP
+IL:
+  confirmed_cases: POSITIVE
+  deaths: DEATH
+  total_tested: TOTAL
+IN:
+  Deaths: DEATH
+  Positives: POSITIVE
+  Tested: TOTAL
+  Update Text: DATE
+KY:
+  Confirmed: POSITIVE
+  Deceased: DEATH
+  Hospitalized: CURR_HOSP
+  ICU: CURR_ICU
+LA:
+  SUM_Cases: POSITIVE
+  SUM_Commercial_Tests: TOTAL
+  SUM_Deaths: DEATH
+MD:
+  NegativeTests: NEGATIVE
+  ReportDate: TIMESTAMP
+  TotalCases: POSITIVE
+  bedsICU: CURR_ICU
+  bedsTotal: CURR_HOSP
+  deaths: DEATH
+  pDeaths: DEATH_PROBABLE
+  total_hospitalized: HOSP
+  total_released: RECOVERED
+MI:
+  Recovered: RECOVERED
+  SUM_F__in_Critical_Care: CURR_ICU
+  SUM_F__on_Ventilators: CURR_VENT
+  SUM_Inpatients: CURR_HOSP
+  Tot_Deaths: DEATH
+  positives: POSITIVE
+MN:
+  SUM_COVID19DTH: DEATH
+  SUM_COVID19POS: POSITIVE
+MO:
+  SUM_Cases: POSITIVE
+  SUM_Deaths: DEATH
+MT:
+  MAX_LAST_UPDATE: TIMESTAMP
+  SUM_HospitalizationCount: CURR_HOSP
+  SUM_Total: POSITIVE
+  SUM_TotalDeaths: DEATH
+  SUM_TotalRecovered: RECOVERED
+NC:
+  MAX_Hosp: CURR_HOSP
+  SUM_Deaths: DEATH
+  SUM_Total: POSITIVE
+NE:
+  Inconclusive: INCONCLUSIVE
+  Not Detected: NEGATIVE
+  Positive: POSITIVE
+NJ:
+  _date: TIMESTAMP
+  recoveries: RECOVERED
+  total_deaths: DEATH
+  total_negatives: NEGATIVE
+  total_positives: POSITIVE
+  total_tests_reported: TOTAL
+NM:
+  cases: POSITIVE
+  created: TIMESTAMP
+  currentHospitalizations: CURR_HOSP
+  deaths: DEATH
+  recovered: RECOVERED
+  tests: TOTAL
+  totalHospitalizations: HOSP
+PA:
+  SUM_COVID19onVents: CURR_VENT
+  SUM_Cases: POSITIVE
+  SUM_Deaths: DEATH
+  curr_vent: CURR_VENT
+  curr_hosp: CURR_HOSP
+PR:
+  T_Casos_Unicos: POSITIVE
+  T_Muertes_COVID_RD: DEATH_CONFIRMED
+  T_Muertes_Combinadas: DEATH
+  T_Pacientes_Int_Covid: CURR_ICU
+  T_Serologicos_Pos: ANTIBODY_POS
+  T_Vent_Covid: CURR_VENT
+RI:
+  Covid_Deaths: DEATH
+  Covid_ICU: CURR_ICU
+  Covid_Ventilator: CURR_VENT
+  Covid_case: POSITIVE
+  Date: TIMESTAMP
+  Negative_Covid_Lab_Tests: NEGATIVE
+  Total_Covid_Lab_Tests: TOTAL
+  Total_Hospitalized: CURR_HOSP
+SC:
+  MAX_Date_: TIMESTAMP
+  SUM_Confirmed: POSITIVE
+  SUM_Death: DEATH
+TX:
+  CumulativeCases: POSITIVE
+  CumulativeFatalities: DEATH
+  Date: TIMESTAMP
+  curr_hosp: CURR_HOSP
+VT:
+  cumulative_positives: POSITIVE
+  current_hospitalizations: CURR_HOSP
+  date: TIMESTAMP
+  total_deaths: DEATH
+  total_tests: TOTAL
+  total_recovered: RECOVERED
+WI:
+  DEATHS: DEATH
+  HOSP_YES: HOSP
+  IC_YES: ICU
+  LoadDttm: TIMESTAMP
+  NEGATIVE: NEGATIVE
+  POSITIVE: POSITIVE

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>State Data Links </title>
+  </head>
+  <body>
+    <ul>
+      {% for state in sources %}
+      <li><b>{{ state }}</b>:
+        {% for link in sources[state] %}
+        <a href="{{link}}">link, </a>
+        {% endfor %}
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

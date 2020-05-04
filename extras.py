@@ -1,9 +1,10 @@
+from copy import copy
 from datetime import datetime
 from utils import request_and_parse, extract_attributes, \
-   map_attributes, Fields, request_and_parse_multi
+   map_attributes, Fields
 
 ''' This file contains extra handling needed for some states
-To make it work, the method must be called "handle_{state_abbreviation:lower_case}" 
+To make it work, the method must be called "handle_{state_abbreviation:lower_case}"
 The parameters are:
 - query result
 - state mappings
@@ -13,7 +14,8 @@ def handle_ct(res, mapping):
     # res is a list of dict, one per day
     if not res:
         return {}
-    
+    res = res[0]
+
     sorted_res = sorted(res, key=lambda x: x['date'], reverse = True)
     latest = sorted_res[0]
     mapped = map_attributes(latest, mapping, 'CT')
@@ -23,6 +25,7 @@ def handle_fl(res, mapping):
     '''Need to add the non-FL residents to the totals:
     they separate it for death and hosp"
     '''
+    res = res[0]
     mapped = extract_attributes(res, mapping, 'FL')
     extra_hosp = 0
     extra_death = 0
@@ -31,7 +34,8 @@ def handle_fl(res, mapping):
         extra_death = res['features'][0]['attributes']['SUM_C_NonResDeaths']
     except Exception as ex:
         print("Failed Florida extra processing: ", str(e))
-    
+        raise
+
     mapped[Fields.HOSP.name] += extra_hosp
     mapped[Fields.DEATH.name] += extra_death
 
@@ -39,68 +43,44 @@ def handle_fl(res, mapping):
 
 def handle_vt(res, mapping):
     state = 'VT'
-    tagged = extract_attributes(res, mapping, state)
-    
-    # get the hosp_pui and add to HOSP
-    try:
-        tagged[Fields.CURR_HOSP.name] += res['features'][0]['attributes']['hosp_pui']
-    except Exception as e:
-        # TODO: handle exceptions 
-        print(str(e))
-    return tagged
-            
-def handle_tx(res, mapping):
-    '''Texas splits the data between multiple data sources, so a single query is not enough
-    This method will do the rest of the queries
-    '''
-    tagged = extract_attributes(res, mapping, 'TX')
-    current_hosp_url = 'https://services1.arcgis.com/d9sLvPecHnb8pMfE/arcgis/rest/services/TSA_BedAvailability_ViewTest/FeatureServer/0/query'
-    current_hosp_query = {"where": "1=1", 
-                          'outStatistics': '[{"statisticType":"sum","onStatisticField":"Sum_Total_Lab_COVID","outStatisticFieldName":"value"}]',
-                         'f': 'json'}
-    try:
-        res = request_and_parse(current_hosp_url, current_hosp_query)
-        value = res['features'][0]['attributes']['value']
-    except Exception as ex:
-        print(str(ex))
-    
-    tagged[Fields.CURR_HOSP.name] = value
+    tagged = {}
+    updated_mapping = copy(mapping)
+    pui = 'hosp_pui'
+    updated_mapping.update({pui: pui})
+    for result in res:
+        partial = extract_attributes(result, updated_mapping, state)
+        tagged.update(partial)
+
+    tagged[Fields.CURR_HOSP.name] += tagged[pui]
+    tagged.pop(pui)
     return tagged
 
 def handle_pa(res, mapping):
     '''PA has different data sources for positive/death and for hospitalization that's displayd on the dashboard
     The main source has a different number for hosp.
-    
+
     Also need to sub ECMO to Vent number
     '''
     state = 'PA'
-    tagged = extract_attributes(res, mapping, state)
+    tagged = {}
+    updated_mapping = copy(mapping)
+    ecmo = 'ecmo'
+    updated_mapping.update({ecmo: ecmo})
+    for result in res:
+        partial = extract_attributes(result, updated_mapping, state)
+        tagged.update(partial)
 
-    hosp_url = 'https://services2.arcgis.com/xtuWQvb2YQnp0z3F/arcgis/rest/services/Adam_County_Summary_V3/FeatureServer/0/query'
-    hosp_query = {
-        'where': '1=1',
-        'outStatistics': [{"statisticType":"sum","onStatisticField":"COVID_19_Patient_Counts_Total_2", "outStatisticFieldName": "total_hosp"}],
-        'f': 'json'
-    }
-    ecmo_val = 0
-    hosp_val = None
-    try:
-        hosp_res = request_and_parse(hosp_url, hosp_query)
-        hosp_val = hosp_res['features'][0]['attributes']['total_hosp']
-        ecmo_val = res['features'][0]['attributes']['SUM_COVID19ECMO']
-    except Exception as ex:
-        print(str(ex))
-    
-    tagged[Fields.CURR_HOSP.name] = hosp_val
-    tagged[Fields.CURR_VENT.name] += ecmo_val
+    tagged[Fields.CURR_VENT.name] += tagged[ecmo]
+    tagged.pop(ecmo)
     return tagged
 
 def handle_nm(res, mapping):
-    data = res['data']
+    data = res[0]['data']
     mapped = map_attributes(data, mapping, 'NM')
     return mapped
 
 def handle_ne(res, mapping):
+    res = res[0]
     tagged = {}
     if 'features' in res and len(res['features']) > 0:
         attributes = res['features']
@@ -110,7 +90,7 @@ def handle_ne(res, mapping):
             value = attr['attributes']['COUNT_EXPR0']
             if name in mapping:
                 tagged[mapping[name]] = value
-    
+
     return tagged
 
 def handle_in_outdated(res, mapping):
@@ -123,10 +103,11 @@ def handle_in_outdated(res, mapping):
             value = attr['attributes']['Counts']
             if name in mapping:
                 tagged[mapping[name]] = value
-    
+
     return tagged
 
 def handle_la(res, mapping):
+    res = res[0]
     state_tests = 'SUM_State_Tests'
     state = 'LA'
     tagged = extract_attributes(res, mapping, state)
@@ -136,18 +117,19 @@ def handle_la(res, mapping):
         tagged[Fields.TOTAL.name] += val
     except Exception as e:
         print(str(e))
+        raise
     return tagged
 
 def handle_il(res, mapping):
     state = 'IL'
     state_name = 'Illinois'
     mapped = {}
-    try:        
-        for county in res['characteristics_by_county']['values']:
+    try:
+        for county in res[0]['characteristics_by_county']['values']:
             if county['County'] == state_name:
                 mapped = map_attributes(county, mapping, state)
 
-        last_update = res['LastUpdateDate']
+        last_update = res[0]['LastUpdateDate']
         y = last_update['year']
         m = last_update['month']
         d = last_update['day']
@@ -155,26 +137,5 @@ def handle_il(res, mapping):
         mapped[Fields.TIMESTAMP.name] = timestamp
     except Exception as e:
         print(str(e))
+        raise
     return mapped
-
-def handle_de(res, mapping):
-    state = 'DE'
-    tagged = extract_attributes(res, mapping, state)
-
-    #query_url = arcgis_urls[state]
-    query_url = 'https://services1.arcgis.com/PlCPCPzGOwulHUHo/arcgis/rest/services/DEMA_COVID_County_Boundary_Time_VIEW/FeatureServer/0/query'
-    query_params = {
-        'where': 'NAME=\'Statewide\'',
-        'outFields': 'NegativeCOVID,Recovered,Hospitalizations,CriticalCond,Last_Updated',
-        'f': 'json'
-    }
-    tagged_extra = {}
-    try:
-        res_extra = request_and_parse(query_url, query_params)
-        extra_val = res_extra['features'][0]['attributes']
-        tagged_extra = map_attributes(extra_val, mapping, state)
-    except Exception as ex:
-        print(str(ex))
-    
-    tagged.update(tagged_extra)
-    return tagged
