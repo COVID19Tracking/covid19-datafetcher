@@ -28,8 +28,7 @@ AK:
         outStatisticFieldName: ReportDate}], f: json}
   type: arcgis
 - url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/COVID_Hospital_Dataset_(prod)/FeatureServer/0/query
-  params: {where: Bed_Current=1, outStatistics: [{statisticType: sum, onStatisticField: Pos_COVID},
-      {statisticType: sum, onStatisticField: Pos_COVID_Vent}, {statisticType: sum,
+  params: {where: 1=1, outStatistics: [{statisticType: sum,
         onStatisticField: Pos_COVID_PUI_Pending}], f: json}
   type: arcgis
 AL:
@@ -55,7 +54,7 @@ CO:
 CT:
 - url: https://data.ct.gov/resource/rf3k-f8fg.json
   params: null
-  type: arcgis
+  type: json
 DE:
 - url: https://services1.arcgis.com/PlCPCPzGOwulHUHo/arcgis/rest/services/DEMA_COVID_County_Boundary_Time_VIEW/FeatureServer/0/query
   params: {f: json, outStatistics: [{onStatisticField: Presumptive_Positive, statisticType: sum},
@@ -90,7 +89,7 @@ IA:
 IL:
 - url: http://www.dph.illinois.gov/sitefiles/COVIDTestResults.json
   params: null
-  type: arcgis
+  type: json
 IN:
 - url: https://services5.arcgis.com/f2aRfVsQG7TInso2/arcgis/rest/services/Coronavirus/FeatureServer/0/query
   params: {f: json, outFields: '*', where: Measure <> ''}
@@ -171,7 +170,7 @@ NJ:
 NM:
 - url: https://e7p503ngy5.execute-api.us-west-2.amazonaws.com/prod/GetPublicStatewideData
   params: null
-  type: arcgis
+  type: json
 PA:
 - url: https://services2.arcgis.com/xtuWQvb2YQnp0z3F/ArcGIS/rest/services/County_Case_Data_Public/FeatureServer/0/query
   params: {f: json, outStatistics: [{onStatisticField: COVID19onVents, statisticType: sum},
