@@ -1,5 +1,13 @@
-*.csv
+# Emacs
 *~
-#*
+\#*#
 .#*
+
+# Data
+*.csv
 log.txt
+index.html
+
+# Python
+__pycache__
+.ipynb_*
