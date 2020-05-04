@@ -37,6 +37,12 @@ AL:
       {statisticType: sum, onStatisticField: CONFIRMED}, {statisticType: sum, onStatisticField: DIED}],
     f: json}
   type: arcgis
+- url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/COV19_Public_Statewide_Summary2/FeatureServer/0/query
+  params: {where: 1=1, outFields: '*', f: json}
+  type: arcgis
+- url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/ArcGIS/rest/services/COV19_Public_Statewide_Summary2/FeatureServer/1/query
+  params: {where: 1=1, outFields: 'CLN_ICU,CLN_VENT', f: json}
+  type: arcgis
 AR:
 - url: https://services.arcgis.com/PwY9ZuZRDiI5nXUB/arcgis/rest/services/ADH_COVID19_Positive_Test_Results/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{statisticType: sum, onStatisticField: negative},

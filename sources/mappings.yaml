@@ -11,6 +11,9 @@ AL:
   SUM_CONFIRMED: POSITIVE
   SUM_DIED: DEATH
   SUM_LabTestCount: TOTAL
+  hospitalized: CURR_HOSP
+  CLN_ICU: CURR_ICU
+  CLN_VENT: CURR_VENT
 AR:
   SUM_Recoveries: RECOVERED
   SUM_deaths: DEATH
