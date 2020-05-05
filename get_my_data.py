@@ -4,7 +4,7 @@ import pandas as pd
 import sys
 import urllib, urllib.request, json
 
-from utils import request_and_parse, extract_attributes, Fields
+from utils import request_and_parse, extract_attributes, Fields, request_csv
 import extras as extras_module
 from sources import states
 
@@ -90,6 +90,7 @@ class Fetcher(object):
                 results.append(res)
             except Exception as e:
                 print(state, ": failed to fetch ", query['url'], str(e))
+                raise
 
         if state in self.extras:
             data = self.extras[state](results, self.mappings.get(state))

@@ -58,6 +58,12 @@ GU:
   Probable cases: PROBABLE
   Recovered: RECOVERED
   Confirmed cases: POSITIVE
+HI:
+  Date: DATE
+  Cases_Tot: POSITIVE
+  Recovered_Tot: RECOVERED
+  Hospitalized_Tot: HOSP
+  Deaths_Tot: DEATH
 IA:
   CurrHospitalized: CURR_HOSP
   Deceased: DEATH

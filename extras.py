@@ -1,3 +1,5 @@
+import csv
+from io import StringIO
 from copy import copy
 from datetime import datetime
 from utils import request_and_parse, extract_attributes, \
@@ -155,4 +157,18 @@ def handle_gu(res, mapping):
     return tagged
 
 def handle_hi(res, mapping):
-    print(res)
+    res = res[0]
+
+    reader = csv.DictReader(StringIO(res), dialect = 'unix')
+    last_state_row = {}
+    for row in reader:
+        if row['Region'] == 'State':
+            last_state_row = row
+
+    tagged = {}
+    # expecting the order be old -> new data, so last line is the newest
+    for k, v in last_state_row.items():
+        if k in mapping:
+            tagged[mapping[k]] = v
+
+    return tagged
