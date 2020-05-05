@@ -68,7 +68,8 @@ DE:
   type: arcgis
 - url: https://services1.arcgis.com/PlCPCPzGOwulHUHo/arcgis/rest/services/DEMA_COVID_County_Boundary_Time_VIEW/FeatureServer/0/query
   params: {where: NAME='Statewide',
-        outFields: NegativeCOVID,Recovered,Hospitalizations,CriticalCond,Last_Updated,
+        returnGeometry: false,
+        outFields: 'NegativeCOVID,Recovered,Hospitalizations,CriticalCond,Last_Updated',
         f: json
         }
   type: arcgis

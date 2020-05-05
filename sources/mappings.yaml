@@ -29,6 +29,7 @@ CO:
   MAX_State_Pos_Cases: POSITIVE
 CT:
   cases: POSITIVE
+  covid_19_tests_reported: TOTAL
   date: DATE
   deaths: DEATH
   hospitalizations: HOSP
@@ -37,6 +38,7 @@ DE:
   Last_Updated: TIMESTAMP
   NegativeCOVID: NEGATIVE
   Recovered: RECOVERED
+  CriticalCond: CURR_ICU
   SUM_Presumptive_Positive: POSITIVE
   SUM_Total_Death: DEATH
 FL:
