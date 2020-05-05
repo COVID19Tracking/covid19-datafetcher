@@ -102,7 +102,7 @@ class Fetcher(object):
         data[Fields.FETCH_TIMESTAMP.name] = datetime.now().timestamp()
 
 
-def build_dataframe(results):
+def build_dataframe(results, dump_all_states=False):
     columns=[Fields.FETCH_TIMESTAMP, Fields.TIMESTAMP,
              Fields.POSITIVE, Fields.NEGATIVE, Fields.TOTAL, Fields.PENDING,
              Fields.CURR_HOSP, Fields.HOSP, Fields.CURR_ICU, Fields.ICU, Fields.CURR_VENT,
@@ -110,7 +110,17 @@ def build_dataframe(results):
              Fields.RECOVERED]
     columns = [f.name for f in columns]
 
+    states = ['AK', 'AL', 'AR', 'AS', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'GU',
+              'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI',
+              'MN', 'MO', 'MP', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV',
+              'NY', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT',
+              'VA', 'VI', 'VT', 'WA', 'WI', 'WV', 'WY'
+    ]
+
+
     df = pd.DataFrame.from_dict(results, 'index', columns=columns)
+    if dump_all_states:
+        df = df.reindex(pd.Series(states))
     base_name = 'states.csv'
     now_name = 'states_{}.csv'.format(datetime.now().strftime('%Y%m%d%H%M%S'))
 
@@ -134,7 +144,7 @@ def main(state = None):
         results = fetcher.fetch_all()
 
     # This will also store a CSV
-    df = build_dataframe(results)
+    df = build_dataframe(results, dump_all_states = (state is None))
     print(df)
 
 if __name__ == "__main__":
