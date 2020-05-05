@@ -1,3 +1,4 @@
+import csv
 from enum import Enum
 import json
 import urllib
@@ -14,7 +15,7 @@ class Fields(Enum):
     NEGATIVE = 3
     TOTAL = 4  # total tests
     INCONCLUSIVE = 5  # tests
-    POSITIVE_PRESUMPTIVE = 6
+    PROBABLE = 6
     PENDING = 7
 
     ANTIBODY_POS=8
@@ -50,6 +51,15 @@ def request_and_parse(url, query=None):
         res = json.loads(res)
     return res
 
+def request_csv(url, query=None):
+    if query:
+        url = "{}?{}".format(url, urllib.parse.urlencode(query))
+    res = {}
+    with urllib.request.urlopen(url) as f:
+        res = f.read().decode('utf-8')
+        # experting csv content
+    return res
+
 def map_attributes(original, mapping, debug_state=None):
     tagged_attributes = {}
     for k, v in original.items():
@@ -59,7 +69,7 @@ def map_attributes(original, mapping, debug_state=None):
             # report value without mapping
             print("[{}] Field {} has no mapping".format(debug_state, k))
     return tagged_attributes
-    
+
 
 def extract_attributes(res, mapping, debug_state = None):
     '''Uses mapping to extract attributes from `res`
@@ -68,11 +78,8 @@ def extract_attributes(res, mapping, debug_state = None):
     features = 'features'
     attributes = 'attributes'
     mapped_attributes = {}
-    if features in res and len(res[features]) > 0:        
+    if features in res and len(res[features]) > 0:
         if attributes in res[features][0]:
             attribs = res[features][0][attributes]
             mapped_attributes = map_attributes(attribs, mapping, debug_state)
     return mapped_attributes
-                    
-
-    

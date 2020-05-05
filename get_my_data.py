@@ -83,7 +83,10 @@ class Fetcher(object):
         results = []
         for query in queries:
             try:
-                res = request_and_parse(query['url'], query['params'])
+                if query['type'] in ['arcgis', 'json']:
+                    res = request_and_parse(query['url'], query['params'])
+                if query['type'] in ['csv']:
+                    res = request_csv(query['url'], query['params'])
                 results.append(res)
             except Exception as e:
                 print(state, ": failed to fetch ", query['url'], str(e))
@@ -107,7 +110,7 @@ def build_dataframe(results, dump_all_states=False):
              Fields.POSITIVE, Fields.NEGATIVE, Fields.TOTAL, Fields.PENDING,
              Fields.CURR_HOSP, Fields.HOSP, Fields.CURR_ICU, Fields.ICU, Fields.CURR_VENT,
              Fields.DEATH, Fields.DEATH_PROBABLE, Fields.DEATH_CONFIRMED,
-             Fields.RECOVERED]
+             Fields.RECOVERED, Fields.PROBABLE, Fields.DATE]
     columns = [f.name for f in columns]
 
     states = ['AK', 'AL', 'AR', 'AS', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'GU',

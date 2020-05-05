@@ -93,6 +93,10 @@ GU:
 - url: https://services2.arcgis.com/FPJlJZYRsD8OhCWA/ArcGIS/rest/services/Testing_and_Status_Query/FeatureServer/0/query
   params: {where: '1=1', outFields: '*', f: json}
   type: arcgis
+HI:
+- url: 'https://docs.google.com/spreadsheets/d/1sd-L317Je9ZhiQh3_uH9jTkl3ckc_o3sgrVauShcwCk/gviz/tq?tqx=out:csv&sheet=Data'
+  params: null
+  type: csv
 IA:
 - url: https://services.arcgis.com/vPD5PVLI6sfkZ5E4/arcgis/rest/services/IACOVID19Cases_Demographics/FeatureServer/0/query
   params: {f: json, outFields: '*', where: 1=1}

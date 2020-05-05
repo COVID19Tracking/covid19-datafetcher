@@ -154,3 +154,5 @@ def handle_gu(res, mapping):
 
     return tagged
 
+def handle_hi(res, mapping):
+    print(res)
