@@ -89,6 +89,10 @@ GA:
       {onStatisticField: COVID_Deaths, statisticType: sum}, {onStatisticField: EditDate,
         statisticType: max}], where: 1=1}
   type: arcgis
+GU:
+- url: https://services2.arcgis.com/FPJlJZYRsD8OhCWA/ArcGIS/rest/services/Testing_and_Status_Query/FeatureServer/0/query
+  params: {where: '1=1', outFields: '*', f: json}
+  type: arcgis
 IA:
 - url: https://services.arcgis.com/vPD5PVLI6sfkZ5E4/arcgis/rest/services/IACOVID19Cases_Demographics/FeatureServer/0/query
   params: {f: json, outFields: '*', where: 1=1}

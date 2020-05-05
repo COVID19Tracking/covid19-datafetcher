@@ -139,3 +139,18 @@ def handle_il(res, mapping):
         print(str(e))
         raise
     return mapped
+
+def handle_gu(res, mapping):
+    res = res[0]
+    tagged = {}
+    if 'features' in res and len(res['features']) > 0:
+        attributes = res['features']
+        for attr in attributes:
+            # expecting {attributes: {Variable: NAME, Count: VALUE}}
+            name = attr['attributes']['Variable']
+            value = attr['attributes']['Count']
+            if name in mapping:
+                tagged[mapping[name]] = value
+
+    return tagged
+

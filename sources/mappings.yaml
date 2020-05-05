@@ -53,6 +53,11 @@ GA:
   MAX_EditDate: TIMESTAMP
   SUM_COVID_Cases: POSITIVE
   SUM_COVID_Deaths: DEATH
+GU:
+  Deceased: DEATH
+  Probable cases: PROBABLE
+  Recovered: RECOVERED
+  Confirmed cases: POSITIVE
 IA:
   CurrHospitalized: CURR_HOSP
   Deceased: DEATH
