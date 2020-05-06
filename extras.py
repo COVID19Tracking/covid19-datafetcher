@@ -126,20 +126,31 @@ def handle_il(res, mapping):
     state = 'IL'
     state_name = 'Illinois'
     mapped = {}
-    try:
-        for county in res[0]['characteristics_by_county']['values']:
-            if county['County'] == state_name:
-                mapped = map_attributes(county, mapping, state)
+    # main dashboard
+    for county in res[0]['characteristics_by_county']['values']:
+        if county['County'] == state_name:
+            mapped = map_attributes(county, mapping, state)
 
-        last_update = res[0]['LastUpdateDate']
-        y = last_update['year']
-        m = last_update['month']
-        d = last_update['day']
-        timestamp = datetime(y,m,d).timestamp()
-        mapped[Fields.TIMESTAMP.name] = timestamp
-    except Exception as e:
-        print(str(e))
-        raise
+    last_update = res[0]['LastUpdateDate']
+    y = last_update['year']
+    m = last_update['month']
+    d = last_update['day']
+    timestamp = datetime(y,m,d).timestamp()
+    mapped[Fields.TIMESTAMP.name] = timestamp
+
+    # hospital data
+    hosp_data = res[1]['statewideValues']
+    hosp_mapped = map_attributes(hosp_data, mapping, state)
+    mapped.update(hosp_mapped)
+
+    # fill in the date
+    last_update = res[1]['LastUpdateDate']
+    y = last_update['year']
+    m = last_update['month']
+    d = last_update['day']
+    updated = datetime(y,m,d, 23, 59).strftime("%m/%d/%Y %H:%M:%S")
+    mapped[Fields.DATE.name] = updated
+
     return mapped
 
 def handle_gu(res, mapping):

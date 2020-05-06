@@ -105,6 +105,9 @@ IL:
 - url: http://www.dph.illinois.gov/sitefiles/COVIDTestResults.json
   params: null
   type: json
+- url: http://www.dph.illinois.gov/sitefiles/COVIDHospitalRegions.json
+  params: {nocache: 1}
+  type: json
 IN:
 - url: https://services5.arcgis.com/f2aRfVsQG7TInso2/arcgis/rest/services/Coronavirus/FeatureServer/0/query
   params: {f: json, outFields: '*', where: Measure <> ''}
