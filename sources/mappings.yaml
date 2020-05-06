@@ -139,6 +139,9 @@ NJ:
   total_negatives: NEGATIVE
   total_positives: POSITIVE
   total_tests_reported: TOTAL
+  curr_hosp: CURR_HOSP
+  curr_vent: CURR_VENT
+  curr_icu: CURR_ICU
 NM:
   cases: POSITIVE
   created: TIMESTAMP
