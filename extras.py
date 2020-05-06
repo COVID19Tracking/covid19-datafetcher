@@ -95,16 +95,17 @@ def handle_ne(res, mapping):
 
     return tagged
 
-def handle_in_outdated(res, mapping):
+def handle_in(res, mapping):
     tagged = {}
-    if 'features' in res and len(res['features']) > 0:
-        attributes = res['features']
-        for attr in attributes:
-            # expecting {attributes: {Measure: NAME, Counts: VALUE}}
-            name = attr['attributes']['Measure']
-            value = attr['attributes']['Counts']
-            if name in mapping:
-                tagged[mapping[name]] = value
+
+    # There's pretty bad error handling now
+    # I want to get errors as fast as possible -- to fix faster
+    hosp_data = res[0]['result']['records']
+    for record in hosp_data:
+        name = record['STATUS_TYPE']
+        value = record['TOTAL']
+        if name in mapping:
+            tagged[mapping[name]] = value
 
     return tagged
 

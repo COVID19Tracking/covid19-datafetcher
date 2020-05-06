@@ -109,6 +109,9 @@ IL:
   params: {nocache: 1}
   type: json
 IN:
+- url: https://hub.mph.in.gov/api/3/action/datastore_search?resource_id=882a7426-886f-48cc-bbe0-a8d14e3012e4
+  params: null
+  type: json
 - url: https://services5.arcgis.com/f2aRfVsQG7TInso2/arcgis/rest/services/Coronavirus/FeatureServer/0/query
   params: {f: json, outFields: '*', where: Measure <> ''}
   type: arcgis
