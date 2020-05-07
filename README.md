@@ -9,9 +9,19 @@ The biggest value of this repository comes from (1) the list of state data sourc
 <br />The scripts that fetch and process the data are very minimal now.
 
 
-## Coding TODOs
-This was originally a Jupyter notebook (this is why `pandas` is used), I exported it and separated it into separate files, but the separation is not great yet. 
+## TODO
+This was originally a Jupyter notebook (this is why `pandas` is used, now it's only creating a csv), I exported it and separated it into separate files, but the separation is not great yet. 
 
+### Project
+- [ ] documentation + running instructions
+- [ ] requirements & packaging
+
+### Data 
+- [x] handle csv data sources
+- [ ] zip data sources
+- [ ] shit sources (html page)
+
+### Code
 - [ ] Use a real logger
-- [ ] Different data-source configuration scheme
-- [ ] Next: handle less-structured data sources
+- [x] Different data-source configuration scheme: yaml (with some flow for the query-params part).
+- [ ] parallel fetching the data
