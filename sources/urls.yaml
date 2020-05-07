@@ -135,6 +135,16 @@ MD:
   params: {f: json, resultRecordCount: 1, orderByFields: ReportDate desc, outFields: 'ReportDate,TotalCases,NegativeTests,bedsICU,bedsAcute,bedsTotal,total_hospitalized,total_released,deaths,pdeaths',
     where: 1=1}
   type: arcgis
+ME:
+- url: https://services1.arcgis.com/RbMX0mRVOFNTdLzd/ArcGIS/rest/services/Maine_County_Covid_Cases/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"Recovered"},
+  {"statisticType":"sum","onStatisticField":"Deaths"},
+  {"statisticType":"sum","onStatisticField":"ConfirmedPositiveCases"},
+  {"statisticType":"sum","onStatisticField":"PresumptivePositiveCases"},
+  {"statisticType":"sum","onStatisticField":"Hospitalizations"},
+  {"statisticType":"sum","onStatisticField":"TotalCases"},
+  {"statisticType":"max","onStatisticField":"LastUpdated"}], f: json}
+  type: arcgis
 MI:
 - url: https://services5.arcgis.com/ZqUZ99cjRiEOyN05/arcgis/rest/services/COVID19_Cases_Growth_Public2/FeatureServer/0/query
   params: {where: 1=1, outFields: 'f1 as date,f2 as negatives,f3 as positives,f5 as

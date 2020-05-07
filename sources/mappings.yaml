@@ -105,6 +105,14 @@ MD:
   pDeaths: DEATH_PROBABLE
   total_hospitalized: HOSP
   total_released: RECOVERED
+ME:
+  SUM_Recovered: RECOVERED
+  SUM_Deaths: DEATH
+  SUM_ConfirmedPositiveCases: POSITIVE
+  SUM_PresumptivePositiveCases: PROBABLE
+  SUM_Hospitalizations: CURR_HOSP
+  #SUM_TotalCases:
+  MAX_LastUpdated: TIMESTAMP
 MI:
   Recovered: RECOVERED
   SUM_F__in_Critical_Care: CURR_ICU
