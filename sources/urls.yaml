@@ -242,18 +242,22 @@ PR:
 RI:
 # CSV: https://docs.google.com/spreadsheets/d/1n-zMS9Al94CPj_Tc3K7Adin-tN9x1RSjjx2UzJ4SV7Q/edit#gid=0
 # historic data: https://static.dwcdn.net/data/dO7k8.csv
-- url: https://services1.arcgis.com/dkWT1XL4nglP5MLP/ArcGIS/rest/services/COVID_Public_Map_TEST/FeatureServer/2/query
-  params: {f: json, outStatistics: [{outStatisticFieldName: Date, statisticType: max,
-        onStatisticField: Date}, {outStatisticFieldName: Covid_case, statisticType: max,
-        onStatisticField: Covid_case}, {outStatisticFieldName: Covid_Deaths, statisticType: max,
-        onStatisticField: Covid_Deaths}, {outStatisticFieldName: Total_Hospitalized,
-        statisticType: max, onStatisticField: Total_Hospitalized}, {outStatisticFieldName: Covid_ICU,
-        statisticType: max, onStatisticField: Covid_ICU}, {outStatisticFieldName: Covid_Ventilator,
-        statisticType: max, onStatisticField: Covid_Ventilator}, {outStatisticFieldName: Total_Covid_Lab_Tests,
-        statisticType: max, onStatisticField: Total_Covid_Lab_Tests}, {outStatisticFieldName: Negative_Covid_Lab_Tests,
-        statisticType: max, onStatisticField: Negative_Covid_Lab_Tests}], where: City_Town
-      <> 'TOTAL'}
-  type: arcgis
+- url: 'https://docs.google.com/spreadsheets/d/1n-zMS9Al94CPj_Tc3K7Adin-tN9x1RSjjx2UzJ4SV7Q/gviz/tq'
+  params: {tqx: 'out:csv', gid: 0}
+  type: csv
+  header: no # for CSV parsing
+# - url: https://services1.arcgis.com/dkWT1XL4nglP5MLP/ArcGIS/rest/services/COVID_Public_Map_TEST/FeatureServer/2/query
+#   params: {f: json, outStatistics: [{outStatisticFieldName: Date, statisticType: max,
+#         onStatisticField: Date}, {outStatisticFieldName: Covid_case, statisticType: max,
+#         onStatisticField: Covid_case}, {outStatisticFieldName: Covid_Deaths, statisticType: max,
+#         onStatisticField: Covid_Deaths}, {outStatisticFieldName: Total_Hospitalized,
+#         statisticType: max, onStatisticField: Total_Hospitalized}, {outStatisticFieldName: Covid_ICU,
+#         statisticType: max, onStatisticField: Covid_ICU}, {outStatisticFieldName: Covid_Ventilator,
+#         statisticType: max, onStatisticField: Covid_Ventilator}, {outStatisticFieldName: Total_Covid_Lab_Tests,
+#         statisticType: max, onStatisticField: Total_Covid_Lab_Tests}, {outStatisticFieldName: Negative_Covid_Lab_Tests,
+#         statisticType: max, onStatisticField: Negative_Covid_Lab_Tests}], where: City_Town
+#       <> 'TOTAL'}
+#   type: arcgis
 SC:
 - url: https://services2.arcgis.com/XZg2efAbaieYAXmu/arcgis/rest/services/COVID19/FeatureServer/0/query
   params: {f: json, outStatistics: [{onStatisticField: Date_, statisticType: max},

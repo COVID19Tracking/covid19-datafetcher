@@ -7,34 +7,35 @@ import urllib.request
 
 # fields
 class Fields(Enum):
-    FETCH_TIMESTAMP = -1
-    TIMESTAMP = 0
-    DATE = 1
+    # time
+    FETCH_TIMESTAMP = 0
+    TIMESTAMP = 1
+    DATE = 2
 
     # Tests
-    POSITIVE = 2
-    NEGATIVE = 3
-    TOTAL = 4  # total tests
-    INCONCLUSIVE = 5  # tests
-    PROBABLE = 6
-    PENDING = 7
+    POSITIVE = 10
+    NEGATIVE = 11
+    TOTAL = 12  # total tests
+    INCONCLUSIVE = 13  # tests
+    PROBABLE = 14
+    PENDING = 15
 
-    ANTIBODY_POS=8
+    ANTIBODY_POS=16
 
     # Death
-    DEATH = 11  # total
-    DEATH_CONFIRMED = 12
-    DEATH_PROBABLE = 13 # probable cases, or any secondary number published
+    DEATH = 30  # total
+    DEATH_CONFIRMED = 31
+    DEATH_PROBABLE = 32 # probable cases, or any secondary number published
 
     # Holpitalization
-    HOSP = 21  # ever hospital
-    ICU = 22  # ever ICU
-    CURR_HOSP = 23
-    CURR_ICU = 24
-    CURR_VENT = 25
+    HOSP = 40  # ever hospital
+    ICU = 41  # ever ICU
+    CURR_HOSP = 42
+    CURR_ICU = 43
+    CURR_VENT = 44
 
     # Recovered
-    RECOVERED = 30
+    RECOVERED = 50
 
 
     def __repr__(self):
@@ -52,7 +53,7 @@ def request_and_parse(url, query=None):
         res = json.loads(res)
     return res
 
-def request_csv(url, query=None, dialect=None):
+def request_csv(url, query=None, dialect=None, header=True):
     if query:
         url = "{}?{}".format(url, urllib.parse.urlencode(query))
     res = {}
@@ -60,7 +61,10 @@ def request_csv(url, query=None, dialect=None):
         dialect = 'unix'
     with urllib.request.urlopen(url) as f:
         res = f.read().decode('utf-8')
-        reader = csv.DictReader(StringIO(res), dialect = 'unix')
+        if header:
+            reader = csv.DictReader(StringIO(res), dialect = 'unix')
+        else:
+            reader = csv.reader(StringIO(res), dialect = 'unix')
         res = list(reader)
     return res
 

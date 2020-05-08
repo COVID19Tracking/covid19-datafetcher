@@ -186,3 +186,8 @@ def handle_hi(res, mapping):
             tagged[mapping[k]] = v
 
     return tagged
+
+def handle_ri(res, mapping):
+    dict_res = {r[0]: r[1] for r in res[0]}
+    mapped = map_attributes(dict_res, mapping, 'RI')
+    return mapped
