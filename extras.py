@@ -174,9 +174,8 @@ def handle_gu(res, mapping):
 def handle_hi(res, mapping):
     res = res[0]
 
-    reader = csv.DictReader(StringIO(res), dialect = 'unix')
     last_state_row = {}
-    for row in reader:
+    for row in res:
         if row['Region'] == 'State':
             last_state_row = row
 

@@ -1,5 +1,6 @@
 import csv
 from enum import Enum
+from io import StringIO
 import json
 import urllib
 import urllib.request
@@ -51,13 +52,16 @@ def request_and_parse(url, query=None):
         res = json.loads(res)
     return res
 
-def request_csv(url, query=None):
+def request_csv(url, query=None, dialect=None):
     if query:
         url = "{}?{}".format(url, urllib.parse.urlencode(query))
     res = {}
+    if not dialect:
+        dialect = 'unix'
     with urllib.request.urlopen(url) as f:
         res = f.read().decode('utf-8')
-        # experting csv content
+        reader = csv.DictReader(StringIO(res), dialect = 'unix')
+        res = list(reader)
     return res
 
 def map_attributes(original, mapping, debug_state=None):
