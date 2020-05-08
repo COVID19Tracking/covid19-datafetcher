@@ -21,6 +21,12 @@ AR:
   SUM_pending: PENDING
   SUM_positive: POSITIVE
   SUM_total_tests: TOTAL
+CA:
+  confirmed: POSITIVE
+  death: DEATH
+  curr_icu: CURR_ICU
+  curr_hosp: CURR_HOSP
+  "Most Recent Date": DATE
 CO:
   MAX_Date_Data_Last_Updated: DATE
   MAX_State_Deaths: DEATH

@@ -96,6 +96,7 @@ def handle_ne(res, mapping):
     return tagged
 
 def handle_in(res, mapping):
+    # ckan
     tagged = {}
 
     # There's pretty bad error handling now
@@ -191,3 +192,15 @@ def handle_ri(res, mapping):
     dict_res = {r[0]: r[1] for r in res[0]}
     mapped = map_attributes(dict_res, mapping, 'RI')
     return mapped
+
+def handle_ca(res, mapping):
+    # ckan
+    tagged = {}
+
+    stats = res[0]['result']['records'][0]
+    tagged = map_attributes(stats, mapping, 'CA')
+
+    # add hosp and icu pui
+    tagged[Fields.CURR_HOSP.name] = int(tagged[Fields.CURR_HOSP.name]) + int(stats.get('curr_hosp_pui', 0))
+    tagged[Fields.CURR_ICU.name] = int(tagged[Fields.CURR_ICU.name]) + int(stats.get('curr_icu_pui', 0))
+    return tagged
