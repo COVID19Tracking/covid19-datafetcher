@@ -269,6 +269,10 @@ SC:
       {onStatisticField: Confirmed, statisticType: sum}, {onStatisticField: Recovered,
         statisticType: sum}, {onStatisticField: Death, statisticType: sum}], where: 1=1}
   type: arcgis
+TN:
+- url: https://services1.arcgis.com/HLC8bAygObK4fhPW/arcgis/rest/services/TN_COVID19_Daily/FeatureServer/0/query
+  params: {where: 1=1, outFields: '*', orderByFields: 'DATE desc', resultRecordCount: 1, f: json}
+  type: arcgis
 TX:
 - url: https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/EpiCurve410_View/FeatureServer/0/query
   params: {f: json, resultRecordCount: 1, orderByFields: Date desc, outFields: '*',
