@@ -1,9 +1,10 @@
 AK:
-  Cases: POSITIVE
-  Date: TIMESTAMP
-  Deceased: DEATH
-  Hospitalized: HOSP
-  Recovered: RECOVERED
+  Date_: TIMESTAMP
+  Cum_cases: POSITIVE
+  cum_recoveries: RECOVERED
+  cum_deaths: DEATH
+  cum_hospitalizations: HOSP
+
   SUM_Pos_COVID_PUI_Pending: CURR_HOSP
   SUM_Pos_COVID_Vent: CURR_VENT
   cum_Total: TOTAL

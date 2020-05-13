@@ -1,31 +1,16 @@
 # Format: State => [queries]
 # Query is {url: .., params: ..., type: ...}
 AK:
+- url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/cumulative_cases/FeatureServer/0/query
+  params: {where: Economic_Region='Statewide', outFields: '*', orderByFields: 'Date_ desc',
+  resultRecordCount: 1, f: json}
+  type: arcgis
 - url: https://services1.arcgis.com/WzFsmainVTuD5KML/ArcGIS/rest/services/COVID_Tests/FeatureServer/0/query
   params: {where: 1=1,
     outFields: 'Date,cum_Total',
     orderByFields: Date desc,
     resultRecordCount: 1,
     f: json}
-  type: arcgis
-- url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/COVID_Cases_public/FeatureServer/0/query
-  params: {where: Hospitalized='Y',
-    outStatistics: [{statisticType: count, onStatisticField: FID,
-        outStatisticFieldName: Hospitalized}], f: json}
-  type: arcgis
-- url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/COVID_Cases_public/FeatureServer/0/query
-  params: {where: Deceased='Y', outStatistics: [{statisticType: count, onStatisticField: FID,
-        outStatisticFieldName: Deceased}], f: json}
-  type: arcgis
-- url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/COVID_Cases_public/FeatureServer/0/query
-  params: {where: 'RecoverDate>timestamp ''2020-01-02 07:59:59''', outStatistics: [
-      {statisticType: count, onStatisticField: FID, outStatisticFieldName: Recovered}],
-    f: json}
-  type: arcgis
-- url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/COVID_Cases_public/FeatureServer/0/query
-  params: {where: 1=1, outStatistics: [{statisticType: count, onStatisticField: FID,
-        outStatisticFieldName: Cases}, {statisticType: max, onStatisticField: ReportDate,
-        outStatisticFieldName: ReportDate}], f: json}
   type: arcgis
 - url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/COVID_Hospital_Dataset_(prod)/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{statisticType: sum,
