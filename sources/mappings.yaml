@@ -4,7 +4,6 @@ AK:
   cum_recoveries: RECOVERED
   cum_deaths: DEATH
   cum_hospitalizations: HOSP
-
   SUM_Pos_COVID_PUI_Pending: CURR_HOSP
   SUM_Pos_COVID_Vent: CURR_VENT
   cum_Total: TOTAL
@@ -12,9 +11,9 @@ AL:
   SUM_CONFIRMED: POSITIVE
   SUM_DIED: DEATH
   SUM_LabTestCount: TOTAL
-  hospitalized: CURR_HOSP
-  CLN_ICU: CURR_ICU
-  CLN_VENT: CURR_VENT
+  hospitalized: HOSP
+  CLN_ICU: ICU
+  CLN_VENT: VENT
 AR:
   SUM_Recoveries: RECOVERED
   SUM_deaths: DEATH

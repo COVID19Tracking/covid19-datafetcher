@@ -30,9 +30,10 @@ class Fields(Enum):
     # Holpitalization
     HOSP = 40  # ever hospital
     ICU = 41  # ever ICU
-    CURR_HOSP = 42
-    CURR_ICU = 43
-    CURR_VENT = 44
+    VENT = 42
+    CURR_HOSP = 43
+    CURR_ICU = 44
+    CURR_VENT = 45
 
     # Recovered
     RECOVERED = 50

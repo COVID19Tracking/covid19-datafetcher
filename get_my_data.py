@@ -110,7 +110,7 @@ class Fetcher(object):
 def build_dataframe(results, dump_all_states=False):
     columns=[Fields.FETCH_TIMESTAMP, Fields.TIMESTAMP,
              Fields.POSITIVE, Fields.NEGATIVE, Fields.TOTAL, Fields.PENDING,
-             Fields.CURR_HOSP, Fields.HOSP, Fields.CURR_ICU, Fields.ICU, Fields.CURR_VENT,
+             Fields.CURR_HOSP, Fields.HOSP, Fields.CURR_ICU, Fields.ICU, Fields.CURR_VENT, Fields.VENT,
              Fields.DEATH, Fields.DEATH_PROBABLE, Fields.DEATH_CONFIRMED,
              Fields.RECOVERED, Fields.PROBABLE, Fields.DATE]
     columns = [f.name for f in columns]
