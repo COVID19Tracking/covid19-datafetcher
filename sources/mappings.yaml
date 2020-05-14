@@ -33,6 +33,8 @@ CO:
   MAX_State_Number_Hospitalizations: HOSP
   MAX_State_Number_Tested: TOTAL
   MAX_State_Pos_Cases: POSITIVE
+  antibody_pos: ANTIBODY_POS
+  antibody_neg: ANTIBODY_NEG
 CT:
   cases: POSITIVE
   covid_19_tests_reported: TOTAL

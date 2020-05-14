@@ -21,6 +21,8 @@ class Fields(Enum):
     PENDING = 15
 
     ANTIBODY_POS=16
+    ANTIBODY_NEG=17
+    ANTIBODY_TOTAL=18
 
     # Death
     DEATH = 30  # total

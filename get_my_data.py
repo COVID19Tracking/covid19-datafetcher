@@ -112,7 +112,9 @@ def build_dataframe(results, dump_all_states=False):
              Fields.POSITIVE, Fields.NEGATIVE, Fields.TOTAL, Fields.PENDING,
              Fields.CURR_HOSP, Fields.HOSP, Fields.CURR_ICU, Fields.ICU, Fields.CURR_VENT, Fields.VENT,
              Fields.DEATH, Fields.DEATH_PROBABLE, Fields.DEATH_CONFIRMED,
-             Fields.RECOVERED, Fields.PROBABLE, Fields.DATE]
+             Fields.RECOVERED, Fields.PROBABLE, Fields.DATE,
+             Fields.ANTIBODY_POS, Fields.ANTIBODY_NEG
+    ]
     columns = [f.name for f in columns]
 
     states = ['AK', 'AL', 'AR', 'AS', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'GU',
