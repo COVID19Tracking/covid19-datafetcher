@@ -111,6 +111,8 @@ IL:
   params: {nocache: 1}
   type: json
 IN:
+# https://www.coronavirus.in.gov/map/covid-19-indiana-daily-report-current.topojson
+# .objects | .daily_statistics
 - url: https://hub.mph.in.gov/api/3/action/datastore_search
   params: {resource_id: 182b6742-edac-442d-8eeb-62f96b17773e, limit: 1, sort: DATE desc}
   type: json
@@ -126,6 +128,8 @@ KY:
     where: 1=1}
   type: arcgis
 LA:
+# https://www.arcgis.com/sharing/rest/content/items/69b726e2b82e408f89c3a54f96e8f776/data
+# the extra text that says vent and probable death numbers
 - url: https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/Cases_by_Parish/FeatureServer/0/query
   params: {f: json, outStatistics: [{onStatisticField: Cases, statisticType: sum},
       {onStatisticField: Deaths, statisticType: sum}, {onStatisticField: State_Tests,
