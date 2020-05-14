@@ -40,7 +40,7 @@ CT:
   covid_19_tests_reported: TOTAL
   date: DATE
   deaths: DEATH
-  hospitalizations: HOSP
+  hospitalizations: CURR_HOSP
 DE:
   Hospitalizations: CURR_HOSP
   Last_Updated: TIMESTAMP
