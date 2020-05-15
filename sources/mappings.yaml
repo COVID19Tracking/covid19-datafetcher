@@ -217,6 +217,10 @@ TX:
   CumulativeFatalities: DEATH
   Date: TIMESTAMP
   curr_hosp: CURR_HOSP
+UT:
+  MAX_Date_Updated: TIMESTAMP
+  SUM_COVID_Cases_Total: POSITIVE
+  SUM_Hospitalizations: HOSP
 VA:
   Report Date: DATE
   Number of Cases: POSITIVE

@@ -284,6 +284,12 @@ TX:
   'outStatistics': '[{"statisticType":"sum","onStatisticField":"Sum_Total_Lab_COVID","outStatisticFieldName":"curr_hosp"}]',
   'f': 'json'}
   type: arcgis
+UT:
+- url: https://services6.arcgis.com/KaHXE9OkiB9e63uE/ArcGIS/rest/services/Utah_COVID19_Cases_by_Local_Health_Department_View/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{"statisticType": "max", "onStatisticField": "Date_Updated"},
+  {"statisticType": "sum", "onStatisticField": "COVID_Cases_Total"},
+  {"statisticType": "sum", "onStatisticField": "Hospitalizations"}], f: json}
+  type: arcgis
 VA:
 # Cases
 - url: https://www.vdh.virginia.gov/content/uploads/sites/182/2020/04/VDH-COVID-19-PublicUseDataset-Cases_By-Confirmation.csv
