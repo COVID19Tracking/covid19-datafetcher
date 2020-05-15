@@ -217,6 +217,15 @@ TX:
   CumulativeFatalities: DEATH
   Date: TIMESTAMP
   curr_hosp: CURR_HOSP
+VA:
+  Report Date: DATE
+  Number of Cases: POSITIVE
+  #Number of Hospitalizations: HOSP
+  Number of Deaths: DEATH
+  Number of Testing Encounters: TOTAL
+  Total COVID-19 Patients: CURR_HOSP
+  ICU Patients: CURR_ICU
+  Vent Patients: CURR_VENT
 VT:
   cumulative_positives: POSITIVE
   current_hospitalizations: CURR_HOSP

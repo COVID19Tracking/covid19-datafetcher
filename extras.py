@@ -204,3 +204,55 @@ def handle_ca(res, mapping):
     tagged[Fields.CURR_HOSP.name] = int(tagged[Fields.CURR_HOSP.name]) + int(stats.get('curr_hosp_pui', 0))
     tagged[Fields.CURR_ICU.name] = int(tagged[Fields.CURR_ICU.name]) + int(stats.get('curr_icu_pui', 0))
     return tagged
+
+def handle_va(res, mapping):
+    '''Getting multiple CVS files from the state and parsing each for
+    the specific data it contains
+    '''
+    tagged = {}
+
+    # Res:
+    # 0 -- cases & death, probable & confirmed
+    # 1 -- testing info
+    # 2 -- hospital/icu/vent
+    cases = res[0]
+    testing = res[1]
+    hospital = res[2]
+
+    date_format = "%m/%d/%Y"
+
+    # Cases
+    # expecting 2 rows in the following format
+    # Report Date,Case Status,Number of Cases,Number of Hospitalizations,Number of Deaths
+    # 5/14/2020,Probable,1344,24,28
+    # 5/14/2020,Confirmed,26469,3568,927
+
+    PROB = 'Probable'
+    CONF = 'Confirmed'
+
+    for row in cases:
+        if (row['Case Status'] == CONF):
+            for k, v in row.items():
+                if (k in mapping):
+                    tagged[mapping[k]] = v
+        elif (row['Case Status'] == PROB):
+            tagged[Fields.PROBABLE.name] = row['Number of Cases']
+            tagged[Fields.DEATH_PROBABLE.name] = row['Number of Deaths']
+
+
+    # Verify that we're only taking the most recent date
+    testing = sorted(testing, key=lambda x: datetime.strptime(x['Report Date'],date_format), reverse = True)
+    most_recent_date = testing[0]['Report Date']
+    testing = [x for x in testing if x['Report Date'] == most_recent_date]
+    total_tests = [x['Number of Testing Encounters'] for x in testing]
+    total_tests = sum([int(x.replace(',','')) for x in total_tests])
+    tagged[Fields.TOTAL.name] = total_tests
+
+    # Hospitalizations
+    hospital = sorted(hospital, key=lambda x: datetime.strptime(x['Date'], date_format), reverse = True)
+    print("Hospital:")
+    print(hospital[0])
+    mapped_hosp = map_attributes(hospital[0], mapping, 'VA')
+    tagged.update(mapped_hosp)
+
+    return tagged

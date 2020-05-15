@@ -4,6 +4,7 @@ from io import StringIO
 import json
 import urllib
 import urllib.request
+import os, ssl
 
 # fields
 class Fields(Enum):
@@ -56,14 +57,20 @@ def request_and_parse(url, query=None):
         res = json.loads(res)
     return res
 
-def request_csv(url, query=None, dialect=None, header=True):
+def request_csv(url, query=None, dialect=None, header=True, encoding=None):
+    # skip cert verification for VA (because they use some unknown CA)
+    if getattr(ssl, '_create_unverified_context', None):
+        ssl._create_default_https_context = ssl._create_unverified_context
+
     if query:
         url = "{}?{}".format(url, urllib.parse.urlencode(query))
     res = {}
     if not dialect:
         dialect = 'unix'
+    if not encoding:
+        encoding = 'utf-8'
     with urllib.request.urlopen(url) as f:
-        res = f.read().decode('utf-8')
+        res = f.read().decode(encoding)
         if header:
             reader = csv.DictReader(StringIO(res), dialect = 'unix')
         else:
@@ -74,8 +81,8 @@ def request_csv(url, query=None, dialect=None, header=True):
 def map_attributes(original, mapping, debug_state=None):
     tagged_attributes = {}
     for k, v in original.items():
-        if k in mapping:
-            tagged_attributes[mapping[k]] = v
+        if k.strip() in mapping:
+            tagged_attributes[mapping[k.strip()]] = v
         else:
             # report value without mapping
             print("[{}] Field {} has no mapping".format(debug_state, k))

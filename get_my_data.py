@@ -86,8 +86,9 @@ class Fetcher(object):
                 if query['type'] in ['arcgis', 'json']:
                     res = request_and_parse(query['url'], query['params'])
                 if query['type'] in ['csv']:
-                    print("Query has headre?", query.get('header', True))
-                    res = request_csv(query['url'], query['params'], header=query.get('header', True))
+                    res = request_csv(
+                        query['url'], query['params'],
+                        header=query.get('header', True), encoding=query.get('encoding'))
                 results.append(res)
             except Exception as e:
                 print(state, ": failed to fetch ", query['url'], str(e))

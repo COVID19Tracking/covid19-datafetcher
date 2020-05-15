@@ -284,6 +284,20 @@ TX:
   'outStatistics': '[{"statisticType":"sum","onStatisticField":"Sum_Total_Lab_COVID","outStatisticFieldName":"curr_hosp"}]',
   'f': 'json'}
   type: arcgis
+VA:
+# Cases
+- url: https://www.vdh.virginia.gov/content/uploads/sites/182/2020/04/VDH-COVID-19-PublicUseDataset-Cases_By-Confirmation.csv
+  params: null
+  type: csv
+# Test data
+- url: https://www.vdh.virginia.gov/content/uploads/sites/182/2020/05/VDH-COVID-19-PublicUseDataset-ZIPCode.csv
+  params: null
+  type: csv
+# Hospital data
+- url: https://www.vdh.virginia.gov/content/uploads/sites/182/2020/05/VDH-COVID-19-PublicUseDataset-KeyMeasures-Hospitals.csv
+  params: null
+  type: csv
+  encoding: utf-8-sig
 VT:
 - url: https://services1.arcgis.com/BkFxaEFNwHqX3tAw/arcgis/rest/services/county_summary/FeatureServer/0/query
   params: {f: json, resultRecordCount: 1, orderByFields: date DESC, outFields: 'date,cumulative_positives,total_tests,total_deaths,current_hospitalizations,hosp_pui,total_recovered',
