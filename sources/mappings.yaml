@@ -205,8 +205,11 @@ TN:
   DEATHS_TOT: DEATH
   DATE: TIMESTAMP
 TX:
-  CumulativeCases: POSITIVE
-  CumulativeFatalities: DEATH
+  SUM_Positive: POSITIVE
+  SUM_Fatalities: DEATH
+  totals: TOTAL
+  Recovered: RECOVERED
+  death_confirmed: DEATH_CONFIRMED
   Date: TIMESTAMP
   curr_hosp: CURR_HOSP
 UT:

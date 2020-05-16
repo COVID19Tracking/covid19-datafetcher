@@ -263,9 +263,18 @@ TN:
   params: {where: 1=1, outFields: '*', orderByFields: 'DATE desc', resultRecordCount: 1, f: json}
   type: arcgis
 TX:
-- url: https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/EpiCurve410_View/FeatureServer/0/query
-  params: {f: json, resultRecordCount: 1, orderByFields: Date desc, outFields: '*',
-    where: 1=1}
+- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Service/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"Positive"},
+  {"statisticType":"sum","onStatisticField":"Fatalities"}], f: json}
+  type: arcgis
+- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Service/FeatureServer/9/query
+  params: {where: TestType='Total Tests', outFields: '*, Count_ as totals', f: json}
+  type: arcgis
+- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Service/FeatureServer/8/query
+  params: {where: 1=1, outFields: '*', f: json}
+  type: arcgis
+- url: https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/DSHS_COVID19_Service/FeatureServer/6/query
+  params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"Count_","outStatisticFieldName":"death_confirmed"}], f: json}
   type: arcgis
 - url: https://services1.arcgis.com/d9sLvPecHnb8pMfE/arcgis/rest/services/TSA_BedAvailability_ViewTest/FeatureServer/0/query
   params: {"where": "1=1",
