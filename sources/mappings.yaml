@@ -232,6 +232,10 @@ VT:
   total_deaths: DEATH
   total_tests: TOTAL
   total_recovered: RECOVERED
+WA:
+  MAX_CV_Updated: TIMESTAMP
+  MAX_CV_State_Cases: POSITIVE
+  MAX_CV_State_Deaths: DEATH
 WI:
   DEATHS: DEATH
   HOSP_YES: HOSP

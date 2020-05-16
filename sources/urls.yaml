@@ -306,6 +306,12 @@ VT:
   params: {f: json, resultRecordCount: 1, orderByFields: date DESC, outFields: 'date,cumulative_positives,total_tests,total_deaths,current_hospitalizations,hosp_pui,total_recovered',
     where: 1=1}
   type: arcgis
+WA:
+- url: https://services8.arcgis.com/rGGrs6HCnw87OFOT/ArcGIS/rest/services/CountyCases/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{"statisticType": "max", "onStatisticField": "CV_Updated"},
+{"statisticType": "max", "onStatisticField": "CV_State_Cases"},
+{"statisticType": "max", "onStatisticField": "CV_State_Deaths"}], f: json}
+  type: arcgis
 WI:
 - url: https://services1.arcgis.com/ISZ89Z51ft1G16OK/ArcGIS/rest/services/COVID19_WI/FeatureServer/2/query
   params: {f: json, outFields: 'LoadDttm,POSITIVE,NEGATIVE,HOSP_YES,IC_YES,DEATHS',
