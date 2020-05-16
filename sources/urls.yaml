@@ -186,10 +186,13 @@ NJ:
   params: {f: json, resultRecordCount: 1, orderByFields: _date desc, outFields: '*',
     where: 1=1}
   type: arcgis
+- url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query
+  params: {where: survey_period>=timestamp '2020-04-28 07:00:00' AND structure_measure_identifier LIKE '%of COVID + Patients Discharged from Hospital - Excluding Deaths (Past 24 hours)', outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "recoveries"}], f: json}
+  type: arcgis
 - url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/Discharges_NJHA/FeatureServer/0/query
   params: {where: structure_measure_identifier='# of COVID Patients Discharged from
       the Hospital (past 24 hours)', outStatistics: [{statisticType: sum, onStatisticField: value,
-        outStatisticFieldName: recoveries}, {statisticType: max, onStatisticField: survey_period}],
+        outStatisticFieldName: old_recoveries}, {statisticType: max, onStatisticField: survey_period}],
     f: json}
   type: arcgis
 - url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query

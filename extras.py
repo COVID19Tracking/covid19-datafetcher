@@ -256,3 +256,16 @@ def handle_va(res, mapping):
     tagged.update(mapped_hosp)
 
     return tagged
+
+def handle_nj(res, mapping):
+    '''Need to parse everything the same, and add past recoveries
+    to the new query, because I do not know how to add a constant
+    to the ArcGIS query
+    '''
+    mapped = {}
+    for result in res:
+        partial = extract_attributes(result, mapping, 'NJ')
+        mapped.update(partial)
+
+    mapped[Fields.RECOVERED.name] += 15642
+    return mapped
