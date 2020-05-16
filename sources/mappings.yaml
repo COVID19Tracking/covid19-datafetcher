@@ -41,14 +41,6 @@ CT:
   date: DATE
   deaths: DEATH
   hospitalizations: CURR_HOSP
-DE:
-  Hospitalizations: CURR_HOSP
-  Last_Updated: TIMESTAMP
-  NegativeCOVID: NEGATIVE
-  Recovered: RECOVERED
-  CriticalCond: CURR_ICU
-  SUM_Presumptive_Positive: POSITIVE
-  SUM_Total_Death: DEATH
 FL:
   SUM_C_FLResDeaths: DEATH
   SUM_C_HospYes_Res: HOSP

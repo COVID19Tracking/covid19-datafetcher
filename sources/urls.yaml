@@ -63,18 +63,6 @@ CT:
 - url: https://data.ct.gov/resource/rf3k-f8fg.json
   params: null
   type: json
-DE:
-- url: https://services1.arcgis.com/PlCPCPzGOwulHUHo/arcgis/rest/services/DEMA_COVID_County_Boundary_Time_VIEW/FeatureServer/0/query
-  params: {f: json, outStatistics: [{onStatisticField: Presumptive_Positive, statisticType: sum},
-      {onStatisticField: Total_Death, statisticType: sum}], where: NAME<>'Statewide'}
-  type: arcgis
-- url: https://services1.arcgis.com/PlCPCPzGOwulHUHo/arcgis/rest/services/DEMA_COVID_County_Boundary_Time_VIEW/FeatureServer/0/query
-  params: {where: NAME='Statewide',
-        returnGeometry: false,
-        outFields: 'NegativeCOVID,Recovered,Hospitalizations,CriticalCond,Last_Updated',
-        f: json
-        }
-  type: arcgis
 FL:
 - url: https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/arcgis/rest/services/Florida_COVID19_Cases/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{statisticType: sum, onStatisticField: T_positive},
