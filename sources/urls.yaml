@@ -116,14 +116,16 @@ KY:
     where: 1=1}
   type: arcgis
 LA:
-# https://www.arcgis.com/sharing/rest/content/items/69b726e2b82e408f89c3a54f96e8f776/data
-# the extra text that says vent and probable death numbers
 - url: https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/Cases_by_Parish/FeatureServer/0/query
   params: {f: json, outStatistics: [{onStatisticField: Cases, statisticType: sum},
       {onStatisticField: Deaths, statisticType: sum}, {onStatisticField: State_Tests,
         statisticType: sum}, {onStatisticField: Commercial_Tests, statisticType: sum}],
     where: 1=1}
   type: arcgis
+# the extra text that says vent and probable death numbers
+- url: https://www.arcgis.com/sharing/rest/content/items/69b726e2b82e408f89c3a54f96e8f776/data
+  params: {f: json}
+  type: json
 MD:
 - url: https://services.arcgis.com/njFNhDsUCentVYJW/ArcGIS/rest/services/MASTER_CaseTracker_3/FeatureServer/0/query
   params: {f: json, resultRecordCount: 1, orderByFields: ReportDate desc, outFields: 'ReportDate,TotalCases,NegativeTests,bedsICU,bedsAcute,bedsTotal,total_hospitalized,total_released,deaths,pdeaths',

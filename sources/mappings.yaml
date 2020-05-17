@@ -94,7 +94,7 @@ KY:
 LA:
   SUM_Cases: POSITIVE
   SUM_Commercial_Tests: TOTAL
-  SUM_Deaths: DEATH
+  SUM_Deaths: DEATH_CONFIRMED
 MD:
   NegativeTests: NEGATIVE
   ReportDate: TIMESTAMP

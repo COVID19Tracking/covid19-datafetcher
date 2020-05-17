@@ -114,17 +114,43 @@ def handle_in(res, mapping):
     return tagged
 
 def handle_la(res, mapping):
-    res = res[0]
+    res1 = res[0]
     state_tests = 'SUM_State_Tests'
     state = 'LA'
-    tagged = extract_attributes(res, mapping, state)
+    tagged = extract_attributes(res1, mapping, state)
     try:
         # TODO: extract this into a separate function
-        val = res['features'][0]['attributes'][state_tests]
+        val = res1['features'][0]['attributes'][state_tests]
         tagged[Fields.TOTAL.name] += val
     except Exception as e:
         print(str(e))
         raise
+
+    # parse the probable death and vent and hospital data
+    # This is going to be fragile
+    death_title = "Deaths Reported"
+    hosp_title = "Reported COVID-19 Patients in Hospitals"
+    death_probable = 0
+    curr_hosp = 0
+    curr_vent = 0
+
+    widgets = res[1].get('widgets', {})
+    for widget in widgets:
+        if widget.get('defaultSettings', {}) \
+                  .get('topSection', {}).get('textInfo', {}).get('text') == death_title:
+            # Take the subtitle and extract the value of probable from there
+            death_subtext = widget['defaultSettings']['bottomSection']['textInfo']['text']
+            death_probable = int(death_subtext.split()[0].replace(",", ""))
+        elif widget.get('defaultSettings', {}) \
+                    .get('topSection', {}).get('textInfo', {}).get('text') == hosp_title:
+            # Take the hosp value from the main number, and vent number from the small text
+            curr_hosp = int(widget['datasets'][0]['data'].replace(',', ''))
+            vent_subtext = widget['defaultSettings']['bottomSection']['textInfo']['text']
+            curr_vent = int(vent_subtext.split()[0].replace(",", ""))
+
+    tagged[Fields.DEATH_PROBABLE.name] = death_probable
+    tagged[Fields.CURR_HOSP.name] = curr_hosp
+    tagged[Fields.CURR_VENT.name] = curr_vent
     return tagged
 
 def handle_il(res, mapping):
