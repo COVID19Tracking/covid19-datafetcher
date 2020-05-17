@@ -234,11 +234,8 @@ PA:
         statisticType: sum}, {onStatisticField: Cases, statisticType: sum}, {onStatisticField: Deaths,
         statisticType: sum}], where: 1=1}
   type: arcgis
-- url: https://services2.arcgis.com/xtuWQvb2YQnp0z3F/arcgis/rest/services/Adam_County_Summary_Table_v4/FeatureServer/0/query
-  params: { where: 1=1, f: json,
-    outStatistics: [{"statisticType":"sum","onStatisticField":"COVID_19_Patient_Counts_Total_n","outStatisticFieldName":"curr_vent"},
-{"statisticType":"sum","onStatisticField":"COVID_19_Patient_Counts_Total_2","outStatisticFieldName":"curr_hosp"},
-{"statisticType":"sum","onStatisticField":"COVID_19_Patient_Counts_Total_1","outStatisticFieldName":"ecmo"}]}
+- url: https://services2.arcgis.com/xtuWQvb2YQnp0z3F/ArcGIS/rest/services/Adam_County_Summary_Table_v5/FeatureServer/0/query
+  params: { where: 1=1, f: json, outStatistics: [{"onStatisticField": "numc19mechventpats", "statisticType": "sum", "outStatisticFieldName": "curr_vent"}, {"onStatisticField": "ttlcvd19ptntecmo", "statisticType": "sum", "outStatisticFieldName": "ecmo"}, {"onStatisticField": "numc19hosppats", "statisticType": "sum", "outStatisticFieldName": "curr_hosp"}]}
   type: arcgis
 PR:
 - url: https://services5.arcgis.com/klquQoHA0q9zjblu/ArcGIS/rest/services/Datos_Totales/FeatureServer/0/query
