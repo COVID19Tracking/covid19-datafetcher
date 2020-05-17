@@ -101,7 +101,7 @@ def handle_in(res, mapping):
 
     # There's pretty bad error handling now
     # I want to get errors as fast as possible -- to fix faster
-    stats = res[0]['result']['records'][0]
+    stats = res[0]['objects']['daily_statistics']
     tagged = map_attributes(stats, mapping, 'IN')
 
     hosp_data = res[1]['result']['records']
