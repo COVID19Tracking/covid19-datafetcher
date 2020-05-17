@@ -220,6 +220,10 @@ NM:
 - url: https://e7p503ngy5.execute-api.us-west-2.amazonaws.com/prod/GetPublicStatewideData
   params: null
   type: json
+OK:
+- url: https://storage.googleapis.com/ok-covid-gcs-public-download/oklahoma_cases_county.csv
+  params: null
+  type: csv
 PA:
 - url: https://services2.arcgis.com/xtuWQvb2YQnp0z3F/ArcGIS/rest/services/County_Case_Data_Public/FeatureServer/0/query
   params: {f: json, outStatistics: [{onStatisticField: COVID19onVents, statisticType: sum},

@@ -295,3 +295,18 @@ def handle_nj(res, mapping):
 
     mapped[Fields.RECOVERED.name] += 15642
     return mapped
+
+def handle_ok(res, mapping):
+    # need to sum all values
+    res = res[0]
+
+    # sum all fields
+    # TODO: functools probably has something nice
+    summed = {'Cases': 0, 'Deaths': 0, 'Recovered': 0}
+    for row in res:
+        for k, v in row.items():
+            if k in summed:
+                summed[k] += v if isinstance(v, int) else int(v.replace(',', ''))
+    mapped = map_attributes(summed, mapping, 'OK')
+    mapped[Fields.DATE.name] = res[0].get('ReportDate')
+    return mapped

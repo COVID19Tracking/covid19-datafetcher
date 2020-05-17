@@ -158,6 +158,11 @@ NM:
   recovered: RECOVERED
   tests: TOTAL
   totalHospitalizations: HOSP
+OK:
+  Cases: POSITIVE
+  Deaths: DEATH
+  Recovered: RECOVERED
+  ReportDate: DATE
 PA:
   SUM_COVID19onVents: CURR_VENT
   SUM_Cases: POSITIVE
