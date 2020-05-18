@@ -82,10 +82,12 @@ def handle_nm(res, mapping):
     return mapped
 
 def handle_ne(res, mapping):
-    res = res[0]
-    tagged = {}
-    if 'features' in res and len(res['features']) > 0:
-        attributes = res['features']
+    tagged = extract_attributes(res[0], mapping, 'NE')
+    partial = extract_attributes(res[1], mapping, 'NE')
+    tagged.update(partial)
+    stats = res[2]
+    if 'features' in stats and len(stats['features']) > 0:
+        attributes = stats['features']
         for attr in attributes:
             # expecting {attributes: {lab_status: NAME, COUNT_EXPR0: VALUE}}
             name = attr['attributes']['lab_status']

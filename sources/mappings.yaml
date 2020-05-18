@@ -151,6 +151,8 @@ NE:
   Inconclusive: INCONCLUSIVE
   Not Detected: NEGATIVE
   Positive: POSITIVE
+  death: DEATH
+  total: TOTAL
 NJ:
   _date: TIMESTAMP
   recoveries: RECOVERED
