@@ -140,6 +140,9 @@ MT:
   SUM_Total: POSITIVE
   SUM_TotalDeaths: DEATH
   SUM_TotalRecovered: RECOVERED
+  Test_Date: DATE
+  Total_Tests_Completed: TOTAL
+  hosp: HOSP
 NC:
   MAX_Hosp: CURR_HOSP
   SUM_Deaths: DEATH

@@ -175,6 +175,12 @@ MT:
         statisticType: sum}, {onStatisticField: TotalRecovered, statisticType: sum},
       {onStatisticField: LAST_UPDATE, statisticType: max}], where: 1=1}
   type: arcgis
+- url: https://services.arcgis.com/qnjIrwR8z5Izc0ij/ArcGIS/rest/services/COVID_Cases_Production_View/FeatureServer/1/query
+  params: {where: 1=1, outFields: '*', orderByFields: 'ScriptRunDate desc', resultRecordCount: 1, f: json}
+  type: arcgis
+- url: https://services.arcgis.com/qnjIrwR8z5Izc0ij/ArcGIS/rest/services/COVID_Cases_Production_View/FeatureServer/2/query
+  params: {where: Hospitalization='Y' OR Hospitalization='P', outStatistics: [{"statisticType":"count","onStatisticField":"OBJECTID","outStatisticFieldName":"hosp"}], f: json}
+  type: arcgis
 NC:
 - url: https://services.arcgis.com/iFBq2AW9XO0jYYF7/ArcGIS/rest/services/NCCovid19/FeatureServer/0/query
   params: {f: json, outStatistics: [{onStatisticField: Hosp, statisticType: max},
@@ -250,17 +256,6 @@ RI:
   type: csv
   header: no # for CSV parsing
 # - url: https://services1.arcgis.com/dkWT1XL4nglP5MLP/ArcGIS/rest/services/COVID_Public_Map_TEST/FeatureServer/2/query
-#   params: {f: json, outStatistics: [{outStatisticFieldName: Date, statisticType: max,
-#         onStatisticField: Date}, {outStatisticFieldName: Covid_case, statisticType: max,
-#         onStatisticField: Covid_case}, {outStatisticFieldName: Covid_Deaths, statisticType: max,
-#         onStatisticField: Covid_Deaths}, {outStatisticFieldName: Total_Hospitalized,
-#         statisticType: max, onStatisticField: Total_Hospitalized}, {outStatisticFieldName: Covid_ICU,
-#         statisticType: max, onStatisticField: Covid_ICU}, {outStatisticFieldName: Covid_Ventilator,
-#         statisticType: max, onStatisticField: Covid_Ventilator}, {outStatisticFieldName: Total_Covid_Lab_Tests,
-#         statisticType: max, onStatisticField: Total_Covid_Lab_Tests}, {outStatisticFieldName: Negative_Covid_Lab_Tests,
-#         statisticType: max, onStatisticField: Negative_Covid_Lab_Tests}], where: City_Town
-#       <> 'TOTAL'}
-#   type: arcgis
 SC:
 - url: https://services2.arcgis.com/XZg2efAbaieYAXmu/arcgis/rest/services/COVID19/FeatureServer/0/query
   params: {f: json, outStatistics: [{onStatisticField: Date_, statisticType: max},
