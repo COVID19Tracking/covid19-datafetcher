@@ -129,8 +129,12 @@ MI:
   Tot_Deaths: DEATH
   positives: POSITIVE
 MN:
-  SUM_COVID19DTH: DEATH
-  SUM_COVID19POS: POSITIVE
+  DateTime: DATE
+  TotalCases: POSITIVE
+  hosp: HOSP
+  EvrICUYes: ICU
+  RlsdFrmIso: RECOVERED
+  OutcmDied: DEATH
 MO:
   SUM_Cases: POSITIVE
   SUM_Deaths: DEATH

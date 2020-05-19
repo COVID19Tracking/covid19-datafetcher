@@ -159,9 +159,8 @@ MI:
         outStatisticFieldName: Recovered}], f: json}
   type: arcgis
 MN:
-- url: https://services1.arcgis.com/RQG3sksSXcoDoIfj/ArcGIS/rest/services/MN_COVID19_County_Tracking_Public_View/FeatureServer/0/query
-  params: {f: json, outStatistics: [{onStatisticField: COVID19POS, statisticType: sum},
-      {onStatisticField: COVID19DTH, statisticType: sum}], where: 1=1}
+- url: https://services2.arcgis.com/V12PKGiMAH7dktkU/arcgis/rest/services/MyMapService/FeatureServer/0/query
+  params: {where: 1=1, outFields: 'Date, Time,TotalCases, EvrHospYes + EvrICUYes as hosp, EvrICUYes, RlsdFrmIso, OutcmDied', f: json}
   type: arcgis
 MO:
 - url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/ArcGIS/rest/services/lpha_boundry/FeatureServer/0/query
