@@ -175,6 +175,10 @@ NM:
   recovered: RECOVERED
   tests: TOTAL
   totalHospitalizations: HOSP
+NY:
+  test_date: DATE
+  sum_cumulative_number_of_positives: POSITIVE
+  sum_cumulative_number_of_tests: TOTAL
 OK:
   Cases: POSITIVE
   Deaths: DEATH

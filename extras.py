@@ -312,3 +312,9 @@ def handle_ok(res, mapping):
     mapped = map_attributes(summed, mapping, 'OK')
     mapped[Fields.DATE.name] = res[0].get('ReportDate')
     return mapped
+
+def handle_ny(res, mapping):
+    stats = res[0]
+    mapped = map_attributes(stats[0], mapping, 'NY')
+
+    return mapped
