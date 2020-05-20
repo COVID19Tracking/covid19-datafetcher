@@ -2,24 +2,53 @@
 <html lang="en">
   <head>
     <title>COVID19: US State Data</title>
+
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 80%;
+      }
+
+      table td, table th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      table tr:nth-child(even){background-color: #f2f2f2;}
+      table tr:hover {background-color: #ddd;}
+
+      table th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4C4C50;
+        color: white;
+      }
+    </style>
+
   </head>
   <body>
     <h1>Data </h1>
-    <p>Download most recent data: <a href="states.csv">CSV</a>
-    <p>Google Spreadsheet with the data <<ADD LINK HERE>>
+    <p>Download most recent data: <a href="states.csv">CSV</a></p>
+    <p>Google Spreadsheet with the data <<ADD LINK HERE>></p>
 
     <h1>State Data Sources</h1>
-    <ul style="columns: 3; width: 80%; list-style-type: none;">
+    <table id="data_sources">
+      <tr>
+        <th>State</th>
+        <th>Query Links</th>
+      </tr>
       {% for state in sources %}
-      <li><b>{{ state }}</b>
-        <ul>
-          {% for query in sources[state] %}
-          <li><a href="{{query['url']}}">
-              {{ query['desc'] if query.get('desc') else 'link' }}
-          </a></li>
-          {% endfor %}
-      </ul></li>
-      {% endfor %}
-    </ul>
+      <tr id="{{ state }}">
+      <td><a name="{{ state }}"/><b>{{ state }}</b></td>
+      <td>
+        {% for query in sources[state] %}
+        <a href="{{query['url']}}">
+            {{ query['desc'] if query.get('desc') else 'link' }}
+        </a><br/>
+        {% endfor %}
+    </td></tr>
+    {% endfor %}
+    </table>
   </body>
 </html>
