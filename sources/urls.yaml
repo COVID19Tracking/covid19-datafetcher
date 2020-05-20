@@ -5,6 +5,7 @@ AK:
   params: {where: Economic_Region='Statewide', outFields: '*', orderByFields: 'Date_ desc',
   resultRecordCount: 1, f: json}
   type: arcgis
+  desc: Cases/recoveries/hosp/deaths
 - url: https://services1.arcgis.com/WzFsmainVTuD5KML/ArcGIS/rest/services/COVID_Tests/FeatureServer/0/query
   params: {where: 1=1,
     outFields: 'Date,cum_Total',
@@ -12,22 +13,27 @@ AK:
     resultRecordCount: 1,
     f: json}
   type: arcgis
+  desc: Totals
 - url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/COVID_Hospital_Dataset_(prod)/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{statisticType: sum,
         onStatisticField: Pos_COVID_PUI_Pending}], f: json}
   type: arcgis
+  desc: Hospitalization (current)
 AL:
 - url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/COV19_Public_Dashboard_ReadOnly/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{statisticType: sum, onStatisticField: LabTestCount},
       {statisticType: sum, onStatisticField: CONFIRMED}, {statisticType: sum, onStatisticField: DIED}],
     f: json}
   type: arcgis
+  desc: Tests/positive/death
 - url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/COV19_Public_Statewide_Summary2/FeatureServer/0/query
-  params: {where: 1=1, outFields: '*', f: json}
+  params: {where: 1=1, outFields: '*', returnGeometry: false, f: json}
   type: arcgis
+  desc: Hospitalized
 - url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/ArcGIS/rest/services/COV19_Public_Statewide_Summary2/FeatureServer/1/query
-  params: {where: 1=1, outFields: 'CLN_ICU,CLN_VENT', f: json}
+  params: {where: 1=1, outFields: 'CLN_ICU,CLN_VENT', returnGeometry: false, f: json}
   type: arcgis
+  desc: ICU/Vent
 AR:
 - url: https://services.arcgis.com/PwY9ZuZRDiI5nXUB/arcgis/rest/services/ADH_COVID19_Positive_Test_Results/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{statisticType: sum, onStatisticField: negative},
@@ -53,12 +59,14 @@ CO:
     {"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "antibody_pos"}],
     f: json}
   type: arcgis
+  desc: Positive serological tests
 - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/COVID19_Positivity_Data_from_Clinical_Laboratories/FeatureServer/0/query
   params: {where: Metric='Number of negative tests',
     outStatistics: [{"statisticType": "max", "onStatisticField": "Attr_Date"},
     {"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "antibody_neg"}],
     f: json}
   type: arcgis
+  desc: Negative serological tests
 CT:
 - url: https://data.ct.gov/resource/rf3k-f8fg.json
   params: null
@@ -95,9 +103,11 @@ IL:
 - url: http://www.dph.illinois.gov/sitefiles/COVIDTestResults.json
   params: null
   type: json
+  desc: Cases/tests
 - url: http://www.dph.illinois.gov/sitefiles/COVIDHospitalRegions.json
   params: {nocache: 1}
   type: json
+  desc: Hospitalization
 IN:
 # https://www.coronavirus.in.gov/map/covid-19-indiana-daily-report-current.topojson
 # .objects | .daily_statistics
@@ -125,10 +135,12 @@ LA:
         statisticType: sum}, {onStatisticField: Commercial_Tests, statisticType: sum}],
     where: 1=1}
   type: arcgis
+  desc: Most dashboard data
 # the extra text that says vent and probable death numbers
 - url: https://www.arcgis.com/sharing/rest/content/items/69b726e2b82e408f89c3a54f96e8f776/data
   params: {f: json}
   type: json
+  desc: Probable death + vent (from dashboard description)
 MD:
 - url: https://services.arcgis.com/njFNhDsUCentVYJW/ArcGIS/rest/services/MASTER_CaseTracker_3/FeatureServer/0/query
   params: {f: json, resultRecordCount: 1, orderByFields: ReportDate desc, outFields: 'ReportDate,TotalCases,NegativeTests,bedsICU,bedsAcute,bedsTotal,total_hospitalized,total_released,deaths,pdeaths',
@@ -174,12 +186,15 @@ MT:
         statisticType: sum}, {onStatisticField: TotalRecovered, statisticType: sum},
       {onStatisticField: LAST_UPDATE, statisticType: max}], where: 1=1}
   type: arcgis
+  desc: Cases, death, hospitalization, recovered
 - url: https://services.arcgis.com/qnjIrwR8z5Izc0ij/ArcGIS/rest/services/COVID_Cases_Production_View/FeatureServer/1/query
   params: {where: 1=1, outFields: '*', orderByFields: 'ScriptRunDate desc', resultRecordCount: 1, f: json}
   type: arcgis
+  desc: Totals
 - url: https://services.arcgis.com/qnjIrwR8z5Izc0ij/ArcGIS/rest/services/COVID_Cases_Production_View/FeatureServer/2/query
   params: {where: Hospitalization='Y' OR Hospitalization='P', outStatistics: [{"statisticType":"count","onStatisticField":"OBJECTID","outStatisticFieldName":"hosp"}], f: json}
   type: arcgis
+  desc: Hospitalization
 NC:
 - url: https://services.arcgis.com/iFBq2AW9XO0jYYF7/ArcGIS/rest/services/NCCovid19/FeatureServer/0/query
   params: {f: json, outStatistics: [{onStatisticField: Hosp, statisticType: max},
@@ -191,30 +206,37 @@ NE:
   params: {where: case_status='Confirmed' AND NE_JURIS='yes' AND Did_Pat_Die_From_Illness='Y',
     outStatistics: [{"statisticType":"count","onStatisticField":"ID","outStatisticFieldName": "death"}], f: json}
   type: arcgis
+  desc: Death
 - url: https://gis.ne.gov/Agency/rest/services/COVID19_County_Layer/MapServer/3/query
   params: {f: json, outStatistics: [{onStatisticField: ID, statisticType: count, outStatisticFieldName: total}], where: NE_JURIS='yes'}
   type: arcgis
+  desc: Total
 - url: https://gis.ne.gov/Agency/rest/services/COVID19_County_Layer/MapServer/3/query
   params: {f: json, outStatistics: [{onStatisticField: ID, statisticType: count}],
     groupByFieldsForStatistics: lab_status, outFields: '*', where: NE_JURIS='yes'}
   type: arcgis
+  desc: Lab results (pos, inconclusive, neg)
 NJ:
 - url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/survey123_cb9a6e9a53ae45f6b9509a23ecdf7bcf/FeatureServer/0/query
   params: {f: json, resultRecordCount: 1, orderByFields: _date desc, outFields: '*',
     where: 1=1}
   type: arcgis
+  desc: Base data
 - url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query
   params: {where: survey_period>=timestamp '2020-04-27 07:00:00' AND structure_measure_identifier LIKE '%of COVID + Patients Discharged from Hospital - Excluding Deaths (Past 24 hours)', outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "recoveries"}], f: json}
   type: arcgis
+  desc: Discharged (new)
 - url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/Discharges_NJHA/FeatureServer/0/query
   params: {where: structure_measure_identifier='# of COVID Patients Discharged from
       the Hospital (past 24 hours)', outStatistics: [{statisticType: sum, onStatisticField: value,
         outStatisticFieldName: old_recoveries}, {statisticType: max, onStatisticField: survey_period}],
     f: json}
   type: arcgis
+  desc: Discharged (old, up to 28-April)
 - url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query
   params: {where: structure_measure_identifier='Case count of COVID-19 positive cases currently in the hospital' OR structure_measure_identifier='Case count of persons under investigation (PUI) / presumptive positive cases currently in the hospital', orderByFields: 'survey_period desc', groupByFieldsForStatistics: survey_period, outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "curr_hosp"}], resultRecordCount: 1, f: json}
   type: arcgis
+  desc: Hospitalized
 - url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query
   params: {where: structure_measure_identifier LIKE 'Total % of COVID Patients Currently on a Ventilator',
   orderByFields: 'survey_period desc',
@@ -223,6 +245,7 @@ NJ:
   resultRecordCount: 1,
   f: json}
   type: arcgis
+  desc: Curr vent
 - url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query
   params: {where: structure_measure_identifier='COVID-19 Positive and PUI Patients Combined in a - Critical Care Bed' OR structure_measure_identifier='COVID-19 Positive and PUI Patients Combined in a - Intensive Care Bed',
   orderByFields: 'survey_period desc',
@@ -231,6 +254,7 @@ NJ:
   resultRecordCount: 1,
   f: json}
   type: arcgis
+  desc: Critical & Intensive Care
 NM:
 - url: https://e7p503ngy5.execute-api.us-west-2.amazonaws.com/prod/GetPublicStatewideData
   params: null
@@ -246,9 +270,11 @@ PA:
         statisticType: sum}, {onStatisticField: Cases, statisticType: sum}, {onStatisticField: Deaths,
         statisticType: sum}], where: 1=1}
   type: arcgis
+  desc: Cases, death (and old hosp/vent/ecmo)
 - url: https://services2.arcgis.com/xtuWQvb2YQnp0z3F/ArcGIS/rest/services/Adam_County_Summary_Table_v5/FeatureServer/0/query
   params: { where: 1=1, f: json, outStatistics: [{"onStatisticField": "numc19mechventpats", "statisticType": "sum", "outStatisticFieldName": "curr_vent"}, {"onStatisticField": "ttlcvd19ptntecmo", "statisticType": "sum", "outStatisticFieldName": "ecmo"}, {"onStatisticField": "numc19hosppats", "statisticType": "sum", "outStatisticFieldName": "curr_hosp"}]}
   type: arcgis
+  desc: Hosp, vent, ecmo
 PR:
 - url: https://services5.arcgis.com/klquQoHA0q9zjblu/ArcGIS/rest/services/Datos_Totales/FeatureServer/0/query
   params: {where: 1=1, outFields: 'T_Muertes_COVID_RD,T_Muertes_Combinadas,T_Pacientes_Int_Covid,T_Vent_Covid,T_Serologicos_Pos,T_Casos_Unicos,T_Molecular_Pos,T_Fatalidades',
@@ -302,15 +328,18 @@ VA:
 - url: https://www.vdh.virginia.gov/content/uploads/sites/182/2020/04/VDH-COVID-19-PublicUseDataset-Cases_By-Confirmation.csv
   params: null
   type: csv
+  desc: Cases
 # Test data
 - url: https://www.vdh.virginia.gov/content/uploads/sites/182/2020/05/VDH-COVID-19-PublicUseDataset-ZIPCode.csv
   params: null
   type: csv
+  desc: Test data
 # Hospital data
 - url: https://www.vdh.virginia.gov/content/uploads/sites/182/2020/05/VDH-COVID-19-PublicUseDataset-KeyMeasures-Hospitals.csv
   params: null
   type: csv
   encoding: utf-8-sig
+  desc: Hospital data
 VT:
 - url: https://services1.arcgis.com/BkFxaEFNwHqX3tAw/arcgis/rest/services/county_summary/FeatureServer/0/query
   params: {f: json, resultRecordCount: 1, orderByFields: date DESC, outFields: 'date,cumulative_positives,total_tests,total_deaths,current_hospitalizations,hosp_pui,total_recovered',

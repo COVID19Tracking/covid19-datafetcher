@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>State Data Links </title>
+    <title>COVID19: US State Data</title>
   </head>
   <body>
-    <ul>
+    <h1>Data </h1>
+    <p>Download most recent data: <a href="states.csv">CSV</a>
+    <p>Google Spreadsheet with the data <<ADD LINK HERE>>
+
+    <h1>State Data Sources</h1>
+    <ul style="columns: 3; width: 80%; list-style-type: none;">
       {% for state in sources %}
-      <li><b>{{ state }}</b>:
-        {% for link in sources[state] %}
-        <a href="{{link}}">link, </a>
-        {% endfor %}
-      </li>
+      <li><b>{{ state }}</b>
+        <ul>
+          {% for query in sources[state] %}
+          <li><a href="{{query['url']}}">
+              {{ query['desc'] if query.get('desc') else 'link' }}
+          </a></li>
+          {% endfor %}
+      </ul></li>
       {% endfor %}
     </ul>
   </body>
