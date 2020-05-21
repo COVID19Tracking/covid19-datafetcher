@@ -16,10 +16,11 @@ class Fields(Enum):
     # Tests
     POSITIVE = 10
     NEGATIVE = 11
-    TOTAL = 12  # total tests
-    INCONCLUSIVE = 13  # tests
-    PROBABLE = 14
-    PENDING = 15
+    CONFIRMED = 12
+    TOTAL = 13  # total tests
+    INCONCLUSIVE = 14  # tests
+    PROBABLE = 15
+    PENDING = 16
 
     ANTIBODY_POS=16
     ANTIBODY_NEG=17

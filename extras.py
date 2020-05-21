@@ -343,7 +343,6 @@ def handle_mi(res, mapping):
     row_data = []
     for row in rows:
         row_data.append([x.get_text(strip=True) for x in row.find_all("td")])
-
     # Headers: Date, Positive Tests, Negative Tests, Total Tests, % pos Tests
     sums = [0, 0, 0]
     for row in row_data:
