@@ -25,6 +25,10 @@ class Fields(Enum):
     ANTIBODY_NEG=17
     ANTIBODY_TOTAL=18
 
+    SPECIMENS = 20
+    SPECIMENS_POS = 21
+    SPECIMENS_NEG = 22
+
     # Death
     DEATH = 30  # total
     DEATH_CONFIRMED = 31
@@ -45,16 +49,20 @@ class Fields(Enum):
     def __repr__(self):
         return self.__str__()
 
-
-def request_and_parse(url, query=None):
+def request(url, query=None, encoding=None):
+    if not encoding:
+        encoding = 'utf-8'
     if query:
         url = "{}?{}".format(url, urllib.parse.urlencode(query))
-
     res = {}
     with urllib.request.urlopen(url) as f:
-        res = f.read().decode('utf-8')
-        # always assume that response is json
-        res = json.loads(res)
+        res = f.read().decode(encoding)
+    return res
+
+
+def request_and_parse(url, query=None):
+    res = request(url, query)
+    res = json.loads(res)
     return res
 
 def request_csv(url, query=None, dialect=None, header=True, encoding=None):
@@ -62,20 +70,14 @@ def request_csv(url, query=None, dialect=None, header=True, encoding=None):
     if getattr(ssl, '_create_unverified_context', None):
         ssl._create_default_https_context = ssl._create_unverified_context
 
-    if query:
-        url = "{}?{}".format(url, urllib.parse.urlencode(query))
-    res = {}
+    res = request(url, query, encoding)
     if not dialect:
         dialect = 'unix'
-    if not encoding:
-        encoding = 'utf-8'
-    with urllib.request.urlopen(url) as f:
-        res = f.read().decode(encoding)
-        if header:
-            reader = csv.DictReader(StringIO(res), dialect = 'unix')
-        else:
-            reader = csv.reader(StringIO(res), dialect = 'unix')
-        res = list(reader)
+    if header:
+        reader = csv.DictReader(StringIO(res), dialect = 'unix')
+    else:
+        reader = csv.reader(StringIO(res), dialect = 'unix')
+    res = list(reader)
     return res
 
 def map_attributes(original, mapping, debug_state=None):

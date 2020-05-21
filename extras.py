@@ -1,5 +1,6 @@
 import csv
 from io import StringIO
+from bs4 import BeautifulSoup
 from copy import copy
 from datetime import datetime
 from utils import request_and_parse, extract_attributes, \
@@ -283,8 +284,6 @@ def handle_va(res, mapping):
 
     # Hospitalizations
     hospital = sorted(hospital, key=lambda x: datetime.strptime(x['Date'], date_format), reverse = True)
-    print("Hospital:")
-    print(hospital[0])
     mapped_hosp = map_attributes(hospital[0], mapping, 'VA')
     tagged.update(mapped_hosp)
 
@@ -323,3 +322,36 @@ def handle_ny(res, mapping):
     mapped = map_attributes(stats[0], mapping, 'NY')
 
     return mapped
+
+def handle_mi(res, mapping):
+    tagged = {}
+    for result in res[:-1]:
+        partial = extract_attributes(result, mapping, 'MI')
+        tagged.update(partial)
+
+    # soup time
+    soup = BeautifulSoup(res[-1], 'html.parser')
+    tables = soup.find_all("table")
+    table = tables[0]
+
+    # TODO: extract method to sum csv columns
+    headers = table.find_all('th')
+    headers = [x.text for x in headers]
+
+    testing = table.find('tbody')
+    rows = testing.find_all('tr')
+    row_data = []
+    for row in rows:
+        row_data.append([x.get_text(strip=True) for x in row.find_all("td")])
+
+    # Headers: Date, Positive Tests, Negative Tests, Total Tests, % pos Tests
+    sums = [0, 0, 0]
+    for row in row_data:
+        for i in range(3):
+            v = row[i+1] if row[i+1] else 0
+            sums[i] += v if isinstance(v, int) else int(v.replace(',', ''))
+    tagged[Fields.TOTAL.name] = sums[2]
+    tagged[Fields.SPECIMENS.name] = sums[2]
+    tagged[Fields.SPECIMENS_POS.name] = sums[0]
+    tagged[Fields.SPECIMENS_NEG.name] = sums[1]
+    return tagged

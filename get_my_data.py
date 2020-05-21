@@ -4,7 +4,7 @@ import pandas as pd
 import sys
 import urllib, urllib.request, json
 
-from utils import request_and_parse, extract_attributes, Fields, request_csv
+from utils import request, request_and_parse, extract_attributes, Fields, request_csv
 import extras as extras_module
 from sources import states
 
@@ -85,10 +85,13 @@ class Fetcher(object):
             try:
                 if query['type'] in ['arcgis', 'json']:
                     res = request_and_parse(query['url'], query['params'])
-                if query['type'] in ['csv']:
+                elif query['type'] in ['csv']:
                     res = request_csv(
                         query['url'], query['params'],
                         header=query.get('header', True), encoding=query.get('encoding'))
+                elif query['type'] in ['html']:
+                    # TODO: Return soup?
+                    res = request(query['url'], query['params'])
                 results.append(res)
             except Exception as e:
                 print(state, ": failed to fetch ", query['url'], str(e))
@@ -114,7 +117,8 @@ def build_dataframe(results, dump_all_states=False):
              Fields.CURR_HOSP, Fields.HOSP, Fields.CURR_ICU, Fields.ICU, Fields.CURR_VENT, Fields.VENT,
              Fields.DEATH, Fields.DEATH_PROBABLE, Fields.DEATH_CONFIRMED,
              Fields.RECOVERED, Fields.PROBABLE, Fields.DATE,
-             Fields.ANTIBODY_POS, Fields.ANTIBODY_NEG
+             Fields.ANTIBODY_POS, Fields.ANTIBODY_NEG,
+             Fields.SPECIMENS, Fields.SPECIMENS_POS, Fields.SPECIMENS_NEG
     ]
     columns = [f.name for f in columns]
 
