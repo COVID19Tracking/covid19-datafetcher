@@ -138,6 +138,8 @@ MN:
 MO:
   SUM_Cases: POSITIVE
   SUM_Deaths: DEATH
+  MAX_EditDate: TIMESTAMP
+  total: TOTAL
 MT:
   MAX_LAST_UPDATE: TIMESTAMP
   SUM_HospitalizationCount: CURR_HOSP
