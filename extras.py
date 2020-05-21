@@ -273,12 +273,11 @@ def handle_va(res, mapping):
             tagged[Fields.PROBABLE.name] = row['Number of Cases']
             tagged[Fields.DEATH_PROBABLE.name] = row['Number of Deaths']
 
-
     # Verify that we're only taking the most recent date
     testing = sorted(testing, key=lambda x: datetime.strptime(x['Report Date'],date_format), reverse = True)
     most_recent_date = testing[0]['Report Date']
     testing = [x for x in testing if x['Report Date'] == most_recent_date]
-    total_tests = [x['Number of Testing Encounters'] for x in testing]
+    total_tests = [x['Number of PCR Testing Encounters'] for x in testing]
     total_tests = sum([int(x.replace(',','')) for x in total_tests])
     tagged[Fields.TOTAL.name] = total_tests
 

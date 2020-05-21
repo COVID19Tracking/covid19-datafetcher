@@ -359,7 +359,7 @@ VA:
 - url: https://www.vdh.virginia.gov/content/uploads/sites/182/2020/05/VDH-COVID-19-PublicUseDataset-ZIPCode.csv
   params: null
   type: csv
-  desc: Test data
+  desc: PCR Test data
 # Hospital data
 - url: https://www.vdh.virginia.gov/content/uploads/sites/182/2020/05/VDH-COVID-19-PublicUseDataset-KeyMeasures-Hospitals.csv
   params: null
