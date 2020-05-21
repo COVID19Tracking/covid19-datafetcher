@@ -109,7 +109,7 @@ MD:
   TotalCases: POSITIVE
   bedsICU: CURR_ICU
   bedsTotal: CURR_HOSP
-  deaths: DEATH
+  deaths: DEATH_CONFIRMED
   pDeaths: DEATH_PROBABLE
   total_hospitalized: HOSP
   total_released: RECOVERED
@@ -195,6 +195,7 @@ PA:
 PR:
   T_Casos_Unicos: POSITIVE
   T_Fatalidades: DEATH_CONFIRMED
+  T_Muertes_COVID_RD: DEATH_PROBABLE
   T_Muertes_Combinadas: DEATH
   T_Pacientes_Int_Covid: CURR_ICU
   T_Serologicos_Pos: ANTIBODY_POS
