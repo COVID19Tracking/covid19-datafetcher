@@ -132,9 +132,11 @@ def handle_la(res, mapping):
     # This is going to be fragile
     death_title = "Deaths Reported"
     hosp_title = "Reported COVID-19 Patients in Hospitals"
-    death_probable = 0
-    curr_hosp = 0
-    curr_vent = 0
+    recovered_title = "Presumed Recovered**"
+    death_probable = ""
+    curr_hosp = ""
+    curr_vent = ""
+    recovered = ""
 
     widgets = res[1].get('widgets', {})
     for widget in widgets:
@@ -149,10 +151,14 @@ def handle_la(res, mapping):
             curr_hosp = int(widget['datasets'][0]['data'].replace(',', ''))
             vent_subtext = widget['defaultSettings']['bottomSection']['textInfo']['text']
             curr_vent = int(vent_subtext.split()[0].replace(",", ""))
+        elif widget.get('defaultSettings', {}) \
+                    .get('topSection', {}).get('textInfo', {}).get('text') == recovered_title:
+            recovered = int(widget['datasets'][0]['data'].replace(',', ''))
 
     tagged[Fields.DEATH_PROBABLE.name] = death_probable
     tagged[Fields.CURR_HOSP.name] = curr_hosp
     tagged[Fields.CURR_VENT.name] = curr_vent
+    tagged[Fields.RECOVERED.name] = recovered
     return tagged
 
 def handle_il(res, mapping):
