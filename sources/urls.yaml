@@ -161,18 +161,17 @@ ME:
   {"statisticType":"max","onStatisticField":"LastUpdated"}], f: json}
   type: arcgis
 MI:
-- url: https://services5.arcgis.com/ZqUZ99cjRiEOyN05/arcgis/rest/services/COVID19_Cases_Growth_Public2/FeatureServer/0/query
-  params: {where: 1=1, outFields: 'f1 as date,f2 as negatives,f3 as positives,f5 as
-      pending,Tot_Deaths', orderByFields: f1 desc, resultRecordCount: 1, f: json}
+- url: https://services5.arcgis.com/ZqUZ99cjRiEOyN05/ArcGIS/rest/services/jX9FD/FeatureServer/0/query
+  params: {where: 1=1, outFields: 'f1 as date,f3 as positives, Total_Deaths', orderByFields: f1 desc, resultRecordCount: 1, f: json}
   type: arcgis
-  desc: Testing (neg/pos/pending) and death
+  desc: Cases and death
 - url: https://services5.arcgis.com/ZqUZ99cjRiEOyN05/ArcGIS/rest/services/COVID_Metrics/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{statisticType: sum, onStatisticField: F__in_Critical_Care},
       {statisticType: sum, onStatisticField: F__on_Ventilators}, {statisticType: sum,
         onStatisticField: Inpatients}], f: json}
   type: arcgis
   desc: Hospitalization/vent/icu
-- url: https://services5.arcgis.com/ZqUZ99cjRiEOyN05/arcgis/rest/services/uwyRu/FeatureServer/0/query
+- url: https://services5.arcgis.com/ZqUZ99cjRiEOyN05/arcgis/rest/services/AdKoF/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{statisticType: sum, onStatisticField: f2,
         outStatisticFieldName: Recovered}], f: json}
   type: arcgis

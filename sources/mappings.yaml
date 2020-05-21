@@ -126,8 +126,9 @@ MI:
   SUM_F__in_Critical_Care: CURR_ICU
   SUM_F__on_Ventilators: CURR_VENT
   SUM_Inpatients: CURR_HOSP
-  Tot_Deaths: DEATH
+  Total_Deaths: DEATH
   positives: POSITIVE
+  date: TIMESTAMP
 MN:
   DateTime: DATE
   TotalCases: POSITIVE
