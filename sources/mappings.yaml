@@ -235,9 +235,11 @@ TN:
   DEATHS_TOT: DEATH
   DATE: TIMESTAMP
 TX:
+  ViralTests: TOTAL
+  AntibodyTests: ANTIBODY_TOTAL
+  antibody_pos: ANTIBODY_POS
   SUM_Positive: POSITIVE
   SUM_Fatalities: DEATH
-  totals: TOTAL
   Recovered: RECOVERED
   death_confirmed: DEATH_CONFIRMED
   Date: TIMESTAMP

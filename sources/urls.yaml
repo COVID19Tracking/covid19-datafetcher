@@ -332,20 +332,29 @@ TX:
   params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"Positive"},
   {"statisticType":"sum","onStatisticField":"Fatalities"}], f: json}
   type: arcgis
-- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Service/FeatureServer/9/query
-  params: {where: TestType='Total Tests', outFields: '*, Count_ as totals', f: json}
+  desc: Positive, death
+- url: https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/DSHS_COVID19_Testing_Service/FeatureServer/3/query
+  params: {where: 1=1, outFields: '*', orderByFields: Date desc, resultRecordCount: 1, f: json}
   type: arcgis
+  desc: Tests (PCR + Antibody)
+- url: https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/DSHS_COVID19_Testing_Service/FeatureServer/2/query
+  params: {where: TestType='PostiveAntibody', outFields: '*, Count_ as antibody_pos', f: json}
+  type: arcgis
+  desc: Positive antibody
 - url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Service/FeatureServer/8/query
   params: {where: 1=1, outFields: '*', f: json}
   type: arcgis
+  desc: Recoveries
 - url: https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/DSHS_COVID19_Service/FeatureServer/6/query
   params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"Count_","outStatisticFieldName":"death_confirmed"}], f: json}
   type: arcgis
+  desc: Death confirmed
 - url: https://services1.arcgis.com/d9sLvPecHnb8pMfE/arcgis/rest/services/TSA_BedAvailability_ViewTest/FeatureServer/0/query
   params: {"where": "1=1",
   'outStatistics': '[{"statisticType":"sum","onStatisticField":"Sum_Total_Lab_COVID","outStatisticFieldName":"curr_hosp"}]',
   'f': 'json'}
   type: arcgis
+  desc: Curr hosp
 UT:
 - url: https://services6.arcgis.com/KaHXE9OkiB9e63uE/ArcGIS/rest/services/Utah_COVID19_Cases_by_Local_Health_Department_View/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{"statisticType": "max", "onStatisticField": "Date_Updated"},

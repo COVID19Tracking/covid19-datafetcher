@@ -117,7 +117,7 @@ def build_dataframe(results, dump_all_states=False):
              Fields.CURR_HOSP, Fields.HOSP, Fields.CURR_ICU, Fields.ICU, Fields.CURR_VENT, Fields.VENT,
              Fields.DEATH, Fields.DEATH_PROBABLE, Fields.DEATH_CONFIRMED,
              Fields.RECOVERED, Fields.PROBABLE, Fields.DATE,
-             Fields.ANTIBODY_POS, Fields.ANTIBODY_NEG,
+             Fields.ANTIBODY_TOTAL, Fields.ANTIBODY_POS, Fields.ANTIBODY_NEG,
              Fields.SPECIMENS, Fields.SPECIMENS_POS, Fields.SPECIMENS_NEG
     ]
     columns = [f.name for f in columns]
