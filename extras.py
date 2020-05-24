@@ -329,9 +329,19 @@ def handle_mi(res, mapping):
     # soup time
     soup = BeautifulSoup(res[-1], 'html.parser')
     tables = soup.find_all("table")
+
+    # Serological tests
     table = tables[0]
+    # need to take the total from the 3rd column
+    last_row = table.find_all("tr")[-1]
+    if last_row.find("td").get_text(strip=True).lower() == "total":
+        v = last_row.find_all("td")[2].get_text(strip=True)
+        v = v if isinstance(v, int) else int(v.replace(',', ''))
+        tagged[Fields.ANTIBODY_TOTAL.name] = v
+
 
     # TODO: extract method to sum csv columns
+    table = tables[1] # 2nd table
     headers = table.find_all('th')
     headers = [x.text for x in headers]
 
@@ -346,8 +356,9 @@ def handle_mi(res, mapping):
         for i in range(3):
             v = row[i+1] if row[i+1] else 0
             sums[i] += v if isinstance(v, int) else int(v.replace(',', ''))
-    tagged[Fields.TOTAL.name] = sums[2]
-    tagged[Fields.SPECIMENS.name] = sums[2]
+
     tagged[Fields.SPECIMENS_POS.name] = sums[0]
     tagged[Fields.SPECIMENS_NEG.name] = sums[1]
+    tagged[Fields.TOTAL.name] = sums[2]
+    tagged[Fields.SPECIMENS.name] = sums[2]
     return tagged
