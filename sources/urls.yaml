@@ -188,6 +188,10 @@ MO:
       {onStatisticField: Deaths, statisticType: sum}, {onStatisticField: EditDate, statisticType: max}], where: 1=1}
   type: arcgis
   desc: Cases, death
+- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/PCR_Tests_by_Age_Group/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"Frequency", "outStatisticFieldName": "total_people"}], f: json}
+  type: arcgis
+  desc: Total PCR (people)
 - url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/Daily_COVID19_Testing_Report_for_OPI/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{"statisticType":"count","onStatisticField":"FID", "outStatisticFieldName": "total"}], f: json}
   type: arcgis
@@ -196,6 +200,20 @@ MO:
   params: {where: 1=1, groupByFieldsForStatistics: result  ,outStatistics: [{"statisticType":"count","onStatisticField":"FID"}], f: json}
   type: arcgis
   desc: Test reslts (unused)
+- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/SERTestbydates/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "Negative"},
+{"statisticType": "sum", "onStatisticField": "Positive"},
+{"statisticType": "sum", "onStatisticField": "Total"}], f: json}
+  type: arcgis
+  desc: Antibody (total, pos, neg)
+- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/Tests_by_Age_Ser/FeatureServer/0/query
+  params: {where: Date>timestamp '2020-03-02 07:59:59', outStatistics: [{"statisticType": "sum", "onStatisticField": "Negative", "outStatisticFieldName": "PCR_Negative"},
+{"statisticType": "sum", "onStatisticField": "Positive", "outStatisticFieldName": "PCR_Positive"},
+{"statisticType": "sum", "onStatisticField": "Total",    "outStatisticFieldName": "PCR_Total"}], f: json}
+  type: arcgis
+  desc: PCR (totals, pos/neg)
+# Individuals who tested for antibody is embedded in the dashboard:
+# https://mophep.maps.arcgis.com/sharing/rest/content/items/9835d94aec44449aa10088eff2201e9d/data?f=json
 MT:
 - url: https://services.arcgis.com/qnjIrwR8z5Izc0ij/arcgis/rest/services/COVID_Cases_Production_View/FeatureServer/0/query
   params: {f: json, outStatistics: [{onStatisticField: Total, statisticType: sum},
@@ -330,11 +348,6 @@ TX:
   params: {where: 1=1, outFields: '*', orderByFields: Date desc, resultRecordCount: 1, f: json}
   type: arcgis
   desc: Positives, death
-- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Service/FeatureServer/0/query
-  params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"Positive"},
-  {"statisticType":"sum","onStatisticField":"Fatalities"}], f: json}
-  type: arcgis
-  desc: Positive, death
 - url: https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/DSHS_COVID19_Testing_Service/FeatureServer/3/query
   params: {where: 1=1, outFields: '*', orderByFields: Date desc, resultRecordCount: 1, f: json}
   type: arcgis
