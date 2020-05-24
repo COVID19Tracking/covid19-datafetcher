@@ -253,7 +253,7 @@ VA:
   Report Date: DATE
   Number of Cases: POSITIVE
   #Number of Hospitalizations: HOSP
-  Number of Deaths: DEATH
+  Number of Deaths: DEATH_CONFIRMED
   Number of Testing Encounters: TOTAL
   Total COVID-19 Patients: CURR_HOSP
   ICU Patients: CURR_ICU
