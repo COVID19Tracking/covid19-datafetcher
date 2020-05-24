@@ -209,6 +209,7 @@ PR:
   T_Pacientes_Int_Covid: CURR_ICU
   T_Serologicos_Pos: ANTIBODY_POS
   T_Vent_Covid: CURR_VENT
+  T_Hospitalizados: CURR_HOSP
 RI:
   # ArcGIS query:
   Covid_Deaths: DEATH
