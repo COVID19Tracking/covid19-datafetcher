@@ -117,24 +117,27 @@ def handle_in(res, mapping):
     return tagged
 
 def handle_la(res, mapping):
-    res1 = res[0]
-    state_tests = 'SUM_State_Tests'
-    state = 'LA'
-    tagged = extract_attributes(res1, mapping, state)
-    try:
-        # TODO: extract this into a separate function
-        val = res1['features'][0]['attributes'][state_tests]
-        tagged[Fields.TOTAL.name] += val
-    except Exception as e:
-        print(str(e))
-        raise
+    stats = res[0]
+    state_tests = 'STATE_TESTS'
+    tagged = {}
+    print(stats)
+    if 'features' in stats and len(stats['features']) > 0:
+        attributes = stats['features']
+        for attr in attributes:
+            # expecting {attributes: {lab_status: NAME, COUNT_EXPR0: VALUE}}
+            name = attr['attributes']['Measure']
+            value = attr['attributes']['SUM_Value']
+            if name in mapping:
+                tagged[mapping[name]] = value
+
+    if state_tests in tagged:
+        tests = tagged.pop(state_tests)
+        tagged[Fields.TOTAL.name] += tests
 
     # parse the probable death and vent and hospital data
     # This is going to be fragile
-    death_title = "Deaths Reported"
     hosp_title = "Reported COVID-19 Patients in Hospitals"
     recovered_title = "Presumed Recovered**"
-    death_probable = ""
     curr_hosp = ""
     curr_vent = ""
     recovered = ""
@@ -142,11 +145,6 @@ def handle_la(res, mapping):
     widgets = res[1].get('widgets', {})
     for widget in widgets:
         if widget.get('defaultSettings', {}) \
-                  .get('topSection', {}).get('textInfo', {}).get('text') == death_title:
-            # Take the subtitle and extract the value of probable from there
-            death_subtext = widget['defaultSettings']['bottomSection']['textInfo']['text']
-            death_probable = int(death_subtext.split()[0].replace(",", ""))
-        elif widget.get('defaultSettings', {}) \
                     .get('topSection', {}).get('textInfo', {}).get('text') == hosp_title:
             # Take the hosp value from the main number, and vent number from the small text
             curr_hosp = int(widget['datasets'][0]['data'].replace(',', ''))
@@ -156,7 +154,6 @@ def handle_la(res, mapping):
                     .get('topSection', {}).get('textInfo', {}).get('text') == recovered_title:
             recovered = int(widget['datasets'][0]['data'].replace(',', ''))
 
-    tagged[Fields.DEATH_PROBABLE.name] = death_probable
     tagged[Fields.CURR_HOSP.name] = curr_hosp
     tagged[Fields.CURR_VENT.name] = curr_vent
     tagged[Fields.RECOVERED.name] = recovered

@@ -133,10 +133,8 @@ KY:
     where: 1=1}
   type: arcgis
 LA:
-- url: https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/Cases_by_Parish/FeatureServer/0/query
-  params: {f: json, outStatistics: [{onStatisticField: Cases, statisticType: sum},
-      {onStatisticField: Deaths, statisticType: sum}, {onStatisticField: State_Tests,
-        statisticType: sum}, {onStatisticField: Commercial_Tests, statisticType: sum}],
+- url: https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/Combined_COVID_Reporting/FeatureServer/0/query
+  params: {f: json, groupByFieldsForStatistics: Measure, outStatistics: [{"statisticType": "sum", "onStatisticField": "Value"}],
     where: 1=1}
   type: arcgis
   desc: Most dashboard data

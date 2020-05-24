@@ -100,9 +100,10 @@ KY:
   Hospitalized: CURR_HOSP
   ICU: CURR_ICU
 LA:
-  SUM_Cases: POSITIVE
-  SUM_Commercial_Tests: TOTAL
-  SUM_Deaths: DEATH_CONFIRMED
+  Case Count: POSITIVE
+  Deaths: DEATH
+  Commercial Tests: TOTAL
+  State Tests: STATE_TESTS
 MD:
   NegativeTests: NEGATIVE
   ReportDate: TIMESTAMP
