@@ -45,6 +45,15 @@ AR:
       {statisticType: sum, onStatisticField: total_tests}, {statisticType: sum, onStatisticField: deaths},
       {statisticType: sum, onStatisticField: Recoveries}], f: json}
   type: arcgis
+AZ:
+- url: https://services6.arcgis.com/l7uujk4hHifqabRB/ArcGIS/rest/services/COVID19_County_Level_View_Layer/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "Number_Confirmed"}], f: json}
+  type: arcgis
+  desc: Cases
+- url: https://services6.arcgis.com/l7uujk4hHifqabRB/ArcGIS/rest/services/ADHS_Count/FeatureServer/0/query
+  params: {where: 1=1, outFields: Deaths, f: json}
+  type: arcgis
+  desc: Deaths
 CA:
 - url: https://data.chhs.ca.gov/api/3/action/datastore_search_sql
   params: {sql: 'SELECT "Most Recent Date", sum("Total Count Confirmed") as confirmed, sum("Total Count Deaths") as death, sum("ICU COVID-19 Positive Patients") as curr_icu, sum("ICU COVID-19 Suspected Patients") as curr_icu_pui, sum("COVID-19 Positive Patients") as curr_hosp, sum("Suspected COVID-19 Positive Patients") as curr_hosp_pui from "6cd8d424-dfaa-4bdd-9410-a3d656e1176e" WHERE 1=1 GROUP BY "Most Recent Date" order by "Most Recent Date" desc limit 1'}

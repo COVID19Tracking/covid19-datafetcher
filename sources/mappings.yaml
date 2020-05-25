@@ -21,6 +21,9 @@ AR:
   SUM_pending: PENDING
   SUM_positive: POSITIVE
   SUM_total_tests: TOTAL
+AZ:
+  SUM_Number_Confirmed: POSITIVE
+  Deaths: DEATH
 CA:
   confirmed: POSITIVE
   death: DEATH
