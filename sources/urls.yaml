@@ -336,10 +336,9 @@ PR:
     f: json}
   type: arcgis
 RI:
-# CSV: https://docs.google.com/spreadsheets/d/1n-zMS9Al94CPj_Tc3K7Adin-tN9x1RSjjx2UzJ4SV7Q/edit#gid=0
 # historic data: https://static.dwcdn.net/data/dO7k8.csv
-- url: 'https://docs.google.com/spreadsheets/d/1n-zMS9Al94CPj_Tc3K7Adin-tN9x1RSjjx2UzJ4SV7Q/gviz/tq'
-  params: {tqx: 'out:csv', gid: 0}
+- url: 'https://docs.google.com/spreadsheets/d/1n-zMS9Al94CPj_Tc3K7Adin-tN9x1RSjjx2UzJ4SV7Q/export?format=csv&sheet=1225599023'
+  params: null
   type: csv
   header: no # for CSV parsing
 # - url: https://services1.arcgis.com/dkWT1XL4nglP5MLP/ArcGIS/rest/services/COVID_Public_Map_TEST/FeatureServer/2/query
