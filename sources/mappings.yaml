@@ -139,7 +139,7 @@ MN:
   hosp: HOSP
   EvrICUYes: ICU
   RlsdFrmIso: RECOVERED
-  OutcmDied: DEATH
+  OutcmDied: DEATH_CONFIRMED
 MO:
   SUM_Cases: POSITIVE
   SUM_Deaths: DEATH
