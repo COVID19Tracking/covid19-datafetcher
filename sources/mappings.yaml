@@ -228,7 +228,7 @@ RI:
   "Total number of positive labs received by RIDOH (cumulative count by person based on date of first positive test result)": POSITIVE
   "Total number of negative labs received by RIDOH (cumulative count by lab result)": NEGATIVE
   "Total number of positive labs (by person) and negative labs (by lab result), cumulative as of previous day": TOTAL
-  "Number of COVID-19 cases who  were admitted to a hospital in Rhode Island (cumulative)": HOSP
+  "Number of COVID-19 cases who were admitted to a hospital in Rhode Island (cumulative)": HOSP
   "Number of COVID-19 cases who were discharged from a hospital in Rhode Island (cumulative)": RECOVERED
   "Number of COVID-19 cases who are currently hospitalized in Rhode Island": CURR_HOSP
   "Number of COVID-19 cases who are currently in an intensive care unit (ICU) in Rhode Island": CURR_ICU
