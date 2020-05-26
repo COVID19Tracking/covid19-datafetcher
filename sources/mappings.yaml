@@ -144,7 +144,6 @@ MO:
   SUM_Cases: POSITIVE
   SUM_Deaths: DEATH
   MAX_EditDate: TIMESTAMP
-  #total: TOTAL
   total_people: TOTAL
   SUM_Total: ANTIBODY_TOTAL
   SUM_Positive: ANTIBODY_POS

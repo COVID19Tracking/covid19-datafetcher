@@ -220,6 +220,10 @@ MO:
   desc: PCR (totals, pos/neg)
 # Individuals who tested for antibody is embedded in the dashboard:
 # https://mophep.maps.arcgis.com/sharing/rest/content/items/9835d94aec44449aa10088eff2201e9d/data?f=json
+- url: https://mophep.maps.arcgis.com/sharing/rest/content/items/a847b7b3b54c4daa90f9be915bc4c1a0/data
+  params: null
+  type: json
+  desc: Positive PCR tests (embedded in dashboard)
 MT:
 - url: https://services.arcgis.com/qnjIrwR8z5Izc0ij/arcgis/rest/services/COVID_Cases_Production_View/FeatureServer/0/query
   params: {f: json, outStatistics: [{onStatisticField: Total, statisticType: sum},
