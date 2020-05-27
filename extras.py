@@ -366,23 +366,3 @@ def handle_mi(res, mapping):
     tagged[Fields.TOTAL.name] = sums[2]
     tagged[Fields.SPECIMENS.name] = sums[2]
     return tagged
-
-def handle_mo(res, mapping):
-    tagged = {}
-    for result in res[:-1]:
-        partial = extract_attributes(result, mapping, 'MO')
-        tagged.update(partial)
-
-    # The last is a dashboad widget text
-    pos_title = "Individuals with Positive PCR Results"
-    confirmed = ""
-
-    widgets = res[-1].get('widgets', {})
-    for widget in widgets:
-        if widget.get('defaultSettings', {}) \
-                    .get('bottomSection', {}).get('textInfo', {}).get('text') == pos_title:
-            confirmed_str = widget['defaultSettings']['middleSection']['textInfo']['text']
-            confirmed = atoi(confirmed_str)
-
-    tagged[Fields.CONFIRMED.name] = confirmed
-    return tagged
