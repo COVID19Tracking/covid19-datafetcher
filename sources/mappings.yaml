@@ -246,7 +246,8 @@ TN:
   DEATHS_TOT: DEATH
   DATE: TIMESTAMP
 TX:
-  ViralTests: TOTAL
+  ViralTests: SPECIMENS
+  totals: TOTAL
   AntibodyTests: ANTIBODY_TOTAL
   antibody_pos: ANTIBODY_POS
   CumulativeCases: POSITIVE
