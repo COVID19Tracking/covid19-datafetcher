@@ -152,12 +152,12 @@ def handle_la(res, mapping):
         if widget.get('defaultSettings', {}) \
                     .get('topSection', {}).get('textInfo', {}).get('text') == hosp_title:
             # Take the hosp value from the main number, and vent number from the small text
-            curr_hosp = int(widget['datasets'][0]['data'].replace(',', ''))
+            curr_hosp = atoi(widget['datasets'][0]['data'])
             vent_subtext = widget['defaultSettings']['bottomSection']['textInfo']['text']
-            curr_vent = int(vent_subtext.split()[0].replace(",", ""))
+            curr_vent = atoi(vent_subtext.split()[0])
         elif widget.get('defaultSettings', {}) \
                     .get('topSection', {}).get('textInfo', {}).get('text') == recovered_title:
-            recovered = int(widget['datasets'][0]['data'].replace(',', ''))
+            recovered = atoi(widget['datasets'][0]['data'])
 
     tagged[Fields.CURR_HOSP.name] = curr_hosp
     tagged[Fields.CURR_VENT.name] = curr_vent
@@ -313,11 +313,8 @@ def handle_ok(res, mapping):
 
     # sum all fields
     # TODO: functools probably has something nice
-    summed = {'Cases': 0, 'Deaths': 0, 'Recovered': 0}
-    for row in res:
-        for k, v in row.items():
-            if k in summed:
-                summed[k] += v if isinstance(v, int) else int(v.replace(',', ''))
+    cols = ['Cases', 'Deaths', 'Recovered']
+    summed = csv_sum(res, cols)
     mapped = map_attributes(summed, mapping, 'OK')
     mapped[Fields.DATE.name] = res[0].get('ReportDate')
     return mapped
@@ -344,8 +341,7 @@ def handle_mi(res, mapping):
     last_row = table.find_all("tr")[-1]
     if last_row.find("td").get_text(strip=True).lower() == "total":
         v = last_row.find_all("td")[2].get_text(strip=True)
-        v = v if isinstance(v, int) else int(v.replace(',', ''))
-        tagged[Fields.ANTIBODY_TOTAL.name] = v
+        tagged[Fields.ANTIBODY_TOTAL.name] = atoi(v)
 
 
     # TODO: extract method to sum csv columns
@@ -363,7 +359,7 @@ def handle_mi(res, mapping):
     for row in row_data:
         for i in range(3):
             v = row[i+1] if row[i+1] else 0
-            sums[i] += v if isinstance(v, int) else int(v.replace(',', ''))
+            sums[i] += atoi(v)
 
     tagged[Fields.SPECIMENS_POS.name] = sums[0]
     tagged[Fields.SPECIMENS_NEG.name] = sums[1]
@@ -386,7 +382,7 @@ def handle_mo(res, mapping):
         if widget.get('defaultSettings', {}) \
                     .get('bottomSection', {}).get('textInfo', {}).get('text') == pos_title:
             confirmed_str = widget['defaultSettings']['middleSection']['textInfo']['text']
-            confirmed = int(confirmed_str.replace(",", ""))
+            confirmed = atoi(confirmed_str)
 
     tagged[Fields.CONFIRMED.name] = confirmed
     return tagged
