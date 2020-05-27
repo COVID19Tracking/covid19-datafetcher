@@ -388,10 +388,10 @@ VA:
   type: csv
   desc: Cases
 # Test data
-- url: https://www.vdh.virginia.gov/content/uploads/sites/182/2020/05/VDH-COVID-19-PublicUseDataset-ZIPCode.csv
+- url: https://www.vdh.virginia.gov/content/uploads/sites/182/2020/05/VDH-COVID-19-PublicUseDataset-Tests_by-LabReportDate.csv
   params: null
   type: csv
-  desc: PCR Test data
+  desc: Testing data (PCR and totals)
 # Hospital data
 - url: https://www.vdh.virginia.gov/content/uploads/sites/182/2020/05/VDH-COVID-19-PublicUseDataset-KeyMeasures-Hospitals.csv
   params: null

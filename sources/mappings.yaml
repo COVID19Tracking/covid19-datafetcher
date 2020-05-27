@@ -261,13 +261,14 @@ UT:
   SUM_Hospitalizations: HOSP
 VA:
   Report Date: DATE
-  Number of Cases: POSITIVE
+  Number of Cases: CONFIRMED
   #Number of Hospitalizations: HOSP
   Number of Deaths: DEATH_CONFIRMED
-  Number of Testing Encounters: TOTAL
   Total COVID-19 Patients: CURR_HOSP
   ICU Patients: CURR_ICU
   Vent Patients: CURR_VENT
+  Number of PCR Testing Encounters: SPECIMENS
+  Number of Positive PCR Tests: SPECIMENS_POS
 VT:
   cumulative_positives: POSITIVE
   current_hospitalizations: CURR_HOSP

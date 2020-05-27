@@ -104,3 +104,21 @@ def extract_attributes(res, mapping, debug_state = None):
             attribs = res[features][0][attributes]
             mapped_attributes = map_attributes(attribs, mapping, debug_state)
     return mapped_attributes
+
+def csv_sum(data, columns=None):
+    '''Expecting Dict CSV: list of dicts-like objects
+    What about dates/cells that cannot be summed?
+    Use columns hint
+    TODO: heuristic to decide whether a column is numeric for summation
+
+    returns dictionary of sums
+    '''
+    if columns is None or not columns:
+        return {}
+
+    sums = {x: 0 for x in columns}
+    for row in data:
+        for k, v in row.items():
+            if k in sums:
+                sums[k] += v if isinstance(v, int) else int(v.replace(',', ''))
+    return sums

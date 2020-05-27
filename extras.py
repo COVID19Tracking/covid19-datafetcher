@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from copy import copy
 from datetime import datetime
 from utils import request_and_parse, extract_attributes, \
-   map_attributes, Fields
+   map_attributes, Fields, csv_sum
 
 ''' This file contains extra handling needed for some states
 To make it work, the method must be called "handle_{state_abbreviation:lower_case}"
@@ -12,6 +12,11 @@ The parameters are:
 - query result
 - state mappings
 '''
+
+def atoi(val):
+    if isinstance(val, int):
+        return val
+    return int(val.replace(",",''))
 
 def handle_ct(res, mapping):
     # res is a list of dict, one per day
@@ -266,18 +271,21 @@ def handle_va(res, mapping):
         if (row['Case Status'] == CONF):
             for k, v in row.items():
                 if (k in mapping):
-                    tagged[mapping[k]] = v
+                    tagged[mapping[k]] = atoi(v)
         elif (row['Case Status'] == PROB):
-            tagged[Fields.PROBABLE.name] = row['Number of Cases']
-            tagged[Fields.DEATH_PROBABLE.name] = row['Number of Deaths']
+            tagged[Fields.PROBABLE.name] = atoi(row['Number of Cases'])
+            tagged[Fields.DEATH_PROBABLE.name] = atoi(row['Number of Deaths'])
+    tagged[Fields.POSITIVE.name] = tagged[Fields.CONFIRMED.name] + tagged[Fields.PROBABLE.name]
 
-    # Verify that we're only taking the most recent date
-    testing = sorted(testing, key=lambda x: datetime.strptime(x['Report Date'],date_format), reverse = True)
-    most_recent_date = testing[0]['Report Date']
-    testing = [x for x in testing if x['Report Date'] == most_recent_date]
-    total_tests = [x['Number of PCR Testing Encounters'] for x in testing]
-    total_tests = sum([int(x.replace(',','')) for x in total_tests])
-    tagged[Fields.TOTAL.name] = total_tests
+    # sum everything
+    testing_cols = [
+        'Number of PCR Testing Encounters', 'Number of Positive PCR Tests',
+        'Total Number of Testing Encounters', 'Total Number of Positive Tests']
+    summed_testing = csv_sum(testing, testing_cols)
+    tagged[Fields.SPECIMENS.name] = summed_testing[testing_cols[0]]
+    tagged[Fields.SPECIMENS_POS.name] = summed_testing[testing_cols[1]]
+    tagged[Fields.ANTIBODY_TOTAL.name] = summed_testing[testing_cols[2]] - summed_testing[testing_cols[0]]
+    tagged[Fields.ANTIBODY_POS.name] = summed_testing[testing_cols[3]] - summed_testing[testing_cols[1]]
 
     # Hospitalizations
     hospital = sorted(hospital, key=lambda x: datetime.strptime(x['Date'], date_format), reverse = True)
