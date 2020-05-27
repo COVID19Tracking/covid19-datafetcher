@@ -365,7 +365,7 @@ TX:
   params: {where: TestType='PostiveAntibody', outFields: '*, Count_ as antibody_pos', f: json}
   type: arcgis
   desc: Positive antibody
-- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Service/FeatureServer/8/query
+- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Cases_Service/FeatureServer/7/query
   params: {where: 1=1, outFields: '*', f: json}
   type: arcgis
   desc: Recoveries
