@@ -142,7 +142,6 @@ def handle_la(res, mapping):
     stats = res[0]
     state_tests = 'STATE_TESTS'
     tagged = {}
-    print(stats)
     if 'features' in stats and len(stats['features']) > 0:
         attributes = stats['features']
         for attr in attributes:
@@ -159,7 +158,7 @@ def handle_la(res, mapping):
     # parse the probable death and vent and hospital data
     # This is going to be fragile
     hosp_title = "Reported COVID-19 Patients in Hospitals"
-    recovered_title = "Presumed Recovered**"
+    recovered_title = "Presumed Recovered"
     curr_hosp = ""
     curr_vent = ""
     recovered = ""
@@ -173,7 +172,7 @@ def handle_la(res, mapping):
             vent_subtext = widget['defaultSettings']['bottomSection']['textInfo']['text']
             curr_vent = atoi(vent_subtext.split()[0])
         elif widget.get('defaultSettings', {}) \
-                    .get('topSection', {}).get('textInfo', {}).get('text') == recovered_title:
+                    .get('topSection', {}).get('textInfo', {}).get('text', '').find(recovered_title) >= 0:
             recovered = atoi(widget['datasets'][0]['data'])
 
     tagged[Fields.CURR_HOSP.name] = curr_hosp
