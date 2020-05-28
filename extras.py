@@ -39,13 +39,11 @@ def handle_al(res, mapping):
 
 def handle_ct(res, mapping):
     # res is a list of dict, one per day
-    if not res:
+    if not res or not res[0]:
         return {}
-    res = res[0]
-
-    sorted_res = sorted(res, key=lambda x: x['date'], reverse = True)
-    latest = sorted_res[0]
-    mapped = map_attributes(latest, mapping, 'CT')
+    res = res[0][0]
+    mapped = map_attributes(res, mapping, 'CT')
+    mapped[Fields.SPECIMENS.name] = mapped[Fields.TOTAL.name]
     return mapped
 
 def handle_fl(res, mapping):

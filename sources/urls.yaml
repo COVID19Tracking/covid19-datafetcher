@@ -85,9 +85,10 @@ CO:
   type: arcgis
   desc: Negative serological tests
 CT:
-- url: https://data.ct.gov/resource/rf3k-f8fg.json
-  params: null
+- url: https://data.ct.gov/api/id/rf3k-f8fg.json
+  params: {$query: 'select * order by date desc limit 1'}
   type: json
+  desc: JSON (cases, death, hosp, date, SODA API)
 FL:
 - url: https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/arcgis/rest/services/Florida_COVID19_Cases/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{statisticType: sum, onStatisticField: T_positive},

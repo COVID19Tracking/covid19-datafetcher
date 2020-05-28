@@ -40,7 +40,7 @@ CO:
   antibody_neg: ANTIBODY_NEG
 CT:
   cases: POSITIVE
-  covid_19_tests_reported: TOTAL
+  covid_19_pcr_tests_reported: TOTAL
   date: DATE
   deaths: DEATH
   hospitalizations: CURR_HOSP
