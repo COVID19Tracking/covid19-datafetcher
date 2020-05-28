@@ -164,6 +164,14 @@ NC:
   MAX_Hosp: CURR_HOSP
   SUM_Deaths: DEATH
   SUM_Total: POSITIVE
+ND:
+  Positive Cases: POSITIVE
+  Negative: NEGATIVE
+  Total Tested: TOTAL
+  Recovered: RECOVERED
+  Currently Hospitalized: CURR_HOSP
+  Total Hospitalized: HOSP
+  Deaths: DEATH
 NE:
   Inconclusive: INCONCLUSIVE
   Not Detected: NEGATIVE

@@ -245,6 +245,15 @@ NC:
       {onStatisticField: Total, statisticType: sum}, {onStatisticField: Deaths, statisticType: sum}],
     where: 1=1}
   type: arcgis
+ND:
+# - url: https://static.dwcdn.net/data/yuhr0.csv
+#   params: {}
+#   type: csv
+#   desc: Cases/tests/neg, etc (CSV)
+- url: https://www.health.nd.gov/diseases-conditions/coronavirus/north-dakota-coronavirus-cases
+  params: {}
+  type: html
+  desc: State page (soup)
 NE:
 - url: https://gis.ne.gov/Agency/rest/services/COVID19_County_Layer/MapServer/4/query
   params: {where: case_status='Confirmed' AND NE_JURIS='yes' AND Did_Pat_Die_From_Illness='Y',

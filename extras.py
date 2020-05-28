@@ -3,8 +3,10 @@ from io import StringIO
 from bs4 import BeautifulSoup
 from copy import copy
 from datetime import datetime
+import re
 from utils import request_and_parse, extract_attributes, \
    map_attributes, Fields, csv_sum
+
 
 ''' This file contains extra handling needed for some states
 To make it work, the method must be called "handle_{state_abbreviation:lower_case}"
@@ -365,4 +367,24 @@ def handle_mi(res, mapping):
     tagged[Fields.SPECIMENS_NEG.name] = sums[1]
     tagged[Fields.TOTAL.name] = sums[2]
     tagged[Fields.SPECIMENS.name] = sums[2]
+    return tagged
+
+def handle_nd(res, mapping):
+    soup = BeautifulSoup(res[-1], 'html.parser')
+    circles = soup.find_all("div", "circle")
+    tagged = {}
+    for c in circles:
+        name = c.find('p').get_text(strip=True)
+        value = atoi(c.find('h2').get_text(strip=True))
+        if name in mapping:
+            tagged[mapping[name]] = value
+
+    # total tests
+    tests_text = soup.find(string=re.compile("Tests Completed"))
+    if tests_text:
+        # take the 1st value
+        tests_val = atoi(tests_text.split()[0])
+        if tests_val:
+            tagged[Fields.SPECIMENS.name] = tests_val
+
     return tagged
