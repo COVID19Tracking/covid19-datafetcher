@@ -20,6 +20,23 @@ def atoi(val):
         return val
     return int(val.replace(",",''))
 
+def handle_al(res, mapping):
+    tagged = {}
+    for result in res[:-1]:
+        partial = extract_attributes(result, mapping, 'AL')
+        tagged.update(partial)
+
+    # last one is the recoveries
+    widgets = res[-1].get('widgets', {})
+
+    for widget in widgets:
+        if widget.get('defaultSettings', {}) \
+                    .get('caption', "").find("RECOVERIES") >= 0:
+            recovered = atoi(widget['defaultSettings']['middleSection']['textInfo']['text'])
+            tagged[Fields.RECOVERED.name] = recovered
+
+    return tagged
+
 def handle_ct(res, mapping):
     # res is a list of dict, one per day
     if not res:

@@ -38,6 +38,10 @@ AL:
   params: {where: 1=1, outFields: 'CLN_ICU,CLN_VENT', returnGeometry: false, f: json}
   type: arcgis
   desc: ICU/Vent
+- url: https://alpublichealth.maps.arcgis.com/sharing/rest/content/items/6d2771faa9da4a2786a509d82c8cf0f7/data
+  params: {}
+  type: json
+  desc: Recovered (embedded in dashboard)
 AR:
 - url: https://services.arcgis.com/PwY9ZuZRDiI5nXUB/arcgis/rest/services/ADH_COVID19_Positive_Test_Results/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{statisticType: sum, onStatisticField: negative},
