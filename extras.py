@@ -223,6 +223,7 @@ def handle_gu(res, mapping):
             if name in mapping:
                 tagged[mapping[name]] = value
 
+    # sum all tests
     return tagged
 
 def handle_hi(res, mapping):

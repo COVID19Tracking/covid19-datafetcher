@@ -57,10 +57,12 @@ GA:
   SUM_COVID_Cases: POSITIVE
   SUM_COVID_Deaths: DEATH
 GU:
-  Deceased: DEATH
-  Probable cases: PROBABLE
+  Case Count: POSITIVE
+  Death: DEATH
   Recovered: RECOVERED
-  Confirmed cases: POSITIVE
+  Confirmed cases: CONFIRMED
+  Probable cases: PROBABLE
+  Negative: NEGATIVE
 HI:
   Date: DATE
   Cases_Tot: POSITIVE
