@@ -144,6 +144,7 @@ MN:
   OutcmDied: DEATH_CONFIRMED
 MO:
   SUM_Cases: POSITIVE
+  confirmed: CONFIRMED
   SUM_Deaths: DEATH
   MAX_EditDate: TIMESTAMP
   total_people: TOTAL
