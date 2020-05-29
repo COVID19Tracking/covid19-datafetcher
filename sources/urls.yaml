@@ -184,7 +184,7 @@ MI:
   type: arcgis
   desc: Hospitalization/vent/icu
 - url: https://services5.arcgis.com/ZqUZ99cjRiEOyN05/arcgis/rest/services/AdKoF/FeatureServer/0/query
-  params: {where: 1=1, outFields: 'f2 as Recovered, f1 as updated', resultRecordCount: 1, orderByFields: 'f1 desc', f: json}
+  params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "f2", "outStatisticFieldName": "Recovered"}], f: json}
   type: arcgis
   desc: Recovered
 - url: https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173_99225---,00.html
