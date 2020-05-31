@@ -26,6 +26,10 @@ AL:
     f: json}
   type: arcgis
   desc: Tests/positive/death
+- url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/COVID19_probable_confirmed_PUBLIC/FeatureServer/1/query
+  params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"PROBABLE_DEATH"},{"statisticType":"sum","onStatisticField":"PROBABLE"}], f: json}
+  type: arcgis
+  desc: Probable (death, cases)
 - url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/Labtest_Summary_by_County_PUBLIC/FeatureServer/1/query
   params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"LabTestCount"}], f: json}
   type: arcgis
@@ -291,7 +295,7 @@ NJ:
   type: arcgis
   desc: Discharged (old, up to 28-April)
 - url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query
-  params: {where: structure_measure_identifier='Case count of COVID-19 positive cases currently in the hospital' OR structure_measure_identifier='Case count of persons under investigation (PUI) / presumptive positive cases currently in the hospital', orderByFields: 'survey_period desc', groupByFieldsForStatistics: survey_period, outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "curr_hosp"}], resultRecordCount: 1, f: json}
+  params: {where: structure_measure_identifier='Case count of COVID-19 positive cases currently in the hospital' OR structure_measure_identifier='Case count of persons under investigation (PUI) / presumptive positive cases currently in the hospital', orderByFields: 'survey_period desc', groupByFieldsForStatistics: survey_period, outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "curr_hosp"}], resultRecordCount: 1, resultOffset: 1, f: json}
   type: arcgis
   desc: Hospitalized
 - url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query
@@ -299,7 +303,7 @@ NJ:
   orderByFields: 'survey_period desc',
   groupByFieldsForStatistics: survey_period,
   outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "curr_vent"}],
-  resultRecordCount: 1,
+  resultRecordCount: 1, resultOffset: 1,
   f: json}
   type: arcgis
   desc: Curr vent
