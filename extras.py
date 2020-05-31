@@ -81,10 +81,7 @@ def handle_vt(res, mapping):
     return tagged
 
 def handle_pa(res, mapping):
-    '''PA has different data sources for positive/death and for hospitalization that's displayd on the dashboard
-    The main source has a different number for hosp.
-
-    Also need to sub ECMO to Vent number
+    '''Need to sum ECMO and Vent number for a total count
     '''
     state = 'PA'
     tagged = {}

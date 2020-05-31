@@ -331,13 +331,11 @@ OK:
   params: null
   type: csv
 PA:
-- url: https://services2.arcgis.com/xtuWQvb2YQnp0z3F/ArcGIS/rest/services/County_Case_Data_Public/FeatureServer/0/query
-  params: {f: json, outStatistics: [{onStatisticField: COVID19onVents, statisticType: sum},
-      {onStatisticField: COVID19ECMO, statisticType: sum}, {onStatisticField: COVID19Hospitalized,
-        statisticType: sum}, {onStatisticField: Cases, statisticType: sum}, {onStatisticField: Deaths,
-        statisticType: sum}], where: 1=1}
+- url: https://services2.arcgis.com/xtuWQvb2YQnp0z3F/ArcGIS/rest/services/Pennsylvania_Public_COVID19_Dashboard_Data/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "Cases"},
+{"statisticType": "sum", "onStatisticField": "Confirmed"},{"statisticType": "sum", "onStatisticField": "Probable"},{"statisticType": "sum", "onStatisticField": "Negative"},{"statisticType": "sum", "onStatisticField": "Deaths"}], f: json}
   type: arcgis
-  desc: Cases, death (and old hosp/vent/ecmo)
+  desc: Positive/probable/negatives, death
 - url: https://services2.arcgis.com/xtuWQvb2YQnp0z3F/ArcGIS/rest/services/Adam_County_Summary_Table_v5/FeatureServer/0/query
   params: { where: 1=1, f: json, outStatistics: [{"onStatisticField": "numc19mechventpats", "statisticType": "sum", "outStatisticFieldName": "curr_vent"}, {"onStatisticField": "ttlcvd19ptntecmo", "statisticType": "sum", "outStatisticFieldName": "ecmo"}, {"onStatisticField": "numc19hosppats", "statisticType": "sum", "outStatisticFieldName": "curr_hosp"}]}
   type: arcgis
