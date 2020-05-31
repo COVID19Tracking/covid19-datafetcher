@@ -226,9 +226,10 @@ def handle_gu(res, mapping):
 def handle_hi(res, mapping):
     res = res[0]
 
+    # last row with values
     last_state_row = {}
     for row in res:
-        if row['Region'] == 'State':
+        if row['Region'] == 'State' and row.get('Cases_Tot'):
             last_state_row = row
 
     tagged = {}

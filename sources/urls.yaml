@@ -114,7 +114,7 @@ GU:
   params: {where: '1=1', outFields: '*', f: json}
   type: arcgis
 HI:
-- url: 'https://docs.google.com/spreadsheets/d/1sd-L317Je9ZhiQh3_uH9jTkl3ckc_o3sgrVauShcwCk/gviz/tq?tqx=out:csv&sheet=Data'
+- url: 'https://docs.google.com/spreadsheets/d/1sd-L317Je9ZhiQh3_uH9jTkl3ckc_o3sgrVauShcwCk/export?format=csv&sheet=Data'
   params: null
   type: csv
 IA:
