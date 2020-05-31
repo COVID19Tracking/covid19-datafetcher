@@ -119,6 +119,7 @@ MD:
   pDeaths: DEATH_PROBABLE
   total_hospitalized: HOSP
   total_released: RECOVERED
+  TotalTests: SPECIMENS
 ME:
   SUM_Recovered: RECOVERED
   SUM_Deaths: DEATH
