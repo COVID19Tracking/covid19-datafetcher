@@ -178,6 +178,10 @@ ND:
   Currently Hospitalized: CURR_HOSP
   Total Hospitalized: HOSP
   Deaths: DEATH
+  # Serology tests table
+  Detected: ANTIBODY_POS
+  Not Detected: ANTIBODY_NEG
+  Total: ANTIBODY_TOTAL
 NE:
   Inconclusive: INCONCLUSIVE
   Not Detected: NEGATIVE

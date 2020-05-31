@@ -395,9 +395,26 @@ def handle_nd(res, mapping):
     # total tests
     tests_text = soup.find(string=re.compile("Tests Completed"))
     if tests_text:
-        # take the 1st value
-        tests_val = atoi(tests_text.split()[0])
+        # take the 1st value, after stripping everything, including "-"
+        tests_val = ""
+        try:
+            tests_text = tests_text.split()[0].split("-")[0]
+            tests_val = atoi(tests_text)
+        except Exception as e:
+            print(str(e))
         if tests_val:
             tagged[Fields.SPECIMENS.name] = tests_val
+
+    # Serology testing
+    table = soup.find('table')
+    rows = table.find_all('tr')
+    titles = rows[0]
+    data = rows[1].find_all('td')
+
+    for i, title in enumerate(titles.find_all("td")):
+        title = title.get_text(strip=True)
+        if title in mapping:
+            value = atoi(data[i].get_text(strip=True))
+            tagged[mapping[title]] = value
 
     return tagged
