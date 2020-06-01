@@ -88,12 +88,35 @@ def handle_pa(res, mapping):
     updated_mapping = copy(mapping)
     ecmo = 'ecmo'
     updated_mapping.update({ecmo: ecmo})
-    for result in res:
+    for result in res[:-1]:
         partial = extract_attributes(result, updated_mapping, state)
         tagged.update(partial)
 
     tagged[Fields.CURR_VENT.name] += tagged[ecmo]
     tagged.pop(ecmo)
+
+    # antibody stuff, soup time
+    page = res[-1]
+    soup = BeautifulSoup(res[-1], 'html.parser')
+    try:
+        table = soup.find_all("table")[1]
+        # expecting 2 rows, with 3 columns
+        # need the value for "serology"
+        rows = table.find_all('tr')
+        titles = rows[0]
+        data = rows[1].find_all('td')
+        for i, title in enumerate(titles.find_all("td")):
+            title = title.get_text(strip=True)
+            if title.lower().find('serology') >= 0:
+                value = atoi(data[i].get_text(strip=True))
+                tagged[Fields.ANTIBODY_POS.name] = value
+
+        if tagged.get(Fields.ANTIBODY_POS.name):
+            tagged[Fields.POSITIVE.name] += tagged[Fields.ANTIBODY_POS.name]
+
+    except Exception as e:
+        pass
+
     return tagged
 
 def handle_nm(res, mapping):

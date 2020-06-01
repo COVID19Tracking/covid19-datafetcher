@@ -340,6 +340,10 @@ PA:
   params: { where: 1=1, f: json, outStatistics: [{"onStatisticField": "numc19mechventpats", "statisticType": "sum", "outStatisticFieldName": "curr_vent"}, {"onStatisticField": "ttlcvd19ptntecmo", "statisticType": "sum", "outStatisticFieldName": "ecmo"}, {"onStatisticField": "numc19hosppats", "statisticType": "sum", "outStatisticFieldName": "curr_hosp"}]}
   type: arcgis
   desc: Hosp, vent, ecmo
+- url: https://www.health.pa.gov/topics/disease/coronavirus/Pages/Cases.aspx
+  params: null
+  type: html
+  desc: Main page, for antibody (soup)
 PR:
 - url: https://services5.arcgis.com/klquQoHA0q9zjblu/ArcGIS/rest/services/Datos_Totales/FeatureServer/0/query
   params: {where: 1=1, outFields: 'T_Muertes_COVID_RD,T_Muertes_Combinadas,T_Pacientes_Int_Covid,T_Vent_Covid,T_Serologicos_Pos,T_Casos_Unicos,T_Molecular_Pos,T_Fatalidades,T_Hospitalizados',
