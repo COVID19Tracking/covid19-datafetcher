@@ -19,6 +19,10 @@ AK:
         onStatisticField: Pos_COVID_PUI_Pending}], f: json}
   type: arcgis
   desc: Hospitalization (current)
+- url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/pos_susp_vent/FeatureServer/0/query
+  params: {where: 1=1, outFields: '*', f: json}
+  type: arcgis
+  desc: Vent (current)
 AL:
 - url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/COV19_Public_Dashboard_ReadOnly/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{statisticType: sum, onStatisticField: LabTestCount},

@@ -5,7 +5,7 @@ AK:
   cum_deaths: DEATH
   cum_hospitalizations: HOSP
   SUM_Pos_COVID_PUI_Pending: CURR_HOSP
-  SUM_Pos_COVID_Vent: CURR_VENT
+  pos_susp_vent: CURR_VENT
   cum_Total: TOTAL
 AL:
   SUM_CONFIRMED: CONFIRMED
