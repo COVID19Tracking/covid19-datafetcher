@@ -462,8 +462,8 @@ def handle_ma(res, mapping):
             shutil.unpack_archive(tmpfile.name, tmpdir, format="zip")
 
             # Now we can read the files
-            files = ['Cases.csv', 'DeathsReported.csv', 'Testing2.csv',
-                     'Hospitalization from Hospitals.csv']
+            files = ['DeathsReported.csv', 'Testing2.csv',
+                     'Hospitalization from Hospitals.csv', 'Cases.csv']
             for filename in files:
                 with open("{}/{}".format(tmpdir, filename), 'r') as csvfile:
                     reader = csv.DictReader(csvfile, dialect = 'unix')
