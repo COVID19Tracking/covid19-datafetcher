@@ -41,11 +41,15 @@ CO:
   antibody_pos: ANTIBODY_POS
   antibody_neg: ANTIBODY_NEG
 CT:
-  cases: POSITIVE
+  totalcases: POSITIVE
+  confirmedcases: CONFIRMED
+  probablecases: PROBABLE
   covid_19_pcr_tests_reported: TOTAL
   date: DATE
-  deaths: DEATH
-  hospitalizations: CURR_HOSP
+  hospitalizedcases: CURR_HOSP
+  totaldeaths: DEATH
+  confirmeddeaths: DEATH_CONFIRMED
+  probabledeaths: DEATH_PROBABLE
 FL:
   SUM_C_FLResDeaths: DEATH
   SUM_C_HospYes_Res: HOSP
