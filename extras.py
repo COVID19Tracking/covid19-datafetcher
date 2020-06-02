@@ -35,7 +35,7 @@ def handle_al(res, mapping):
 
     for widget in widgets:
         if widget.get('defaultSettings', {}) \
-                    .get('caption', "").find("RECOVERIES") >= 0:
+                    .get('description', "").find("UPDATED WEEKLY") >= 0:
             recovered = atoi(widget['defaultSettings']['middleSection']['textInfo']['text'])
             tagged[Fields.RECOVERED.name] = recovered
 
