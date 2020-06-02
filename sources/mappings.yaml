@@ -115,6 +115,19 @@ LA:
   Deaths: DEATH
   Commercial Tests: TOTAL
   State Tests: STATE_TESTS
+MA:
+  Date: DATE
+  Probable Total: PROBABLY
+  Positive Total: POSITIVE
+  Deaths: DEATH
+  DeathsConfTotal: DEATH_CONFIRMED
+  DeathsProbTotal: DEATH_PROBABLE
+  Molecular Total: TOTAL
+  Serology Total: ANTIBODY_TOTAL
+  Total number of COVID patients in hospital today: CURR_HOSP
+  ICU: CURR_ICU
+  Total number intubated: CURR_VENT
+  Ever Hospitaltized: HOSP
 MD:
   NegativeTests: NEGATIVE
   ReportDate: TIMESTAMP

@@ -56,10 +56,14 @@ def request(url, query=None, encoding=None):
     if query:
         url = "{}?{}".format(url, urllib.parse.urlencode(query))
     res = {}
-    with urllib.request.urlopen(url) as f:
+    req = urllib.request.Request(url, headers = {'User-Agent': 'Mozilla/5.0'})
+    with urllib.request.urlopen(req) as f:
         res = f.read().decode(encoding)
     return res
 
+def request_cvs_folder(url, query=None, encoding=None):
+    # returning context?
+    pass
 
 def request_and_parse(url, query=None):
     res = request(url, query)

@@ -1,9 +1,13 @@
-import csv
-from io import StringIO
 from bs4 import BeautifulSoup
 from copy import copy
 from datetime import datetime
+from io import StringIO
+from zipfile import ZipFile
+import csv
 import re
+import shutil
+from tempfile import NamedTemporaryFile, TemporaryDirectory
+import urllib, urllib.request
 from utils import request_and_parse, extract_attributes, \
    map_attributes, Fields, csv_sum
 
@@ -439,5 +443,43 @@ def handle_nd(res, mapping):
         if title in mapping:
             value = atoi(data[i].get_text(strip=True))
             tagged[mapping[title]] = value
+
+    return tagged
+
+def handle_ma(res, mapping):
+    soup = BeautifulSoup(res[0], 'html.parser')
+    link = soup.find('a', string=re.compile("COVID-19 Raw Data"))
+    link_part = link['href']
+    url = "https://www.mass.gov{}".format(link_part)
+
+    tagged = {}
+
+    # download zip
+    req = urllib.request.Request(url, headers = {'User-Agent': 'Mozilla/5.0'})
+    with urllib.request.urlopen(req) as response:
+        with NamedTemporaryFile(delete=True) as tmpfile , TemporaryDirectory() as tmpdir:
+            shutil.copyfileobj(response, tmpfile)
+            shutil.unpack_archive(tmpfile.name, tmpdir, format="zip")
+
+            # Now we can read the files
+            files = ['Cases.csv', 'DeathsReported.csv', 'Testing2.csv',
+                     'Hospitalization from Hospitals.csv']
+            for filename in files:
+                with open("{}/{}".format(tmpdir, filename), 'r') as csvfile:
+                    reader = csv.DictReader(csvfile, dialect = 'unix')
+                    # get the last
+                    last_row = None
+                    for row in reader:
+                        last_row = row
+                    partial = map_attributes(last_row, mapping, 'MA')
+                    tagged.update(partial)
+
+            hosp_key = ""
+            for k, v in mapping.items():
+                if v == Fields.HOSP.name:
+                    hosp_key = k
+            hospfile = csv.DictReader(open(tmpdir + "/RaceEthnicity.csv", 'r'))
+            summed = csv_sum(hospfile, [hosp_key])
+            tagged[Fields.HOSP.name] = summed[hosp_key]
 
     return tagged

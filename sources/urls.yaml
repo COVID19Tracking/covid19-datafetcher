@@ -161,6 +161,11 @@ LA:
   params: {f: json}
   type: json
   desc: Probable death + vent (from dashboard description)
+MA:
+- url: https://www.mass.gov/info-details/covid-19-response-reporting
+  params: null
+  type: html
+  desc: None, just need a trigger
 MD:
 - url: https://services.arcgis.com/njFNhDsUCentVYJW/ArcGIS/rest/services/MASTERCaseTracker/FeatureServer/0/query
   params: {f: json, resultRecordCount: 1, orderByFields: ReportDate desc, outFields: 'ReportDate,TotalCases,NegativeTests,bedsICU,bedsAcute,bedsTotal,total_hospitalized,total_released,deaths,pdeaths,TotalTests',
