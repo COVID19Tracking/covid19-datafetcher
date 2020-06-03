@@ -472,10 +472,8 @@ def handle_ma(res, mapping):
             for filename in files:
                 with open("{}/{}".format(tmpdir, filename), 'r') as csvfile:
                     reader = csv.DictReader(csvfile, dialect = 'unix')
-                    # get the last
-                    last_row = None
-                    for row in reader:
-                        last_row = row
+                    rows = list(reader)
+                    last_row = rows[-1]
                     partial = map_attributes(last_row, mapping, 'MA')
                     tagged.update(partial)
 
@@ -484,7 +482,10 @@ def handle_ma(res, mapping):
                 if v == Fields.HOSP.name:
                     hosp_key = k
             hospfile = csv.DictReader(open(tmpdir + "/RaceEthnicity.csv", 'r'))
-            summed = csv_sum(hospfile, [hosp_key])
+            hosprows = list(hospfile)
+            last_row = hosprows[-1]
+            hosprows = [x for x in hosprows if x['Date'] == last_row['Date']]
+            summed = csv_sum(hosprows, [hosp_key])
             tagged[Fields.HOSP.name] = summed[hosp_key]
 
     return tagged
