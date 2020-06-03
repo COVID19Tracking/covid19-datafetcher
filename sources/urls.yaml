@@ -109,6 +109,10 @@ GA:
       {onStatisticField: COVID_Deaths, statisticType: sum}, {onStatisticField: EditDate,
         statisticType: max}], where: 1=1}
   type: arcgis
+- url: https://dph.georgia.gov/covid-19-daily-status-report
+  params: null
+  type: html
+  desc: State page
 GU:
 - url: https://services2.arcgis.com/FPJlJZYRsD8OhCWA/ArcGIS/rest/services/Testing_and_Status_Query/FeatureServer/0/query
   params: {where: '1=1', outFields: '*', f: json}
@@ -268,16 +272,16 @@ ND:
   type: html
   desc: State page (soup)
 NE:
-- url: https://gis.ne.gov/Agency/rest/services/COVID19_County_Layer/MapServer/4/query
+- url: https://gis.ne.gov/Agency/rest/services/COVID19_County_Layer/MapServer/2/query
   params: {where: case_status='Confirmed' AND NE_JURIS='yes' AND Did_Pat_Die_From_Illness='Y',
     outStatistics: [{"statisticType":"count","onStatisticField":"ID","outStatisticFieldName": "death"}], f: json}
   type: arcgis
   desc: Death
-- url: https://gis.ne.gov/Agency/rest/services/COVID19_County_Layer/MapServer/3/query
+- url: https://gis.ne.gov/Agency/rest/services/COVID19_County_Layer/MapServer/1/query
   params: {f: json, outStatistics: [{onStatisticField: ID, statisticType: count, outStatisticFieldName: total}], where: NE_JURIS='yes'}
   type: arcgis
   desc: Total
-- url: https://gis.ne.gov/Agency/rest/services/COVID19_County_Layer/MapServer/3/query
+- url: https://gis.ne.gov/Agency/rest/services/COVID19_County_Layer/MapServer/1/query
   params: {f: json, outStatistics: [{onStatisticField: ID, statisticType: count}],
     groupByFieldsForStatistics: lab_status, outFields: '*', where: NE_JURIS='yes'}
   type: arcgis

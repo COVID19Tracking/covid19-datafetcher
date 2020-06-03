@@ -129,10 +129,11 @@ def handle_nm(res, mapping):
     return mapped
 
 def handle_ne(res, mapping):
-    tagged = extract_attributes(res[0], mapping, 'NE')
-    partial = extract_attributes(res[1], mapping, 'NE')
-    tagged.update(partial)
-    stats = res[2]
+    tagged = {}
+    for result in res[:-1]:
+        partial = extract_attributes(result, mapping, 'NE')
+        tagged.update(partial)
+    stats = res[-1]
     if 'features' in stats and len(stats['features']) > 0:
         attributes = stats['features']
         for attr in attributes:
@@ -234,6 +235,10 @@ def handle_il(res, mapping):
     mapped[Fields.DATE.name] = updated
 
     return mapped
+
+def handle_ga(res, mapping):
+    # do the soup
+    pass
 
 def handle_gu(res, mapping):
     res = res[0]
