@@ -88,6 +88,23 @@ CO:
     f: json}
   type: arcgis
   desc: Negative serological tests
+# Could do it in less queries, might get back to that
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/CDPHE_COVID19_StateLevel_Open_Data_Repository/FeatureServer/0/query
+  params: {where: metric = 'Number of Deaths' AND attribute = 'Probable', outFields: 'metric, attribute, value as death_probable', orderByfields: rep_date desc, f: json}
+  type: arcgis
+  desc: Death probable
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/CDPHE_COVID19_StateLevel_Open_Data_Repository/FeatureServer/0/query
+  params: {where: metric = 'Number of Deaths' AND attribute = 'Confirmed', outFields: 'metric, attribute, value as death_confirmed', orderByfields: rep_date desc, f: json}
+  type: arcgis
+  desc: Death confirmed
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/CDPHE_COVID19_StateLevel_Open_Data_Repository/FeatureServer/0/query
+  params: {where: metric = 'Number of Cases' AND attribute = 'Probable', outFields: 'metric, attribute, value as cases_probable', orderByfields: rep_date desc, f: json}
+  type: arcgis
+  desc: Cases probable
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/CDPHE_COVID19_StateLevel_Open_Data_Repository/FeatureServer/0/query
+  params: {where: metric = 'Number of Cases' AND attribute = 'Confirmed', outFields: 'metric, attribute, value as cases_confirmed', orderByfields: rep_date desc, f: json}
+  type: arcgis
+  desc: Cases confirmed
 CT:
 - url: https://data.ct.gov/api/id/rf3k-f8fg.json
   params: {$query: 'select * order by date desc limit 1'}

@@ -44,6 +44,10 @@ CO:
   MAX_State_Pos_Cases: POSITIVE
   antibody_pos: ANTIBODY_POS
   antibody_neg: ANTIBODY_NEG
+  death_probable: DEATH_PROBABLE
+  death_confirmed: DEATH_CONFIRMED
+  cases_probable: PROBABLE
+  cases_confirmed: CONFIRMED
 CT:
   totalcases: POSITIVE
   confirmedcases: CONFIRMED
