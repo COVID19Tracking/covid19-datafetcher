@@ -236,10 +236,6 @@ def handle_il(res, mapping):
 
     return mapped
 
-def handle_ga(res, mapping):
-    # do the soup
-    pass
-
 def handle_gu(res, mapping):
     res = res[0]
     tagged = {}
