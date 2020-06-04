@@ -34,14 +34,10 @@ AL:
   params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"PROBABLE_DEATH"},{"statisticType":"sum","onStatisticField":"PROBABLE"}], f: json}
   type: arcgis
   desc: Probable (death, cases)
-- url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/COV19_Public_Statewide_Summary2/FeatureServer/0/query
-  params: {where: 1=1, outFields: '*', returnGeometry: false, f: json}
+- url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/c19v2_hcw_ltcf_PUBLIC/FeatureServer/1/query
+  params: {where: 1=1, outFields: 'CLN_ICU,CLN_VENT,hospitalization', returnGeometry: false, f: json}
   type: arcgis
-  desc: Hospitalized
-- url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/ArcGIS/rest/services/COV19_Public_Statewide_Summary2/FeatureServer/1/query
-  params: {where: 1=1, outFields: 'CLN_ICU,CLN_VENT', returnGeometry: false, f: json}
-  type: arcgis
-  desc: ICU/Vent
+  desc: Hosp/ICU/Vent
 - url: https://alpublichealth.maps.arcgis.com/sharing/rest/content/items/6d2771faa9da4a2786a509d82c8cf0f7/data
   params: {}
   type: json

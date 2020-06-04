@@ -13,7 +13,7 @@ AL:
   SUM_PROBABLE: PROBABLE
   SUM_PROBABLE_DEATH: DEATH_PROBABLE
   SUM_LabTestCount: TOTAL
-  hospitalized: HOSP
+  hospitalization: HOSP
   CLN_ICU: ICU
   CLN_VENT: VENT
 AR:
