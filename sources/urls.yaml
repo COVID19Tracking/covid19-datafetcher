@@ -167,6 +167,11 @@ KY:
         statisticType: sum}, {outStatisticFieldName: ICU, onStatisticField: ICU, statisticType: sum}],
     where: 1=1}
   type: arcgis
+- url: he
+  params: null
+  # I can't with all this soup
+  type: html
+  desc: Page (soup)
 LA:
 - url: https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/Combined_COVID_Reporting/FeatureServer/0/query
   params: {f: json, groupByFieldsForStatistics: Measure, outStatistics: [{"statisticType": "sum", "onStatisticField": "Value"}],
@@ -241,7 +246,7 @@ MO:
 {"statisticType": "sum", "onStatisticField": "Total"}], f: json}
   type: arcgis
   desc: Antibody (total, pos, neg)
-- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/Tests_by_Age_Ser/FeatureServer/0/query
+- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/pcrbydate/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "Negative", "outStatisticFieldName": "PCR_Negative"},{"statisticType": "sum", "onStatisticField": "Positive", "outStatisticFieldName": "PCR_Positive"},{"statisticType": "sum", "onStatisticField": "Total", "outStatisticFieldName": "PCR_Total"}], f: json}
   type: arcgis
   desc: PCR (totals, pos/neg)
