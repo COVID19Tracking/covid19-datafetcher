@@ -41,6 +41,31 @@ def handle_al(res, mapping):
 
     return tagged
 
+def handle_ar(res, mapping):
+    tagged = {}
+    for result in res[:-1]:
+        partial = extract_attributes(result, mapping, 'AR')
+        tagged.update(partial)
+
+    soup = BeautifulSoup(res[-1], 'html.parser')
+    try:
+        tables = soup.find_all("table")
+        table = tables[-1].find("tbody")
+        for tr in table.find_all("tr"):
+            print(tr)
+            cols = tr.find_all("td")
+            if len(cols) < 2:
+                 continue
+            name = cols[0].get_text(strip=True)
+            value = cols[1].get_text(strip=True)
+            if name in mapping:
+                tagged[mapping[name]] = atoi(value)
+
+    except Exception as e:
+        print(str(e))
+
+    return tagged
+
 def handle_ct(res, mapping):
     # res is a list of dict, one per day
     if not res or not res[0]:
@@ -100,7 +125,6 @@ def handle_pa(res, mapping):
     tagged.pop(ecmo)
 
     # antibody stuff, soup time
-    page = res[-1]
     soup = BeautifulSoup(res[-1], 'html.parser')
     try:
         table = soup.find_all("table")[1]

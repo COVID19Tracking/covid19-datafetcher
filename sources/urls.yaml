@@ -49,6 +49,10 @@ AR:
       {statisticType: sum, onStatisticField: total_tests}, {statisticType: sum, onStatisticField: deaths},
       {statisticType: sum, onStatisticField: Recoveries}], f: json}
   type: arcgis
+- url: https://www.healthy.arkansas.gov/programs-services/topics/novel-coronavirus
+  params: null
+  type: html
+  desc: State page (soup)
 AZ:
 - url: https://services6.arcgis.com/l7uujk4hHifqabRB/ArcGIS/rest/services/COVID19_County_Level_View_Layer/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "Number_Confirmed"}], f: json}
