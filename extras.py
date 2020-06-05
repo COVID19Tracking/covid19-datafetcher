@@ -112,7 +112,7 @@ def handle_ky(res, mapping):
         if title.lower().find("tested") >= 0:
             for (k, v) in probable:
                 if k.lower().find("pcr") >= 0:
-                    tagged[Fields.SPECIMENS.name] = atoi(v)
+                    tagged[Fields.TOTAL.name] = atoi(v)
                 elif k.lower().find("serology") >= 0:
                     tagged[Fields.ANTIBODY_TOTAL.name] = atoi(v)
         elif title.lower().find("positive") >= 0:
