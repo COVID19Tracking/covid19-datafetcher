@@ -218,6 +218,10 @@ NE:
   Positive: POSITIVE
   death: DEATH
   total: TOTAL
+  hosp_latest_pat_count: CURR_HOSP
+  hosp_cumulative_total: HOSP
+  dash_update_date: TIMESTAMP
+  rec_latest_pat_count: RECOVERED
 NJ:
   _date: TIMESTAMP
   recoveries: RECOVERED
