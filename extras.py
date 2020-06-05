@@ -95,6 +95,63 @@ def handle_fl(res, mapping):
 
     return mapped
 
+def handle_ky(res, mapping):
+    tagged = {}
+    for result in res[:-1]:
+        partial = extract_attributes(result, mapping, 'MI')
+        tagged.update(partial)
+
+    # soup time
+    soup = BeautifulSoup(res[-1], 'html.parser')
+    h3 = soup.find("h3", string=re.compile("Coronavirus Monitoring"))
+    if not h3:
+        # quick fail
+        return tagged
+
+    datadiv = h3.find_next_sibling("div", "row")
+    for item in datadiv.find_all("div", "info-card"):
+        title = item.find("span", "title")
+        value = item.find("span", "number")
+        probable = item.find("span", "probable")
+        if not value:
+            continue
+
+        hasalpha = lambda x: re.match("[a-zA-Z0-9]", x)
+        pattern = "([a-zA-Z ]*): ([0-9,]*)"
+
+        # class = title, number, probable
+        title = title.get_text(strip=True)
+        value = value.get_text(strip=True)
+        probable = probable.get_text(strip=True) if probable else ""
+        if probable:
+            probable = re.findall(pattern, probable)
+
+        if title.lower().find("tested") >= 0:
+            for (k, v) in probable:
+                if k.lower().find("pcr") >= 0:
+                    tagged[Fields.SPECIMENS.name] = atoi(v)
+                elif k.lower().find("serology") >= 0:
+                    tagged[Fields.ANTIBODY_TOTAL.name] = atoi(v)
+        elif title.lower().find("positive") >= 0:
+            for (k, v) in probable:
+                if k.lower().find("probable") >= 0:
+                    tagged[Fields.PROBABLE.name] = atoi(v)
+                elif k.lower().find("confirm") >= 0:
+                    tagged[Fields.CONFIRMED.name] = atoi(v)
+        elif title.lower().find("death") >= 0:
+            for (k, v) in probable:
+                if k.lower().find("probable") >= 0:
+                    tagged[Fields.DEATH_PROBABLE.name] = atoi(v)
+                elif k.lower().find("confirm") >= 0:
+                    tagged[Fields.DEATH_CONFIRMED.name] = atoi(v)
+        elif title.lower().find("recover") >= 0:
+            tagged[Fields.RECOVERED.name] = atoi(value)
+
+    updated = h3.find_next_sibling("p").get_text(strip=True)
+    tagged[Fields.DATE.name] = updated
+
+    return tagged
+
 def handle_vt(res, mapping):
     state = 'VT'
     tagged = {}

@@ -167,7 +167,7 @@ KY:
         statisticType: sum}, {outStatisticFieldName: ICU, onStatisticField: ICU, statisticType: sum}],
     where: 1=1}
   type: arcgis
-- url: he
+- url: https://govstatus.egov.com/kycovid19
   params: null
   # I can't with all this soup
   type: html

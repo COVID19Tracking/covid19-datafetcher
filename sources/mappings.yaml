@@ -118,6 +118,11 @@ KY:
   Deceased: DEATH
   Hospitalized: CURR_HOSP
   ICU: CURR_ICU
+  Total Positive: POSITIVE
+  Probable: PROBABLE
+  Lab Confirmed: CONFIRMED
+  Serology: ANTIBODY_TOTAL
+  PCR: SPECIMENS
 LA:
   Case Count: POSITIVE
   Deaths: DEATH
