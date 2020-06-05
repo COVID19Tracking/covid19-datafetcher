@@ -116,12 +116,14 @@ def handle_ky(res, mapping):
                 elif k.lower().find("serology") >= 0:
                     tagged[Fields.ANTIBODY_TOTAL.name] = atoi(v)
         elif title.lower().find("positive") >= 0:
+            tagged[Fields.POSITIVE.name] = atoi(value)
             for (k, v) in probable:
                 if k.lower().find("probable") >= 0:
                     tagged[Fields.PROBABLE.name] = atoi(v)
                 elif k.lower().find("confirm") >= 0:
                     tagged[Fields.CONFIRMED.name] = atoi(v)
         elif title.lower().find("death") >= 0:
+            tagged[Fields.DEATH.name] = atoi(value)
             for (k, v) in probable:
                 if k.lower().find("probable") >= 0:
                     tagged[Fields.DEATH_PROBABLE.name] = atoi(v)
