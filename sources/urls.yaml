@@ -330,25 +330,21 @@ NJ:
   type: arcgis
   desc: Discharged (old, up to 28-April)
 - url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query
-  params: {where: structure_measure_identifier='Case count of COVID-19 positive cases currently in the hospital' OR structure_measure_identifier='Case count of persons under investigation (PUI) / presumptive positive cases currently in the hospital', orderByFields: 'survey_period desc', groupByFieldsForStatistics: survey_period, outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "curr_hosp"}], resultRecordCount: 1, resultOffset: 1, f: json}
+  params: {where: structure_measure_identifier='Case count of COVID-19 positive cases currently in the hospital' OR structure_measure_identifier='Case count of persons under investigation (PUI) / presumptive positive cases currently in the hospital', orderByFields: 'survey_period desc', groupByFieldsForStatistics: survey_period, outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "curr_hosp"}], resultRecordCount: 1, f: json}
   type: arcgis
   desc: Hospitalized
 - url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query
   params: {where: structure_measure_identifier LIKE 'Total % of COVID Patients Currently on a Ventilator',
   orderByFields: 'survey_period desc',
   groupByFieldsForStatistics: survey_period,
-  outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "curr_vent"}],
-  resultRecordCount: 1, resultOffset: 1,
-  f: json}
+  outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "curr_vent"}], resultRecordCount: 1, f: json}
   type: arcgis
   desc: Curr vent
 - url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query
   params: {where: structure_measure_identifier='COVID-19 Positive and PUI Patients Combined in a - Critical Care Bed' OR structure_measure_identifier='COVID-19 Positive and PUI Patients Combined in a - Intensive Care Bed',
   orderByFields: 'survey_period desc',
   groupByFieldsForStatistics: survey_period,
-  outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "curr_icu"}],
-  resultRecordCount: 1,
-  f: json}
+  outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "curr_icu"}], resultRecordCount: 1, f: json}
   type: arcgis
   desc: Critical & Intensive Care
 NM:
