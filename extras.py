@@ -30,12 +30,11 @@ def handle_ar(res, mapping):
         partial = extract_attributes(result, mapping, 'AR')
         tagged.update(partial)
 
-    soup = BeautifulSoup(res[-1], 'html.parser')
+    soup = res[-1]
     try:
         tables = soup.find_all("table")
         table = tables[-1].find("tbody")
         for tr in table.find_all("tr"):
-            print(tr)
             cols = tr.find_all("td")
             if len(cols) < 2:
                  continue
@@ -46,6 +45,7 @@ def handle_ar(res, mapping):
 
     except Exception as e:
         print(str(e))
+        raise
 
     return tagged
 
@@ -85,7 +85,7 @@ def handle_ky(res, mapping):
         tagged.update(partial)
 
     # soup time
-    soup = BeautifulSoup(res[-1], 'html.parser')
+    soup = res[-1]
     h3 = soup.find("h3", string=re.compile("Coronavirus Monitoring"))
     if not h3:
         # quick fail
@@ -167,7 +167,7 @@ def handle_pa(res, mapping):
     tagged.pop(ecmo)
 
     # antibody stuff, soup time
-    soup = BeautifulSoup(res[-1], 'html.parser')
+    soup = res[-1]
     try:
         table = soup.find_all("table")[1]
         # expecting 2 rows, with 3 columns
@@ -441,7 +441,7 @@ def handle_mi(res, mapping):
         tagged.update(partial)
 
     # soup time
-    soup = BeautifulSoup(res[-1], 'html.parser')
+    soup = res[-1]
     tables = soup.find_all("table")
 
     # Serological tests
@@ -477,7 +477,7 @@ def handle_mi(res, mapping):
     return tagged
 
 def handle_nd(res, mapping):
-    soup = BeautifulSoup(res[-1], 'html.parser')
+    soup = res[-1]
     circles = soup.find_all("div", "circle")
     tagged = {}
     for c in circles:
@@ -514,7 +514,7 @@ def handle_nd(res, mapping):
     return tagged
 
 def handle_ma(res, mapping):
-    soup = BeautifulSoup(res[0], 'html.parser')
+    soup = res[0]
     link = soup.find('a', string=re.compile("COVID-19 Raw Data"))
     link_part = link['href']
     url = "https://www.mass.gov{}".format(link_part)

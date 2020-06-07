@@ -47,7 +47,7 @@ AR:
   type: arcgis
 - url: https://www.healthy.arkansas.gov/programs-services/topics/novel-coronavirus
   params: null
-  type: html
+  type: html:soup
   desc: State page (soup)
 AZ:
 - url: https://services6.arcgis.com/l7uujk4hHifqabRB/ArcGIS/rest/services/COVID19_County_Level_View_Layer/FeatureServer/0/query
@@ -166,7 +166,7 @@ KY:
 - url: https://govstatus.egov.com/kycovid19
   params: null
   # I can't with all this soup
-  type: html
+  type: html:soup
   desc: Page (soup)
 LA:
 - url: https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/Combined_COVID_Reporting/FeatureServer/0/query
@@ -182,7 +182,7 @@ LA:
 MA:
 - url: https://www.mass.gov/info-details/covid-19-response-reporting
   params: null
-  type: html
+  type: html:soup
   desc: None, just need a trigger
 MD:
 - url: https://services.arcgis.com/njFNhDsUCentVYJW/ArcGIS/rest/services/MASTERCaseTracker/FeatureServer/0/query
@@ -216,7 +216,7 @@ MI:
   desc: Recovered
 - url: https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173_99225---,00.html
   params: null
-  type: html
+  type: html:soup
   desc: Testing page soup
 MN:
 - url: https://services2.arcgis.com/V12PKGiMAH7dktkU/arcgis/rest/services/MyMapService/FeatureServer/0/query
@@ -283,7 +283,7 @@ ND:
 #   desc: Cases/tests/neg, etc (CSV)
 - url: https://www.health.nd.gov/diseases-conditions/coronavirus/north-dakota-coronavirus-cases
   params: {}
-  type: html
+  type: html:soup
   desc: State page (soup)
 NE:
 - url: https://gis.ne.gov/Agency/rest/services/COVID19_County_Layer/MapServer/2/query
@@ -373,7 +373,7 @@ PA:
   desc: Hosp, vent, ecmo
 - url: https://www.health.pa.gov/topics/disease/coronavirus/Pages/Cases.aspx
   params: null
-  type: html
+  type: html:soup
   desc: Main page, for antibody (soup)
 PR:
 - url: https://services5.arcgis.com/klquQoHA0q9zjblu/ArcGIS/rest/services/Datos_Totales/FeatureServer/0/query

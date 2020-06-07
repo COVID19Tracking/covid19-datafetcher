@@ -4,13 +4,17 @@ import pandas as pd
 import sys
 import urllib, urllib.request, json
 
-from utils import request, request_and_parse, extract_attributes, Fields, request_csv
+from utils import request, request_and_parse, extract_attributes, Fields, request_csv, \
+    request_soup
 import extras as extras_module
 from sources import states
 
 
 
 OUTPUT_FOLDER = "."
+
+# TODO:
+# - make a mapper of type to fetch method
 
 
 class Fetcher(object):
@@ -90,8 +94,9 @@ class Fetcher(object):
                         query['url'], query['params'],
                         header=query.get('header', True), encoding=query.get('encoding'))
                 elif query['type'] in ['html']:
-                    # TODO: Return soup?
                     res = request(query['url'], query['params'])
+                elif query['type'] in ['html:soup']:
+                    res = request_soup(query['url'], query['params'])
                 results.append(res)
             except Exception as e:
                 print(state, ": failed to fetch ", query['url'], str(e))

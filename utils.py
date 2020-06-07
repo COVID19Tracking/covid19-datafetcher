@@ -1,4 +1,5 @@
 import csv
+from bs4 import BeautifulSoup
 from enum import Enum
 from io import StringIO
 import json
@@ -60,6 +61,10 @@ def request(url, query=None, encoding=None):
     with urllib.request.urlopen(req) as f:
         res = f.read().decode(encoding)
     return res
+
+def request_soup(url, query=None, encoding=None):
+    res = request(url, query, encoding)
+    return BeautifulSoup(res, 'html.parser')
 
 def request_cvs_folder(url, query=None, encoding=None):
     # returning context?
