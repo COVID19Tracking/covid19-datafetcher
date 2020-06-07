@@ -168,6 +168,14 @@ MI:
   Total_Deaths: DEATH
   positives: POSITIVE
   date: TIMESTAMP
+  CasesProbable: PROBABLE
+  CasesConfirmed: CONFIRMED
+  DeathsProbable: DEATH_PROBABLE
+  DeathsConfirmed: DEATH_CONFIRMED
+  Diagnostic: SPECIMENS
+  Serology: ANTIBODY_TOTAL
+  Negative: SPECIMENS_NEG
+  Positive: SPECIMENS_POS
 MN:
   DateTime: DATE
   TotalCases: POSITIVE

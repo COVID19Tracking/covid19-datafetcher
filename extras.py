@@ -440,40 +440,34 @@ def handle_mi(res, mapping):
         partial = extract_attributes(result, mapping, 'MI')
         tagged.update(partial)
 
-    # soup time
-    soup = res[-1]
-    tables = soup.find_all("table")
+    # TODO: Can use the reverse mapping
+    cases = 'Cases'
+    deaths = 'Deaths'
+    probable = 'Probable'
+    confirmed = 'Confirmed'
+    pcr = 'Diagnostic'
+    antibody = 'Serology'
+    negative = 'Negative'
+    positive = 'Positive'
 
-    # Serological tests
-    table = tables[0]
-    # need to take the total from the 3rd column
-    last_row = table.find_all("tr")[-1]
-    if last_row.find("td").get_text(strip=True).lower() == "total":
-        v = last_row.find_all("td")[2].get_text(strip=True)
-        tagged[Fields.ANTIBODY_TOTAL.name] = atoi(v)
+    df = res[3]
+    filter_col = 'CASE_STATUS'
+    summed = df.groupby(filter_col).sum()
+    for m in [cases, deaths]:
+        for t in [probable, confirmed]:
+            tagged[mapping[m+t]] = summed[m][t]
 
+    df = res[4]
+    filter_col = 'TestType'
+    summed = df.groupby(filter_col).sum()
+    for m in [pcr, antibody]:
+        tagged[mapping[m]] = summed['Count'][m]
 
-    # TODO: extract method to sum csv columns
-    table = tables[1] # 2nd table
-    headers = table.find_all('th')
-    headers = [x.text for x in headers]
+    df = res[5]
+    summed = df[[negative, positive]].sum()
+    for x in [negative, positive]:
+        tagged[mapping[x]] = summed[x]
 
-    testing = table.find('tbody')
-    rows = testing.find_all('tr')
-    row_data = []
-    for row in rows:
-        row_data.append([x.get_text(strip=True) for x in row.find_all("td")])
-    # Headers: Date, Positive Tests, Negative Tests, Total Tests, % pos Tests
-    sums = [0, 0, 0]
-    for row in row_data:
-        for i in range(3):
-            v = row[i+1] if row[i+1] else 0
-            sums[i] += atoi(v)
-
-    tagged[Fields.SPECIMENS_POS.name] = sums[0]
-    tagged[Fields.SPECIMENS_NEG.name] = sums[1]
-    tagged[Fields.TOTAL.name] = sums[2]
-    tagged[Fields.SPECIMENS.name] = sums[2]
     return tagged
 
 def handle_nd(res, mapping):

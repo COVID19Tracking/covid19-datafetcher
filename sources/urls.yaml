@@ -214,10 +214,18 @@ MI:
   params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "f2", "outStatisticFieldName": "Recovered"}], f: json}
   type: arcgis
   desc: Recovered
-- url: https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173_99225---,00.html
+- url: https://www.michigan.gov/documents/coronavirus/Cases_and_Deaths_by_County_693145_7.xlsx
   params: null
-  type: html:soup
-  desc: Testing page soup
+  type: pandas
+  desc: Cases and death (xlsx)
+- url: https://www.michigan.gov/documents/coronavirus/Covid-19_Tests_by_County_693148_7.xlsx
+  params: null
+  type: pandas
+  desc: Testing
+- url: https://www.michigan.gov/documents/coronavirus/Diagnostic_Tests_by_Result_and_County_693149_7.xlsx
+  params: null
+  type: pandas
+  desc: PCR test results
 MN:
 - url: https://services2.arcgis.com/V12PKGiMAH7dktkU/arcgis/rest/services/MyMapService/FeatureServer/0/query
   params: {where: 1=1, outFields: 'Date, Time,TotalCases, EvrHospYes + EvrICUYes as hosp, EvrICUYes, RlsdFrmIso, OutcmDied', f: json}

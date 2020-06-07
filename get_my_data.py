@@ -5,7 +5,7 @@ import sys
 import urllib, urllib.request, json
 
 from utils import request, request_and_parse, extract_attributes, Fields, request_csv, \
-    request_soup
+    request_soup, request_pandas
 import extras as extras_module
 from sources import states
 
@@ -86,6 +86,7 @@ class Fetcher(object):
 
         results = []
         for query in queries:
+            # TODO: make a better mapping here
             try:
                 if query['type'] in ['arcgis', 'json']:
                     res = request_and_parse(query['url'], query['params'])
@@ -97,6 +98,8 @@ class Fetcher(object):
                     res = request(query['url'], query['params'])
                 elif query['type'] in ['html:soup']:
                     res = request_soup(query['url'], query['params'])
+                elif query['type'] in ['pandas', 'xls', 'xlsx']:
+                    res = request_pandas(query)
                 results.append(res)
             except Exception as e:
                 print(state, ": failed to fetch ", query['url'], str(e))

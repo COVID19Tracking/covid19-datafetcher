@@ -1,6 +1,7 @@
 import csv
 from bs4 import BeautifulSoup
 from enum import Enum
+import pandas as pd
 from io import StringIO
 import json
 import urllib
@@ -61,6 +62,14 @@ def request(url, query=None, encoding=None):
     with urllib.request.urlopen(req) as f:
         res = f.read().decode(encoding)
     return res
+
+def request_pandas(query):
+    url = query['url']
+    params = query.get('params')
+    if params:
+        url = "{}?{}".format(url, urllib.parse.urlencode(params))
+    df = pd.read_excel(url)
+    return df
 
 def request_soup(url, query=None, encoding=None):
     res = request(url, query, encoding)
