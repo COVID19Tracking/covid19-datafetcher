@@ -318,11 +318,10 @@ def handle_gu(res, mapping):
     return tagged
 
 def handle_hi(res, mapping):
-    res = res[0]
-
+    stats = res[0]
     # last row with values
     last_state_row = {}
-    for row in res:
+    for row in stats:
         if row['Region'] == 'State' and row.get('Cases_Tot'):
             last_state_row = row
 
@@ -331,6 +330,15 @@ def handle_hi(res, mapping):
     for k, v in last_state_row.items():
         if k in mapping:
             tagged[mapping[k]] = v
+
+    people = res[1]
+    h2 = people.find('h2', string=re.compile("COVID-19 Cases"))
+    h2par = h2.find_parent()
+    for p in h2par.find_all("p"):
+        text = p.get_text(strip=True)
+        if text.lower().find('a total of') >= 0:
+            val = text.split()[3]
+            tagged[Fields.TOTAL.name] = atoi(val)
 
     return tagged
 

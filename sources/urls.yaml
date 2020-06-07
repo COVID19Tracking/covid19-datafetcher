@@ -130,6 +130,9 @@ HI:
 - url: 'https://docs.google.com/spreadsheets/d/1sd-L317Je9ZhiQh3_uH9jTkl3ckc_o3sgrVauShcwCk/export?format=csv&sheet=Data'
   params: null
   type: csv
+- url: https://hawaiicovid19.com/
+  params: null
+  type: html:soup
 IA:
 - url: https://services.arcgis.com/vPD5PVLI6sfkZ5E4/arcgis/rest/services/IACOVID19Cases_Demographics/FeatureServer/0/query
   params: {f: json, outFields: '*', where: 1=1}
