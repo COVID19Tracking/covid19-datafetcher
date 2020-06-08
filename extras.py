@@ -24,6 +24,25 @@ def atoi(val):
         return val
     return int(val.replace(",",''))
 
+def handle_al(res, mapping):
+    tagged = {}
+    for result in res[:-1]:
+        partial = extract_attributes(result, mapping, 'AL')
+        tagged.update(partial)
+
+    widgets = res[-1].get('widgets', {})
+
+    for widget in widgets:
+        if widget.get('defaultSettings', {}) \
+                    .get('description',"").find("STATEWIDE") >= 0:
+            # now check that it's a numeric value
+            recovered = widget['defaultSettings']['middleSection']['textInfo']['text'].strip()
+            if re.match("[1-9][0-9,]*", recovered) is not None:
+                tagged[Fields.RECOVERED.name] = atoi(recovered)
+
+    return tagged
+
+
 def handle_ar(res, mapping):
     tagged = {}
     for result in res[:-1]:
