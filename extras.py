@@ -10,7 +10,7 @@ from tempfile import NamedTemporaryFile, TemporaryDirectory
 import urllib, urllib.request
 from utils import request_and_parse, extract_attributes, \
    map_attributes, Fields, csv_sum
-
+import pandas as pd
 
 ''' This file contains extra handling needed for some states
 To make it work, the method must be called "handle_{state_abbreviation:lower_case}"
@@ -458,20 +458,31 @@ def handle_mi(res, mapping):
     negative = 'Negative'
     positive = 'Positive'
 
-    df = res[3]
+
+    soup = res[-1]
+    h = soup.find("h5", string=re.compile('[dD][aA][tT][aA]'))
+    parent = h.find_parent("ul")
+    links = parent.find_all("a")
+
+    base_url = 'https://www.michigan.gov'
+    cases_url = base_url + links[0]['href']
+    tests_url = base_url + links[3]['href']
+    results_url = base_url + links[4]['href']
+
+    df = pd.read_excel(cases_url)
     filter_col = 'CASE_STATUS'
     summed = df.groupby(filter_col).sum()
     for m in [cases, deaths]:
         for t in [probable, confirmed]:
             tagged[mapping[m+t]] = summed[m][t]
 
-    df = res[4]
+    df = pd.read_excel(tests_url)
     filter_col = 'TestType'
     summed = df.groupby(filter_col).sum()
     for m in [pcr, antibody]:
         tagged[mapping[m]] = summed['Count'][m]
 
-    df = res[5]
+    df = pd.read_excel(results_url)
     summed = df[[negative, positive]].sum()
     for x in [negative, positive]:
         tagged[mapping[x]] = summed[x]
