@@ -323,6 +323,11 @@ UT:
   MAX_Date_Updated: TIMESTAMP
   SUM_COVID_Cases_Total: POSITIVE
   SUM_Hospitalizations: HOSP
+  # double mapping here, that's from the site:
+  total-covid-19-cases: POSITIVE
+  total-reported-people-tested: TOTAL
+  total-covid-19-hospitalizations: HOSP
+  total-covid-19-deaths: DEATH
 VA:
   Report Date: DATE
   Number of Cases: CONFIRMED

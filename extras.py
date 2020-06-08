@@ -564,3 +564,23 @@ def handle_ma(res, mapping):
             tagged[Fields.HOSP.name] = summed[hosp_key]
 
     return tagged
+
+def handle_ut(res, mapping):
+    tagged = {}
+    for result in res[:-1]:
+        partial = extract_attributes(result, mapping, 'NJ')
+        tagged.update(partial)
+    soup = res[-1]
+    for k, v in mapping.items():
+        x = soup.find(id=k)
+        if x:
+            print(x)
+            name = v
+            value_item = x.find(class_='value')
+            if not value_item:
+                value_item = x.find(class_='value-output')
+            if not value_item:
+                continue
+            value = atoi(value_item.get_text(strip=True))
+            tagged[v] = value
+    return tagged

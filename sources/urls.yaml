@@ -423,6 +423,10 @@ UT:
   {"statisticType": "sum", "onStatisticField": "COVID_Cases_Total"},
   {"statisticType": "sum", "onStatisticField": "Hospitalizations"}], f: json}
   type: arcgis
+- url: https://coronavirus-dashboard.utah.gov/
+  params: null
+  type: html:soup
+  desc: State page (soup)
 VA:
 # Cases
 - url: https://www.vdh.virginia.gov/content/uploads/sites/182/2020/04/VDH-COVID-19-PublicUseDataset-Cases_By-Confirmation.csv
