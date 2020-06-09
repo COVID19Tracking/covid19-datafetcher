@@ -510,12 +510,15 @@ def handle_mi(res, mapping):
     tests_url = base_url + links[3]['href']
     results_url = base_url + links[4]['href']
 
-    df = pd.read_excel(cases_url)
-    filter_col = 'CASE_STATUS'
-    summed = df.groupby(filter_col).sum()
-    for m in [cases, deaths]:
-        for t in [probable, confirmed]:
-            tagged[mapping[m+t]] = summed[m][t]
+    try:
+        df = pd.read_excel(cases_url)
+        filter_col = 'CASE_STATUS'
+        summed = df.groupby(filter_col).sum()
+        for m in [cases, deaths]:
+            for t in [probable, confirmed]:
+                tagged[mapping[m+t]] = summed[m][t]
+    except Exception as e:
+        print("Exception getting cases by status", str(e))
 
     df = pd.read_excel(tests_url)
     filter_col = 'TestType'
