@@ -444,11 +444,25 @@ def handle_nj(res, mapping):
     to the ArcGIS query
     '''
     mapped = {}
-    for result in res:
+    for result in res[:-1]:
         partial = extract_attributes(result, mapping, 'NJ')
         mapped.update(partial)
 
+    # it's not a magic value, it's from an existing query, but
+    # it's always the same
     mapped[Fields.RECOVERED.name] += 15642
+
+
+    hosp = 'Hospitalizations'
+    widgets = res[-1].get('widgets', {})
+
+    for widget in widgets:
+        if widget.get('defaultSettings', {}) \
+                    .get('topSection',{}).get('textInfo', {}).get('text', "").find(hosp) >= 0:
+            val = widget['defaultSettings']['middleSection']['textInfo']['text'].strip()
+            if re.match("[1-9][0-9,]*", val) is not None:
+                mapped[Fields.HOSP.name] = atoi(val)
+
     return mapped
 
 def handle_ok(res, mapping):

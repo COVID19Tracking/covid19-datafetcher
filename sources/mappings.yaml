@@ -237,9 +237,10 @@ NJ:
   _date: TIMESTAMP
   recoveries: RECOVERED
   total_deaths: DEATH
-  total_negatives: NEGATIVE
   total_positives: POSITIVE
-  total_tests_reported: TOTAL
+  # not a mistake:
+  total_negatives: TOTAL
+  # total_tests_reported: TOTAL
   curr_hosp: CURR_HOSP
   curr_vent: CURR_VENT
   curr_icu: CURR_ICU

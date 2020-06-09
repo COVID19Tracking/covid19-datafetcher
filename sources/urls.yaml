@@ -345,6 +345,10 @@ NJ:
   outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "curr_icu"}], resultRecordCount: 1, f: json}
   type: arcgis
   desc: Critical & Intensive Care
+- url: https://maps.arcgis.com/sharing/rest/content/items/0cc7684992b942eb81c21ff3c252c1ee/data
+  params: null
+  type: json
+  desc: Hospitalizations (embedded in dashboard)
 NM:
 - url: https://e7p503ngy5.execute-api.us-west-2.amazonaws.com/prod/GetPublicStatewideData
   params: null
