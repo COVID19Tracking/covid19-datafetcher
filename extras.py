@@ -306,6 +306,14 @@ def handle_il(res, mapping):
     timestamp = datetime(y,m,d).timestamp()
     mapped[Fields.TIMESTAMP.name] = timestamp
 
+    # probable
+    partial = map_attributes(res[0].get('probable_case_counts', {}), mapping, state)
+    mapped.update(partial)
+
+    # recovery
+    partial = map_attributes(res[0].get('state_recovery_data', {}).get('values')[0], mapping, state)
+    mapped.update(partial)
+
     # hospital data
     hosp_data = res[1]['statewideValues']
     hosp_mapped = map_attributes(hosp_data, mapping, state)
