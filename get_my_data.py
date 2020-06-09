@@ -88,7 +88,7 @@ class Fetcher(object):
         for query in queries:
             # TODO: make a better mapping here
             try:
-                if query['type'] in ['arcgis', 'json']:
+                if query['type'] in ['arcgis', 'json', 'ckan', 'soda']:
                     res = request_and_parse(query['url'], query['params'])
                 elif query['type'] in ['csv']:
                     res = request_csv(

@@ -65,8 +65,7 @@ AZ:
 CA:
 - url: https://data.chhs.ca.gov/api/3/action/datastore_search_sql
   params: {sql: 'SELECT "Most Recent Date", sum("Total Count Confirmed") as confirmed, sum("Total Count Deaths") as death, sum("ICU COVID-19 Positive Patients") as curr_icu, sum("ICU COVID-19 Suspected Patients") as curr_icu_pui, sum("COVID-19 Positive Patients") as curr_hosp, sum("Suspected COVID-19 Positive Patients") as curr_hosp_pui from "6cd8d424-dfaa-4bdd-9410-a3d656e1176e" WHERE 1=1 GROUP BY "Most Recent Date" order by "Most Recent Date" desc limit 1'}
-  type: json
-  # type: ckan
+  type: ckan
 CO:
 - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/Colorado_COVID19_Positive_Cases/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{statisticType: max, onStatisticField: State_Pos_Cases},
@@ -108,7 +107,7 @@ CO:
 CT:
 - url: https://data.ct.gov/api/id/rf3k-f8fg.json
   params: {$query: 'select * order by date desc limit 1'}
-  type: json
+  type: soda
   desc: JSON (cases, death, hosp, date, SODA API)
 FL:
 - url: https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/arcgis/rest/services/Florida_COVID19_Cases/FeatureServer/0/query
@@ -161,7 +160,7 @@ IN:
 #  type: json
 - url: https://hub.mph.in.gov/api/3/action/datastore_search?resource_id=882a7426-886f-48cc-bbe0-a8d14e3012e4
   params: null
-  type: json
+  type: ckan
 KY:
 - url: https://kygisserver.ky.gov/arcgis/rest/services/WGS84WM_Services/Ky_Cnty_COVID19_Cases_WGS84WM/FeatureServer/0/query
   params: {f: json, outStatistics: [{outStatisticFieldName: Confirmed, onStatisticField: Confirmed,
@@ -358,7 +357,7 @@ NY:
 # https://health.data.ny.gov/resource/xdss-u53e.json?
 - url: https://health.data.ny.gov/resource/xdss-u53e.json
   params: {$select: 'test_date,sum(cumulative_number_of_positives),sum(cumulative_number_of_tests)', $group: test_date, $order: test_date desc, $limit: 1}
-  type: json
+  type: soda
   desc: Total & positives
 OK:
 - url: https://storage.googleapis.com/ok-covid-gcs-public-download/oklahoma_cases_county.csv
