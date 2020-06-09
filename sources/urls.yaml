@@ -434,6 +434,10 @@ UT:
   params: null
   type: html:soup
   desc: State page (soup)
+- url: https://coronavirus-dashboard.utah.gov/#hospitalizations-mortality
+  params: null
+  type: html:soup
+  desc: Hospitalization page (soup)
 VA:
 # Cases
 - url: https://www.vdh.virginia.gov/content/uploads/sites/182/2020/04/VDH-COVID-19-PublicUseDataset-Cases_By-Confirmation.csv

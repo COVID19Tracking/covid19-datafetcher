@@ -611,14 +611,16 @@ def handle_ma(res, mapping):
 
 def handle_ut(res, mapping):
     tagged = {}
-    for result in res[:-1]:
+    soup_start = 1
+    for result in res[:soup_start]:
         partial = extract_attributes(result, mapping, 'NJ')
         tagged.update(partial)
-    soup = res[-1]
+
+
+    stats = res[1]
     for k, v in mapping.items():
-        x = soup.find(id=k)
+        x = stats.find(id=k)
         if x:
-            print(x)
             name = v
             value_item = x.find(class_='value')
             if not value_item:
@@ -627,4 +629,24 @@ def handle_ut(res, mapping):
                 continue
             value = atoi(value_item.get_text(strip=True))
             tagged[v] = value
+
+    # inverse mapping
+    revmap = {v: k for k, v in mapping.items()}
+    hosp = res[2]
+    tables = hosp.find_all('table')
+
+    curr_hosp_table = tables[0]
+    tds = curr_hosp_table.find_all('td', string=re.compile(revmap[Fields.CURR_HOSP.name]))
+    curr_hosp = 0
+    for td in tds:
+        for x in td.next_siblings:
+            if (x.name == 'td'):
+                curr_hosp += atoi(x.get_text(strip=True))
+    tagged[Fields.CURR_HOSP.name] = curr_hosp
+
+    for t in tables[1:]:
+        if t.caption.get_text(strip=True) in mapping:
+            td = t.find_all('td', limit=2)[1]
+            tagged[mapping[t.caption.get_text(strip=True)]] = atoi(td.get_text(strip=True))
+
     return tagged

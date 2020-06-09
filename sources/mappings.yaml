@@ -332,6 +332,9 @@ UT:
   total-reported-people-tested: TOTAL
   total-covid-19-hospitalizations: HOSP
   total-covid-19-deaths: DEATH
+  Intubation/Ventilator Use: VENT
+  ICU Admissions: ICU
+  currently hospitalized: CURR_HOSP
 VA:
   Report Date: DATE
   Number of Cases: CONFIRMED
