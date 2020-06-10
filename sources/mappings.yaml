@@ -192,9 +192,11 @@ MO:
   SUM_Deaths: DEATH
   MAX_EditDate: TIMESTAMP
   total_people: TOTAL
-  SUM_Total: ANTIBODY_TOTAL
-  SUM_Positive: ANTIBODY_POS
-  SUM_Negative: ANTIBODY_NEG
+  #SUM_Total: ANTIBODY_TOTAL
+  #SUM_Positive: ANTIBODY_POS
+  #SUM_Negative: ANTIBODY_NEG
+  ser_positive: ANTIBODY_POS
+  ser_tested: ANTIBODY_TOTAL
   PCR_Total: SPECIMENS
   PCR_Positive: SPECIMENS_POS
   PCR_Negative: SPECIMENS_NEG

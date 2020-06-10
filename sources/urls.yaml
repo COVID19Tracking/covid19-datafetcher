@@ -248,6 +248,14 @@ MO:
 {"statisticType": "sum", "onStatisticField": "Total"}], f: json}
   type: arcgis
   desc: Antibody (total, pos, neg)
+- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/dashboard_daily_numbers/FeatureServer/0/query
+  params: {where: Description='SER Positive', outFields: 'Description, value as ser_positive', f: json}
+  type: arcgis
+  desc: Serology positive (people)
+- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/dashboard_daily_numbers/FeatureServer/0/query
+  params: {where: Description='SER Tested', outFields: 'Description, value as ser_tested', f: json}
+  type: arcgis
+  desc: Serology total (people)
 - url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/pcrbydate/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "Negative", "outStatisticFieldName": "PCR_Negative"},{"statisticType": "sum", "onStatisticField": "Positive", "outStatisticFieldName": "PCR_Positive"},{"statisticType": "sum", "onStatisticField": "Total", "outStatisticFieldName": "PCR_Total"}], f: json}
   type: arcgis
@@ -260,6 +268,7 @@ MO:
   params: {where: Description='PCR Tested', outFields: 'value as total_people', f: json}
   type: arcgis
   desc: Total PCR (people)
+# -------------------------------
 MT:
 - url: https://services.arcgis.com/qnjIrwR8z5Izc0ij/arcgis/rest/services/COVID_Cases_Production_View/FeatureServer/0/query
   params: {f: json, outStatistics: [{onStatisticField: Total, statisticType: sum},
