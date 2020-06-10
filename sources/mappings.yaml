@@ -277,6 +277,7 @@ PR:
   T_Muertes_Combinadas: DEATH
   T_Pacientes_Int_Covid: CURR_ICU
   T_Serologicos_Pos: ANTIBODY_POS
+  T_Molecular_Pos: SPECIMENS_POS
   T_Vent_Covid: CURR_VENT
   T_Hospitalizados: CURR_HOSP
 RI:
