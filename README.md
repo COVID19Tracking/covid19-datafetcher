@@ -43,9 +43,42 @@ To increase coverage, I added more sources:
 Pretty much everything requires custom code now (except for the states that use `ArcGIS`).
 
 
-
 ## Data Entry
 What's available
 
 How it's being used
 
+# Running the Code
+## Setting up Environment and Running the Scripts
+I use `conda` locally and on the server that runs the periodic task. Between `BeautifulSoup`, `Pandas` and libraries to parse Excel files, it's a huge environment.
+
+Get the code
+```
+git clone https://github.com/space-buzzer/covid19-datafetcher.git
+cd covid19-datafetcher
+```
+
+Create Conda environment
+```
+conda env create -f environment.yml
+conda activate c19-data
+```
+
+Run scripts
+```
+# python get_my_data.py <STATE_ABBRV>
+
+python get_my_data.py MI
+# or
+python get_my_data.py MI
+```
+The output will be in `states.csv`
+
+
+## Publishing Flow
+
+There are a few `cron` triggered workflows:
+- Fetch the repository from GitHub and fast-forward it (set to 1h now)
+- Generate the [index page with source links](https://notbroken.dev/covid19/) 
+- Run the script (set to 8 min now)
+- (After running) push the `csv` to Google Spreadsheets (code not in this repo, TBD to publish)

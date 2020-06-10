@@ -1,0 +1,33 @@
+name: c19-data
+channels:
+  - defaults
+dependencies:
+  - _libgcc_mutex=0.1
+  - ca-certificates=2020.1.1
+  - certifi=2020.4.5.1
+  - ld_impl_linux-64=2.33.1
+  - libedit=3.1.20181209
+  - libffi=3.3
+  - libgcc-ng=9.1.0
+  - libstdcxx-ng=9.1.0
+  - ncurses=6.2
+  - openssl=1.1.1g
+  - pip=20.0.2
+  - python=3.8.3
+  - readline=8.0
+  - setuptools=47.1.1
+  - sqlite=3.31.1
+  - tk=8.6.8
+  - wheel=0.34.2
+  - xz=5.2.5
+  - zlib=1.2.11
+  - pip:
+    - beautifulsoup4
+    - numpy==1.18.5
+    - pandas==1.0.4
+    - python-dateutil
+    - pytz
+    - pyyaml
+    - six
+    - soupsieve
+    - xlrd
