@@ -50,21 +50,16 @@ def handle_ar(res, mapping):
         tagged.update(partial)
 
     soup = res[-1]
-    try:
-        tables = soup.find_all("table")
-        table = tables[-1].find("tbody")
-        for tr in table.find_all("tr"):
-            cols = tr.find_all("td")
-            if len(cols) < 2:
-                 continue
-            name = cols[0].get_text(strip=True)
-            value = cols[1].get_text(strip=True)
-            if name in mapping:
-                tagged[mapping[name]] = atoi(value)
-
-    except Exception as e:
-        print(str(e))
-        raise
+    tables = soup.find_all("table")
+    table = tables[-1].find("tbody")
+    for tr in table.find_all("tr"):
+        cols = tr.find_all("td")
+        if len(cols) < 2:
+            continue
+        name = cols[0].get_text(strip=True)
+        value = cols[1].get_text(strip=True)
+        if name in mapping:
+            tagged[mapping[name]] = atoi(value)
 
     return tagged
 
@@ -205,7 +200,6 @@ def handle_pa(res, mapping):
 
     except Exception as e:
         pass
-
     return tagged
 
 def handle_nm(res, mapping):
@@ -255,7 +249,7 @@ def handle_la(res, mapping):
     if 'features' in stats and len(stats['features']) > 0:
         attributes = stats['features']
         for attr in attributes:
-            # expecting {attributes: {lab_status: NAME, COUNT_EXPR0: VALUE}}
+            # expecting {attributes: {Measure: NAME, SUM_Value: VALUE}}
             name = attr['attributes']['Measure']
             value = attr['attributes']['SUM_Value']
             if name in mapping:
