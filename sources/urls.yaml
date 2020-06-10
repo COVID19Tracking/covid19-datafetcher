@@ -73,14 +73,14 @@ CO:
       {statisticType: max, onStatisticField: State_Number_Tested}, {statisticType: max,
         onStatisticField: Date_Data_Last_Updated}], f: json}
   type: arcgis
-- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/COVID19_Positivity_Data_from_Clinical_Laboratories/FeatureServer/0/query
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
   params: {where: Metric='Number of positive tests',
     outStatistics: [{"statisticType": "max", "onStatisticField": "Attr_Date"},
     {"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "antibody_pos"}],
     f: json}
   type: arcgis
   desc: Positive serological tests
-- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/COVID19_Positivity_Data_from_Clinical_Laboratories/FeatureServer/0/query
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
   params: {where: Metric='Number of negative tests',
     outStatistics: [{"statisticType": "max", "onStatisticField": "Attr_Date"},
     {"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "antibody_neg"}],
