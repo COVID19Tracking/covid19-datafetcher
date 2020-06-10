@@ -53,22 +53,22 @@ How it's being used
 I use `conda` locally and on the server that runs the periodic task. Between `BeautifulSoup`, `Pandas` and libraries to parse Excel files, it's a huge environment.
 
 Get the code
-```
+```sh
 git clone https://github.com/space-buzzer/covid19-datafetcher.git
 cd covid19-datafetcher
 ```
 
 Create Conda environment
-```
+```sh
 conda env create -f environment.yml
 conda activate c19-data
 ```
 
 Run scripts
-```
-# python get_my_data.py <STATE_ABBRV>
+```sh
+# python get_my_data.py [STATE_ABBRV
 
-python get_my_data.py MI
+python get_my_data.py
 # or
 python get_my_data.py MI
 ```
