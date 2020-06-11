@@ -16,6 +16,7 @@ AL:
   hospitalization: HOSP
   CLN_ICU: ICU
   CLN_VENT: VENT
+  Confirmed_AllWeekdays: CURR_HOSP
 AR:
   SUM_Recoveries: RECOVERED
   SUM_deaths: DEATH
