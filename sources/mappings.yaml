@@ -265,6 +265,11 @@ OK:
   Deaths: DEATH
   Recovered: RECOVERED
   ReportDate: DATE
+OR:
+  SUM_Cases: POSITIVE
+  SUM_Deaths: DEATH
+  SUM_Recovered: RECOVERED
+  SUM_NegativeTests: NEGATIVE
 PA:
   SUM_COVID19onVents: CURR_VENT
   curr_vent: CURR_VENT

@@ -380,6 +380,11 @@ OK:
 - url: https://storage.googleapis.com/ok-covid-gcs-public-download/oklahoma_cases_county.csv
   params: null
   type: csv
+OR:
+- url: https://services.arcgis.com/uUvqNMGPm7axC2dD/arcgis/rest/services/COVID_Cases_Oregon_Public/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "Cases"}, {"statisticType": "sum", "onStatisticField": "Deaths"}, {"statisticType": "sum", "onStatisticField": "Recovered"}, {"statisticType": "sum", "onStatisticField": "NegativeTests"}], f: json}
+  type: arcgis
+  desc: Cases, death, recovered, negative tests
 PA:
 - url: https://services2.arcgis.com/xtuWQvb2YQnp0z3F/ArcGIS/rest/services/Pennsylvania_Public_COVID19_Dashboard_Data/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "Cases"},
