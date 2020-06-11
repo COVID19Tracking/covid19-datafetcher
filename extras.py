@@ -562,6 +562,14 @@ def handle_nd(res, mapping):
             value = atoi(data[i].get_text(strip=True))
             tagged[mapping[title]] = value
 
+    # probable death
+    prob_death = [k for k, v in mapping.items() if v == Fields.DEATH_PROBABLE.name][0]
+    prob = soup.find(string=re.compile(prob_death))
+    td = prob.find_parent('td')
+    val_td = td.find_next_sibling('td').get_text(strip=True)
+    tagged[Fields.DEATH_PROBABLE.name] = atoi(val_td)
+    print(val_td)
+
     return tagged
 
 def handle_ma(res, mapping):

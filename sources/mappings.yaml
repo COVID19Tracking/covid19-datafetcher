@@ -220,11 +220,12 @@ ND:
   Recovered: RECOVERED
   Currently Hospitalized: CURR_HOSP
   Total Hospitalized: HOSP
-  Deaths: DEATH
+  Deaths: DEATH_CONFIRMED
   # Serology tests table
   Detected: ANTIBODY_POS
   Not Detected: ANTIBODY_NEG
   Total: ANTIBODY_TOTAL
+  Deaths of Individuals Presumed Positive: DEATH_PROBABLE
 NE:
   Inconclusive: INCONCLUSIVE
   Not Detected: NEGATIVE
