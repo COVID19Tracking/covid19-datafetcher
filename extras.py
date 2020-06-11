@@ -471,6 +471,46 @@ def handle_ok(res, mapping):
     mapped[Fields.DATE.name] = res[0].get('ReportDate')
     return mapped
 
+def handle_or(res, mapping):
+    mapped = {}
+    for result in res[:-1]:
+        partial = extract_attributes(result, mapping, 'NJ')
+        mapped.update(partial)
+
+    # The last item is the page that needs to be scraped
+    page = res[-1]
+    # main stats
+    h4 = page.find('h4', string=re.compile("Overview"))
+    main_table = h4.find_next_sibling('table')
+    for row in main_table.find_all('tr'):
+        tds = row.find_all('td')
+        if len(tds) < 2:
+            continue
+        name = tds[0].get_text(strip=True)
+        value = tds[1].get_text(strip=True)
+        if name in mapping:
+            mapped[mapping[name]] = atoi(value)
+
+
+    tables = page.find_all('table')
+    hosp = tables[4]
+    curr_hosp = tables[6]
+
+    td = hosp.find_all("td", limit=2)
+    mapped[Fields.HOSP.name] = atoi(td[1].get_text(strip=True))
+
+    # TODO: Unify this code (data tables)
+    for tr in curr_hosp.find_all("tr"):
+        tds = tr.find_all('td')
+        if len(tds) < 2:
+            continue
+        name = tds[0].get_text(strip=True)
+        value = tds[1].get_text(strip=True)
+        if name in mapping:
+            mapped[mapping[name]] = atoi(value)
+
+    return mapped
+
 def handle_ny(res, mapping):
     stats = res[0]
     mapped = map_attributes(stats[0], mapping, 'NY')

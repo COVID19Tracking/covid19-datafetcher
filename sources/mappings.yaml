@@ -270,6 +270,13 @@ OR:
   SUM_Deaths: DEATH
   SUM_Recovered: RECOVERED
   SUM_NegativeTests: NEGATIVE
+  # from page
+  Positive tests: CONFIRMED
+  Negative tests: NEGATIVE
+  Total tested: TOTAL
+  Current hospitalized patients: CURR_HOSP
+  Current patients in ICU beds: CURR_ICU
+  Current patients on ventilators: CURR_VENT
 PA:
   SUM_COVID19onVents: CURR_VENT
   curr_vent: CURR_VENT

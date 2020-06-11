@@ -385,6 +385,10 @@ OR:
   params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "Cases"}, {"statisticType": "sum", "onStatisticField": "Deaths"}, {"statisticType": "sum", "onStatisticField": "Recovered"}, {"statisticType": "sum", "onStatisticField": "NegativeTests"}], f: json}
   type: arcgis
   desc: Cases, death, recovered, negative tests
+- url: https://govstatus.egov.com/OR-OHA-COVID-19
+  params: null
+  type: html:soup
+  desc: Main page
 PA:
 - url: https://services2.arcgis.com/xtuWQvb2YQnp0z3F/ArcGIS/rest/services/Pennsylvania_Public_COVID19_Dashboard_Data/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "Cases"},
