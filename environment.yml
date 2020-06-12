@@ -4,8 +4,6 @@ channels:
 dependencies:
   - ca-certificates=2020.1.1
   - certifi=2020.4.5.1
-  - libedit=3.1.20181209
-  - libffi=3.3
   - openssl=1.1.1g
   - pip=20.0.2
   - python=3.8.3
@@ -25,3 +23,7 @@ dependencies:
     - six
     - soupsieve
     - xlrd
+    - hydra-core==1.0.0rc1
+    - google-api-python-client
+    - google-auth-httplib2
+    - google-auth-oauthlib
