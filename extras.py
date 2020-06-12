@@ -622,9 +622,10 @@ def handle_ma(res, mapping):
 
     # download zip
     req = urllib.request.Request(url, headers = {'User-Agent': 'Mozilla/5.0'})
-    with urllib.request.urlopen(req) as response:
-        with NamedTemporaryFile(delete=True) as tmpfile , TemporaryDirectory() as tmpdir:
+    with urllib.request.urlopen(req) as response, \
+         NamedTemporaryFile(delete=False) as tmpfile , TemporaryDirectory() as tmpdir:
             shutil.copyfileobj(response, tmpfile)
+            tmpfile.flush()
             shutil.unpack_archive(tmpfile.name, tmpdir, format="zip")
 
             # Now we can read the files
