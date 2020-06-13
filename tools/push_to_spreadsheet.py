@@ -21,7 +21,7 @@ class MemoryCache(Cache):
     def set(self, url, content):
         MemoryCache._CACHE[url] = content
 
-def _google_auth():
+def _google_auth(interactive=False):
     creds = None
     if os.path.exists('creds/token.pickle'):
         with open('creds/token.pickle', 'rb') as token:
@@ -31,9 +31,14 @@ def _google_auth():
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
+            # Create the flow using the client secrets file from the Google API
+            # Console.
             flow = InstalledAppFlow.from_client_secrets_file(
                 'creds/credentials.json', SCOPES)
-            creds = flow.run_local_server(port=0)
+            if interactive:
+                creds = flow.run_local_server(port=0)
+            else:
+                creds = flow.run_console()
         # Save the credentials for the next run
         with open('creds/token.pickle', 'wb') as token:
             pickle.dump(creds, token)
@@ -41,7 +46,7 @@ def _google_auth():
 
 @hydra.main(config_name='config')
 def main(cfg: DictConfig) -> None:
-    creds = _google_auth()
+    creds = _google_auth(cfg.push.interactive)
     service = build('sheets', 'v4', credentials=creds, cache=MemoryCache())
 
     content = ""

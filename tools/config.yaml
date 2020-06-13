@@ -5,3 +5,4 @@ push:
   spreadsheet_id: 1brHKBhqiXkkLyiDTDfaBK-tms-R4KVkI-NPFfFZwqYk
   sheet_id: 0
   file: states.csv
+  interactive: false
