@@ -1,4 +1,4 @@
-name: c19-data
+name: c19-2
 channels:
   - defaults
 dependencies:
@@ -14,16 +14,4 @@ dependencies:
   - xz=5.2.5
   - zlib=1.2.11
   - pip:
-    - beautifulsoup4
-    - numpy==1.18.5
-    - pandas==1.0.4
-    - python-dateutil
-    - pytz
-    - pyyaml
-    - six
-    - soupsieve
-    - xlrd
-    - hydra-core==1.0.0rc1
-    - google-api-python-client
-    - google-auth-httplib2
-    - google-auth-oauthlib
+    - -r file:requirements.txt
