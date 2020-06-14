@@ -5,7 +5,7 @@ import sys
 import urllib, urllib.request, json
 
 from utils import request, request_and_parse, extract_attributes, Fields, request_csv, \
-    request_soup, request_pandas
+    request_soup, request_pandas, extract_arcgis_attributes
 import extras as extras_module
 from sources import states
 
@@ -108,8 +108,12 @@ class Fetcher(object):
         if state in self.extras:
             data = self.extras[state](results, self.mappings.get(state))
         else:
-            for result in results:
-                partial = extract_attributes(result, self.mappings[state], state)
+            for i, result in enumerate(results):
+                if queries[i].get('type') == 'arcgis':
+                    partial = extract_arcgis_attributes(result, self.mappings[state], state)
+                elif queries[i].get('data_path') is not None:
+                    partial = extract_attributes(
+                        result, queries[i].get('data_path'), self.mappings[state], state)
                 data.update(partial)
 
         self._timestamp_data(data)
@@ -137,7 +141,6 @@ def build_dataframe(results, dump_all_states=False):
               'NY', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT',
               'VA', 'VI', 'VT', 'WA', 'WI', 'WV', 'WY'
     ]
-
 
     df = pd.DataFrame.from_dict(results, 'index', columns=columns)
     if dump_all_states:

@@ -1,4 +1,5 @@
 import csv
+import typing
 from bs4 import BeautifulSoup
 from enum import Enum
 import pandas as pd
@@ -109,19 +110,34 @@ def map_attributes(original, mapping, debug_state=None):
             print("[{}] Field {} has no mapping".format(debug_state, k))
     return tagged_attributes
 
+def extract_arcgis_attributes(dict_result, mapping, debug_state=None):
+    path = ['features', 0, 'attributes']
+    extract_attributes(dict_result, path, mapping, debug_state)
 
-def extract_attributes(res, mapping, debug_state = None):
-    '''Uses mapping to extract attributes from `res`
+def extract_attributes(dict_result, path, mapping, debug_state = None):
+    '''Uses mapping to extract attributes from dict_result
     Retruns tagged attributes
+
+    dict_result: the object we get from maping a call to api/url
+    path: the path in the result dict where all the mappings should apply
+        e.g., {"state": {"results": [{"name": value}, {...}}]}
+          path would be: ['state', 'results', 0]
+          This is like the cheap version of a `jq` expression
+    mapping: the mapping from the given tags/terms to our common field names
     '''
-    features = 'features'
-    attributes = 'attributes'
-    mapped_attributes = {}
-    if features in res and len(res[features]) > 0:
-        if attributes in res[features][0]:
-            attribs = res[features][0][attributes]
-            mapped_attributes = map_attributes(attribs, mapping, debug_state)
-    return mapped_attributes
+
+    res = dict_result
+    for step in path:
+        # need to distinguish between list index and dict key:
+        if isinstance(res, typing.List):
+            if isinstance(step, int):
+                res = res[step]
+        elif isinstance(res, typing.Dict):
+            if step in res:
+                res = res[step]
+
+    # now that res is the correct place in the result object, we can map the values
+    return map_attributes(res, mapping, debug_state)
 
 def csv_sum(data, columns=None):
     '''Expecting Dict CSV: list of dicts-like objects

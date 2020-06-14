@@ -63,15 +63,6 @@ def handle_ar(res, mapping):
 
     return tagged
 
-def handle_ct(res, mapping):
-    # res is a list of dict, one per day
-    if not res or not res[0]:
-        return {}
-    res = res[0][0]
-    mapped = map_attributes(res, mapping, 'CT')
-    mapped[Fields.SPECIMENS.name] = mapped[Fields.TOTAL.name]
-    return mapped
-
 def handle_fl(res, mapping):
     '''Need to add the non-FL residents to the totals:
     they separate it for death and hosp"
@@ -95,7 +86,7 @@ def handle_fl(res, mapping):
 def handle_ky(res, mapping):
     tagged = {}
     for result in res[:-1]:
-        partial = extract_attributes(result, mapping, 'MI')
+        partial = extract_attributes(result, mapping, 'KY')
         tagged.update(partial)
 
     # soup time
@@ -201,11 +192,6 @@ def handle_pa(res, mapping):
     except Exception as e:
         pass
     return tagged
-
-def handle_nm(res, mapping):
-    data = res[0]['data']
-    mapped = map_attributes(data, mapping, 'NM')
-    return mapped
 
 def handle_ne(res, mapping):
     tagged = {}
@@ -508,12 +494,6 @@ def handle_or(res, mapping):
         value = tds[1].get_text(strip=True)
         if name in mapping:
             mapped[mapping[name]] = atoi(value)
-
-    return mapped
-
-def handle_ny(res, mapping):
-    stats = res[0]
-    mapped = map_attributes(stats[0], mapping, 'NY')
 
     return mapped
 

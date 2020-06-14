@@ -1,5 +1,13 @@
 # Format: State => [queries]
-# Query is {url: .., params: ..., type: ...}
+# Query is
+# url: The URL to make the request to
+# params: url params (in json format, for convenience)
+# type: type of query: arcgis, json, csv, etc.
+# desc: String description, used to build the links index
+# data_path: path in the query result from which to get the data
+#
+# Only `url` and `type` are mandatory, but I fill `params` with `null` when it's empty, I think that it's nicer this way
+
 AK:
 - url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/cumulative_cases/FeatureServer/0/query
   params: {where: Economic_Region='Statewide', outFields: '*', orderByFields: 'Date_ desc',
@@ -113,6 +121,7 @@ CT:
   params: {$query: 'select * order by date desc limit 1'}
   type: soda
   desc: JSON (cases, death, hosp, date, SODA API)
+  data_path: [0, 0]
 FL:
 - url: https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/arcgis/rest/services/Florida_COVID19_Cases/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{statisticType: sum, onStatisticField: T_positive},
@@ -366,16 +375,17 @@ NM:
 - url: https://e7p503ngy5.execute-api.us-west-2.amazonaws.com/prod/GetPublicStatewideData
   params: null
   type: json
+  data_path: [0, 'data']
 NY:
 # NYC
 # - url: https://raw.githubusercontent.com/nychealth/coronavirus-data/master/case-hosp-death.csv
 #   params: null
 #   type: csv
-# https://health.data.ny.gov/resource/xdss-u53e.json?
 - url: https://health.data.ny.gov/resource/xdss-u53e.json
   params: {$select: 'test_date,sum(cumulative_number_of_positives),sum(cumulative_number_of_tests)', $group: test_date, $order: test_date desc, $limit: 1}
   type: soda
   desc: Total & positives
+  data_path: [0, 0]
 OK:
 - url: https://storage.googleapis.com/ok-covid-gcs-public-download/oklahoma_cases_county.csv
   params: null
