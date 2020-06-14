@@ -2,30 +2,23 @@ from datetime import datetime
 from enum import Enum
 import os
 import logging
+import hydra
 import pandas as pd
 import sys
 import urllib, urllib.request, json
 
 from fetcher.utils import request, request_and_parse, extract_attributes, Fields, request_csv, \
     request_soup, request_pandas, extract_arcgis_attributes
-from fetcher.sources import Sources, URLS_FILE, MAPPING_FILE, EXTRAS_MODULE
-
-
-# TODO: not the place for this, but have plans to move it soon
-logging.basicConfig(level=logging.DEBUG,
-                    datefmt="%Y%m%d %H%M%S",
-                    format='%(asctime)s %(levelno)s [%(name)s:%(lineno)d] %(message)s')
-
-OUTPUT_FOLDER = "."
+from fetcher.sources import Sources
 
 # TODO:
 # - make a mapper of type to fetch method
 
 
 class Fetcher(object):
-    def __init__(self):
+    def __init__(self, cfg):
         '''Initialize source information'''
-        self.sources = Sources(URLS_FILE, MAPPING_FILE, EXTRAS_MODULE)
+        self.sources = Sources(cfg.sources_file, cfg.mapping_file, cfg.extras_module)
         self.extras = self.sources.extras
 
     def has_state(self, state):
@@ -52,7 +45,8 @@ class Fetcher(object):
                 failures.append(state)
 
         logging.info("Fetched data for {} states".format(success))
-        logging.info("Failed to fetch: %r", failures)
+        if failures:
+            logging.info("Failed to fetch: %r", failures)
         return results
 
     def fetch_state(self, state):
@@ -96,9 +90,10 @@ class Fetcher(object):
             for i, result in enumerate(results):
                 if queries[i].get('type') == 'arcgis':
                     partial = extract_arcgis_attributes(result, self.sources.mapping_for(state), state)
-                elif queries[i].get('data_path') is not None:
+                else:
+                    # This is a guess; getting an unknown top level object
                     partial = extract_attributes(
-                        result, queries[i].get('data_path'), self.sources.mapping_for(state), state)
+                        result, queries[i].get('data_path', []), self.sources.mapping_for(state), state)
                 data.update(partial)
 
         self._timestamp_data(data)
@@ -108,18 +103,8 @@ class Fetcher(object):
         data[Fields.FETCH_TIMESTAMP.name] = datetime.now().timestamp()
 
 
-def build_dataframe(results, dump_all_states=False):
-    columns=[Fields.FETCH_TIMESTAMP, Fields.TIMESTAMP,
-             Fields.POSITIVE, Fields.NEGATIVE, Fields.TOTAL, Fields.PENDING,
-             Fields.CURR_HOSP, Fields.HOSP, Fields.CURR_ICU, Fields.ICU, Fields.CURR_VENT, Fields.VENT,
-             Fields.DEATH, Fields.DEATH_PROBABLE, Fields.DEATH_CONFIRMED,
-             Fields.RECOVERED, Fields.PROBABLE, Fields.DATE,
-             Fields.ANTIBODY_TOTAL, Fields.ANTIBODY_POS, Fields.ANTIBODY_NEG,
-             Fields.SPECIMENS, Fields.SPECIMENS_POS, Fields.SPECIMENS_NEG,
-             Fields.CONFIRMED
-    ]
-    columns = [f.name for f in columns]
-
+def build_dataframe(results, columns, filename, dump_all_states=False):
+    # TODO: move this somewhere else
     states = ['AK', 'AL', 'AR', 'AS', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'GU',
               'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI',
               'MN', 'MO', 'MP', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV',
@@ -130,11 +115,11 @@ def build_dataframe(results, dump_all_states=False):
     df = pd.DataFrame.from_dict(results, 'index', columns=columns)
     if dump_all_states:
         df = df.reindex(pd.Series(states))
-    base_name = 'states.csv'
-    now_name = 'states_{}.csv'.format(datetime.now().strftime('%Y%m%d%H%M%S'))
+    base_name = "{}.csv".format(filename)
+    now_name = '{}_{}.csv'.format(filename, datetime.now().strftime('%Y%m%d%H%M%S'))
 
-    df.to_csv('{}/{}'.format(OUTPUT_FOLDER, now_name))
-    df.to_csv('{}/{}'.format(OUTPUT_FOLDER, base_name))
+    df.to_csv('{}'.format(now_name))
+    df.to_csv('{}'.format(base_name))
 
     # Report an interesting metric:
     total_non_empty = df.notnull().sum().sum()
@@ -142,20 +127,23 @@ def build_dataframe(results, dump_all_states=False):
     return df
 
 
-def main(state = None):
-    if state:
-        print("Fetching ", state)
-    else:
-        print("Fetching all")
+@hydra.main(config_path='..', config_name="config")
+def main(cfg):
+    print(cfg.pretty(resolve=True))
 
-    fetcher = Fetcher()
+    if cfg.state and isinstance(cfg.state, str):
+        cfg.state = cfg.state.split(',')
+
+    fetcher = Fetcher(cfg)
     results = {}
-    if state and fetcher.has_state(state):
-        _, data = fetcher.fetch_state(state)
-        results[state] = data
+    if cfg.state:
+        for s in cfg.state:
+            _, mapped = fetcher.fetch_state(s)
+            results[s] = mapped
     else:
         results = fetcher.fetch_all()
 
-    # This will also store a CSV
-    df = build_dataframe(results, dump_all_states = (state is None))
+    # This stores the CSV with the requsted fields in order
+    df = build_dataframe(results, cfg.dataset.fields, cfg.output,
+                         dump_all_states = not cfg.state)
     print(df)

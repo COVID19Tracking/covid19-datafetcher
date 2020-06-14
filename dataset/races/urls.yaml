@@ -1,0 +1,8 @@
+# Format: State => [queries]
+# Query is {url: .., params: ..., type: ...}
+NM:
+- url: https://e7p503ngy5.execute-api.us-west-2.amazonaws.com/prod/GetPublicStatewideData
+  params: null
+  type: json
+  data_path: [0, 'data']
+  desc: Everything

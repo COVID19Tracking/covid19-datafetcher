@@ -386,11 +386,11 @@ NM:
   params: null
   type: json
   data_path: [0, 'data']
-NY:
 # NYC
 # - url: https://raw.githubusercontent.com/nychealth/coronavirus-data/master/case-hosp-death.csv
 #   params: null
 #   type: csv
+NY:
 - url: https://health.data.ny.gov/resource/xdss-u53e.json
   params: {$select: 'test_date,sum(cumulative_number_of_positives),sum(cumulative_number_of_tests)', $group: test_date, $order: test_date desc, $limit: 1}
   type: soda

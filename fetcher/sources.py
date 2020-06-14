@@ -7,11 +7,6 @@ import importlib
 import os
 import yaml
 
-# TODO: this will not stay here
-URLS_FILE = 'sources/urls.yaml'
-MAPPING_FILE = 'sources/mappings.yaml'
-EXTRAS_MODULE = 'sources.extras'
-
 def _read_yaml(parent_dir, filename):
     content = yaml.load(open(os.path.join(parent_dir, filename), 'r'), Loader=yaml.SafeLoader)
     return content

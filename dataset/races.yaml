@@ -1,0 +1,3 @@
+# @package _group_
+fields: [FETCH_TIMESTAMP, TIMESTAMP, DATE, ASIAN, BLACK, HAWAIIAN, UNKNOWN, OTHER, WHITE, HISPANIC]
+name: races

@@ -1,0 +1,9 @@
+NM:
+  created: TIMESTAMP
+  asian: ASIAN
+  black: BLACK
+  hawaiian: HAWAIIAN
+  unknown: UNKNOWN
+  other: OTHER
+  white: WHITE
+  hispanic: HISPANIC

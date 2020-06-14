@@ -234,12 +234,8 @@ def handle_la(res, mapping):
     tagged = {}
     if 'features' in stats and len(stats['features']) > 0:
         attributes = stats['features']
-        for attr in attributes:
-            # expecting {attributes: {Measure: NAME, SUM_Value: VALUE}}
-            name = attr['attributes']['Measure']
-            value = attr['attributes']['SUM_Value']
-            if name in mapping:
-                tagged[mapping[name]] = value
+        attributes = {attr.get('attributes', {}).get('Measure'): attr.get('attributes', {}).get('SUM_Value') for attr in attributes}
+        tagged = map_attributes(attributes, mapping, 'LA')
 
     if state_tests in tagged:
         tests = tagged.pop(state_tests)

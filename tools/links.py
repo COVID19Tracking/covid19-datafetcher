@@ -3,19 +3,19 @@ This is only one step over just dumping everything to a txt file, nothing fancy
 '''
 
 from jinja2 import Environment, PackageLoader, select_autoescape
-import urllib.parse
-import sys
-import yaml
+import hydra
 import os
+import sys
+import urllib.parse
+import yaml
 
+# TODO: take it from the
 FILENAME = 'index.html'
-# relative path (not great, but it'll suffice for now)
-SOURCES_FILE = ['../sources/urls.yaml', 'sources/urls.yaml']
 
-def main():
-    for f in SOURCES_FILE:
-        if os.path.isfile(f):
-            sources = yaml.load(open(f), Loader=yaml.SafeLoader)
+# this means that it has to run from the root folder, not from "tools"
+@hydra.main(config_path='..', config_name="config")
+def main(cfg):
+    sources = yaml.load(open(cfg.sources_file), Loader=yaml.SafeLoader)
     # massage the sources to make them human readable (for the relevant ones)
     for state in sources:
         for query in sources.get(state, []):
