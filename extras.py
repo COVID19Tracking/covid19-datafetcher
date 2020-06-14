@@ -9,7 +9,7 @@ import shutil
 from tempfile import NamedTemporaryFile, TemporaryDirectory
 import urllib, urllib.request
 from utils import request_and_parse, extract_attributes, \
-   map_attributes, Fields, csv_sum
+   map_attributes, Fields, csv_sum, extract_arcgis_attributes
 import pandas as pd
 
 ''' This file contains extra handling needed for some states
@@ -27,7 +27,7 @@ def atoi(val):
 def handle_al(res, mapping):
     tagged = {}
     for result in res[:-1]:
-        partial = extract_attributes(result, mapping, 'AL')
+        partial = extract_arcgis_attributes(result, mapping, debug_state = 'AL')
         tagged.update(partial)
 
     widgets = res[-1].get('widgets', {})
@@ -46,7 +46,7 @@ def handle_al(res, mapping):
 def handle_ar(res, mapping):
     tagged = {}
     for result in res[:-1]:
-        partial = extract_attributes(result, mapping, 'AR')
+        partial = extract_arcgis_attributes(result, mapping, 'AR')
         tagged.update(partial)
 
     soup = res[-1]
@@ -68,7 +68,7 @@ def handle_fl(res, mapping):
     they separate it for death and hosp"
     '''
     res = res[0]
-    mapped = extract_attributes(res, mapping, 'FL')
+    mapped = extract_arcgis_attributes(res, mapping, 'FL')
     extra_hosp = 0
     extra_death = 0
     try:
@@ -86,7 +86,7 @@ def handle_fl(res, mapping):
 def handle_ky(res, mapping):
     tagged = {}
     for result in res[:-1]:
-        partial = extract_attributes(result, mapping, 'KY')
+        partial = extract_arcgis_attributes(result, mapping, 'KY')
         tagged.update(partial)
 
     # soup time
@@ -149,7 +149,7 @@ def handle_vt(res, mapping):
     pui = 'hosp_pui'
     updated_mapping.update({pui: pui})
     for result in res:
-        partial = extract_attributes(result, updated_mapping, state)
+        partial = extract_arcgis_attributes(result, updated_mapping, state)
         tagged.update(partial)
 
     tagged[Fields.CURR_HOSP.name] += tagged[pui]
@@ -165,7 +165,7 @@ def handle_pa(res, mapping):
     ecmo = 'ecmo'
     updated_mapping.update({ecmo: ecmo})
     for result in res[:-1]:
-        partial = extract_attributes(result, updated_mapping, state)
+        partial = extract_arcgis_attributes(result, updated_mapping, state)
         tagged.update(partial)
 
     tagged[Fields.CURR_VENT.name] += tagged[ecmo]
@@ -196,7 +196,7 @@ def handle_pa(res, mapping):
 def handle_ne(res, mapping):
     tagged = {}
     for result in res[:-1]:
-        partial = extract_attributes(result, mapping, 'NE')
+        partial = extract_arcgis_attributes(result, mapping, 'NE')
         tagged.update(partial)
     stats = res[-1]
     if 'features' in stats and len(stats['features']) > 0:
@@ -425,7 +425,7 @@ def handle_nj(res, mapping):
     '''
     mapped = {}
     for result in res[:-1]:
-        partial = extract_attributes(result, mapping, 'NJ')
+        partial = extract_arcgis_attributes(result, mapping, 'NJ')
         mapped.update(partial)
 
     # it's not a magic value, it's from an existing query, but
@@ -460,7 +460,7 @@ def handle_ok(res, mapping):
 def handle_or(res, mapping):
     mapped = {}
     for result in res[:-1]:
-        partial = extract_attributes(result, mapping, 'NJ')
+        partial = extract_arcgis_attributes(result, mapping, 'NJ')
         mapped.update(partial)
 
     # The last item is the page that needs to be scraped
@@ -500,7 +500,7 @@ def handle_or(res, mapping):
 def handle_mi(res, mapping):
     tagged = {}
     for result in res[:-1]:
-        partial = extract_attributes(result, mapping, 'MI')
+        partial = extract_arcgis_attributes(result, mapping, 'MI')
         tagged.update(partial)
 
     # TODO: Can use the reverse mapping
@@ -636,7 +636,7 @@ def handle_ut(res, mapping):
     tagged = {}
     soup_start = 1
     for result in res[:soup_start]:
-        partial = extract_attributes(result, mapping, 'NJ')
+        partial = extract_arcgis_attributes(result, mapping, 'NJ')
         tagged.update(partial)
 
 

@@ -112,7 +112,7 @@ def map_attributes(original, mapping, debug_state=None):
 
 def extract_arcgis_attributes(dict_result, mapping, debug_state=None):
     path = ['features', 0, 'attributes']
-    extract_attributes(dict_result, path, mapping, debug_state)
+    return extract_attributes(dict_result, path, mapping, debug_state)
 
 def extract_attributes(dict_result, path, mapping, debug_state = None):
     '''Uses mapping to extract attributes from dict_result
