@@ -1,5 +1,6 @@
 from datetime import datetime
 from enum import Enum
+import logging
 import pandas as pd
 import sys
 import urllib, urllib.request, json
@@ -10,6 +11,9 @@ import extras as extras_module
 from sources import states
 
 
+logging.basicConfig(level=logging.DEBUG,
+                    datefmt="%Y%m%d %H%M%S",
+                    format='%(asctime)s %(levelno)s [%(name)s:%(lineno)d] %(message)s')
 
 OUTPUT_FOLDER = "."
 
@@ -60,14 +64,14 @@ class Fetcher(object):
                         success += 1
                     else:
                         # failed parsing
-                        print("Failed parsing {}?".format(state))
+                        logging.warning("Failed parsing %s", state)
                         failures.append(state)
             except Exception as e:
-                print("Failed to fetch {}".format(state), str(e))
+                logging.error("Failed to fetch %s", state, e)
                 failures.append(state)
 
-        print("Fetched data for {} states".format(success))
-        print("Failed fetching: ", failures)
+        logging.info("Fetched data for {} states".format(success))
+        logging.info("Failed to fetch: %r", failures)
         return results
 
     def fetch_state(self, state):
@@ -76,7 +80,7 @@ class Fetcher(object):
 
         If there's no query for the state: return (None, _)
         '''
-        print("Fetching: ", state)
+        logging.debug("Fetching: %s", state)
         res = None
         data = {}
 
@@ -102,7 +106,7 @@ class Fetcher(object):
                     res = request_pandas(query)
                 results.append(res)
             except Exception as e:
-                print(state, ": failed to fetch ", query['url'], str(e))
+                logging.warning("{}: Failed to fetch {}".format(state, query['url']), e)
                 raise
 
         if state in self.extras:

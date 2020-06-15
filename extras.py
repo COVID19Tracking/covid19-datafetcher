@@ -2,15 +2,18 @@ from bs4 import BeautifulSoup
 from copy import copy
 from datetime import datetime
 from io import StringIO
+from tempfile import NamedTemporaryFile, TemporaryDirectory
 from zipfile import ZipFile
 import csv
+import logging
+import pandas as pd
 import re
 import shutil
-from tempfile import NamedTemporaryFile, TemporaryDirectory
 import urllib, urllib.request
+
 from utils import request_and_parse, extract_attributes, \
    map_attributes, Fields, csv_sum, extract_arcgis_attributes
-import pandas as pd
+
 
 ''' This file contains extra handling needed for some states
 To make it work, the method must be called "handle_{state_abbreviation:lower_case}"
@@ -75,7 +78,7 @@ def handle_fl(res, mapping):
         extra_hosp = res['features'][0]['attributes']['SUM_C_HospYes_NonRes']
         extra_death = res['features'][0]['attributes']['SUM_C_NonResDeaths']
     except Exception as ex:
-        print("Failed Florida extra processing: ", str(e))
+        logging.warning("Failed Florida extra processing: ", e)
         raise
 
     mapped[Fields.HOSP.name] += extra_hosp
@@ -532,7 +535,7 @@ def handle_mi(res, mapping):
             for t in [probable, confirmed]:
                 tagged[mapping[m+t]] = summed[m][t]
     except Exception as e:
-        print("Exception getting cases by status", str(e))
+        logging.warning("Exception getting cases by status", e)
 
     df = pd.read_excel(tests_url)
     filter_col = 'TestType'
@@ -566,7 +569,7 @@ def handle_nd(res, mapping):
             tests_text = tests_text.split()[0].split("-")[0]
             tests_val = atoi(tests_text)
         except Exception as e:
-            print(str(e))
+            logging.warning("Failed to parrse tests/text", e)
         if tests_val:
             tagged[Fields.SPECIMENS.name] = tests_val
 
@@ -588,7 +591,6 @@ def handle_nd(res, mapping):
     td = prob.find_parent('td')
     val_td = td.find_next_sibling('td').get_text(strip=True)
     tagged[Fields.DEATH_PROBABLE.name] = atoi(val_td)
-    print(val_td)
 
     return tagged
 

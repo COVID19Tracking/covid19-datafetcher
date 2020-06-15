@@ -7,7 +7,6 @@
 # data_path: path in the query result from which to get the data
 #
 # Only `url` and `type` are mandatory, but I fill `params` with `null` when it's empty, I think that it's nicer this way
-
 AK:
 - url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/cumulative_cases/FeatureServer/0/query
   params: {where: Economic_Region='Statewide', outFields: '*', orderByFields: 'Date_ desc',

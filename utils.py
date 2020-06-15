@@ -1,13 +1,14 @@
-import csv
-import typing
 from bs4 import BeautifulSoup
 from enum import Enum
-import pandas as pd
 from io import StringIO
+import csv
 import json
+import logging
+import os, ssl
+import pandas as pd
+import typing
 import urllib
 import urllib.request
-import os, ssl
 
 # fields
 class Fields(Enum):
@@ -107,7 +108,7 @@ def map_attributes(original, mapping, debug_state=None):
             tagged_attributes[mapping[k.strip()]] = v
         else:
             # report value without mapping
-            print("[{}] Field {} has no mapping".format(debug_state, k))
+            logging.debug("[{}] Field {} has no mapping".format(debug_state, k))
     return tagged_attributes
 
 def extract_arcgis_attributes(dict_result, mapping, debug_state=None):
