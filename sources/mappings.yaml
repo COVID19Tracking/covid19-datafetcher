@@ -227,7 +227,7 @@ NC:
 ND:
   Positive Cases: POSITIVE
   Negative: NEGATIVE
-  Total Tested: TOTAL
+  Total Unique Individuals Tested: TOTAL
   Recovered: RECOVERED
   Currently Hospitalized: CURR_HOSP
   Total Hospitalized: HOSP
@@ -366,7 +366,6 @@ UT:
   ICU Admissions: ICU
   currently hospitalized: CURR_HOSP
   Number of patients in ICU for confirmed COVID-19: CURR_ICU
-
 VA:
   Report Date: DATE
   Number of Cases: CONFIRMED
