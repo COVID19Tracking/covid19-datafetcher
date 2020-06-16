@@ -1,4 +1,4 @@
-name: c19-2
+name: c19-data
 channels:
   - defaults
 dependencies:
