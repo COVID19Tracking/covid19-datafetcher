@@ -365,6 +365,8 @@ UT:
   Intubation/Ventilator Use: VENT
   ICU Admissions: ICU
   currently hospitalized: CURR_HOSP
+  Number of patients in ICU for confirmed COVID-19: CURR_ICU
+
 VA:
   Report Date: DATE
   Number of Cases: CONFIRMED

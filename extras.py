@@ -692,6 +692,13 @@ def handle_ut(res, mapping):
                 curr_hosp += atoi(x.get_text(strip=True))
     tagged[Fields.CURR_HOSP.name] = curr_hosp
 
+    #TODO: code here can be improved, combined with top part
+    td = curr_hosp_table.find('td', string=re.compile(revmap[Fields.CURR_ICU.name]))
+    for x in td.next_siblings:
+        if (x.name == 'td'):
+            val = atoi(x.get_text(strip=True))
+            tagged[Fields.CURR_ICU.name] = val
+
     for t in tables[1:]:
         if t.caption.get_text(strip=True) in mapping:
             td = t.find_all('td', limit=2)[1]
