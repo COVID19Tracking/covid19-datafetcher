@@ -150,6 +150,7 @@ MA:
   DeathsConfTotal: DEATH_CONFIRMED
   DeathsProbTotal: DEATH_PROBABLE
   Molecular Total: TOTAL
+  Molecular All Tests Total: SPECIMENS
   Serology Total: ANTIBODY_TOTAL
   Total number of COVID patients in hospital today: CURR_HOSP
   ICU: CURR_ICU
