@@ -273,7 +273,7 @@ MO:
   params: {where: Description='SER Tested', outFields: 'Description, value as ser_tested', f: json}
   type: arcgis
   desc: Serology total (people)
-- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/pcrbydate/FeatureServer/0/query
+- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/PCR_by_date/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "Negative", "outStatisticFieldName": "PCR_Negative"},{"statisticType": "sum", "onStatisticField": "Positive", "outStatisticFieldName": "PCR_Positive"},{"statisticType": "sum", "onStatisticField": "Total", "outStatisticFieldName": "PCR_Total"}], f: json}
   type: arcgis
   desc: PCR (totals, pos/neg)
