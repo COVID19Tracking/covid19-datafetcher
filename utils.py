@@ -67,10 +67,8 @@ def request(url, query=None, encoding=None):
 
 def request_pandas(query):
     url = query['url']
-    params = query.get('params')
-    if params:
-        url = "{}?{}".format(url, urllib.parse.urlencode(params))
-    df = pd.read_excel(url)
+    # Use params as **kwargs for pandas call
+    df = pd.read_excel(url, **query.get('params', {}))
     return df
 
 def request_soup(url, query=None, encoding=None):

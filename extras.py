@@ -369,6 +369,29 @@ def handle_ca(res, mapping):
     tagged[Fields.CURR_ICU.name] = int(tagged[Fields.CURR_ICU.name]) + int(stats.get('curr_icu_pui', 0))
     return tagged
 
+def handle_dc(res, mapping):
+    # expecting 1 file:
+    df = res[0]
+    tagged = {}
+
+    overall = df['Overall Stats']
+    for tab in ['Testing', 'Hospitals']:
+        subtable = overall[overall['Unnamed: 0'] == tab].T
+        subtable.columns = subtable.loc['Unnamed: 1']
+        subtable = subtable.iloc[-1]
+
+        for name in subtable.index:
+            if name in mapping:
+                tagged[mapping[name]] = subtable[name]
+
+    # Need hospitals tab for vent number
+    hospitals = df['Hospital Data']
+    # TODO: add to mapping
+    vent = hospitals.iloc[-1]['Number of ventilators in use by COVID positive inpatients']
+    tagged[Fields.CURR_VENT.name] = vent
+
+    return tagged
+
 def handle_va(res, mapping):
     '''Getting multiple CVS files from the state and parsing each for
     the specific data it contains

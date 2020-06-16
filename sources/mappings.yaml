@@ -59,6 +59,16 @@ CT:
   totaldeaths: DEATH
   confirmeddeaths: DEATH_CONFIRMED
   probabledeaths: DEATH_PROBABLE
+DC:
+  Total Overall Tested: TOTAL
+  Total Tests Overall: TOTAL
+  Total Positives: POSITIVE
+  Number of Deaths: DEATH
+  Cleared From Isolation: RECOVERED
+  People Recovered: RECOVERED
+  Name: TIMESTAMP
+  Total COVID-19 Patients in DC Hospitals: CURR_HOSP
+  Total COVID-19 Patients in ICU: CURR_ICU
 FL:
   SUM_C_FLResDeaths: DEATH
   SUM_C_HospYes_Res: HOSP
@@ -332,7 +342,6 @@ TN:
   TEST_TOT: SPECIMENS
   CASES_CONFIRMED: CONFIRMED
   CASES_PROBABLE: PROBABLE
-
 TX:
   ViralTests: SPECIMENS
   totals: TOTAL

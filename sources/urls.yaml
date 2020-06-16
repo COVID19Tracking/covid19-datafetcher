@@ -121,6 +121,11 @@ CT:
   type: soda
   desc: JSON (cases, death, hosp, date, SODA API)
   data_path: [0, 0]
+DC:
+- url: https://dcgov.app.box.com/index.php?rm=box_download_shared_file&vanity_name=DCHealthStatisticsData&file_id=f_645422184765
+  params: {sheet_name: ["Overall Stats", "Hospital Data"], parse_dates: true}
+  type: xlsx
+  desc:
 FL:
 - url: https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/arcgis/rest/services/Florida_COVID19_Cases/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{statisticType: sum, onStatisticField: T_positive},
