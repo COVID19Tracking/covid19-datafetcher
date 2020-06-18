@@ -3,17 +3,19 @@ This is only one step over just dumping everything to a txt file, nothing fancy
 '''
 
 from jinja2 import Environment, PackageLoader, select_autoescape
-from fetcher.sources import Sources, URLS_FILE, MAPPING_FILE, EXTRAS_MODULE
-import sys
 import urllib.parse
-
+import sys
+import yaml
+import os
 
 FILENAME = 'index.html'
+# relative path (not great, but it'll suffice for now)
+SOURCES_FILE = ['../sources/urls.yaml', 'sources/urls.yaml']
 
 def main():
-    sources = Sources(URLS_FILE, MAPPING_FILE)
-    # cheating a bit here
-    sources = sources.sources
+    for f in SOURCES_FILE:
+        if os.path.isfile(f):
+            sources = yaml.load(open(f), Loader=yaml.SafeLoader)
     # massage the sources to make them human readable (for the relevant ones)
     for state in sources:
         for query in sources.get(state, []):

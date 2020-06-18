@@ -135,6 +135,10 @@ def build_dataframe(results, dump_all_states=False):
 
     df.to_csv('{}/{}'.format(OUTPUT_FOLDER, now_name))
     df.to_csv('{}/{}'.format(OUTPUT_FOLDER, base_name))
+
+    # Report an interesting metric:
+    total_non_empty = df.notnull().sum().sum()
+    logging.info("Fetched a total of %d cells", total_non_empty)
     return df
 
 
