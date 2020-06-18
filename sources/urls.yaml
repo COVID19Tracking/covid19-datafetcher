@@ -492,10 +492,14 @@ VA:
   encoding: utf-8-sig
   desc: Hospital data
 VT:
-- url: https://services1.arcgis.com/BkFxaEFNwHqX3tAw/arcgis/rest/services/county_summary/FeatureServer/0/query
-  params: {f: json, resultRecordCount: 1, orderByFields: date DESC, outFields: 'date,cumulative_positives,total_tests,total_deaths,current_hospitalizations,hosp_pui,total_recovered',
-    where: 1=1}
+- url: https://services1.arcgis.com/BkFxaEFNwHqX3tAw/ArcGIS/rest/services/VIEW_EPI_DailyCount_PUBLIC/FeatureServer/0/query
+  params: {f: json, resultRecordCount: 1, orderByFields: date DESC, outFields: '*', where: 1=1}
   type: arcgis
+  desc: Cases/death/recovered
+- url: https://services1.arcgis.com/BkFxaEFNwHqX3tAw/ArcGIS/rest/services/VIEW_EMR_Hospitalization_PUBLIC/FeatureServer/0/query
+  params: {where: 1=1, outFields: '*', orderByFields: date desc, resultRecordCount: 1, f: json}
+  type: arcgis
+  desc: Hospitalizations
 WA:
 - url: https://services8.arcgis.com/rGGrs6HCnw87OFOT/ArcGIS/rest/services/CountyCases/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{"statisticType": "max", "onStatisticField": "CV_Updated"},

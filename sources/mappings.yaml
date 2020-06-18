@@ -378,9 +378,10 @@ VA:
   Number of PCR Testing Encounters: SPECIMENS
   Number of Positive PCR Tests: SPECIMENS_POS
 VT:
-  cumulative_positives: POSITIVE
   current_hospitalizations: CURR_HOSP
+  hosp_pui: HOSP_PUI
   date: TIMESTAMP
+  cumulative_positives: POSITIVE
   total_deaths: DEATH
   total_tests: TOTAL
   total_recovered: RECOVERED

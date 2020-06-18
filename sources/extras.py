@@ -146,13 +146,10 @@ def handle_ky(res, mapping):
     return tagged
 
 def handle_vt(res, mapping):
-    state = 'VT'
     tagged = {}
-    updated_mapping = copy(mapping)
-    pui = 'hosp_pui'
-    updated_mapping.update({pui: pui})
+    pui = 'HOSP_PUI'
     for result in res:
-        partial = extract_arcgis_attributes(result, updated_mapping, state)
+        partial = extract_arcgis_attributes(result, mapping, 'VT')
         tagged.update(partial)
 
     tagged[Fields.CURR_HOSP.name] += tagged[pui]
