@@ -1,6 +1,6 @@
 import sys
 import os
-from fetcher.lib import main
+from .lib import Fetcher, build_dataframe, main
 
 if __name__ == "__main__":
     print("Version: ", sys.version_info)

@@ -11,7 +11,7 @@ import re
 import shutil
 import urllib, urllib.request
 
-from utils import request_and_parse, extract_attributes, \
+from fetcher.utils import request_and_parse, extract_attributes, \
    map_attributes, Fields, csv_sum, extract_arcgis_attributes
 
 

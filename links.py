@@ -3,7 +3,7 @@ This is only one step over just dumping everything to a txt file, nothing fancy
 '''
 
 from jinja2 import Environment, PackageLoader, select_autoescape
-from sources import states
+from fetcher.sources import Sources, URLS_FILE, MAPPING_FILE, EXTRAS_MODULE
 import sys
 import urllib.parse
 
@@ -11,10 +11,12 @@ import urllib.parse
 FILENAME = 'index.html'
 
 def main():
-    sources = states.read_sources()
+    sources = Sources(URLS_FILE, MAPPING_FILE)
+    # cheating a bit here
+    sources = sources.sources
     # massage the sources to make them human readable (for the relevant ones)
     for state in sources:
-        for query in sources[state]:
+        for query in sources.get(state, []):
             # query is url, params
             url = query.get('url')
             params = query.get('params')
@@ -33,7 +35,6 @@ def main():
         autoescape=select_autoescape(['html'])
     )
     template = env.get_template('links.html')
-    #res = template.rended(sources = sources)
     template.stream(sources=sources).dump(open(FILENAME, 'w'))
 
 
