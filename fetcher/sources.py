@@ -28,7 +28,7 @@ class Sources(object):
         ''' Read sources and mappings '''
         self.sources = _read_yaml(".", url_file)
         self.mapping = _read_yaml(".", mappings_file)
-        self.extras = None
+        self.extras = {}
         if extras_module:
             self.extras = _read_extras(extras_module, self.keys())
 
