@@ -115,7 +115,7 @@ def map_attributes(original, mapping, debug_state=None):
     return tagged_attributes
 
 def extract_arcgis_attributes(dict_result, mapping, debug_state=None):
-    path = ['features', 0, 'attributes']
+    path = ['features', [], 'attributes']
     return extract_attributes(dict_result, path, mapping, debug_state)
 
 def extract_attributes(dict_result, path, mapping, debug_state = None):
@@ -131,17 +131,25 @@ def extract_attributes(dict_result, path, mapping, debug_state = None):
     '''
 
     res = dict_result
-    for step in path:
+    mapped = []
+    for i, step in enumerate(path):
         # need to distinguish between list index and dict key:
-        if isinstance(res, typing.List):
-            if isinstance(step, int):
-                res = res[step]
-        elif isinstance(res, typing.Dict):
-            if step in res:
-                res = res[step]
+        if isinstance(res, typing.List) and step == []:
+            for item in res:
+                mapped.append(extract_attributes(item, path[i+1:], mapping, debug_state))
+        elif isinstance(res, typing.List) and isinstance(step, int):
+            res = res[step]
+        elif isinstance(res, typing.Dict) and not isinstance(step, list) and step in res:
+            res = res[step]
 
     # now that res is the correct place in the result object, we can map the values
-    return map_attributes(res, mapping, debug_state)
+    if not mapped:
+        mapped = map_attributes(res, mapping, debug_state)
+
+    # backfilling hacks
+    if isinstance(mapped, typing.List) and len(mapped) == 1:
+        mapped = mapped[0]
+    return mapped
 
 def csv_sum(data, columns=None):
     '''Expecting Dict CSV: list of dicts-like objects

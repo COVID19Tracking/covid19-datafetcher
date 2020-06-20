@@ -1,0 +1,18 @@
+# Format: State => [queries]
+# Query is
+# url: The URL to make the request to
+# params: url params (in json format, for convenience)
+# type: type of query: arcgis, json, csv, etc.
+# desc: String description, used to build the links index
+# data_path: path in the query result from which to get the data
+#
+# Only `url` and `type` are mandatory, but I fill `params` with `null` when it's empty, I think that it's nicer this way
+MD:
+- url: https://services.arcgis.com/njFNhDsUCentVYJW/ArcGIS/rest/services/MASTERCaseTracker/FeatureServer/0/query
+  params: {f: json, resultRecordCount: 300, orderByFields: ReportDate desc, outFields: 'ReportDate,TotalCases,NegativeTests,bedsICU,bedsAcute,bedsTotal,total_hospitalized,total_released,deaths,pdeaths,TotalTests', where: 1=1}
+  type: arcgis
+TN:
+- url: https://services1.arcgis.com/HLC8bAygObK4fhPW/arcgis/rest/services/TN_COVID19_Daily/FeatureServer/0/query
+  params: {where: 1=1, outFields: '*', orderByFields: 'DATE desc', resultRecordCount: 300, f: json}
+  type: arcgis
+  desc: Main data

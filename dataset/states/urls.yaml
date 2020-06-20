@@ -46,7 +46,7 @@ AL:
   type: arcgis
   desc: Hosp/ICU/Vent
 - url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/HospitalizedPatientTemporal_READ_ONLY/FeatureServer/1/query
-  params: {where: 1=1, orderbyfields: 'DateTxt desc', outFields: '*', f: json}
+  params: {where: 1=1, orderbyfields: 'DateTxt desc', outFields: '*', resultRecordCount: 1, f: json}
   type: arcgis
   desc: Curr. hosp
 - url: https://alpublichealth.maps.arcgis.com/sharing/rest/content/items/6d2771faa9da4a2786a509d82c8cf0f7/data
@@ -261,10 +261,10 @@ MO:
   params: {where: 1=1, outStatistics: [{"statisticType":"count","onStatisticField":"FID", "outStatisticFieldName": "total"}], f: json}
   type: arcgis
   desc: Testing
-- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/Daily_COVID19_Testing_Report_for_OPI/FeatureServer/0/query
-  params: {where: 1=1, groupByFieldsForStatistics: result  ,outStatistics: [{"statisticType":"count","onStatisticField":"FID"}], f: json}
-  type: arcgis
-  desc: Test reslts (unused)
+# - url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/Daily_COVID19_Testing_Report_for_OPI/FeatureServer/0/query
+#   params: {where: 1=1, groupByFieldsForStatistics: result  ,outStatistics: [{"statisticType":"count","onStatisticField":"FID"}], f: json}
+#   type: arcgis
+#   desc: Test reslts (unused)
 - url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/SERTestbydate/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "Negative"},
 {"statisticType": "sum", "onStatisticField": "Positive"},
@@ -326,20 +326,20 @@ ND:
 NE:
 - url: https://gis.ne.gov/Agency/rest/services/COVID19_County_Layer/MapServer/2/query
   params: {where: case_status='Confirmed' AND NE_JURIS='yes' AND Did_Pat_Die_From_Illness='Y',
-    outStatistics: [{"statisticType":"count","onStatisticField":"ID","outStatisticFieldName": "death"}], f: json}
+    outStatistics: [{"statisticType":"count","onStatisticField":"ID","outStatisticFieldName": "death"}], returnGeometry: false, f: json}
   type: arcgis
   desc: Death
 - url: https://gis.ne.gov/Agency/rest/services/COVID19_County_Layer/MapServer/1/query
-  params: {f: json, outStatistics: [{onStatisticField: ID, statisticType: count, outStatisticFieldName: total}], where: NE_JURIS='yes'}
+  params: {f: json, outStatistics: [{onStatisticField: ID, statisticType: count, outStatisticFieldName: total}], where: NE_JURIS='yes', returnGeometry: false}
   type: arcgis
   desc: Total
 - url: https://gis.ne.gov/Agency/rest/services/Covid19_Update_service/MapServer/0/query
-  params: {where: 1=1, outFields: 'hosp_latest_pat_count,hosp_cumulative_total,dash_update_date,rec_latest_pat_count', resultRecordCount: 1, orderByFields: dash_update_date desc, f: json}
+  params: {where: 1=1, outFields: 'hosp_latest_pat_count,hosp_cumulative_total,dash_update_date,rec_latest_pat_count', resultRecordCount: 1, orderByFields: dash_update_date desc, f: json, returnGeometry: false}
   type: arcgis
   desc: Hosp cum/cur, Recovered
 - url: https://gis.ne.gov/Agency/rest/services/COVID19_County_Layer/MapServer/1/query
   params: {f: json, outStatistics: [{onStatisticField: ID, statisticType: count}],
-    groupByFieldsForStatistics: lab_status, outFields: '*', where: NE_JURIS='yes'}
+    groupByFieldsForStatistics: lab_status, outFields: '*', where: NE_JURIS='yes', returnGeometry: false}
   type: arcgis
   desc: Lab results (pos, inconclusive, neg)
 NJ:

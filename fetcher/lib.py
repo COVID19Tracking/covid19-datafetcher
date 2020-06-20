@@ -5,6 +5,7 @@ import logging
 import hydra
 import pandas as pd
 import sys
+import typing
 import urllib, urllib.request, json
 
 from fetcher.utils import request, request_and_parse, extract_attributes, Fields, request_csv, \
@@ -94,14 +95,38 @@ class Fetcher(object):
                     # This is a guess; getting an unknown top level object
                     partial = extract_attributes(
                         result, queries[i].get('data_path', []), self.sources.mapping_for(state), state)
-                data.update(partial)
 
-        self._timestamp_data(data)
+                # special handling for backfilling
+                if isinstance(partial, typing.List):
+                    print("why would this happen here?")
+                    data = partial
+                    for x in data:
+                        # timestamping is shit here
+                        self._timestamp_data(x)
+                else:
+                    data.update(partial)
+
+        if isinstance(data, typing.Dict):
+            self._timestamp_data(data)
         return results, data
 
     def _timestamp_data(self, data):
         data[Fields.FETCH_TIMESTAMP.name] = datetime.now().timestamp()
 
+
+def _build_backfill_dataframe(results, columns):
+    # TODO: reindex like day
+    dfs = []
+    for k, v in results.items():
+        partial = pd.DataFrame(v, columns=columns)
+        partial.to_csv("{}.csv".format(k))
+        partial['state'] = k
+        dfs.append(partial)
+
+    return pd.concat(dfs)
+
+def _build_aggregated_dataframe(results, columns):
+    return pd.DataFrame.from_dict(results, 'index', columns=columns)
 
 def build_dataframe(results, columns, filename, dump_all_states=False):
     # TODO: move this somewhere else
@@ -112,20 +137,29 @@ def build_dataframe(results, columns, filename, dump_all_states=False):
               'VA', 'VI', 'VT', 'WA', 'WI', 'WV', 'WY'
     ]
 
-    df = pd.DataFrame.from_dict(results, 'index', columns=columns)
-    if dump_all_states:
-        df = df.reindex(pd.Series(states))
+    # results is a dict: state -> {} or []
+    if not results:
+        return {}
+
+    # Special case backfilling
+    if isinstance(list(results.values())[0], typing.List):
+        df = _build_backfill_dataframe(results, columns)
+    else:
+        df = _build_aggregated_dataframe(results, columns)
+        if dump_all_states:
+            # TODO: think about it in the backfilling case
+            df = df.reindex(pd.Series(states))
+
     base_name = "{}.csv".format(filename)
     now_name = '{}_{}.csv'.format(filename, datetime.now().strftime('%Y%m%d%H%M%S'))
-
     df.to_csv('{}'.format(now_name))
     df.to_csv('{}'.format(base_name))
 
     # Report an interesting metric:
     total_non_empty = df.notnull().sum().sum()
     logging.info("Fetched a total of %d cells", total_non_empty)
-    return df
 
+    return df
 
 @hydra.main(config_path='..', config_name="config")
 def main(cfg):
