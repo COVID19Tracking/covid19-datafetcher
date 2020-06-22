@@ -223,12 +223,11 @@ MO:
   PCR_Positive: SPECIMENS_POS
   PCR_Negative: SPECIMENS_NEG
 MT:
-  MAX_LAST_UPDATE: TIMESTAMP
   SUM_HospitalizationCount: CURR_HOSP
   SUM_Total: POSITIVE
   SUM_TotalDeaths: DEATH
   SUM_TotalRecovered: RECOVERED
-  Test_Date: DATE
+  Test_Date: TIMESTAMP
   Total_Tests_Completed: TOTAL
   hosp: HOSP
 NC:

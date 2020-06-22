@@ -1,9 +1,19 @@
+AK:
+  "AI/AN": POS_AIAN
+  Asian: POS_ASIAN
+  Black: POS_BLACK
+  # Multiple:
+  NHOPI: POS_HNPI
+  Other: POS_OTHER
+  Unknown: POS_UNKNOWN
+  White: POS_WHITE
 NM:
   created: TIMESTAMP
-  asian: ASIAN
-  black: BLACK
-  hawaiian: HAWAIIAN
-  unknown: UNKNOWN
-  other: OTHER
-  white: WHITE
-  hispanic: HISPANIC
+  asian: POS_ASIAN
+  black: POS_BLACK
+  # hawaiian: # TODO
+  amInd: POS_AIAN
+  unknown: POS_UNKNOWN
+  other: POS_OTHER
+  white: POS_WHITE
+  hispanic: POS_HISPANIC

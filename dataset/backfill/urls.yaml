@@ -7,6 +7,11 @@
 # data_path: path in the query result from which to get the data
 #
 # Only `url` and `type` are mandatory, but I fill `params` with `null` when it's empty, I think that it's nicer this way
+CO:
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_daily_state_statistics_cumulative/FeatureServer/0/query
+  params: {where: 1=1, outFields: '*', f: json}
+  type: arcgis
+  desc: Cases, tested, death, hosp
 MD:
 - url: https://services.arcgis.com/njFNhDsUCentVYJW/ArcGIS/rest/services/MASTERCaseTracker/FeatureServer/0/query
   params: {f: json, resultRecordCount: 300, orderByFields: ReportDate desc, outFields: 'ReportDate,TotalCases,NegativeTests,bedsICU,bedsAcute,bedsTotal,total_hospitalized,total_released,deaths,pdeaths,TotalTests', where: 1=1}

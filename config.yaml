@@ -13,13 +13,21 @@ hydra:
         format: '%(levelname).1s %(asctime)s %(name)s:%(lineno)d %(message)s'
         datefmt: '%Y%m%d_%H%M%S'
 
+
+
+dataset:
+  # Dataset defaults to override
+  sources_file: ${data_root}/urls.yaml
+  mapping_file: ${data_root}/mappings.yaml
+  extras_module: fetcher.extras.${dataset.name}
+  # TODO: should index be part of the columns? not mandatory for state?
+  index: STATE
+
+
 # Base filename: it'll be ${output}.csv and ${output}_${date}.csv
 output: ${dataset.name}
 data_root: ${hydra:runtime.cwd}/dataset/${dataset.name}
-# defaults to override
-sources_file: ${data_root}/urls.yaml
-mapping_file: ${data_root}/mappings.yaml
-extras_module: fetcher.extras.${dataset.name}
+output_date_format: "%Y%m%d"
 
 # fetch a single state (or a list)
 state: null

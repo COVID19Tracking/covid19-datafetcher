@@ -1,7 +1,12 @@
-# @package _global_
+# @package _group_
 
-extras_module: null
 
-dataset:
-  fields: [FETCH_TIMESTAMP, TIMESTAMP, DATE, ASIAN, BLACK, HAWAIIAN, UNKNOWN, OTHER, WHITE, HISPANIC]
-  name: races
+name: races
+index: [STATE]
+
+# Positive, death, negative X Race, Enticity
+# Flat list of fields vs Measure (i.e., positives, death, negatives) and race data (i.e., race, ethnicity) with multiple rows per state -- I like it less, even though it'll be nicely tagged I expect it'll be harder to use for our planned use case
+fields: [FETCH_TIMESTAMP, TIMESTAMP, DATE,
+  POS_WHITE, POS_BLACK, POS_HISPANIC, POS_ASIAN, POS_AIAN, POS_HNPI, POS_OTHER, POS_UNKNOWN,
+  DEATH_WHITE, DEATH_BLACK, DEATH_HISPANIC, DEATH_ASIAN, DEATH_AIAN, DEATH_HNPI, DEATH_OTHER, DEATH_UNKNOWN,
+  NEG_WHITE, NEG_BLACK, NEG_HISPANIC, NEG_ASIAN, NEG_AIAN, NEG_HNPI, NEG_OTHER, NEG_UNKNOWN]

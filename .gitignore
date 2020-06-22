@@ -11,3 +11,7 @@ index.html
 # Python
 __pycache__
 .ipynb_*
+
+# Hydra
+outputs
+*.log

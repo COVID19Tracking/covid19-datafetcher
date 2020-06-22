@@ -1,3 +1,15 @@
+# For this dataset, a timestamp is important
+# Timestamp is either seconds or ms since epoch, expecting int64
+# If timestamp is not available, date should exists together with
+# a format string to parse it. The format string mapped in __strptime
+
+CO:
+  Date: DATE
+  Cases: POSITIVE
+  Tested: TOTAL
+  Deaths: DEATH
+  Hosp: HOSP
+  __strptime: "%m/%d/%Y"
 MD:
   NegativeTests: NEGATIVE
   ReportDate: TIMESTAMP

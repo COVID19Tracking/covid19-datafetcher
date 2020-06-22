@@ -1,5 +1,10 @@
 # Format: State => [queries]
 # Query is {url: .., params: ..., type: ...}
+AK:
+- url: https://services1.arcgis.com/WzFsmainVTuD5KML/ArcGIS/rest/services/race_summary_prod/FeatureServer/0/query
+  params: {where: 1=1, outFields: '*', f: json}
+  type: arcgis
+  desc: Everything
 NM:
 - url: https://e7p503ngy5.execute-api.us-west-2.amazonaws.com/prod/GetPublicStatewideData
   params: null

@@ -12,6 +12,8 @@ import urllib.request
 
 # fields
 class Fields(Enum):
+    STATE = 100
+
     # time
     FETCH_TIMESTAMP = 0
     TIMESTAMP = 1
@@ -119,6 +121,15 @@ def extract_arcgis_attributes(dict_result, mapping, debug_state=None):
     return extract_attributes(dict_result, path, mapping, debug_state)
 
 def extract_attributes(dict_result, path, mapping, debug_state = None):
+    res = _extract_attributes(dict_result, path, mapping, debug_state = None)
+    if isinstance(res, typing.List) and len(res) > 1:
+        return res
+    elif isinstance(res, typing.List) and len(res) == 1:
+        return res[0]
+    else:
+        return res
+
+def _extract_attributes(dict_result, path, mapping, debug_state = None):
     '''Uses mapping to extract attributes from dict_result
     Retruns tagged attributes
 
@@ -137,18 +148,14 @@ def extract_attributes(dict_result, path, mapping, debug_state = None):
         if isinstance(res, typing.List) and step == []:
             for item in res:
                 mapped.append(extract_attributes(item, path[i+1:], mapping, debug_state))
+            return mapped
         elif isinstance(res, typing.List) and isinstance(step, int):
             res = res[step]
         elif isinstance(res, typing.Dict) and not isinstance(step, list) and step in res:
             res = res[step]
 
     # now that res is the correct place in the result object, we can map the values
-    if not mapped:
-        mapped = map_attributes(res, mapping, debug_state)
-
-    # backfilling hacks
-    if isinstance(mapped, typing.List) and len(mapped) == 1:
-        mapped = mapped[0]
+    mapped = map_attributes(res, mapping, debug_state)
     return mapped
 
 def csv_sum(data, columns=None):
