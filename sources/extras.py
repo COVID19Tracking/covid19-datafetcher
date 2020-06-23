@@ -714,8 +714,8 @@ def handle_vi(res, mapping):
 
     header = container.find('div', 'view-header')
     header_text = header.get_text(strip=True)
-    if header_text.startswith('Last Updated'):
-        tagged[Fields.DATE.name] = header_text[len('Last Updated')+1:]
+    if header_text.startswith('Last updated'):
+        tagged[Fields.DATE.name] = header_text[len('Last updated')+1:]
 
     divs = container.find_all('div', 'views-field')
     for x in divs:
@@ -731,6 +731,5 @@ def handle_vi(res, mapping):
 
         if name in mapping:
             tagged[mapping[name]] = atoi(value)
-
 
     return tagged
