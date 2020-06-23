@@ -377,6 +377,13 @@ VA:
   Vent Patients: CURR_VENT
   Number of PCR Testing Encounters: SPECIMENS
   Number of Positive PCR Tests: SPECIMENS_POS
+VI:
+  Positive: POSITIVE
+  Negative: NEGATIVE
+  Pending: PENDING
+  Tested: TOTAL
+  Deaths: DEATH
+  Recovered: RECOVERED
 VT:
   current_hospitalizations: CURR_HOSP
   hosp_pui: HOSP_PUI

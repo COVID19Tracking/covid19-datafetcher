@@ -702,3 +702,35 @@ def handle_ut(res, mapping):
             tagged[mapping[t.caption.get_text(strip=True)]] = atoi(td.get_text(strip=True))
 
     return tagged
+
+def handle_vi(res, mapping):
+    # 0: covid page
+    # 1: DoH page
+
+    covid_page = res[0]
+    container = covid_page.find('div', 'views-element-container block block-views block-views-blockcovid-19-epi-summary-block-1')
+
+    tagged = {}
+
+    header = container.find('div', 'view-header')
+    header_text = header.get_text(strip=True)
+    if header_text.startswith('Last Updated'):
+        tagged[Fields.DATE.name] = header_text[len('Last Updated')+1:]
+
+    divs = container.find_all('div', 'views-field')
+    for x in divs:
+        name = x.find('span').get_text(strip=True)
+        if not x.find('div'):
+            # this is the end
+            break;
+        value = x.find('div').get_text(strip=True)
+
+        if name == 'Recovered':
+            # need to special case it
+            value = value.split("/")[0]
+
+        if name in mapping:
+            tagged[mapping[name]] = atoi(value)
+
+
+    return tagged

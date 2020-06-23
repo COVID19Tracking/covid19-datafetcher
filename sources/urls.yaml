@@ -491,6 +491,15 @@ VA:
   type: csv
   encoding: utf-8-sig
   desc: Hospital data
+VI:
+- url: https://www.covid19usvi.com/
+  params: null
+  type: html:soup
+  desc: Covid page (soup)
+#- url: https://doh.vi.gov/
+#  params: null
+#  type: html:soup
+#  desc: DoH page (soup)
 VT:
 - url: https://services1.arcgis.com/BkFxaEFNwHqX3tAw/ArcGIS/rest/services/VIEW_EPI_DailyCount_PUBLIC/FeatureServer/0/query
   params: {f: json, resultRecordCount: 1, orderByFields: date DESC, outFields: '*', where: 1=1}
