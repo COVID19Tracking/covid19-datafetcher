@@ -117,7 +117,7 @@ def handle_ky(res, mapping):
         if probable:
             probable = re.findall(pattern, probable)
 
-        if title.lower().find("tested") >= 0:
+        if title.lower().find("total test") >= 0:
             for (k, v) in probable:
                 if k.lower().find("pcr") >= 0:
                     tagged[Fields.TOTAL.name] = atoi(v)
