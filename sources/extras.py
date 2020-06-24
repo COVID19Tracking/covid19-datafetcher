@@ -343,8 +343,9 @@ def handle_hi(res, mapping):
     h2par = h2.find_parent()
     for p in h2par.find_all("p"):
         text = p.get_text(strip=True)
-        if text.lower().find('a total of') >= 0:
-            val = text.split()[3]
+        gr = re.search('[aA] total of ([0-9,]+) individuals', text)
+        if gr:
+            val = gr.group(1)
             tagged[Fields.TOTAL.name] = atoi(val)
 
     return tagged
