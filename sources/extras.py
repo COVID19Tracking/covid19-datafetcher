@@ -394,9 +394,13 @@ def handle_de(res, mapping):
     df = res[0]
     df['Date'] = pd.to_datetime(df[['Year', 'Month', 'Day']])
     df = df[(df['Unit'] == 'people') & (df['Statistic'].isin(mapping.keys()))]
-    df = df[df['Date'] == df['Date'].max()]
+    max_date = df['Date'].max()
+    df = df[df['Date'] == max_date]
     df = df.set_index('Statistic')
-    return map_attributes(df['Value'], mapping, 'DE')
+
+    mapped = map_attributes(df['Value'], mapping, 'DE')
+    mapped.update({Fields.DATE.name: max_date})
+    return mapped
 
 def handle_va(res, mapping):
     '''Getting multiple CVS files from the state and parsing each for
