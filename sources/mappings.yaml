@@ -69,6 +69,16 @@ DC:
   Name: TIMESTAMP
   Total COVID-19 Patients in DC Hospitals: CURR_HOSP
   Total COVID-19 Patients in ICU: CURR_ICU
+DE:
+  Confirmed Deaths: DEATH_CONFIRMED
+  Deaths: DEATH
+  Probable Deaths: DEATH_PROBABLE
+  Tested Negative: NEGATIVE
+  Cumulative Number of Confirmed Positive Cases: CONFIRMED
+  Cumulative Number of Positive Cases: POSITIVE
+  Cumulative Number of Probable Positive Cases: PROBABLE
+  Recovered: RECOVERED
+  Total Persons Tested: TOTAL
 FL:
   SUM_C_FLResDeaths: DEATH
   SUM_C_HospYes_Res: HOSP

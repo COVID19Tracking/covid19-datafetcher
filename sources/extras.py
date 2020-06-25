@@ -390,6 +390,14 @@ def handle_dc(res, mapping):
 
     return tagged
 
+def handle_de(res, mapping):
+    df = res[0]
+    df['Date'] = pd.to_datetime(df[['Year', 'Month', 'Day']])
+    df = df[(df['Unit'] == 'people') & (df['Statistic'].isin(mapping.keys()))]
+    df = df[df['Date'] == df['Date'].max()]
+    df = df.set_index('Statistic')
+    return map_attributes(df['Value'], mapping, 'DE')
+
 def handle_va(res, mapping):
     '''Getting multiple CVS files from the state and parsing each for
     the specific data it contains

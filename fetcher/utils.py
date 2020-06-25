@@ -67,8 +67,13 @@ def request(url, query=None, encoding=None):
 
 def request_pandas(query):
     url = query['url']
+    params = {} if not query.get('params') else query.get('params')
     # Use params as **kwargs for pandas call
-    df = pd.read_excel(url, **query.get('params', {}))
+    if query['type'] in ['xlsx', 'xls']:
+        df = pd.read_excel(url, **params)
+    else:
+        # assume csv
+        df = pd.read_csv(url, **params)
     return df
 
 def request_soup(url, query=None, encoding=None):
