@@ -87,7 +87,7 @@ class Fetcher(object):
                     res = request_pandas(query)
                 results.append(res)
             except Exception as e:
-                logging.warning("{}: Failed to fetch {}".format(state, query['url']), e)
+                logging.error("{}: Failed to fetch {}".format(state, query['url']))
                 raise
 
         if state in self.extras:
