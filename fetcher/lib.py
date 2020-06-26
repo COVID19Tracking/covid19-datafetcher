@@ -44,8 +44,8 @@ class Fetcher(object):
                         # failed parsing
                         logging.warning("Failed parsing %s", state)
                         failures.append(state)
-            except Exception as e:
-                logging.error("Failed to fetch %s", state, e)
+            except Exception:
+                logging.error("Failed to fetch %s", state, exc_info=True)
                 failures.append(state)
 
         logging.info("Fetched data for {} states".format(success))
@@ -85,8 +85,8 @@ class Fetcher(object):
                 elif query['type'] in ['pandas', 'xls', 'xlsx']:
                     res = request_pandas(query)
                 results.append(res)
-            except Exception as e:
-                logging.error("{}: Failed to fetch {}".format(state, query['url']))
+            except Exception:
+                logging.error("{}: Failed to fetch {}".format(state, query['url']), exc_info=True)
                 raise
 
         if state in self.extras:
