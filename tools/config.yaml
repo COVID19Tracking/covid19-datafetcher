@@ -1,8 +1,14 @@
 hydra:
   run:
     dir: .
+  output_subdir: null
 push:
   spreadsheet_id: 1brHKBhqiXkkLyiDTDfaBK-tms-R4KVkI-NPFfFZwqYk
   sheet_id: 0
-  file: states.csv
-  interactive: false
+  file: outputs/states.csv
+creds:
+  type: service # valid values should be: user, service
+  interactive: false # this applies only to user credentials
+  dir: creds
+  key_filepath: ${creds.dir}/credentials.json
+  pickled_token: ${creds.dir}/token.pickle

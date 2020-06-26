@@ -1,17 +1,20 @@
-import hydra
 from omegaconf import DictConfig
 import csv
-import pickle
+import hydra
+import logging
 import os.path
+import pickle
 
+from google.auth.transport.requests import Request
+from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.discovery_cache.base import Cache
-from google_auth_oauthlib.flow import InstalledAppFlow
-from google.auth.transport.requests import Request
+from oauth2client.service_account import ServiceAccountCredentials
+
 
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
-#class MemoryCache(Cache):
+
 class MemoryCache(Cache):
     # https://github.com/googleapis/google-api-python-client/issues/325#issuecomment-274349841
     _CACHE = {}
@@ -21,10 +24,15 @@ class MemoryCache(Cache):
     def set(self, url, content):
         MemoryCache._CACHE[url] = content
 
-def _google_auth(interactive=False):
+def _google_service_auth(key_filepath):
+    creds = ServiceAccountCredentials.from_json_keyfile_name(
+        key_filepath, scopes=SCOPES)
+    return creds
+
+def _google_user_auth(interactive, key_filepath, pickled_token):
     creds = None
-    if os.path.exists('creds/token.pickle'):
-        with open('creds/token.pickle', 'rb') as token:
+    if os.path.exists(pickled_token):
+        with open(pickled_token, 'rb') as token:
             creds = pickle.load(token)
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
@@ -33,20 +41,29 @@ def _google_auth(interactive=False):
         else:
             # Create the flow using the client secrets file from the Google API
             # Console.
-            flow = InstalledAppFlow.from_client_secrets_file(
-                'creds/credentials.json', SCOPES)
+            flow = InstalledAppFlow.from_client_secrets_file(key_filepath, SCOPES)
             if interactive:
                 creds = flow.run_local_server(port=0)
             else:
                 creds = flow.run_console()
         # Save the credentials for the next run
-        with open('creds/token.pickle', 'wb') as token:
+        with open(pickled_token, 'wb') as token:
             pickle.dump(creds, token)
     return creds
 
+def _google_auth(creds_cfg):
+    if creds_cfg.type == "user":
+        return _google_user_auth(
+            creds_cfg.interactive, creds_cfg.key_filepath, creds_cfg.pickled_token)
+    elif creds_cfg.type == "service":
+        return _google_service_auth(creds_cfg.key_filepath)
+    else:
+        logging.error("Unknown auth type {}".format(creds_cfg.type))
+    return None
+
 @hydra.main(config_name='config')
 def main(cfg: DictConfig) -> None:
-    creds = _google_auth(cfg.push.interactive)
+    creds = _google_auth(cfg.creds)
     service = build('sheets', 'v4', credentials=creds, cache=MemoryCache())
 
     content = ""
@@ -75,8 +92,8 @@ def main(cfg: DictConfig) -> None:
     # Call the Sheets API
     sheet = service.spreadsheets()
     res = service.spreadsheets().batchUpdate(spreadsheetId=cfg.push.spreadsheet_id, body=body).execute()
-    print("Result: ")
-    print(res)
+
+    logging.info("Pushed to spreadsheet. Result: {}".format(res))
 
 if __name__ == '__main__':
     main()
