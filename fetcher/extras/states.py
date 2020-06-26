@@ -351,18 +351,6 @@ def handle_ri(res, mapping):
     mapped = map_attributes(dict_res, mapping, 'RI')
     return mapped
 
-def handle_ca(res, mapping):
-    # ckan
-    tagged = {}
-
-    stats = res[0]['result']['records'][0]
-    tagged = map_attributes(stats, mapping, 'CA')
-
-    # add hosp and icu pui
-    tagged[Fields.CURR_HOSP.name] = int(tagged[Fields.CURR_HOSP.name]) + int(stats.get('curr_hosp_pui', 0))
-    tagged[Fields.CURR_ICU.name] = int(tagged[Fields.CURR_ICU.name]) + int(stats.get('curr_icu_pui', 0))
-    return tagged
-
 def handle_dc(res, mapping):
     # expecting 1 file:
     df = res[0]

@@ -74,9 +74,21 @@ AZ:
   type: arcgis
   desc: Deaths
 CA:
-- url: https://data.chhs.ca.gov/api/3/action/datastore_search_sql
-  params: {sql: 'SELECT "Most Recent Date", sum("Total Count Confirmed") as confirmed, sum("Total Count Deaths") as death, sum("ICU COVID-19 Positive Patients") as curr_icu, sum("ICU COVID-19 Suspected Patients") as curr_icu_pui, sum("COVID-19 Positive Patients") as curr_hosp, sum("Suspected COVID-19 Positive Patients") as curr_hosp_pui from "6cd8d424-dfaa-4bdd-9410-a3d656e1176e" WHERE 1=1 GROUP BY "Most Recent Date" order by "Most Recent Date" desc limit 1'}
+- url: https://data.ca.gov/api/3/action/datastore_search_sql
+  params: {sql: 'select date, sum(death) as death, sum(confirmed) as confirmed from (SELECT date, totalcountdeaths::float as death, totalcountconfirmed::float as confirmed FROM "926fd08f-cc91-4828-af38-bd45de97f8c3" order by "date" desc) as a group by date order by date desc limit 1'}
   type: ckan
+  data_path: ['result', 'records', 0]
+  desc: Cases, death
+- url: https://data.ca.gov/api/3/action/datastore_search
+  params: {resource_id: b6648a0d-ff0a-4111-b80b-febda2ac9e09, limit: 1, sort: date desc}
+  type: ckan
+  data_path: ['result', 'records', 0]
+  desc: Testing total
+- url: https://data.ca.gov/api/3/action/datastore_search_sql
+  params: {sql: 'SELECT todays_date, sum(icu_covid_confirmed_patients) + sum(icu_suspected_covid_patients) as icu_covid_patients, sum(hospitalized_covid_patients) as hospitalized_covid_patients from "42d33765-20fd-44b8-a978-b083b7542225" where todays_date is not null GROUP BY todays_date ORDER BY todays_date desc limit 1'}
+  type: ckan
+  data_path: ['result', 'records', 0]
+  desc: Hospitalizations, ICU
 CO:
 - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/Colorado_COVID19_Positive_Cases/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{statisticType: max, onStatisticField: State_Pos_Cases},

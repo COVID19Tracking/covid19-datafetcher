@@ -34,9 +34,10 @@ AZ:
 CA:
   confirmed: POSITIVE
   death: DEATH
-  curr_icu: CURR_ICU
-  curr_hosp: CURR_HOSP
-  "Most Recent Date": DATE
+  icu_covid_patients: CURR_ICU
+  hospitalized_covid_patients: CURR_HOSP
+  date: DATE
+  tested: SPECIMENS
 CO:
   MAX_Date_Data_Last_Updated: DATE
   MAX_State_Deaths: DEATH
