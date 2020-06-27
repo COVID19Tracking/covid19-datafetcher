@@ -15,7 +15,7 @@ FILENAME = 'index.html'
 # this means that it has to run from the root folder, not from "tools"
 @hydra.main(config_path='..', config_name="config")
 def main(cfg):
-    sources = yaml.load(open(cfg.sources_file), Loader=yaml.SafeLoader)
+    sources = yaml.load(open(cfg.dataset.sources_file), Loader=yaml.SafeLoader)
     # massage the sources to make them human readable (for the relevant ones)
     for state in sources:
         for query in sources.get(state, []):
