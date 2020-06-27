@@ -495,7 +495,10 @@ def handle_or(res, mapping):
         name = tds[0].get_text(strip=True)
         value = tds[1].get_text(strip=True)
         if name in mapping:
-            mapped[mapping[name]] = atoi(value)
+            try:
+                mapped[mapping[name]] = atoi(value)
+            except Exception as e:
+                logging.warning("OR: failed to parse {} for {}".format(value, name))
 
 
     tables = page.find_all('table')
