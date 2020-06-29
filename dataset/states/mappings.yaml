@@ -261,11 +261,12 @@ NE:
 NJ:
   _date: TIMESTAMP
   recoveries: RECOVERED
-  total_deaths: DEATH
+  total_deaths: DEATH_CONFIRMED
   total_positives: POSITIVE
   # not a mistake:
   total_negatives: TOTAL
-  # total_tests_reported: TOTAL
+  # not a mistake 2:
+  total_tests_reported: DEATH_PROBABLE
   curr_hosp: CURR_HOSP
   curr_vent: CURR_VENT
   curr_icu: CURR_ICU
