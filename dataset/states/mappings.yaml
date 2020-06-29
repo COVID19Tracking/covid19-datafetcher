@@ -210,11 +210,13 @@ MN:
   RlsdFrmIso: RECOVERED
   OutcmDied: DEATH_CONFIRMED
 MO:
-  SUM_Cases: POSITIVE
+  SUM_CASES: POSITIVE
   confirmed: CONFIRMED
-  SUM_Deaths: DEATH
-  MAX_EditDate: TIMESTAMP
+  SUM_DEATHS: DEATH
+  MAX_EditDate: TIMESTAMP # no longer used, TODO: find alternative
   total_people: TOTAL
+  curr_hosp: CURR_HOSP
+  curr_vent: CURR_VENT
   #SUM_Total: ANTIBODY_TOTAL
   #SUM_Positive: ANTIBODY_POS
   #SUM_Negative: ANTIBODY_NEG

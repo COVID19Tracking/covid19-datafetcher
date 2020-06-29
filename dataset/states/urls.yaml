@@ -264,9 +264,9 @@ MN:
   params: {where: 1=1, outFields: 'Date, Time,TotalCases, EvrHospYes + EvrICUYes as hosp, EvrICUYes, RlsdFrmIso, OutcmDied', f: json}
   type: arcgis
 MO:
-- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/ArcGIS/rest/services/lpha_boundry/FeatureServer/0/query
-  params: {f: json, outStatistics: [{onStatisticField: Cases, statisticType: sum},
-      {onStatisticField: Deaths, statisticType: sum}, {onStatisticField: EditDate, statisticType: max}], where: 1=1}
+- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/county_MOHSIS_map/FeatureServer/0/query
+  params: {f: json, outStatistics: [{onStatisticField: CASES, statisticType: sum},
+      {onStatisticField: DEATHS, statisticType: sum}], where: 1=1}
   type: arcgis
   desc: Cases, death
 - url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/Daily_COVID19_Testing_Report_for_OPI/FeatureServer/0/query
@@ -303,6 +303,10 @@ MO:
   params: {where: Description='PCR Tested', outFields: 'value as total_people', f: json}
   type: arcgis
   desc: Total PCR (people)
+- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/MHA_COVID_19_Patient_Layer/FeatureServer/0/query
+  params: {where: 1=1, orderByFields: collectiondate desc, groupByFieldsForStatistics: collectiondate, outStatistics: [{"statisticType":"sum","onStatisticField":"numc19hosppats", "outStatisticFieldName": "curr_hosp"}, {"statisticType":"sum","onStatisticField":"numc19mechventpats", "outStatisticFieldName": "curr_vent"}], resultOffset: 3, resultRecordCount: 1, f: json}
+  type: arcgis
+  desc: Current Hosp.
 # -------------------------------
 MT:
 - url: https://services.arcgis.com/qnjIrwR8z5Izc0ij/arcgis/rest/services/COVID_Cases_Production_View/FeatureServer/0/query
