@@ -43,12 +43,60 @@ To increase coverage, I added more sources:
 Pretty much everything requires custom code now (except for the states that use `ArcGIS`).
 
 
-## Data Entry
-What's available
+# Data
+The goal of this project is to automatically collect the different datasets we display and aggregate for the project.
 
-How it's being used
+There are 3 datasets we're tackling now: the main numbers for states, race-distribution data tracking and historic time series.
 
-# Running the Code
+In the context of this project, a `dataset` is a collection of sources for each state that include query urls, mappings and auxiliary code (when needed). This is not the actual data being fetched, but the instructions to fetch it.
+
+## Available Datasets
+- States (`states`): Covid19 current state data tracking (cases, testing, deaths, etc).
+- CRDT (`races`): Covid19 racial data tracking
+- Historic Backfill (`backfill`): fetcher for time series data, to handle cases of states that update past days (continuously or one-ofs).
+
+## Dataset Structure
+Under the root of the project there's a folder called `dataset` with all the supported datasets.  
+The general structure is a `yaml` file with the specific dataset config, and a folder by the same name (for easy association) with the actual files defining the dataset.
+
+```sh
+dataset
+├── {dataset_name}.yaml
+└── {dataset_name}
+    ├── mappings.yaml
+    └── urls.yaml
+```
+
+We currently have 3 datasets, and this is how it looks:
+
+```sh
+dataset
+├── backfill.yaml
+├── backfill
+│   ├── mappings.yaml
+│   └── urls.yaml
+├── races.yaml
+├── races
+│   ├── mappings.yaml
+│   └── urls.yaml
+├── states.yaml
+└── states
+    ├── mappings.yaml
+    └── urls.yaml
+```
+
+Sometimes, there's a need to add special casing in the code (e.g., when scraping a page) and `yaml` files are not enough. Each dataset can define an *extras* module that will handle the parsing of responses when the default parsing is not sufficient.  
+By default, the extras module is define as `fetcher.extras.${dataset.name}` which results in a file by the same name as the dataset, in the `fetche/extras` folder.
+
+```yaml
+# In the dataset config yaml file:
+extras_module: fetcher.extras.${dataset.name}
+
+# To remove the extras module when it's not needed:
+extras_module: null
+```
+
+# Code
 ## Setting up Environment and Running the Scripts
 I use `conda` locally and on the server that runs the periodic task. Between `BeautifulSoup`, `Pandas` and libraries to parse Excel files, it's a huge environment.
 
@@ -66,14 +114,23 @@ conda activate c19-data
 
 Run scripts
 ```sh
-# python get_my_data.py [STATE_ABBRV
-
+# fetch the default dataset (states) for all states
 python get_my_data.py
+
+# fetch the default dataset (states) for the specified state/sates
+python get_my_data.py state=CA
 # or
-python get_my_data.py MI
+python get_my_data.py state=[CA,MT]
 ```
 The output will be in `states.csv`
 
+To fetch a different dataset, use the `dataset=DATASET` argument:
+```sh
+python get_my_data.py dataset=races
+```
+
+## Project Structure
+<TODO>
 
 ## Publishing Flow
 
