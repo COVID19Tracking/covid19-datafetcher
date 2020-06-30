@@ -70,15 +70,18 @@ def handle_fl(res, mapping):
     '''Need to add the non-FL residents to the totals:
     they separate it for death and hosp"
     '''
-    res = res[0]
-    mapped = extract_arcgis_attributes(res, mapping, 'FL')
+    mapped = extract_arcgis_attributes(res[1], mapping, 'FL')
+    pcr = map_attributes(res[0], mapping, 'FL')
+    mapped.update(pcr)
+
     extra_hosp = 0
     extra_death = 0
+    stats = res[1]
     try:
-        extra_hosp = res['features'][0]['attributes']['SUM_C_HospYes_NonRes']
-        extra_death = res['features'][0]['attributes']['SUM_C_NonResDeaths']
+        extra_hosp = stats['features'][0]['attributes']['SUM_C_HospYes_NonRes']
+        extra_death = stats['features'][0]['attributes']['SUM_C_NonResDeaths']
     except Exception as ex:
-        logging.warning("Failed Florida extra processing: ", e)
+        logging.warning("Failed Florida extra processing: ", ex)
         raise
 
     mapped[Fields.HOSP.name] += extra_hosp

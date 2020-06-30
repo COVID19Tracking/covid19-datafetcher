@@ -88,6 +88,10 @@ FL:
   SUM_T_negative: NEGATIVE
   SUM_T_positive: POSITIVE
   SUM_T_total: TOTAL
+  PCR_Negative: SPECIMENS_NEG
+  PCR_Positive: SPECIMENS_POS
+  PCR_Total: SPECIMENS
+  PCR_Date: DATE
 GA:
   MAX_EditDate: TIMESTAMP
   SUM_COVID_Cases: POSITIVE

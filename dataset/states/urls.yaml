@@ -145,6 +145,10 @@ DE:
   type: pandas
   desc: Full dataset (sans hosp)
 FL:
+- url: https://notbroken.dev/covid19/fl_pcr_specimens.json
+  params: null
+  type: json
+  desc: PCR specimens
 - url: https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/arcgis/rest/services/Florida_COVID19_Cases/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{statisticType: sum, onStatisticField: T_positive},
       {statisticType: sum, onStatisticField: T_negative}, {statisticType: sum, onStatisticField: T_total},
