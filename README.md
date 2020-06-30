@@ -53,7 +53,7 @@ In the context of this project, a `dataset` is a collection of sources for each 
 ## Available Datasets
 - States (`states`): Covid19 current state data tracking (cases, testing, deaths, etc).
 - CRDT (`races`): Covid19 racial data tracking
-- Historic Backfill (`backfill`): fetcher for time series data, to handle cases of states that update past days (continuously or one-ofs).
+- Historic Backfill (`backfill`): fetcher for time series data, to handle cases of states that update past days (continuously or one-offs).
 
 ## Dataset Structure
 Under the root of the project there's a folder called `dataset` with all the supported datasets.  
