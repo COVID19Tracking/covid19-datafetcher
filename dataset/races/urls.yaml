@@ -11,3 +11,8 @@ NM:
   type: json
   data_path: [0, 'data']
   desc: Everything
+WI:
+# Field descriptions: https://www.dhs.wisconsin.gov/publications/p02677.pdf
+- url: https://services1.arcgis.com/ISZ89Z51ft1G16OK/ArcGIS/rest/services/COVID19_WI/FeatureServer/2/query
+  params: {f: json, outFields: 'LoadDttm, POSITIVE, HOSP_YES, IC_YES, NEGATIVE, DEATHS, POS_BLK, POS_AIAN, POS_ASN, POS_WHT, POS_MLTOTH, POS_UNK, POS_E_HSP, POS_E_NHSP, POS_E_UNK, DTH_AIAN, DTH_ASN, DTH_BLK, DTH_WHT, DTH_MLTOTH, DTH_UNK, DTH_E_HSP, DTH_E_NHSP, DTH_E_UNK', where: 1=1}
+  type: arcgis
