@@ -75,7 +75,7 @@ AZ:
   desc: Deaths
 CA:
 - url: https://data.ca.gov/api/3/action/datastore_search_sql
-  params: {sql: 'select date, sum(death) as death, sum(confirmed) as confirmed from (SELECT date, totalcountdeaths::float as death, totalcountconfirmed::float as confirmed FROM "926fd08f-cc91-4828-af38-bd45de97f8c3" order by "date" desc) as a group by date order by date desc limit 1'}
+  params: {sql: 'select date, sum(totalcountdeaths) as death, sum(totalcountconfirmed) as confirmed from "926fd08f-cc91-4828-af38-bd45de97f8c3" group by date order by date desc limit 1'}
   type: ckan
   data_path: ['result', 'records', 0]
   desc: Cases, death
