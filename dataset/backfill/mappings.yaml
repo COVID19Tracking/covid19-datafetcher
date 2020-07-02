@@ -2,7 +2,15 @@
 # Timestamp is either seconds or ms since epoch, expecting int64
 # If timestamp is not available, date should exists together with
 # a format string to parse it. The format string mapped in __strptime
-
+CA:
+  confirmed: POSITIVE
+  death: DEATH
+  icu_covid_patients: CURR_ICU
+  hospitalized_covid_patients: CURR_HOSP
+  date: DATE
+  tested: SPECIMENS
+  # "2020-03-20T00:00:00"
+  __strptime: "%Y-%m-%dT%H:%M:%S"
 CO:
   Date: DATE
   Cases: POSITIVE
