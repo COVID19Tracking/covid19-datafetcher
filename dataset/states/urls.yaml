@@ -96,6 +96,12 @@ CO:
       {statisticType: max, onStatisticField: State_Number_Tested}, {statisticType: max,
         onStatisticField: Date_Data_Last_Updated}], f: json}
   type: arcgis
+  desc: Main source
+# If this gets updated, this should be used as the main source
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_daily_state_statistics_cumulative/FeatureServer/0/query
+  params: {where: 1=1, outFields: '*', resultRecordCount: 1, orderByFields: Date desc, f: json}
+  type: arcgis
+  desc: Death counts
 - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
   params: {where: Metric='Number of positive tests',
     outStatistics: [{"statisticType": "max", "onStatisticField": "Attr_Date"},
@@ -110,15 +116,6 @@ CO:
     f: json}
   type: arcgis
   desc: Negative serological tests
-# Could do it in less queries, might get back to that
-- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/CDPHE_COVID19_StateLevel_Open_Data_Repository/FeatureServer/0/query
-  params: {where: metric = 'Number of Deaths' AND attribute = 'Probable', outFields: 'metric, attribute, value as death_probable', orderByfields: rep_date desc, f: json}
-  type: arcgis
-  desc: Death probable
-- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/CDPHE_COVID19_StateLevel_Open_Data_Repository/FeatureServer/0/query
-  params: {where: metric = 'Number of Deaths' AND attribute = 'Confirmed', outFields: 'metric, attribute, value as death_confirmed', orderByfields: rep_date desc, f: json}
-  type: arcgis
-  desc: Death confirmed
 - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/CDPHE_COVID19_StateLevel_Open_Data_Repository/FeatureServer/0/query
   params: {where: metric = 'Number of Cases' AND attribute = 'Probable', outFields: 'metric, attribute, value as cases_probable', orderByfields: rep_date desc, f: json}
   type: arcgis

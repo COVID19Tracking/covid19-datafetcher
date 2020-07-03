@@ -40,7 +40,8 @@ CA:
   tested: SPECIMENS
 CO:
   MAX_Date_Data_Last_Updated: DATE
-  MAX_State_Deaths: DEATH
+  #MAX_State_Deaths: DEATH
+  DthCOVID19: DEATH
   MAX_State_Number_Hospitalizations: HOSP
   MAX_State_Number_Tested: TOTAL
   MAX_State_Pos_Cases: POSITIVE
