@@ -187,13 +187,19 @@ MD:
   total_released: RECOVERED
   TotalTests: SPECIMENS
 ME:
-  SUM_Recovered: RECOVERED
-  SUM_Deaths: DEATH
-  SUM_ConfirmedPositiveCases: POSITIVE
-  SUM_PresumptivePositiveCases: PROBABLE
-  SUM_Hospitalizations: HOSP
-  #SUM_TotalCases:
-  MAX_LastUpdated: TIMESTAMP
+  Date: TIMESTAMP
+  TotalCases: POSITIVE
+  ConfirmedCases: CONFIRMED
+  PresumptiveCases: PROBABLE
+  Deaths: DEATH
+  Hospitalizations: HOSP
+  Recovered: RECOVERED
+  # This is all tests lumped, PCR an antibody
+  # NegativeTests:
+  TotalHospitalized: CURR_HOSP
+  InCriticalCare: CURR_ICU
+  OnVentilator: CURR_VENT
+  PendingTests: PENDING
 MI:
   Recovered: RECOVERED
   SUM_F__in_Critical_Care: CURR_ICU
