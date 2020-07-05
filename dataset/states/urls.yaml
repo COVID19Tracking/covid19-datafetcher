@@ -444,9 +444,11 @@ RI:
   header: no # for CSV parsing
 # - url: https://services1.arcgis.com/dkWT1XL4nglP5MLP/ArcGIS/rest/services/COVID_Public_Map_TEST/FeatureServer/2/query
 SC:
-- url: https://services2.arcgis.com/XZg2efAbaieYAXmu/arcgis/rest/services/COVID19_2_View/FeatureServer/0/query
-  params: {f: json, outStatistics: [{onStatisticField: Confirmed, statisticType: sum}, {onStatisticField: Death, statisticType: sum}], where: 1=1}
+- url: https://services2.arcgis.com/XZg2efAbaieYAXmu/ArcGIS/rest/services/COVID19/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "Confirmed"}, {"statisticType": "sum", "onStatisticField": "Recovered"}, {"statisticType": "sum", "onStatisticField": "Death"}, {"statisticType": "sum", "onStatisticField": "Probable_Positives"}, {"statisticType": "sum", "onStatisticField": "Probable_Deaths"}, {"statisticType": "sum", "onStatisticField": "Total_Neg_Tests"}, {"statisticType": "sum", "onStatisticField": "Total_Pos_Tests"}, {"statisticType": "max", "onStatisticField": "Date_"}
+] , f: json}
   type: arcgis
+  desc: Everything
 TN:
 - url: https://services1.arcgis.com/HLC8bAygObK4fhPW/arcgis/rest/services/TN_COVID19_Daily/FeatureServer/0/query
   params: {where: 1=1, outFields: '*', orderByFields: 'DATE desc', resultRecordCount: 1, f: json}

@@ -356,9 +356,10 @@ RI:
   "Number of COVID-19 cases who are currently in an intensive care unit (ICU) in Rhode Island": CURR_ICU
   "Number of COVID-19 cases who are currently in an intensive care unit (ICU) and on a vent in Rhode Island": CURR_VENT
 SC:
-  MAX_Date_: TIMESTAMP
-  SUM_Confirmed: POSITIVE
-  SUM_Death: DEATH
+  SUM_Confirmed: CONFIRMED
+  SUM_Death: DEATH_CONFIRMED
+  SUM_Probable_Positives: PROBABLE
+  SUM_Probable_Deaths: DEATH_PROBABLE
 TN:
   CASES_TOT: POSITIVE
   HOSPITALIZED_TOT: HOSP
