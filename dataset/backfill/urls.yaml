@@ -13,6 +13,11 @@ CA:
   type: ckan
   data_path: ['result', 'records', []]
   desc: Cases, death
+- url: https://data.ca.gov/api/3/action/datastore_search
+  params: {resource_id: b6648a0d-ff0a-4111-b80b-febda2ac9e09, limit: 100, sort: date desc}
+  type: ckan
+  data_path: ['result', 'records', []]
+  desc: Testing total
 CO:
 - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_daily_state_statistics_cumulative/FeatureServer/0/query
   params: {where: 1=1, outFields: '*', f: json}

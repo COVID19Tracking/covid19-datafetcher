@@ -21,6 +21,7 @@ TS = 'TIMESTAMP'
 class Fetcher(object):
     def __init__(self, cfg):
         '''Initialize source information'''
+        self.dataset = cfg.dataset  # store dataset config
         self.sources = Sources(
             cfg.dataset.sources_file, cfg.dataset.mapping_file, cfg.dataset.extras_module)
         self.extras = self.sources.extras
@@ -61,11 +62,10 @@ class Fetcher(object):
         '''
         logging.debug("Fetching: %s", state)
         res = None
-        data = {}
 
         queries = self.sources.queries_for(state)
         if not queries:
-            return res, data
+            return res, {}
 
         results = []
         mapping = self.sources.mapping_for(state)
@@ -89,8 +89,9 @@ class Fetcher(object):
                 logging.error("{}: Failed to fetch {}".format(state, query['url']), exc_info=True)
                 raise
 
+        processed_results = []
         if state in self.extras:
-            data = self.extras[state](results, mapping)
+            processed_results = self.extras[state](results, mapping)
         else:
             for i, result in enumerate(results):
                 if queries[i].get('type') == 'arcgis':
@@ -99,19 +100,40 @@ class Fetcher(object):
                     # This is a guess; getting an unknown top level object
                     partial = extract_attributes(
                         result, queries[i].get('data_path', []), mapping, state)
-                # TODO: special case for backfilling
-                # TODO: this can also be solved with pandas
-                if isinstance(partial, typing.List):
-                    data = partial
-                    for x in data:
-                        # timestamping is shit here
-                        self._tag_and_timestamp(state, x, mapping.get('__strptime'))
-                else:
-                    data.update(partial)
+                processed_results.append(partial)
 
-        if isinstance(data, typing.Dict):
-            self._tag_and_timestamp(state, data, mapping.get('__strptime'))
+        data = self._aggregate_state_results(state, processed_results, mapping)
         return results, data
+
+    def _aggregate_state_results(self, state, results, mapping):
+        '''
+        This function handles all the results (post-processing) from
+        all queries to a single state.
+        Result is always a flat list of dictionary records
+        '''
+        # Hiding any special casing for backdating or anything of the sorts
+
+        # special casing here for extras handling
+        if isinstance(results, typing.Dict):
+            results = [results]
+
+        data = []
+        for x in results:
+            if isinstance(x, typing.Dict):
+                self._tag_and_timestamp(state, x, mapping.get('__strptime'))
+                data.append(x)
+            elif isinstance(x, typing.List):
+                # do the same for each element
+                for record in x:
+                    self._tag_and_timestamp(state, record, mapping.get('__strptime'))
+                    data.append(record)
+                # data.extend(x)
+            else:
+                # should not happen
+                logging.warning("Unexpected type in results: %r", x)
+                pass
+
+        return data
 
     def _tag_and_timestamp(self, state, data, dateformat=None):
         data[Fields.FETCH_TIMESTAMP.name] = datetime.now().timestamp()
@@ -130,6 +152,20 @@ class Fetcher(object):
             #TODO: Should I add now time?
             pass
 
+def _fix_index_and_columns(index, columns):
+    index = index if isinstance(index, str) else list(index)
+    if isinstance(index, list) and len(index) == 1:
+        index = index[0]
+
+    # make sure all index columns are also in columns
+    if isinstance(index, str) and index not in columns:
+        columns.insert(0, index)
+    elif isinstance(index, list):
+        for c in index:
+            if c not in columns:
+                columns.insert(0, c)
+
+    return index
 
 def build_dataframe(results, columns, index, output_date_format,
                     filename, dump_all_states=False):
@@ -142,7 +178,7 @@ def build_dataframe(results, columns, index, output_date_format,
               'VA', 'VI', 'VT', 'WA', 'WI', 'WV', 'WY'
     ]
 
-    # results is a *dict*: state -> {} or []
+    # results is a *dict*: state -> []
     if not results:
         return {}
 
@@ -160,23 +196,14 @@ def build_dataframe(results, columns, index, output_date_format,
         else:
             logging.warning("This shouldnt happen: %r", v)
 
-    index = index if isinstance(index, str) else list(index)
-    if isinstance(index, list) and len(index) == 1:
-        index = index[0]
-
-    # make sure all index columns are also in columns
-    if isinstance(index, str) and index not in columns:
-        columns += [index]
-    if isinstance(index, list):
-        for x in index:
-            if not x in columns:
-                columns += [x]
-
+    index = _fix_index_and_columns(index, columns)
     df = pd.DataFrame(items, columns=columns)
+
     if TS in index:
         df['DATE'] = df[TS].dt.strftime(output_date_format)
         # TODO: resample to day? in addition to 'DATE' fild?
     df = df.set_index(index)
+    df = df.groupby(level=df.index.names).last()
 
     if isinstance(index, list):
         #df.sort_index(level=[1, 0], ascending=[False, True], inplace=True)
