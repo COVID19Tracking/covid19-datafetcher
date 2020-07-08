@@ -345,16 +345,18 @@ RI:
   Total_Covid_Lab_Tests: TOTAL
   Total_Hospitalized: CURR_HOSP
   # Google doc:
-  "Number of Rhode Island COVID-19 associated fatalities (cumulative)": DEATH
-  "Last updated (all spreadsheet data last updated as of this date unless specified otherwise): ": DATE
-  "Total number of positive labs received by RIDOH (cumulative count by person based on date of first positive test result)": POSITIVE
-  "Total number of negative labs received by RIDOH (cumulative count by lab result)": NEGATIVE
-  "Total number of positive labs (by person) and negative labs (by lab result), cumulative as of previous day": TOTAL
-  "Number of COVID-19 cases who were admitted to a hospital in Rhode Island (cumulative)": HOSP
-  "Number of COVID-19 cases who were discharged from a hospital in Rhode Island (cumulative)": RECOVERED
-  "Number of COVID-19 cases who are currently hospitalized in Rhode Island": CURR_HOSP
-  "Number of COVID-19 cases who are currently in an intensive care unit (ICU) in Rhode Island": CURR_ICU
-  "Number of COVID-19 cases who are currently in an intensive care unit (ICU) and on a vent in Rhode Island": CURR_VENT
+  "Cumulative positive tests (may count people more than once)": SPECIMENS_POS
+  "Cumulative negative tests (may count people more than once)": SPECIMENS_NEG
+  "Cumulative total tests completed (may count people more than once)": SPECIMENS
+  "Cumulative people who tested positive (counts first positive lab per person)": CONFIRMED
+  "Cumulative people tested (one count per person)": TOTAL
+  "Cumulative hospital admissions": HOSP
+  "Cumulative hospital discharges": RECOVERED
+  "Currently hospitalized": CURR_HOSP
+  "Currently in ICU": CURR_ICU
+  "Currently vented": CURR_VENT
+  "Total deaths": DEATH
+  "Last updated:": DATE
 SC:
   SUM_Confirmed: CONFIRMED
   SUM_Death: DEATH_CONFIRMED

@@ -438,7 +438,7 @@ PR:
   type: arcgis
 RI:
 # historic data: https://static.dwcdn.net/data/dO7k8.csv
-- url: 'https://docs.google.com/spreadsheets/d/1n-zMS9Al94CPj_Tc3K7Adin-tN9x1RSjjx2UzJ4SV7Q/export?format=csv&sheet=1225599023'
+- url: 'https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/export?format=csv&sheet=264100583'
   params: null
   type: csv
   header: no # for CSV parsing
