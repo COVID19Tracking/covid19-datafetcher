@@ -258,11 +258,11 @@ ND:
   Recovered: RECOVERED
   Currently Hospitalized: CURR_HOSP
   Total Hospitalized: HOSP
-  Deaths: DEATH_CONFIRMED
   # Serology tests table
   Detected: ANTIBODY_POS
   Not Detected: ANTIBODY_NEG
   Total: ANTIBODY_TOTAL
+  Deaths Due to COVID-19: DEATH_CONFIRMED
   Deaths of Individuals Presumed Positive: DEATH_PROBABLE
 NE:
   Inconclusive: INCONCLUSIVE
