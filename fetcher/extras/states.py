@@ -221,12 +221,15 @@ def handle_in(res, mapping):
     stats = res[0]['objects']['daily_statistics']
     tagged = map_attributes(stats, mapping, 'IN')
 
-    hosp_data = res[1]['result']['records']
-    for record in hosp_data:
-        name = record['STATUS_TYPE']
-        value = record['TOTAL']
-        if name in mapping:
-            tagged[mapping[name]] = value
+    try:
+        hosp_data = res[1]['result']['records']
+        for record in hosp_data:
+            name = record['STATUS_TYPE']
+            value = record['TOTAL']
+            if name in mapping:
+                tagged[mapping[name]] = value
+    except Exception as e:
+        logging.warning("IN: failed to get hospital data", exc_info=True)
 
     return tagged
 
