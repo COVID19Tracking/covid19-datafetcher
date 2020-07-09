@@ -23,7 +23,7 @@ AR:
   SUM_negative: NEGATIVE
   SUM_pending: PENDING
   SUM_positive: POSITIVE
-  SUM_total_tests: TOTAL
+  SUM_total_tests: SPECIMENS
   Currently Hospitalized: CURR_HOSP
   Ever Hospitalized: HOSP
   Currently on Ventilator: CURR_VENT
