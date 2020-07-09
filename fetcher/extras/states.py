@@ -212,27 +212,6 @@ def handle_ne(res, mapping):
 
     return tagged
 
-def handle_in(res, mapping):
-    # ckan
-    tagged = {}
-
-    # There's pretty bad error handling now
-    # I want to get errors as fast as possible -- to fix faster
-    stats = res[0]['objects']['daily_statistics']
-    tagged = map_attributes(stats, mapping, 'IN')
-
-    try:
-        hosp_data = res[1]['result']['records']
-        for record in hosp_data:
-            name = record['STATUS_TYPE']
-            value = record['TOTAL']
-            if name in mapping:
-                tagged[mapping[name]] = value
-    except Exception as e:
-        logging.warning("IN: failed to get hospital data", exc_info=True)
-
-    return tagged
-
 def handle_la(res, mapping):
     stats = res[0]
     state_tests = 'STATE_TESTS'
