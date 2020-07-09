@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 from copy import copy
 from datetime import datetime
 from io import StringIO
+import math
 from tempfile import NamedTemporaryFile, TemporaryDirectory
 from zipfile import ZipFile
 import csv
@@ -174,26 +175,24 @@ def handle_pa(res, mapping):
     tagged[Fields.CURR_VENT.name] += tagged[ecmo]
     tagged.pop(ecmo)
 
-    # antibody stuff, soup time
+    # soup time: recovered
     soup = res[-1]
     try:
-        table = soup.find_all("table")[1]
-        # expecting 2 rows, with 3 columns
-        # need the value for "serology"
-        rows = table.find_all('tr')
-        titles = rows[0]
-        data = rows[1].find_all('td')
-        for i, title in enumerate(titles.find_all("td")):
-            title = title.get_text(strip=True)
-            if title.lower().find('serology') >= 0:
-                value = atoi(data[i].get_text(strip=True))
-                tagged[Fields.ANTIBODY_POS.name] = value
+        table = soup.find("table")
+        total_cases = None
+        recover_pct = None
+        for td in table.find_all("td"):
+            text = td.get_text(strip=True)
+            text = text.strip(u'\u200b')
+            if text.startswith('Total'):
+                total_cases = atoi(text[len('Total Cases*'):])
+            elif text.startswith('Recovered'):
+                recover_pct = atoi(text[len('Recovered***'):-1])
 
-        if tagged.get(Fields.ANTIBODY_POS.name):
-            tagged[Fields.POSITIVE.name] += tagged[Fields.ANTIBODY_POS.name]
-
+        if total_cases and recover_pct:
+            tagged[Fields.RECOVERED.name] = math.floor(total_cases * recover_pct / 100)
     except Exception as e:
-        pass
+        logging.warning("RI: failed to parse recovered", exc_info=True)
     return tagged
 
 def handle_ne(res, mapping):
