@@ -522,6 +522,37 @@ def handle_or(res, mapping):
 
     return mapped
 
+def handle_me(res, mapping):
+    tagged = {}
+    for result in res[:-1]:
+        partial = extract_arcgis_attributes(result, mapping, 'MI')
+        tagged.update(partial)
+
+    soup = res[-1]
+    th = soup.find("th", string=re.compile("Reported COVID-19 Tests"))
+    table = th.find_parent('table')
+    for tr in table.find_all('tr'):
+        tds = tr.find_all('td')
+        if len(tds) < 3:
+            continue
+        name = tds[0].get_text(strip=True)
+        if name not in ['Positive', 'Negative', 'Total']:
+            continue
+        antibody_val = atoi(tds[1].get_text(strip=True))
+        pcr_val = atoi(tds[2].get_text(strip=True))
+
+        if name == 'Positive':
+            tagged[Fields.ANTIBODY_POS.name] = antibody_val
+            tagged[Fields.SPECIMENS_POS.name] = pcr_val
+        elif name == 'Negative':
+            tagged[Fields.ANTIBODY_NEG.name] = antibody_val
+            tagged[Fields.SPECIMENS_NEG.name] = pcr_val
+        elif name =='Total':
+            tagged[Fields.ANTIBODY_TOTAL.name] = antibody_val
+            tagged[Fields.SPECIMENS.name] = pcr_val
+
+    return tagged
+
 def handle_mi(res, mapping):
     tagged = {}
     for result in res[:-1]:

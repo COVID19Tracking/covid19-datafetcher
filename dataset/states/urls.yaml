@@ -236,6 +236,10 @@ ME:
   params: {where: TotalCases is not NULL, outFields: '*', orderByFields: Date desc, resultRecordCount: 1, f: json}
   type: arcgis
   desc: Main metrics
+- url: https://www.maine.gov/dhhs/mecdc/infectious-disease/epi/airborne/coronavirus/data.shtml
+  params: null
+  type: html:soup
+  desc: Page, for testing (soup)
 MI:
 - url: https://services5.arcgis.com/ZqUZ99cjRiEOyN05/ArcGIS/rest/services/jX9FD/FeatureServer/0/query
   params: {where: 1=1, outFields: 'f1 as date,f3 as positives, Total_Deaths', orderByFields: f1 desc, resultRecordCount: 1, f: json}
