@@ -476,10 +476,8 @@ TX:
   params: {where: 1=1, outFields: '*', f: json}
   type: arcgis
   desc: Recoveries
-- url: https://services1.arcgis.com/d9sLvPecHnb8pMfE/arcgis/rest/services/TSA_BedAvailability_ViewTest/FeatureServer/0/query
-  params: {"where": "1=1",
-  'outStatistics': '[{"statisticType":"sum","onStatisticField":"Sum_Total_Lab_COVID","outStatisticFieldName":"curr_hosp"}]',
-  'f': 'json'}
+- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID_Hospital_Data/FeatureServer/1/query
+  params: {where: HospitalData='COVIDPatientsHospitals', outFields: '*, Count_ as curr_hosp', f: 'json'}
   type: arcgis
   desc: Curr hosp
 UT:
