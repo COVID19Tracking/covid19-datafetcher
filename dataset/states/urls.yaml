@@ -462,11 +462,11 @@ TX:
   params: {where: 1=1, outFields: '*', orderByFields: Date desc, resultRecordCount: 1, f: json}
   type: arcgis
   desc: Positives, death
-- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Testing_Data_Service/FeatureServer/3/query
+- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_TestData_Service/FeatureServer/3/query
   params: {where: 1=1, outFields: '*, ViralTests as totals', orderByFields: Date desc, resultRecordCount: 1, f: json}
   type: arcgis
   desc: Tests (PCR + Antibody)
-- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Testing_Data_Service/FeatureServer/2/query
+- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_TestData_Service/FeatureServer/2/query
   params: {where: TestType='PostiveAntibody', outFields: '*, Count_ as antibody_pos', f: json}
   type: arcgis
   desc: Positive antibody
