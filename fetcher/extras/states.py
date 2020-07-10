@@ -629,7 +629,7 @@ def handle_nd(res, mapping):
         if len(cols) < 2:
             continue
         strong = cols[0].find("strong")
-        if not strong or len(strong) < 10:
+        if not strong or len(strong.get_text()) < 10:
             continue
         name = strong.get_text(strip=True)
         value = cols[1].get_text(strip=True)
