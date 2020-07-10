@@ -338,12 +338,12 @@ ND:
   type: html:soup
   desc: State page (soup)
 NE:
-- url: https://gis.ne.gov/Agency/rest/services/COVID19_County_Layer/MapServer/2/query
+- url: https://gis.ne.gov/enterprise/rest/services/Covid19MapV5/MapServer/2/query
   params: {where: case_status='Confirmed' AND NE_JURIS='yes' AND Did_Pat_Die_From_Illness='Y',
     outStatistics: [{"statisticType":"count","onStatisticField":"ID","outStatisticFieldName": "death"}], returnGeometry: false, f: json}
   type: arcgis
   desc: Death
-- url: https://gis.ne.gov/Agency/rest/services/COVID19_County_Layer/MapServer/1/query
+- url: https://gis.ne.gov/enterprise/rest/services/Covid19MapV5/MapServer/1/query
   params: {f: json, outStatistics: [{onStatisticField: ID, statisticType: count, outStatisticFieldName: total}], where: NE_JURIS='yes', returnGeometry: false}
   type: arcgis
   desc: Total
@@ -351,7 +351,7 @@ NE:
   params: {where: 1=1, outFields: 'hosp_latest_pat_count,hosp_cumulative_total,dash_update_date,rec_latest_pat_count', resultRecordCount: 1, orderByFields: dash_update_date desc, f: json, returnGeometry: false}
   type: arcgis
   desc: Hosp cum/cur, Recovered
-- url: https://gis.ne.gov/Agency/rest/services/COVID19_County_Layer/MapServer/1/query
+- url: https://gis.ne.gov/enterprise/rest/services/Covid19MapV5/MapServer/1/query
   params: {f: json, outStatistics: [{onStatisticField: ID, statisticType: count}],
     groupByFieldsForStatistics: lab_status, outFields: '*', where: NE_JURIS='yes', returnGeometry: false}
   type: arcgis
