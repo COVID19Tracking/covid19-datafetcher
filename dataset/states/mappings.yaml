@@ -136,8 +136,9 @@ IN:
   #COVID_DEATHS_CUMSUM: DEATH_CONFIRMED
   #COVID_TEST_CUMSUM: TOTAL
 
-  m2b_hospitalized_icu_occupied_covid: CURR_ICU
-  m2b_hospitalized_vent_occupied_covid: CURR_VENT
+  beds_all_occupied_beds_covid_19: CURR_HOSP
+  beds_icu_occupied_beds_covid_19: CURR_ICU
+  vents_all_in_use_covid_19: CURR_VENT
 
   total_case: POSITIVE
   total_death: DEATH_CONFIRMED
