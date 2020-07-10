@@ -18,6 +18,27 @@ CO:
   Deaths: DEATH
   Hosp: HOSP
   __strptime: "%m/%d/%Y"
+MA:
+  Date: DATE
+  Probable Total: PROBABLE
+  Positive Total: POSITIVE
+
+  Molecular Total: TOTAL
+  Serology Total: ANTIBODY_TOTAL
+  Molecular All Tests Total: SPECIMENS
+
+  Date of Death: DATE
+  #Confirmed Total: DEATH_CONFIRMED
+  #Probable Total: DEATH_PROBABLE
+
+  # Meta; trying something new
+  __case_file: CasesByDate.csv
+  __test_file: TestingByDate.csv
+  __death_file: DateofDeath.csv
+  __specimens_file: Testing2.csv
+
+  __strptime: "%m/%d/%Y"
+
 MD:
   NegativeTests: NEGATIVE
   ReportDate: TIMESTAMP

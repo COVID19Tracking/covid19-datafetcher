@@ -23,6 +23,11 @@ CO:
   params: {where: 1=1, outFields: '*', f: json}
   type: arcgis
   desc: Cases, tested, death, hosp
+MA:
+- url: https://www.mass.gov/info-details/covid-19-response-reporting
+  params: null
+  type: html:soup
+  desc: None, just need a trigger
 MD:
 - url: https://services.arcgis.com/njFNhDsUCentVYJW/ArcGIS/rest/services/MASTERCaseTracker/FeatureServer/0/query
   params: {f: json, resultRecordCount: 300, orderByFields: ReportDate desc, outFields: 'ReportDate,TotalCases,NegativeTests,bedsICU,bedsAcute,bedsTotal,total_hospitalized,total_released,deaths,pdeaths,TotalTests', where: 1=1}
