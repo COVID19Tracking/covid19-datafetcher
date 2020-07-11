@@ -35,14 +35,18 @@ def handle_al(res, mapping):
         tagged.update(partial)
 
     widgets = res[-1].get('widgets', {})
+    # 6 = hospitalizations
+    # 29 = recoveries
+    extras = [(widgets[6], Fields.HOSP.name),
+              (widgets[29], Fields.RECOVERED.name)]
 
-    for widget in widgets:
+    for widget, field in extras:
         if widget.get('defaultSettings', {}) \
                     .get('description',"").find("STATEWIDE") >= 0:
             # now check that it's a numeric value
-            recovered = widget['defaultSettings']['middleSection']['textInfo']['text'].strip()
-            if re.match("[1-9][0-9,]*", recovered) is not None:
-                tagged[Fields.RECOVERED.name] = atoi(recovered)
+            val = widget['defaultSettings']['middleSection']['textInfo']['text'].strip()
+            if re.match("[1-9][0-9,]*", val) is not None:
+                tagged[field] = atoi(val)
 
     return tagged
 
