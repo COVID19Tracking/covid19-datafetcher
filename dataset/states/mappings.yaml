@@ -298,6 +298,15 @@ NY:
   test_date: DATE
   sum_cumulative_number_of_positives: POSITIVE
   sum_cumulative_number_of_tests: TOTAL
+OH:
+  Confirmed Cases: CONFIRMED
+  Total Cases: POSITIVE
+  CDC Expanded Case Definition (Probable): PROBABLE
+  Confirmed Deaths: DEATH_CONFIRMED
+  CDC Expanded Death Definition (Probable): DEATH_PROBABLE
+  Total Deaths: DEATH
+  Number of Hospitalizations in Ohio: HOSP
+  Number of ICU Admissions: ICU
 OK:
   Cases: POSITIVE
   Deaths: DEATH

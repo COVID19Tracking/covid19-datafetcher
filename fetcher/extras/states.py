@@ -449,6 +449,24 @@ def handle_nj(res, mapping):
 
     return mapped
 
+def handle_oh(res, mapping):
+    soup = res[0]
+    container = soup.find('div', 'stats-cards__container')
+    tagged = {}
+    for div in container.find_all('div', 'stats-cards__item'):
+        name = div.find('div', 'stats-cards__label')
+        val = div.find('div', 'stats-cards__number')
+        if name and val and name and name.get_text(strip=True) in mapping:
+            val = atoi(val.get_text(strip=True))
+            tagged[mapping[name.get_text(strip=True)]] = val
+
+    # Get last updated date
+    msg = container.find_next_sibling('div', 'stats-cards__update-msg')
+    if msg:
+        spans = msg.find_all('span')
+        tagged[Fields.DATE.name] = spans[1].get_text(strip=True)
+    return tagged
+
 def handle_ok(res, mapping):
     # need to sum all values
     res = res[0]

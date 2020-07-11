@@ -415,6 +415,11 @@ NY:
   type: soda
   desc: Total & positives
   data_path: [0, 0]
+OH:
+- url: https://coronavirus.ohio.gov/wps/portal/gov/covid-19/home
+  params: null
+  type: html:soup
+  desc: Main page (for soup)
 OK:
 - url: https://storage.googleapis.com/ok-covid-gcs-public-download/oklahoma_cases_county.csv
   params: null
