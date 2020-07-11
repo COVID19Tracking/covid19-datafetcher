@@ -367,10 +367,14 @@ NE:
   desc: Lab results (pos, inconclusive, neg)
 NJ:
 - url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/survey123_cb9a6e9a53ae45f6b9509a23ecdf7bcf/FeatureServer/0/query
-  params: {f: json, resultRecordCount: 1, orderByFields: _date desc, outFields: '*',
-    where: total_tests_reported is not NULL}
+  params: {f: json, resultRecordCount: 1, orderByFields: _date desc, outFields: '*', where: 1=1}
   type: arcgis
   desc: Base data
+- url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/survey123_cb9a6e9a53ae45f6b9509a23ecdf7bcf/FeatureServer/0/query
+  params: {f: json, resultRecordCount: 1, orderByFields: _date desc, outFields: 'total_tests_reported',
+    where: total_tests_reported is not NULL}
+  type: arcgis
+  desc: Probable death
 - url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query
   params: {where: survey_period>=timestamp '2020-04-27 07:00:00' AND structure_measure_identifier LIKE '%of COVID + Patients Discharged from Hospital - Excluding Deaths (Past 24 hours)', outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "recoveries"}], f: json}
   type: arcgis
