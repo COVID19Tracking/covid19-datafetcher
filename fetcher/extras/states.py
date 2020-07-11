@@ -88,6 +88,12 @@ def handle_fl(res, mapping):
     mapped[Fields.HOSP.name] += extra_hosp
     mapped[Fields.DEATH.name] += extra_death
 
+    # Current hosp csv
+    hosp = res[2]
+    for r in hosp:
+        if r.get('County') == 'All':
+            mapped[Fields.CURR_HOSP.name] = atoi(r.get('COVID Hospitalizations'))
+
     return mapped
 
 def handle_ky(res, mapping):

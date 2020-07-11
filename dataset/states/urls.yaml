@@ -154,6 +154,10 @@ FL:
         onStatisticField: C_NonResDeaths}, {statisticType: sum, onStatisticField: C_FLResDeaths}],
     f: json}
   type: arcgis
+- url: https://bi.ahca.myflorida.com/t/ABICC/views/Public/COVIDHospitalizationsCounty.csv
+  params: null
+  type: csv
+  desc: Hospitalizations (current)
 GA:
 - url: https://services1.arcgis.com/2iUE8l8JKrP2tygQ/arcgis/rest/services/COVID_19_Cases/FeatureServer/0/query
   params: {f: json, outStatistics: [{onStatisticField: COVID_Cases, statisticType: sum},
