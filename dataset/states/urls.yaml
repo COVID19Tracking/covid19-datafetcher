@@ -22,8 +22,7 @@ AK:
   type: arcgis
   desc: Totals
 - url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/COVID_Hospital_Dataset_(prod)/FeatureServer/0/query
-  params: {where: 1=1, outStatistics: [{statisticType: sum,
-        onStatisticField: Pos_COVID_PUI_Pending}], f: json}
+  params: {where: facility_filter=1, outStatistics: [{statisticType: sum, onStatisticField: Pos_COVID_PUI_Pending}], f: json}
   type: arcgis
   desc: Hospitalization (current)
 - url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/pos_susp_vent/FeatureServer/0/query
