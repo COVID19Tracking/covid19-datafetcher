@@ -244,6 +244,14 @@ MO:
   # From the excel:
   Hospitalized and Ventilated COVID Patients: CURR_VENT
   Hospitalized COVID Patients: CURR_HOSP
+MP:
+  MAX_reportdt: TIMESTAMP
+  SUM_confirmedcases: CONFIRMED
+  SUM_totalspeccnmi: SPECIMENS
+  SUM_deaths: DEATH
+  SUM_recovered: RECOVERED
+  SUM_hospitalized: HOSP
+  totaltestedcnmi: TOTAL
 MT:
   SUM_HospitalizationCount: CURR_HOSP
   SUM_Total: POSITIVE
