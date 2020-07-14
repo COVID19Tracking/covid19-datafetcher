@@ -123,7 +123,7 @@ IA:
 IL:
   confirmed_cases: POSITIVE
   deaths: DEATH
-  total_tested: TOTAL
+  total_tested: SPECIMENS
   ICUCovidPatients: CURR_ICU
   VentCovidPatients: CURR_VENT
   TotalCOVIDPUIInHospital: CURR_HOSP
