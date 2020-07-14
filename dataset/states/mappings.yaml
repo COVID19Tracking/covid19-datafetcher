@@ -136,6 +136,10 @@ IN:
   #COVID_DEATHS_CUMSUM: DEATH_CONFIRMED
   #COVID_TEST_CUMSUM: TOTAL
 
+  DATE: DATE
+  BEDS_ICU_OCCUPIED_COVID_19: CURR_ICU
+  VENTS_ALL_USE_COVID_19: CURR_VENT
+
   beds_all_occupied_beds_covid_19: CURR_HOSP
   beds_icu_occupied_beds_covid_19: CURR_ICU
   vents_all_in_use_covid_19: CURR_VENT
