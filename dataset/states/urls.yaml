@@ -310,10 +310,14 @@ MO:
   params: {where: Description='PCR Tested', outFields: 'value as total_people', f: json}
   type: arcgis
   desc: Total PCR (people)
-- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/MHA_COVID_19_Patient_Layer/FeatureServer/0/query
-  params: {where: 1=1, orderByFields: collectiondate desc, groupByFieldsForStatistics: collectiondate, outStatistics: [{"statisticType":"sum","onStatisticField":"numc19hosppats", "outStatisticFieldName": "curr_hosp"}, {"statisticType":"sum","onStatisticField":"numc19mechventpats", "outStatisticFieldName": "curr_vent"}], resultOffset: 3, resultRecordCount: 1, f: json}
+- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/MHA_Hospitalizations_Automated/FeatureServer/0/query
+  params: {where: 1=1, orderByFields: collectiondate desc, groupByFieldsForStatistics: collectiondate, outStatistics: [{"statisticType":"sum","onStatisticField":"numc19hosppats", "outStatisticFieldName": "curr_hosp"}], resultRecordCount: 1, f: json}
   type: arcgis
-  desc: Current Hosp.
+  desc: Current Hosp. query
+- url: https://www.mhanet.com/mhaimages/covid-19/daily.dashboard/Statewide_Dashboard.xlsx
+  params: null
+  type: xlsx
+  desc: Current hosp+vent excel
 # -------------------------------
 MT:
 - url: https://services.arcgis.com/qnjIrwR8z5Izc0ij/arcgis/rest/services/COVID_Cases_Production_View/FeatureServer/0/query

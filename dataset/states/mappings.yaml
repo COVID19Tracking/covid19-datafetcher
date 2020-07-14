@@ -229,8 +229,6 @@ MO:
   SUM_DEATHS: DEATH
   MAX_EditDate: TIMESTAMP # no longer used, TODO: find alternative
   total_people: TOTAL
-  curr_hosp: CURR_HOSP
-  curr_vent: CURR_VENT
   #SUM_Total: ANTIBODY_TOTAL
   #SUM_Positive: ANTIBODY_POS
   #SUM_Negative: ANTIBODY_NEG
@@ -239,6 +237,9 @@ MO:
   PCR_Total: SPECIMENS
   PCR_Positive: SPECIMENS_POS
   PCR_Negative: SPECIMENS_NEG
+  # From the excel:
+  Hospitalized and Ventilated COVID Patients: CURR_VENT
+  Hospitalized COVID Patients: CURR_HOSP
 MT:
   SUM_HospitalizationCount: CURR_HOSP
   SUM_Total: POSITIVE
