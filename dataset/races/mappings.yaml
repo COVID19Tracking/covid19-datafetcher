@@ -7,6 +7,9 @@ AK:
   Other: POS_OTHER
   Unknown: POS_UNKNOWN
   White: POS_WHITE
+AZ:
+  SUM_Number_Confirmed: POSITIVE
+  Deaths: DEATH
 CA:
   # Field descriptions: https://data.ca.gov/dataset/covid-19-cases/resource/7e477adb-d7ab-4d4b-a198-dc4c6dc634c9
   # Summary
