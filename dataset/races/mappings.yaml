@@ -7,6 +7,9 @@ AK:
   Other: POS_OTHER
   Unknown: POS_UNKNOWN
   White: POS_WHITE
+AZ:
+  SUM_Number_Confirmed: POSITIVE
+  Deaths: DEATH
 NM:
   created: TIMESTAMP
   asian: POS_ASIAN

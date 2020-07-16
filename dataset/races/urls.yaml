@@ -5,6 +5,15 @@ AK:
   params: {where: 1=1, outFields: '*', f: json}
   type: arcgis
   desc: Everything
+AZ:
+- url: https://services6.arcgis.com/l7uujk4hHifqabRB/ArcGIS/rest/services/COVID19_County_Level_View_Layer/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "Number_Confirmed"}], f: json}
+  type: arcgis
+  desc: Cases
+- url: https://services6.arcgis.com/l7uujk4hHifqabRB/ArcGIS/rest/services/ADHS_Count/FeatureServer/0/query
+  params: {where: 1=1, outFields: Deaths, f: json}
+  type: arcgis
+  desc: Deaths
 NM:
 - url: https://e7p503ngy5.execute-api.us-west-2.amazonaws.com/prod/GetPublicStatewideData
   params: null
