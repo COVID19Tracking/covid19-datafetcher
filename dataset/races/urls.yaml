@@ -14,6 +14,11 @@ AZ:
   params: {where: 1=1, outFields: Deaths, f: json}
   type: arcgis
   desc: Deaths
+MD:
+- url: https://services.arcgis.com/njFNhDsUCentVYJW/ArcGIS/rest/services/MASTERCaseTracker/FeatureServer/0/query
+  params: {f: json, resultRecordCount: 1, orderByFields: ReportDate desc, outFields: 'ReportDate,TotalCases,NegativeTests,bedsTotal,total_hospitalized,deaths,pdeaths,TotalTests,caseAfrAmer,caseWhite,caseHispanic,caseAsian,caseOther,caseNotAVail,deathAfrAmer,deathWhite,deathHispanic,deathAsian,deathOther,deathNotAvail,pDeathAfrAmer,pDeathWhite,pDeathHispanic,pDeathAsian,pDeathOther,pDeathNotAvail',
+    where: 1=1}
+  type: arcgis
 NM:
 - url: https://e7p503ngy5.execute-api.us-west-2.amazonaws.com/prod/GetPublicStatewideData
   params: null
