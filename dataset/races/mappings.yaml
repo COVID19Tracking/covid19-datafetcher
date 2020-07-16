@@ -15,8 +15,8 @@ MD:
   ReportDate: TIMESTAMP
   NegativeTests: NEGATIVE
   TotalCases: POSITIVE
-  deaths: DEATH_CONFIRMED
-  pDeaths: DEATH_PROBABLE
+  deaths: DEATH_CONF
+  pDeaths: DEATH_PROB
   total_hospitalized: HOSP
   TotalTests: SPECIMENS
   # Positives
