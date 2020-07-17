@@ -28,6 +28,15 @@ def atoi(val):
         return val
     return int(val.replace(",",''))
 
+def handle_ak(res, mapping):
+    tagged = {}
+    for result in res:
+        partial = extract_arcgis_attributes(result, mapping, debug_state = 'AK')
+        tagged.update(partial)
+
+    tagged[Fields.POSITIVE.name] = tagged[Fields.POSITIVE.name] + tagged['NON_RESIDENT']
+    return tagged
+
 def handle_al(res, mapping):
     tagged = {}
     for result in res[:-1]:

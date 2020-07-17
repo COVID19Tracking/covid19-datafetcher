@@ -7,6 +7,8 @@ AK:
   SUM_Pos_COVID_PUI_Pending: CURR_HOSP
   pos_susp_vent: CURR_VENT
   cum_Total: TOTAL
+  # value to add to cases
+  non_residents: NON_RESIDENT
 AL:
   SUM_CONFIRMED: CONFIRMED
   SUM_DIED: DEATH_CONFIRMED
