@@ -2,13 +2,26 @@ hydra:
   run:
     dir: .
   output_subdir: null
+
 push:
   spreadsheet_id: 1brHKBhqiXkkLyiDTDfaBK-tms-R4KVkI-NPFfFZwqYk
   sheet_id: 0
   file: outputs/states.csv
+
 creds:
   type: service # valid values should be: user, service
   interactive: false # this applies only to user credentials
   dir: creds
   key_filepath: ${creds.dir}/credentials.json
   pickled_token: ${creds.dir}/token.pickle
+
+backfill:
+  folder: 1Q8SpJFRR8YeQXBaVIRtVQaZvb7nXmLBy
+  templateId: 185rHER_PDUcb_GbQHOXNGcB3YwwPRTTdF1eolWpPtEk
+  templateGid: 1869230983
+  states: [CA, MA, MD, MP, ID]
+
+  states_daily_source: 18oVRrHj3c183mHmq3m89_163yuYltLNlOmPerQ18E8w
+  backfill_source: outputs/backfill.csv
+  ctp_sheet: {name: CTP Data, id: 55555}
+  backfill_sheet: {name: Backfill Data, id: 666666}

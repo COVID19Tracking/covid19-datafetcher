@@ -92,3 +92,20 @@ class GDocsWrapper(object):
         if self.drive is None:
             self.drive = build('drive', 'v3', credentials=self.get_creds(), cache=self.cache)
         return self.drive
+
+    def set_sheet_values(self, spreadsheet_id, sheet_id, content):
+        # TODO: consider doing it here
+        pass
+
+    def get_sheet_values(self, spreadsheet_id, sheet_range):
+        if not spreadsheet_id or not sheet_range:
+            return None
+
+        response = self.get_sheets().spreadsheets().values().get(
+            spreadsheetId=spreadsheet_id, range=sheet_range).execute()
+
+        values = response.get('values')
+        if not values:
+            return None
+
+        return values

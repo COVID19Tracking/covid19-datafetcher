@@ -9,12 +9,12 @@
 # Only `url` and `type` are mandatory, but I fill `params` with `null` when it's empty, I think that it's nicer this way
 CA:
 - url: https://data.ca.gov/api/3/action/datastore_search_sql
-  params: {sql: 'select date, sum(totalcountdeaths) as death, sum(totalcountconfirmed) as confirmed from "926fd08f-cc91-4828-af38-bd45de97f8c3" group by date order by date desc limit 100'}
+  params: {sql: 'select date, sum(totalcountdeaths) as death, sum(totalcountconfirmed) as confirmed from "926fd08f-cc91-4828-af38-bd45de97f8c3" group by date order by date desc limit 200'}
   type: ckan
   data_path: ['result', 'records', []]
   desc: Cases, death
 - url: https://data.ca.gov/api/3/action/datastore_search
-  params: {resource_id: b6648a0d-ff0a-4111-b80b-febda2ac9e09, limit: 100, sort: date desc}
+  params: {resource_id: b6648a0d-ff0a-4111-b80b-febda2ac9e09, limit: 200, sort: date desc}
   type: ckan
   data_path: ['result', 'records', []]
   desc: Testing total
