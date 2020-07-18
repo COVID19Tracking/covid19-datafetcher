@@ -5,6 +5,69 @@ AK:
   params: {where: 1=1, outFields: '*', f: json}
   type: arcgis
   desc: Everything
+CA:
+# Summary
+- url: https://data.ca.gov/api/3/action/datastore_search_sql
+  params: {sql: 'select date, sum(totalcountdeaths) as death, sum(totalcountconfirmed) as confirmed from "926fd08f-cc91-4828-af38-bd45de97f8c3" group by date order by date desc limit 1'}
+  type: ckan
+  data_path: ['result', 'records', 0]
+  desc: Cases, death
+# Latino
+- url: https://data.ca.gov/api/3/action/datastore_search_sql
+  params: 
+     sql: SELECT date, race_ethnicity, cases as pos_e_hispanic, deaths as death_e_hispanic FROM "7e477adb-d7ab-4d4b-a198-dc4c6dc634c9" WHERE "race_ethnicity" = 'Latino' ORDER BY date desc LIMIT 1
+  type: ckan
+  data_path: ['result', 'records', 0]
+  desc: Race
+# White
+- url: https://data.ca.gov/api/3/action/datastore_search_sql
+  params: 
+     sql: SELECT date, race_ethnicity, cases as pos_white, deaths as death_white FROM "7e477adb-d7ab-4d4b-a198-dc4c6dc634c9" WHERE "race_ethnicity" = 'White' ORDER BY date desc LIMIT 1
+  type: ckan
+  data_path: ['result', 'records', 0]
+  desc: Race
+# Asian
+- url: https://data.ca.gov/api/3/action/datastore_search_sql
+  params: 
+     sql: SELECT date, race_ethnicity, cases as pos_asian, deaths as death_asian FROM "7e477adb-d7ab-4d4b-a198-dc4c6dc634c9" WHERE "race_ethnicity" = 'Asian' ORDER BY date desc LIMIT 1
+  type: ckan
+  data_path: ['result', 'records', 0]
+  desc: Race
+# Black
+- url: https://data.ca.gov/api/3/action/datastore_search_sql
+  params: 
+     sql: SELECT date, race_ethnicity, cases as pos_black, deaths as death_black FROM "7e477adb-d7ab-4d4b-a198-dc4c6dc634c9" WHERE "race_ethnicity" = 'Black' ORDER BY date desc LIMIT 1
+  type: ckan
+  data_path: ['result', 'records', 0]
+  desc: Race
+# Multi-Race
+- url: https://data.ca.gov/api/3/action/datastore_search_sql
+  params: 
+     sql: SELECT date, race_ethnicity, cases as pos_mult, deaths as death_mult FROM "7e477adb-d7ab-4d4b-a198-dc4c6dc634c9" WHERE "race_ethnicity" = 'Multi-Race' ORDER BY date desc LIMIT 1
+  type: ckan
+  data_path: ['result', 'records', 0]
+  desc: Race
+# American Indian or Alaska Native
+- url: https://data.ca.gov/api/3/action/datastore_search_sql
+  params: 
+     sql: SELECT date, race_ethnicity, cases as pos_aian, deaths as death_aian FROM "7e477adb-d7ab-4d4b-a198-dc4c6dc634c9" WHERE "race_ethnicity" = 'American Indian or Alaska Native' ORDER BY date desc LIMIT 1
+  type: ckan
+  data_path: ['result', 'records', 0]
+  desc: Race
+# Native Hawaiian and other Pacific Islander
+- url: https://data.ca.gov/api/3/action/datastore_search_sql
+  params: 
+     sql: SELECT date, race_ethnicity, cases as pos_hnpi, deaths as death_hnpi FROM "7e477adb-d7ab-4d4b-a198-dc4c6dc634c9" WHERE "race_ethnicity" = 'Native Hawaiian and other Pacific Islander' ORDER BY date desc LIMIT 1
+  type: ckan
+  data_path: ['result', 'records', 0]
+  desc: Race
+# Other
+- url: https://data.ca.gov/api/3/action/datastore_search_sql
+  params: 
+     sql: SELECT date, race_ethnicity, cases as pos_other, deaths as death_other FROM "7e477adb-d7ab-4d4b-a198-dc4c6dc634c9" WHERE "race_ethnicity" = 'Other' ORDER BY date desc LIMIT 1
+  type: ckan
+  data_path: ['result', 'records', 0]
+  desc: Race
 NM:
 - url: https://e7p503ngy5.execute-api.us-west-2.amazonaws.com/prod/GetPublicStatewideData
   params: null
