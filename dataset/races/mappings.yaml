@@ -7,6 +7,36 @@ AK:
   Other: POS_OTHER
   Unknown: POS_UNKNOWN
   White: POS_WHITE
+MD:
+  # Summary
+  ReportDate: TIMESTAMP
+  NegativeTests: NEGATIVE
+  TotalCases: POSITIVE
+  deaths: DEATH_CONF
+  pDeaths: DEATH_PROB
+  total_hospitalized: HOSP
+  TotalTests: SPECIMENS
+  # Positives
+  caseWhite: POS_WHITE
+  caseAfrAmer: POS_BLACK
+  caseHispanic: POS_E_HISPANIC
+  caseAsian: POS_ASIAN
+  caseOther: POS_OTHER
+  caseNotAVail: POS_UNKNOWN
+  # Deaths
+  deathAfrAmer: DEATH_BLACK
+  deathWhite: DEATH_WHITE
+  deathHispanic: DEATH_E_HISPANIC
+  deathAsian: DEATH_ASIAN
+  deathOther: DEATH_OTHER
+  deathNotAvail: DEATH_UNKNOWN
+  # Probable deaths
+  pDeathAfrAmer: DEATH_PROB_BLACK
+  pDeathWhite: DEATH_PROB_WHITE
+  pDeathHispanic: DEATH_PROB_E_HISPANIC
+  pDeathAsian: DEATH_PROB_ASIAN
+  pDeathOther: DEATH_PROB_OTHER
+  pDeathNotAvail: DEATH_PROB_UNKNOWN
 NM:
   created: TIMESTAMP
   asian: POS_ASIAN
