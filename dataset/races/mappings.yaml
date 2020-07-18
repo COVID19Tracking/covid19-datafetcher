@@ -7,6 +7,29 @@ AK:
   Other: POS_OTHER
   Unknown: POS_UNKNOWN
   White: POS_WHITE
+CA:
+  # Field descriptions: https://data.ca.gov/dataset/covid-19-cases/resource/7e477adb-d7ab-4d4b-a198-dc4c6dc634c9
+  # Summary
+  confirmed: POSITIVE
+  death: DEATH
+  # Positives
+  pos_e_hispanic: POS_E_HISPANIC
+  pos_white: POS_WHITE
+  pos_asian: POS_ASIAN
+  pos_black: POS_BLACK
+  pos_mult: POS_MULT
+  pos_aian: POS_AIAN
+  pos_hnpi: POS_HNPI
+  pos_other: POS_OTHER
+  # Deaths
+  death_e_hispanic: DEATH_E_HISPANIC
+  death_white: DEATH_WHITE
+  death_asian: DEATH_ASIAN
+  death_black: DEATH_BLACK
+  death_mult: DEATH_MULT
+  death_aian: DEATH_AIAN
+  death_hnpi: DEATH_HNPI
+  death_other: DEATH_OTHER
 MD:
   # Summary
   ReportDate: TIMESTAMP
