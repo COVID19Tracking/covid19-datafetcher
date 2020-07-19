@@ -7,6 +7,7 @@ from tempfile import NamedTemporaryFile, TemporaryDirectory
 from zipfile import ZipFile
 import csv
 import logging
+import os
 import pandas as pd
 import re
 import shutil
@@ -702,19 +703,27 @@ def handle_ma(res, mapping):
     tagged = {}
 
     # download zip
-    req = urllib.request.Request(url, headers = {'User-Agent': 'Mozilla/5.0'})
-    with urllib.request.urlopen(req) as response, \
-         NamedTemporaryFile(delete=True) as tmpfile , TemporaryDirectory() as tmpdir:
-            shutil.copyfileobj(response, tmpfile)
-            tmpfile.flush()
-            shutil.unpack_archive(tmpfile.name, tmpdir, format="zip")
+    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    with TemporaryDirectory() as tmpdir:
+        zip_path = os.path.join(tmpdir, "zip_data.zip")
+        with urllib.request.urlopen(req) as response, open(zip_path, 'wb') as zip_file:
+            zip_file.write(response.fp.read())
+            zip_file.flush()
+
+        with ZipFile(zip_path, 'r') as zip_archive:
+            zip_archive.extract('DeathsReported.csv', path=tmpdir)
+            zip_archive.extract('Testing2.csv', path=tmpdir)
+            zip_archive.extract('Hospitalization from Hospitals.csv', path=tmpdir)
+            zip_archive.extract('Cases.csv', path=tmpdir)
+            zip_archive.extract('RaceEthnicity.csv', path=tmpdir)
 
             # Now we can read the files
             files = ['DeathsReported.csv', 'Testing2.csv',
                      'Hospitalization from Hospitals.csv', 'Cases.csv']
             for filename in files:
-                with open("{}/{}".format(tmpdir, filename), 'r') as csvfile:
-                    reader = csv.DictReader(csvfile, dialect = 'unix')
+                file_path = os.path.join(tmpdir, filename)
+                with open(file_path, 'r') as csvfile:
+                    reader = csv.DictReader(csvfile, dialect='unix')
                     rows = list(reader)
                     last_row = rows[-1]
                     partial = map_attributes(last_row, mapping, 'MA')
@@ -724,14 +733,14 @@ def handle_ma(res, mapping):
             for k, v in mapping.items():
                 if v == Fields.HOSP.name:
                     hosp_key = k
-            hospfile = csv.DictReader(open(tmpdir + "/RaceEthnicity.csv", 'r'))
-            hosprows = list(hospfile)
-            last_row = hosprows[-1]
-            hosprows = [x for x in hosprows if x['Date'] == last_row['Date']]
-            summed = csv_sum(hosprows, [hosp_key])
-            tagged[Fields.HOSP.name] = summed[hosp_key]
-
-    return tagged
+            file_path = os.path.join(tmpdir, "RaceEthnicity.csv")
+            with open(file_path, 'r') as hosp_file:
+                hosp_file_reader = csv.DictReader(hosp_file)
+                hosprows = list(hosp_file_reader)
+                last_row = hosprows[-1]
+                hosprows = [x for x in hosprows if x['Date'] == last_row['Date']]
+                summed = csv_sum(hosprows, [hosp_key])
+                tagged[Fields.HOSP.name] = summed[hosp_key]
 
 def handle_ut(res, mapping):
     tagged = {}
