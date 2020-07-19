@@ -574,9 +574,14 @@ def handle_me(res, mapping):
 
 def handle_mi(res, mapping):
     tagged = {}
-    for result in res[:-1]:
+    for result in res[:-2]:
         partial = extract_arcgis_attributes(result, mapping, 'MI')
         tagged.update(partial)
+
+    recovered_page = res[-2]
+    recover_p = recovered_page.find('div', 'fullContent')
+    span = recover_p.find('span').get_text(strip=True)
+    tagged[Fields.RECOVERED.name] = atoi(span)
 
     # TODO: Can use the reverse mapping
     cases = 'Cases'
@@ -587,7 +592,6 @@ def handle_mi(res, mapping):
     antibody = 'Serology'
     negative = 'Negative'
     positive = 'Positive'
-
 
     soup = res[-1]
     h = soup.find("h5", string=re.compile('[dD][aA][tT][aA]'))

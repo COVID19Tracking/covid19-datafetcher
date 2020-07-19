@@ -266,10 +266,10 @@ MI:
         onStatisticField: Inpatients}], f: json}
   type: arcgis
   desc: Hospitalization/vent/icu
-- url: https://services5.arcgis.com/ZqUZ99cjRiEOyN05/ArcGIS/rest/services/Tc7EZ/FeatureServer/0/query
-  params: {where: 1=1, outFields: f4 as Recovered, orderByFields: f1 desc, resultRecordCount: 1, f: json}
-  type: arcgis
-  desc: Recovered
+- url: https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173-531113--,00.html
+  params: null
+  type: html:soup
+  desc: Recovered (soup)
 - url: https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html
   params: null
   type: html:soup
