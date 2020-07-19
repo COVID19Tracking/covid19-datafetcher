@@ -82,6 +82,11 @@ MD:
   params: {f: json, resultRecordCount: 1, orderByFields: ReportDate desc, outFields: 'ReportDate,TotalCases,NegativeTests,bedsTotal,total_hospitalized,deaths,pdeaths,TotalTests,caseAfrAmer,caseWhite,caseHispanic,caseAsian,caseOther,caseNotAVail,deathAfrAmer,deathWhite,deathHispanic,deathAsian,deathOther,deathNotAvail,pDeathAfrAmer,pDeathWhite,pDeathHispanic,pDeathAsian,pDeathOther,pDeathNotAvail',
     where: 1=1}
   type: arcgis
+MO:
+- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/Case_by_Race_Automated/FeatureServer/0/query
+  params: {f: json, outFields: 'RACE, Frequency', where: 1=1}
+  type: arcgis
+  desc: Race
 NM:
 - url: https://e7p503ngy5.execute-api.us-west-2.amazonaws.com/prod/GetPublicStatewideData
   params: null
