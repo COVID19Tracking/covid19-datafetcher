@@ -1,22 +1,20 @@
 from datetime import datetime
-from enum import Enum
-import os
-import logging
 import hydra
+import logging
 import pandas as pd
-import sys
 import typing
-import urllib, urllib.request, json
 
 from fetcher.utils import request, request_and_parse, extract_attributes, Fields, request_csv, \
     request_soup, request_pandas, extract_arcgis_attributes
 from fetcher.sources import Sources
+
 
 # TODO:
 # - make a mapper of type to fetch method
 
 MS_FILTER = datetime(2020, 1, 1, 0, 0).timestamp() * 1000
 TS = 'TIMESTAMP'
+
 
 class Fetcher(object):
     def __init__(self, cfg):
@@ -149,8 +147,9 @@ class Fetcher(object):
             d = data['DATE']
             data[TS] = datetime.strptime(d, dateformat)
         else:
-            #TODO: Should I add now time?
+            # TODO: Should I add now time?
             pass
+
 
 def _fix_index_and_columns(index, columns):
     index = index if isinstance(index, str) else list(index)
@@ -167,6 +166,7 @@ def _fix_index_and_columns(index, columns):
 
     return index
 
+
 def build_dataframe(results, columns, index, output_date_format,
                     filename, dump_all_states=False):
     # TODO: move file generation out of here
@@ -175,8 +175,7 @@ def build_dataframe(results, columns, index, output_date_format,
               'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI',
               'MN', 'MO', 'MP', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV',
               'NY', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT',
-              'VA', 'VI', 'VT', 'WA', 'WI', 'WV', 'WY'
-    ]
+              'VA', 'VI', 'VT', 'WA', 'WI', 'WV', 'WY']
 
     # results is a *dict*: state -> []
     if not results:
@@ -188,7 +187,7 @@ def build_dataframe(results, columns, index, output_date_format,
     # columns: add state even if not listed, if it's in index
 
     items = []
-    for k, v in results.items():
+    for _, v in results.items():
         if isinstance(v, typing.List):
             items.extend(v)
         elif isinstance(v, typing.Dict):
@@ -206,7 +205,7 @@ def build_dataframe(results, columns, index, output_date_format,
     df = df.groupby(level=df.index.names).last()
 
     if isinstance(index, list):
-        #df.sort_index(level=[1, 0], ascending=[False, True], inplace=True)
+        # df.sort_index(level=[1, 0], ascending=[False, True], inplace=True)
         df.sort_index(ascending=False, inplace=True)
     elif dump_all_states:
         # no point doing it for backfill
@@ -223,6 +222,7 @@ def build_dataframe(results, columns, index, output_date_format,
     logging.info("Fetched a total of %d cells", total_non_empty)
 
     return df
+
 
 @hydra.main(config_path='..', config_name="config")
 def main(cfg):
@@ -243,5 +243,5 @@ def main(cfg):
     # This stores the CSV with the requsted fields in order
     df = build_dataframe(results, cfg.dataset.fields, cfg.dataset.index,
                          cfg.output_date_format,
-                         cfg.output, dump_all_states = not cfg.state)
+                         cfg.output, dump_all_states=not cfg.state)
     print(df)

@@ -4,12 +4,14 @@ from io import StringIO
 import csv
 import json
 import logging
-import os, ssl
+import ssl
 import pandas as pd
 import typing
 import urllib
 import urllib.request
 
+
+# TODO: It's not used as an effective enum
 # fields
 class Fields(Enum):
     STATE = 100
@@ -28,9 +30,9 @@ class Fields(Enum):
     PROBABLE = 15
     PENDING = 16
 
-    ANTIBODY_POS=17
-    ANTIBODY_NEG=18
-    ANTIBODY_TOTAL=19
+    ANTIBODY_POS = 17
+    ANTIBODY_NEG = 18
+    ANTIBODY_TOTAL = 19
 
     SPECIMENS = 20
     SPECIMENS_POS = 21
@@ -39,7 +41,7 @@ class Fields(Enum):
     # Death
     DEATH = 30  # total
     DEATH_CONFIRMED = 31
-    DEATH_PROBABLE = 32 # probable cases, or any secondary number published
+    DEATH_PROBABLE = 32  # probable cases, or any secondary number published
 
     # Holpitalization
     HOSP = 40  # ever hospital
@@ -52,9 +54,9 @@ class Fields(Enum):
     # Recovered
     RECOVERED = 50
 
-
     def __repr__(self):
         return self.__str__()
+
 
 def request(url, query=None, encoding=None):
     if not encoding:
@@ -62,10 +64,11 @@ def request(url, query=None, encoding=None):
     if query:
         url = "{}?{}".format(url, urllib.parse.urlencode(query))
     res = {}
-    req = urllib.request.Request(url, headers = {'User-Agent': 'Mozilla/5.0'})
+    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
     with urllib.request.urlopen(req) as f:
         res = f.read().decode(encoding)
     return res
+
 
 def request_pandas(query):
     url = query['url']
@@ -78,18 +81,22 @@ def request_pandas(query):
         df = pd.read_csv(url, **params)
     return df
 
+
 def request_soup(url, query=None, encoding=None):
     res = request(url, query, encoding)
     return BeautifulSoup(res, 'html.parser')
+
 
 def request_cvs_folder(url, query=None, encoding=None):
     # returning context?
     pass
 
+
 def request_and_parse(url, query=None):
     res = request(url, query)
     res = json.loads(res)
     return res
+
 
 def request_csv(url, query=None, dialect=None, header=True, encoding=None):
     # skip cert verification for VA (because they use some unknown CA)
@@ -100,11 +107,12 @@ def request_csv(url, query=None, dialect=None, header=True, encoding=None):
     if not dialect:
         dialect = 'unix'
     if header:
-        reader = csv.DictReader(StringIO(res), dialect = 'unix')
+        reader = csv.DictReader(StringIO(res), dialect='unix')
     else:
-        reader = csv.reader(StringIO(res), dialect = 'unix')
+        reader = csv.reader(StringIO(res), dialect='unix')
     res = list(reader)
     return res
+
 
 def map_attributes(original, mapping, debug_state=None):
     tagged_attributes = {}
@@ -116,20 +124,22 @@ def map_attributes(original, mapping, debug_state=None):
             logging.debug("[{}] Field {} has no mapping".format(debug_state, k))
     return tagged_attributes
 
+
 def extract_arcgis_attributes(dict_result, mapping, debug_state=None):
     path = ['features', [], 'attributes']
     return extract_attributes(dict_result, path, mapping, debug_state)
 
-def extract_attributes(dict_result, path, mapping, debug_state = None):
-    res = _extract_attributes(dict_result, path, mapping, debug_state = None)
+
+def extract_attributes(dict_result, path, mapping, debug_state=None):
+    res = _extract_attributes(dict_result, path, mapping, debug_state=None)
     if isinstance(res, typing.List) and len(res) > 1:
         return res
-    elif isinstance(res, typing.List) and len(res) == 1:
+    if isinstance(res, typing.List) and len(res) == 1:
         return res[0]
-    else:
-        return res
+    return res
 
-def _extract_attributes(dict_result, path, mapping, debug_state = None):
+
+def _extract_attributes(dict_result, path, mapping, debug_state=None):
     '''Uses mapping to extract attributes from dict_result
     Retruns tagged attributes
 
@@ -157,6 +167,7 @@ def _extract_attributes(dict_result, path, mapping, debug_state = None):
     # now that res is the correct place in the result object, we can map the values
     mapped = map_attributes(res, mapping, debug_state)
     return mapped
+
 
 def csv_sum(data, columns=None):
     '''Expecting Dict CSV: list of dicts-like objects

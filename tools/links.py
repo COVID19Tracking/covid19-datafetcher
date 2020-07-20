@@ -4,13 +4,13 @@ This is only one step over just dumping everything to a txt file, nothing fancy
 
 from jinja2 import Environment, PackageLoader, select_autoescape
 import hydra
-import os
 import sys
 import urllib.parse
 import yaml
 
-# TODO: take it from the
+# TODO: take it from configs
 FILENAME = 'index.html'
+
 
 # this means that it has to run from the root folder, not from "tools"
 @hydra.main(config_path='..', config_name="config")
@@ -22,11 +22,11 @@ def main(cfg):
             # query is url, params
             url = query.get('url')
             params = query.get('params')
-            type = query.get('type')
+            query_type = query.get('type')
 
             link = url
             if params:
-                if type == 'arcgis' and 'f' in params and state != 'NE':
+                if query_type == 'arcgis' and 'f' in params and state != 'NE':
                     params.pop('f')
                 link = "{}?{}".format(url, urllib.parse.urlencode(params))
 

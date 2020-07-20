@@ -1,0 +1,4 @@
+[flake8]
+# No need to traverse these directories
+exclude = special, tools/fl_parse_state_report*
+max-line-length = 119

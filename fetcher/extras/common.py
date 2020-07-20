@@ -1,10 +1,10 @@
 from tempfile import NamedTemporaryFile, TemporaryDirectory
-from zipfile import ZipFile
 import shutil
 from contextlib import contextmanager
 import re
 import urllib
 import urllib.request
+
 
 @contextmanager
 def MaContextManager(res):
@@ -12,8 +12,7 @@ def MaContextManager(res):
     link = soup.find('a', string=re.compile("COVID-19 Raw Data"))
     link_part = link['href']
     url = "https://www.mass.gov{}".format(link_part)
-    print("URL = ", url)
-    req = urllib.request.Request(url, headers = {'User-Agent': 'Mozilla/5.0'})
+    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
 
     try:
         response = urllib.request.urlopen(req)

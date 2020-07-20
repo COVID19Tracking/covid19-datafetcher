@@ -7,9 +7,11 @@ import importlib
 import os
 import yaml
 
+
 def _read_yaml(parent_dir, filename):
     content = yaml.load(open(os.path.join(parent_dir, filename), 'r'), Loader=yaml.SafeLoader)
     return content
+
 
 def _read_extras(extras_module_name, keys):
     extras = {}
@@ -22,6 +24,7 @@ def _read_extras(extras_module_name, keys):
         if hasattr(extras_module, extra_name):
             extras[key] = getattr(extras_module, extra_name)
     return extras
+
 
 class Sources(object):
     def __init__(self, url_file, mappings_file, extras_module=None):

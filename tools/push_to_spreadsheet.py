@@ -1,5 +1,4 @@
 from omegaconf import DictConfig
-import csv
 import hydra
 import logging
 import os.path
@@ -18,16 +17,19 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 class MemoryCache(Cache):
     # https://github.com/googleapis/google-api-python-client/issues/325#issuecomment-274349841
     _CACHE = {}
+
     def get(self, url):
         return MemoryCache._CACHE.get(url)
 
     def set(self, url, content):
         MemoryCache._CACHE[url] = content
 
+
 def _google_service_auth(key_filepath):
     creds = ServiceAccountCredentials.from_json_keyfile_name(
         key_filepath, scopes=SCOPES)
     return creds
+
 
 def _google_user_auth(interactive, key_filepath, pickled_token):
     creds = None
@@ -51,15 +53,17 @@ def _google_user_auth(interactive, key_filepath, pickled_token):
             pickle.dump(creds, token)
     return creds
 
+
 def _google_auth(creds_cfg):
     if creds_cfg.type == "user":
         return _google_user_auth(
             creds_cfg.interactive, creds_cfg.key_filepath, creds_cfg.pickled_token)
-    elif creds_cfg.type == "service":
+    if creds_cfg.type == "service":
         return _google_service_auth(creds_cfg.key_filepath)
-    else:
-        logging.error("Unknown auth type {}".format(creds_cfg.type))
+
+    logging.error("Unknown auth type {}".format(creds_cfg.type))
     return None
+
 
 @hydra.main(config_name='config')
 def main(cfg: DictConfig) -> None:
@@ -82,18 +86,16 @@ def main(cfg: DictConfig) -> None:
                 "data": content,
                 "type": 'PASTE_NORMAL',
                 "delimiter": ','
-            }}
-        ],
+            }}],
         "includeSpreadsheetInResponse": False,
-        "responseRanges": [ ],
+        "responseRanges": [],
         "responseIncludeGridData": False
     }
 
     # Call the Sheets API
-    sheet = service.spreadsheets()
     res = service.spreadsheets().batchUpdate(spreadsheetId=cfg.push.spreadsheet_id, body=body).execute()
-
     logging.info("Pushed to spreadsheet. Result: {}".format(res))
+
 
 if __name__ == '__main__':
     main()

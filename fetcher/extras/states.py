@@ -1,19 +1,16 @@
-from bs4 import BeautifulSoup
 from copy import copy
 from datetime import datetime
-from io import StringIO
-import math
 from tempfile import NamedTemporaryFile, TemporaryDirectory
-from zipfile import ZipFile
 import csv
 import logging
+import math
 import pandas as pd
 import re
 import shutil
-import urllib, urllib.request
+import urllib
+import urllib.request
 
-from fetcher.utils import request_and_parse, extract_attributes, \
-   map_attributes, Fields, csv_sum, extract_arcgis_attributes
+from fetcher.utils import map_attributes, Fields, csv_sum, extract_arcgis_attributes
 
 
 ''' This file contains extra handling needed for some states
@@ -23,24 +20,27 @@ The parameters are:
 - state mappings
 '''
 
+
 def atoi(val):
     if isinstance(val, int):
         return val
-    return int(val.replace(",",''))
+    return int(val.replace(",", ''))
+
 
 def handle_ak(res, mapping):
     tagged = {}
     for result in res:
-        partial = extract_arcgis_attributes(result, mapping, debug_state = 'AK')
+        partial = extract_arcgis_attributes(result, mapping, debug_state='AK')
         tagged.update(partial)
 
     tagged[Fields.POSITIVE.name] = tagged[Fields.POSITIVE.name] + tagged['NON_RESIDENT']
     return tagged
 
+
 def handle_al(res, mapping):
     tagged = {}
     for result in res[:-1]:
-        partial = extract_arcgis_attributes(result, mapping, debug_state = 'AL')
+        partial = extract_arcgis_attributes(result, mapping, debug_state='AL')
         tagged.update(partial)
 
     widgets = res[-1].get('widgets', {})
@@ -51,7 +51,7 @@ def handle_al(res, mapping):
 
     for widget, field in extras:
         if widget.get('defaultSettings', {}) \
-                    .get('description',"").find("STATEWIDE") >= 0:
+                    .get('description', "").find("STATEWIDE") >= 0:
             # now check that it's a numeric value
             val = widget['defaultSettings']['middleSection']['textInfo']['text'].strip()
             if re.match("[1-9][0-9,]*", val) is not None:
@@ -79,6 +79,7 @@ def handle_ar(res, mapping):
             tagged[mapping[name]] = atoi(value)
 
     return tagged
+
 
 def handle_fl(res, mapping):
     '''Need to add the non-FL residents to the totals:
@@ -109,6 +110,7 @@ def handle_fl(res, mapping):
 
     return mapped
 
+
 def handle_ky(res, mapping):
     tagged = {}
     for result in res[:-1]:
@@ -130,7 +132,6 @@ def handle_ky(res, mapping):
         if not value:
             continue
 
-        hasalpha = lambda x: re.match("[a-zA-Z0-9]", x)
         pattern = "([a-zA-Z ]*): ([0-9,]*)"
 
         # class = title, number, probable
@@ -168,6 +169,7 @@ def handle_ky(res, mapping):
 
     return tagged
 
+
 def handle_vt(res, mapping):
     tagged = {}
     pui = 'HOSP_PUI'
@@ -178,6 +180,7 @@ def handle_vt(res, mapping):
     tagged[Fields.CURR_HOSP.name] += tagged[pui]
     tagged.pop(pui)
     return tagged
+
 
 def handle_pa(res, mapping):
     '''Need to sum ECMO and Vent number for a total count
@@ -210,9 +213,10 @@ def handle_pa(res, mapping):
 
         if total_cases and recover_pct:
             tagged[Fields.RECOVERED.name] = math.floor(total_cases * recover_pct / 100)
-    except Exception as e:
+    except Exception:
         logging.warning("RI: failed to parse recovered", exc_info=True)
     return tagged
+
 
 def handle_ne(res, mapping):
     tagged = {}
@@ -231,13 +235,15 @@ def handle_ne(res, mapping):
 
     return tagged
 
+
 def handle_la(res, mapping):
     stats = res[0]
     state_tests = 'STATE_TESTS'
     tagged = {}
     if 'features' in stats and len(stats['features']) > 0:
         attributes = stats['features']
-        attributes = {attr.get('attributes', {}).get('Measure'): attr.get('attributes', {}).get('SUM_Value') for attr in attributes}
+        attributes = {attr.get('attributes', {}).get('Measure'):
+                      attr.get('attributes', {}).get('SUM_Value') for attr in attributes}
         tagged = map_attributes(attributes, mapping, 'LA')
 
     if state_tests in tagged:
@@ -261,13 +267,15 @@ def handle_la(res, mapping):
             vent_subtext = widget['defaultSettings']['bottomSection']['textInfo']['text']
             curr_vent = atoi(vent_subtext.split()[0])
         elif widget.get('defaultSettings', {}) \
-                    .get('topSection', {}).get('textInfo', {}).get('text', '').find(recovered_title) >= 0:
+            .get('topSection', {}) \
+                .get('textInfo', {}).get('text', '').find(recovered_title) >= 0:
             recovered = atoi(widget['datasets'][0]['data'])
 
     tagged[Fields.CURR_HOSP.name] = curr_hosp
     tagged[Fields.CURR_VENT.name] = curr_vent
     tagged[Fields.RECOVERED.name] = recovered
     return tagged
+
 
 def handle_il(res, mapping):
     state = 'IL'
@@ -282,7 +290,7 @@ def handle_il(res, mapping):
     y = last_update['year']
     m = last_update['month']
     d = last_update['day']
-    timestamp = datetime(y,m,d).timestamp()
+    timestamp = datetime(y, m, d).timestamp()
     mapped[Fields.TIMESTAMP.name] = timestamp
 
     # probable
@@ -303,10 +311,11 @@ def handle_il(res, mapping):
     y = last_update['year']
     m = last_update['month']
     d = last_update['day']
-    updated = datetime(y,m,d, 23, 59).strftime("%m/%d/%Y %H:%M:%S")
+    updated = datetime(y, m, d, 23, 59).strftime("%m/%d/%Y %H:%M:%S")
     mapped[Fields.DATE.name] = updated
 
     return mapped
+
 
 def handle_gu(res, mapping):
     res = res[0]
@@ -322,6 +331,7 @@ def handle_gu(res, mapping):
 
     # sum all tests
     return tagged
+
 
 def handle_hi(res, mapping):
     stats = res[0]
@@ -349,10 +359,12 @@ def handle_hi(res, mapping):
 
     return tagged
 
+
 def handle_ri(res, mapping):
     dict_res = {r[0]: r[1] for r in res[0]}
     mapped = map_attributes(dict_res, mapping, 'RI')
     return mapped
+
 
 def handle_dc(res, mapping):
     # expecting 1 file:
@@ -377,6 +389,7 @@ def handle_dc(res, mapping):
 
     return tagged
 
+
 def handle_de(res, mapping):
     df = res[0]
     df['Date'] = pd.to_datetime(df[['Year', 'Month', 'Day']])
@@ -388,6 +401,7 @@ def handle_de(res, mapping):
     mapped = map_attributes(df['Value'], mapping, 'DE')
     mapped.update({Fields.DATE.name: max_date})
     return mapped
+
 
 def handle_va(res, mapping):
     '''Getting multiple CVS files from the state and parsing each for
@@ -435,11 +449,12 @@ def handle_va(res, mapping):
     tagged[Fields.ANTIBODY_POS.name] = summed_testing[testing_cols[3]] - summed_testing[testing_cols[1]]
 
     # Hospitalizations
-    hospital = sorted(hospital, key=lambda x: datetime.strptime(x['Date'], date_format), reverse = True)
+    hospital = sorted(hospital, key=lambda x: datetime.strptime(x['Date'], date_format), reverse=True)
     mapped_hosp = map_attributes(hospital[0], mapping, 'VA')
     tagged.update(mapped_hosp)
 
     return tagged
+
 
 def handle_nj(res, mapping):
     '''Need to parse everything the same, and add past recoveries
@@ -455,18 +470,18 @@ def handle_nj(res, mapping):
     # it's always the same
     mapped[Fields.RECOVERED.name] += 15642
 
-
     hosp = 'Hospitalizations'
     widgets = res[-1].get('widgets', {})
 
     for widget in widgets:
         if widget.get('defaultSettings', {}) \
-                    .get('topSection',{}).get('textInfo', {}).get('text', "").find(hosp) >= 0:
+                    .get('topSection', {}).get('textInfo', {}).get('text', "").find(hosp) >= 0:
             val = widget['defaultSettings']['middleSection']['textInfo']['text'].strip()
             if re.match("[1-9][0-9,]*", val) is not None:
                 mapped[Fields.HOSP.name] = atoi(val)
 
     return mapped
+
 
 def handle_oh(res, mapping):
     soup = res[0]
@@ -486,6 +501,7 @@ def handle_oh(res, mapping):
         tagged[Fields.DATE.name] = spans[1].get_text(strip=True)
     return tagged
 
+
 def handle_ok(res, mapping):
     # need to sum all values
     res = res[0]
@@ -497,6 +513,7 @@ def handle_ok(res, mapping):
     mapped = map_attributes(summed, mapping, 'OK')
     mapped[Fields.DATE.name] = res[0].get('ReportDate')
     return mapped
+
 
 def handle_or(res, mapping):
     mapped = {}
@@ -518,9 +535,8 @@ def handle_or(res, mapping):
         if name in mapping:
             try:
                 mapped[mapping[name]] = atoi(value)
-            except Exception as e:
-                logging.warning("OR: failed to parse {} for {}".format(value, name))
-
+            except Exception:
+                logging.warning("OR: failed to parse {} for {}".format(value, name), exc_info=True)
 
     tables = page.find_all('table')
     hosp = tables[4]
@@ -540,6 +556,7 @@ def handle_or(res, mapping):
             mapped[mapping[name]] = atoi(value)
 
     return mapped
+
 
 def handle_me(res, mapping):
     tagged = {}
@@ -566,11 +583,12 @@ def handle_me(res, mapping):
         elif name == 'Negative':
             tagged[Fields.ANTIBODY_NEG.name] = antibody_val
             tagged[Fields.SPECIMENS_NEG.name] = pcr_val
-        elif name =='Total':
+        elif name == 'Total':
             tagged[Fields.ANTIBODY_TOTAL.name] = antibody_val
             tagged[Fields.SPECIMENS.name] = pcr_val
 
     return tagged
+
 
 def handle_mi(res, mapping):
     tagged = {}
@@ -626,16 +644,17 @@ def handle_mi(res, mapping):
 
     return tagged
 
+
 def handle_mo(res, mapping):
     tagged = {}
     for result in res[:-1]:
-        partial = extract_arcgis_attributes(result, mapping, debug_state = 'AL')
+        partial = extract_arcgis_attributes(result, mapping, debug_state='MO')
         tagged.update(partial)
 
     hosp = res[-1]
     # kinda funny, yes
-    hosp_title = [k for k,v in mapping.items() if v == Fields.CURR_HOSP.name][-1]
-    vent_title = [k for k,v in mapping.items() if v == Fields.CURR_VENT.name][-1]
+    hosp_title = [k for k, v in mapping.items() if v == Fields.CURR_HOSP.name][-1]
+    vent_title = [k for k, v in mapping.items() if v == Fields.CURR_VENT.name][-1]
     for row in hosp.itertuples():
         if isinstance(row[1], str) and row[1].startswith(hosp_title):
             tagged[Fields.CURR_HOSP.name] = row[2]
@@ -643,6 +662,7 @@ def handle_mo(res, mapping):
             tagged[Fields.CURR_VENT.name] = row[2]
 
     return tagged
+
 
 def handle_nd(res, mapping):
     soup = res[-1]
@@ -697,6 +717,7 @@ def handle_nd(res, mapping):
 
     return tagged
 
+
 def handle_ma(res, mapping):
     soup = res[0]
     link = soup.find('a', string=re.compile("COVID-19 Raw Data"))
@@ -706,9 +727,9 @@ def handle_ma(res, mapping):
     tagged = {}
 
     # download zip
-    req = urllib.request.Request(url, headers = {'User-Agent': 'Mozilla/5.0'})
+    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
     with urllib.request.urlopen(req) as response, \
-         NamedTemporaryFile(delete=True) as tmpfile , TemporaryDirectory() as tmpdir:
+         NamedTemporaryFile(delete=True) as tmpfile, TemporaryDirectory() as tmpdir:
             shutil.copyfileobj(response, tmpfile)
             tmpfile.flush()
             shutil.unpack_archive(tmpfile.name, tmpdir, format="zip")
@@ -718,7 +739,7 @@ def handle_ma(res, mapping):
                      'Hospitalization from Hospitals.csv', 'Cases.csv']
             for filename in files:
                 with open("{}/{}".format(tmpdir, filename), 'r') as csvfile:
-                    reader = csv.DictReader(csvfile, dialect = 'unix')
+                    reader = csv.DictReader(csvfile, dialect='unix')
                     rows = list(reader)
                     last_row = rows[-1]
                     partial = map_attributes(last_row, mapping, 'MA')
@@ -737,6 +758,7 @@ def handle_ma(res, mapping):
 
     return tagged
 
+
 def handle_ut(res, mapping):
     tagged = {}
     soup_start = 1
@@ -744,12 +766,10 @@ def handle_ut(res, mapping):
         partial = extract_arcgis_attributes(result, mapping, 'NJ')
         tagged.update(partial)
 
-
     stats = res[1]
     for k, v in mapping.items():
         x = stats.find(id=k)
         if x:
-            name = v
             value_item = x.find(class_='value')
             if not value_item:
                 value_item = x.find(class_='value-output')
@@ -772,7 +792,7 @@ def handle_ut(res, mapping):
                 curr_hosp += atoi(x.get_text(strip=True))
     tagged[Fields.CURR_HOSP.name] = curr_hosp
 
-    #TODO: code here can be improved, combined with top part
+    # TODO: code here can be improved, combined with top part
     td = curr_hosp_table.find('td', string=re.compile(revmap[Fields.CURR_ICU.name]))
     for x in td.next_siblings:
         if (x.name == 'td'):
@@ -786,12 +806,15 @@ def handle_ut(res, mapping):
 
     return tagged
 
+
 def handle_vi(res, mapping):
     # 0: covid page
     # 1: DoH page
 
     covid_page = res[0]
-    container = covid_page.find('div', 'views-element-container block block-views block-views-blockcovid-19-epi-summary-block-1')
+    container = covid_page.find(
+        'div',
+        'views-element-container block block-views block-views-blockcovid-19-epi-summary-block-1')
 
     tagged = {}
 
@@ -805,7 +828,7 @@ def handle_vi(res, mapping):
         name = x.find('span').get_text(strip=True)
         if not x.find('div'):
             # this is the end
-            break;
+            break
         value = x.find('div').get_text(strip=True)
 
         if name == 'Recovered':
