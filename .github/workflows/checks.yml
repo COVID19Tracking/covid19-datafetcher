@@ -1,0 +1,38 @@
+# This workflow will generate the Miniconda environment and run the following, in the c19-data env:
+# - [Done] Run Flake8 checker
+# - [ ] Run PyLint/Black once I pass my aversion towards the later
+# - [ ] Run a fetch for each dataset, as a generic sanity check
+# - [ ] Run generic tools option, as sanity check
+
+name: Python application
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Conda env
+      run: |
+        conda env create -f environment.yml
+
+    - name: Run Flake8
+      run: |
+        eval "$(conda shell.bash hook)"
+        conda activate c19-data
+        flake8 . --count --statistics
+
+    # PyLint: with relevant linting rules
+
+    - name: (Test) Build Links
+      run: |
+        eval "$(conda shell.bash hook)"
+        conda activate c19-data
+        python tools/links.py
