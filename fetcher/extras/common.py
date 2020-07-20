@@ -25,7 +25,6 @@ def MaContextManager(res):
 
         yield tmpdir.name
     finally:
-        # close everything
-        print("dir name = ", tmpdir.name, "file name = ", tmpfile.name)
+        # close everything, it should also unlink the dirs to be deleted
         tmpfile.close()
         tmpdir.cleanup()

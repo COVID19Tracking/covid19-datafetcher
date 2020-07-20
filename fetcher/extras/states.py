@@ -1,16 +1,14 @@
 from copy import copy
 from datetime import datetime
-from tempfile import NamedTemporaryFile, TemporaryDirectory
 import csv
 import logging
 import math
 import pandas as pd
+import os
 import re
-import shutil
-import urllib
-import urllib.request
 
 from fetcher.utils import map_attributes, Fields, csv_sum, extract_arcgis_attributes
+from fetcher.extras.common import MaContextManager
 
 
 ''' This file contains extra handling needed for some states
@@ -719,42 +717,30 @@ def handle_nd(res, mapping):
 
 
 def handle_ma(res, mapping):
-    soup = res[0]
-    link = soup.find('a', string=re.compile("COVID-19 Raw Data"))
-    link_part = link['href']
-    url = "https://www.mass.gov{}".format(link_part)
-
     tagged = {}
 
-    # download zip
-    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-    with urllib.request.urlopen(req) as response, \
-         NamedTemporaryFile(delete=True) as tmpfile, TemporaryDirectory() as tmpdir:
-            shutil.copyfileobj(response, tmpfile)
-            tmpfile.flush()
-            shutil.unpack_archive(tmpfile.name, tmpdir, format="zip")
+    files = ['DeathsReported.csv', 'Testing2.csv',
+             'Hospitalization from Hospitals.csv', 'Cases.csv']
 
-            # Now we can read the files
-            files = ['DeathsReported.csv', 'Testing2.csv',
-                     'Hospitalization from Hospitals.csv', 'Cases.csv']
-            for filename in files:
-                with open("{}/{}".format(tmpdir, filename), 'r') as csvfile:
-                    reader = csv.DictReader(csvfile, dialect='unix')
-                    rows = list(reader)
-                    last_row = rows[-1]
-                    partial = map_attributes(last_row, mapping, 'MA')
-                    tagged.update(partial)
+    with MaContextManager(res) as zipdir:
+        for filename in files:
+            with open(os.path.join(zipdir, filename), 'r') as csvfile:
+                reader = csv.DictReader(csvfile, dialect='unix')
+                rows = list(reader)
+                last_row = rows[-1]
+                partial = map_attributes(last_row, mapping, 'MA')
+                tagged.update(partial)
 
-            hosp_key = ""
-            for k, v in mapping.items():
-                if v == Fields.HOSP.name:
-                    hosp_key = k
-            hospfile = csv.DictReader(open(tmpdir + "/RaceEthnicity.csv", 'r'))
-            hosprows = list(hospfile)
-            last_row = hosprows[-1]
-            hosprows = [x for x in hosprows if x['Date'] == last_row['Date']]
-            summed = csv_sum(hosprows, [hosp_key])
-            tagged[Fields.HOSP.name] = summed[hosp_key]
+        hosp_key = ""
+        for k, v in mapping.items():
+            if v == Fields.HOSP.name:
+                hosp_key = k
+        hospfile = csv.DictReader(open(os.path.join(zipdir, "RaceEthnicity.csv"), 'r'))
+        hosprows = list(hospfile)
+        last_row = hosprows[-1]
+        hosprows = [x for x in hosprows if x['Date'] == last_row['Date']]
+        summed = csv_sum(hosprows, [hosp_key])
+        tagged[Fields.HOSP.name] = summed[hosp_key]
 
     return tagged
 
@@ -763,7 +749,7 @@ def handle_ut(res, mapping):
     tagged = {}
     soup_start = 1
     for result in res[:soup_start]:
-        partial = extract_arcgis_attributes(result, mapping, 'NJ')
+        partial = extract_arcgis_attributes(result, mapping, 'UT')
         tagged.update(partial)
 
     stats = res[1]
