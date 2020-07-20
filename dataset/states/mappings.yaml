@@ -430,7 +430,7 @@ VA:
   ICU Patients: CURR_ICU
   Vent Patients: CURR_VENT
   Number of PCR Testing Encounters: SPECIMENS
-  Number of Positive PCR Tests: SPECIMENS_POS
+  Number of Positive PCR Testing Encounters: SPECIMENS_POS
 VI:
   Positive: POSITIVE
   Negative: NEGATIVE

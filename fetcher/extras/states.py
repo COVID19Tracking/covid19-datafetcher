@@ -437,9 +437,10 @@ def handle_va(res, mapping):
     tagged[Fields.POSITIVE.name] = tagged[Fields.CONFIRMED.name] + tagged[Fields.PROBABLE.name]
 
     # sum everything
+    rmapping = {v: k for k, v in mapping.items()}
     testing_cols = [
-        'Number of PCR Testing Encounters', 'Number of Positive PCR Tests',
-        'Total Number of Testing Encounters', 'Total Number of Positive Tests']
+        rmapping[Fields.SPECIMENS.name], rmapping[Fields.SPECIMENS_POS.name],
+        'Total Number of Testing Encounters', 'Total Number of Positive Testing Encounters']
     summed_testing = csv_sum(testing, testing_cols)
     tagged[Fields.SPECIMENS.name] = summed_testing[testing_cols[0]]
     tagged[Fields.SPECIMENS_POS.name] = summed_testing[testing_cols[1]]
