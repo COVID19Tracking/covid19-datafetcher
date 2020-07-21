@@ -15,15 +15,15 @@ def MaContextManager(res):
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
 
     try:
-        response = urllib.request.urlopen(req)
-        tmpfile = NamedTemporaryFile(delete=True)
-        tmpdir = TemporaryDirectory()
+        with urllib.request.urlopen(req) as response:
+            tmpfile = NamedTemporaryFile(delete=True)
+            tmpdir = TemporaryDirectory()
 
-        shutil.copyfileobj(response, tmpfile)
-        tmpfile.flush()
-        shutil.unpack_archive(tmpfile.name, tmpdir.name, format="zip")
+            shutil.copyfileobj(response, tmpfile)
+            tmpfile.flush()
+            shutil.unpack_archive(tmpfile.name, tmpdir.name, format="zip")
 
-        yield tmpdir.name
+            yield tmpdir.name
     finally:
         # close everything, it should also unlink the dirs to be deleted
         tmpfile.close()
