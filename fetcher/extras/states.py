@@ -14,7 +14,6 @@ import re
 from fetcher.utils import map_attributes, Fields, csv_sum, extract_arcgis_attributes
 
 
-
 ''' This file contains extra handling needed for some states
 To make it work, the method must be called "handle_{state_abbreviation:lower_case}"
 The parameters are:
