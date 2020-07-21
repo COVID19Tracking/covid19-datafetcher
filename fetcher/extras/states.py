@@ -12,7 +12,7 @@ import os
 import re
 
 from fetcher.utils import map_attributes, Fields, csv_sum, extract_arcgis_attributes
-from fetcher.extras.common import MaContextManager
+
 
 
 ''' This file contains extra handling needed for some states
@@ -770,6 +770,7 @@ def handle_ma(res, mapping):
                 tagged[Fields.HOSP.name] = summed[hosp_key]
 
     return tagged
+
 
 def handle_ut(res, mapping):
     tagged = {}
