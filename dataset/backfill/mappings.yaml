@@ -50,6 +50,15 @@ MD:
   total_hospitalized: HOSP
   total_released: RECOVERED
   TotalTests: SPECIMENS
+
+MO:
+  Number_Reported: POSITIVE
+  Date: TIMESTAMP
+  pcr_test_encouter_date: TIMESTAMP
+  pcr_negative: SPECIMENS_NEG
+  pcr_positive: SPECIMENS_POS
+  pcr_total: SPECIMENS
+
 TN:
   CASES_TOT: POSITIVE
   HOSPITALIZED_TOT: HOSP
