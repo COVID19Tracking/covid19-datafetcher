@@ -4,9 +4,11 @@ import logging
 import pandas as pd
 import typing
 
+from fetcher.sources import Sources
+from fetcher.result import Result
 from fetcher.utils import request, request_and_parse, extract_attributes, Fields, request_csv, \
     request_soup, request_pandas, extract_arcgis_attributes
-from fetcher.sources import Sources
+
 
 
 # TODO:
@@ -151,79 +153,6 @@ class Fetcher(object):
             pass
 
 
-def _fix_index_and_columns(index, columns):
-    index = index if isinstance(index, str) else list(index)
-    if isinstance(index, list) and len(index) == 1:
-        index = index[0]
-
-    # make sure all index columns are also in columns
-    if isinstance(index, str) and index not in columns:
-        columns.insert(0, index)
-    elif isinstance(index, list):
-        for c in index:
-            if c not in columns:
-                columns.insert(0, c)
-
-    return index
-
-
-def build_dataframe(results, columns, index, output_date_format,
-                    filename, dump_all_states=False):
-    # TODO: move file generation out of here
-    # TODO: move this somewhere else
-    states = ['AK', 'AL', 'AR', 'AS', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'GU',
-              'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI',
-              'MN', 'MO', 'MP', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV',
-              'NY', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT',
-              'VA', 'VI', 'VT', 'WA', 'WI', 'WV', 'WY']
-
-    # results is a *dict*: state -> []
-    if not results:
-        return {}
-
-    # need to prepare the index and preparing the data, and the columns
-    # data: a list of dicts
-    # index: a string or a list of len 2+
-    # columns: add state even if not listed, if it's in index
-
-    items = []
-    for _, v in results.items():
-        if isinstance(v, typing.List):
-            items.extend(v)
-        elif isinstance(v, typing.Dict):
-            items.append(v)
-        else:
-            logging.warning("This shouldnt happen: %r", v)
-
-    index = _fix_index_and_columns(index, columns)
-    df = pd.DataFrame(items, columns=columns)
-
-    if TS in index:
-        df['DATE'] = df[TS].dt.strftime(output_date_format)
-        # TODO: resample to day? in addition to 'DATE' fild?
-    df = df.set_index(index)
-    df = df.groupby(level=df.index.names).last()
-
-    if isinstance(index, list):
-        # df.sort_index(level=[1, 0], ascending=[False, True], inplace=True)
-        df.sort_index(ascending=False, inplace=True)
-    elif dump_all_states:
-        # no point doing it for backfill
-        df = df.reindex(pd.Series(states, name='STATE'))
-
-    base_name = "{}.csv".format(filename)
-    now_name = '{}_{}.csv'.format(filename, datetime.now().strftime('%Y%m%d%H%M%S'))
-    df.to_csv('{}'.format(now_name))
-    df.to_csv('{}'.format(base_name))
-    # TODO: if indexing by more than state, store individual state files?
-
-    # Report an interesting metric:
-    total_non_empty = df.notnull().sum().sum()
-    logging.info("Fetched a total of %d cells", total_non_empty)
-
-    return df
-
-
 @hydra.main(config_path='..', config_name="config")
 def main(cfg):
     print(cfg.pretty(resolve=True))
@@ -241,7 +170,9 @@ def main(cfg):
         results = fetcher.fetch_all()
 
     # This stores the CSV with the requsted fields in order
-    df = build_dataframe(results, cfg.dataset.fields, cfg.dataset.index,
+    result_obj = Result(results, cfg.dataset.fields, cfg.dataset.index,
                          cfg.output_date_format,
                          cfg.output, dump_all_states=not cfg.state)
-    print(df)
+    result_obj.write_to_csv()
+
+    print(result_obj.get_dataframe())
