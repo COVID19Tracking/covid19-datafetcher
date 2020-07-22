@@ -5,9 +5,7 @@ from copy import copy
 
 
 def handle_ma(res, mapping):
-    """Returning a list of dictionaries (records)
-    """
-
+    """Returning a list of dictionaries (records)"""
     tagged = []
     # files we care about: attemting from mappings
     files = [f for k, f in mapping.items() if k.endswith("_file")]
