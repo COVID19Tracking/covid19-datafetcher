@@ -1,15 +1,12 @@
 from datetime import datetime
 import hydra
 import logging
-import pandas as pd
 import typing
 
 from fetcher.sources import Sources
 from fetcher.result import Result
 from fetcher.utils import request, request_and_parse, extract_attributes, Fields, request_csv, \
     request_soup, request_pandas, extract_arcgis_attributes
-
-
 
 # TODO:
 # - make a mapper of type to fetch method
@@ -171,8 +168,8 @@ def main(cfg):
 
     # This stores the CSV with the requsted fields in order
     result_obj = Result(results, cfg.dataset.fields, cfg.dataset.index,
-                         cfg.output_date_format,
-                         cfg.output, dump_all_states=not cfg.state)
+                        cfg.output_date_format,
+                        cfg.output, dump_all_states=not cfg.state)
     result_obj.write_to_csv()
 
     print(result_obj.get_dataframe())
