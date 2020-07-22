@@ -1,0 +1,6 @@
+name: c19-scripts
+channels:
+  - defaults
+dependencies:
+  - pip:
+    - -r file:requirements.txt
