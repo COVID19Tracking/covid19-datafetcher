@@ -523,22 +523,31 @@ UT:
   type: html:soup
   desc: Hospitalization page (soup)
 VA:
-# Cases
-- url: https://www.vdh.virginia.gov/content/uploads/sites/182/2020/04/VDH-COVID-19-PublicUseDataset-Cases_By-Confirmation.csv
-  params: null
-  type: csv
-  desc: Cases
-# Test data
-- url: https://www.vdh.virginia.gov/content/uploads/sites/182/2020/05/VDH-COVID-19-PublicUseDataset-Tests_by-LabReportDate.csv
-  params: null
-  type: csv
+- url: https://data.virginia.gov/api/id/uqs3-x7zh.json
+  params: {$query: 'select report_date as date, sum(number_of_cases) as positive, sum(number_of_deaths) as death, sum(number_of_hospitalizations) as hosp group by report_date order by report_date desc limit 1'}
+  type: soda
+  data_path: [0]
+  desc: Cases, death, hospitalizations (lumped)
+- url: https://data.virginia.gov/api/id/uqs3-x7zh.json
+  params: {$query: 'select report_date as date, number_of_cases as confirmed, number_of_deaths as death_confirmed where case_status = "Confirmed" order by report_date desc limit 1'}
+  type: soda
+  data_path: [0]
+  desc: Cases, death (confirmed)
+- url: https://data.virginia.gov/api/id/uqs3-x7zh.json
+  params: {$query: 'select report_date as date, number_of_cases as probable, number_of_deaths as death_probable where case_status = "Probable" order by report_date desc limit 1'}
+  type: soda
+  data_path: [0]
+  desc: Cases, death (Probable)
+- url: https://data.virginia.gov/resource/3u5k-c2gr.json
+  params: {$query: 'select sum(number_of_pcr_testing) as pcr_specimens, sum(number_of_positive_pcr_testing) as pcr_specimens_pos, sum(total_number_of_testing) - sum(number_of_pcr_testing) as antibody_total, sum(number_of_pcr_testing) - sum(number_of_positive_pcr_testing) as antibody_pos'}
+  type: soda
+  data_path: [0]
   desc: Testing data (PCR and totals)
-# Hospital data
-- url: https://www.vdh.virginia.gov/content/uploads/sites/182/2020/05/VDH-COVID-19-PublicUseDataset-KeyMeasures-Hospitals.csv
-  params: null
-  type: csv
-  encoding: utf-8-sig
-  desc: Hospital data
+- url: https://data.virginia.gov/resource/28wk-762y.json
+  params: {$query: 'select total_covid_19_patients, icu_patients, vent_patients order by date desc limit 1'}
+  type: soda
+  data_path: [0]
+  desc: Current hosp, ICU & vent
 VI:
 - url: https://www.covid19usvi.com/
   params: null

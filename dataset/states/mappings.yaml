@@ -422,15 +422,21 @@ UT:
   currently hospitalized: CURR_HOSP
   Number of patients in ICU for confirmed COVID-19: CURR_ICU
 VA:
-  Report Date: DATE
-  Number of Cases: CONFIRMED
-  #Number of Hospitalizations: HOSP
-  Number of Deaths: DEATH_CONFIRMED
-  Total COVID-19 Patients: CURR_HOSP
-  ICU Patients: CURR_ICU
-  Vent Patients: CURR_VENT
-  Number of PCR Testing Encounters: SPECIMENS
-  Number of Positive PCR Testing Encounters: SPECIMENS_POS
+  date: DATE
+  positive: POSITIVE
+  death: DEATH
+  hosp: HOSP
+  confirmed: CONFIRMED
+  death_confirmed: DEATH_CONFIRMED
+  probable: PROBABLE
+  death_probable: DEATH_PROBABLE
+  pcr_specimens: SPECIMENS
+  pcr_specimens_pos: SPECIMENS_POS
+  antibody_total: ANTIBODY_TOTAL
+  antibody_pos: ANTIBODY_POS
+  total_covid_19_patients: CURR_HOSP
+  icu_patients: CURR_ICU
+  vent_patients: CURR_VENT
 VI:
   Positive: POSITIVE
   Negative: NEGATIVE

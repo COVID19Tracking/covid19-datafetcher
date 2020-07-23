@@ -401,60 +401,6 @@ def handle_de(res, mapping):
     return mapped
 
 
-def handle_va(res, mapping):
-    '''Getting multiple CVS files from the state and parsing each for
-    the specific data it contains
-    '''
-    tagged = {}
-
-    # Res:
-    # 0 -- cases & death, probable & confirmed
-    # 1 -- testing info
-    # 2 -- hospital/icu/vent
-    cases = res[0]
-    testing = res[1]
-    hospital = res[2]
-
-    date_format = "%m/%d/%Y"
-
-    # Cases
-    # expecting 2 rows in the following format
-    # Report Date,Case Status,Number of Cases,Number of Hospitalizations,Number of Deaths
-    # 5/14/2020,Probable,1344,24,28
-    # 5/14/2020,Confirmed,26469,3568,927
-
-    PROB = 'Probable'
-    CONF = 'Confirmed'
-
-    for row in cases:
-        if (row['Case Status'] == CONF):
-            for k, v in row.items():
-                if (k in mapping):
-                    tagged[mapping[k]] = atoi(v)
-        elif (row['Case Status'] == PROB):
-            tagged[Fields.PROBABLE.name] = atoi(row['Number of Cases'])
-            tagged[Fields.DEATH_PROBABLE.name] = atoi(row['Number of Deaths'])
-    tagged[Fields.POSITIVE.name] = tagged[Fields.CONFIRMED.name] + tagged[Fields.PROBABLE.name]
-
-    # sum everything
-    rmapping = {v: k for k, v in mapping.items()}
-    testing_cols = [
-        rmapping[Fields.SPECIMENS.name], rmapping[Fields.SPECIMENS_POS.name],
-        'Total Number of Testing Encounters', 'Total Number of Positive Testing Encounters']
-    summed_testing = csv_sum(testing, testing_cols)
-    tagged[Fields.SPECIMENS.name] = summed_testing[testing_cols[0]]
-    tagged[Fields.SPECIMENS_POS.name] = summed_testing[testing_cols[1]]
-    tagged[Fields.ANTIBODY_TOTAL.name] = summed_testing[testing_cols[2]] - summed_testing[testing_cols[0]]
-    tagged[Fields.ANTIBODY_POS.name] = summed_testing[testing_cols[3]] - summed_testing[testing_cols[1]]
-
-    # Hospitalizations
-    hospital = sorted(hospital, key=lambda x: datetime.strptime(x['Date'], date_format), reverse=True)
-    mapped_hosp = map_attributes(hospital[0], mapping, 'VA')
-    tagged.update(mapped_hosp)
-
-    return tagged
-
-
 def handle_nj(res, mapping):
     '''Need to parse everything the same, and add past recoveries
     to the new query, because I do not know how to add a constant
