@@ -167,7 +167,7 @@ def main(cfg):
 
     # This stores the CSV with the requsted fields in order
     results.write_to_csv(cfg.output, cfg.dataset.fields, cfg.dataset.index,
-                            cfg.output_date_format, dump_all_states=not cfg.state)
+                         cfg.output_date_format, dump_all_states=not cfg.state)
 
     print(results.get_dataframe(cfg.dataset.fields, cfg.dataset.index,
-                            cfg.output_date_format, dump_all_states=not cfg.state))
+                                cfg.output_date_format, dump_all_states=not cfg.state))
