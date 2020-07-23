@@ -27,7 +27,7 @@ class Fetcher(object):
         return state in self.sources.keys()
 
     def fetch_all(self):
-        results = {}
+        results = Result()
         success = 0
         failures = []
 
@@ -158,7 +158,7 @@ def main(cfg):
         cfg.state = cfg.state.split(',')
 
     fetcher = Fetcher(cfg)
-    results = {}
+    results = Result()
     if cfg.state:
         for s in cfg.state:
             _, mapped = fetcher.fetch_state(s)
@@ -167,9 +167,8 @@ def main(cfg):
         results = fetcher.fetch_all()
 
     # This stores the CSV with the requsted fields in order
-    result_obj = Result(results, cfg.dataset.fields, cfg.dataset.index,
-                        cfg.output_date_format,
-                        cfg.output, dump_all_states=not cfg.state)
-    result_obj.write_to_csv()
+    results.write_to_csv(cfg.output, cfg.dataset.fields, cfg.dataset.index,
+                            cfg.output_date_format, dump_all_states=not cfg.state)
 
-    print(result_obj.get_dataframe())
+    print(results.get_dataframe(cfg.dataset.fields, cfg.dataset.index,
+                            cfg.output_date_format, dump_all_states=not cfg.state))

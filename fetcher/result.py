@@ -4,25 +4,18 @@ from datetime import datetime
 
 import pandas as pd
 
+STATES = ['AK', 'AL', 'AR', 'AS', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'GU',
+          'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI',
+          'MN', 'MO', 'MP', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV',
+          'NY', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT',
+          'VA', 'VI', 'VT', 'WA', 'WI', 'WV', 'WY']
 
-class Result(object):
+class Result(dict):
 
     TS = 'TIMESTAMP'
-    # TODO: move this somewhere else
-    STATES = ['AK', 'AL', 'AR', 'AS', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'GU',
-              'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI',
-              'MN', 'MO', 'MP', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV',
-              'NY', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT',
-              'VA', 'VI', 'VT', 'WA', 'WI', 'WV', 'WY']
 
-    def __init__(self, results, columns, index, output_date_format,
-                 filename, dump_all_states=False):
-        self.results = results
-        self.columns = columns
-        self.index = index
-        self.output_date_format = output_date_format
-        self.filename = filename
-        self.dump_all_states = dump_all_states
+    def __init__(self):
+        super().__init__()
 
     def _fix_index_and_columns(self, index, columns):
         index = index if isinstance(index, str) else list(index)
@@ -39,10 +32,10 @@ class Result(object):
 
         return index
 
-    def get_dataframe(self):
+    def get_dataframe(self, columns, index, output_date_format,  dump_all_states=False):
 
         # results is a *dict*: state -> []
-        if not self.results:
+        if not self:
             return {}
 
         # need to prepare the index and preparing the data, and the columns
@@ -51,7 +44,7 @@ class Result(object):
         # columns: add state even if not listed, if it's in index
 
         items = []
-        for _, v in self.results.items():
+        for _, v in self.items():
             if isinstance(v, typing.List):
                 items.extend(v)
             elif isinstance(v, typing.Dict):
@@ -59,11 +52,11 @@ class Result(object):
             else:
                 logging.warning("This shouldnt happen: %r", v)
 
-        index = self._fix_index_and_columns(self.index, self.columns)
-        df = pd.DataFrame(items, columns=self.columns)
+        index = self._fix_index_and_columns(index, columns)
+        df = pd.DataFrame(items, columns=columns)
 
         if Result.TS in index:
-            df['DATE'] = df[Result.TS].dt.strftime(self.output_date_format)
+            df['DATE'] = df[Result.TS].dt.strftime(output_date_format)
             # TODO: resample to day? in addition to 'DATE' fild?
         df = df.set_index(index)
         df = df.groupby(level=df.index.names).last()
@@ -71,18 +64,18 @@ class Result(object):
         if isinstance(index, list):
             # df.sort_index(level=[1, 0], ascending=[False, True], inplace=True)
             df.sort_index(ascending=False, inplace=True)
-        elif self.dump_all_states:
+        elif dump_all_states:
             # no point doing it for backfill
-            df = df.reindex(pd.Series(Result.STATES, name='STATE'))
+            df = df.reindex(pd.Series(STATES, name='STATE'))
 
         return df
 
-    def write_to_csv(self):
+    def write_to_csv(self, filename, columns, index, output_date_format,  dump_all_states=False):
 
-        base_name = "{}.csv".format(self.filename)
-        now_name = '{}_{}.csv'.format(self.filename, datetime.now().strftime('%Y%m%d%H%M%S'))
+        base_name = "{}.csv".format(filename)
+        now_name = '{}_{}.csv'.format(filename, datetime.now().strftime('%Y%m%d%H%M%S'))
 
-        df = self.get_dataframe()
+        df = self.get_dataframe(columns, index, output_date_format,  dump_all_states)
         df.to_csv('{}'.format(now_name))
         df.to_csv('{}'.format(base_name))
         # TODO: if indexing by more than state, store individual state files?
