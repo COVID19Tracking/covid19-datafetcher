@@ -82,13 +82,13 @@ DE:
   Recoveries: RECOVERED
   Total Persons Tested: TOTAL
 FL:
-  SUM_C_FLResDeaths: DEATH
-  SUM_C_HospYes_Res: HOSP
-  SUM_TInconc: INCONCLUSIVE[
-  SUM_TPending: PENDING
-  SUM_T_negative: NEGATIVE
-  SUM_T_positive: POSITIVE
-  SUM_T_total: TOTAL
+  death: DEATH
+  hosp: HOSP
+  TInconc: INCONCLUSIVE
+  TPending: PENDING
+  T_negative: NEGATIVE
+  T_positive: POSITIVE
+  T_total: TOTAL
   PCR_Negative: SPECIMENS_NEG
   PCR_Positive: SPECIMENS_POS
   PCR_Total: SPECIMENS

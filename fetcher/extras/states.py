@@ -87,19 +87,6 @@ def handle_fl(res, mapping):
     pcr = map_attributes(res[0], mapping, 'FL')
     mapped.update(pcr)
 
-    extra_hosp = 0
-    extra_death = 0
-    stats = res[1]
-    try:
-        extra_hosp = stats['features'][0]['attributes']['SUM_C_HospYes_NonRes']
-        extra_death = stats['features'][0]['attributes']['SUM_C_NonResDeaths']
-    except Exception as ex:
-        logging.warning("Failed Florida extra processing: ", ex)
-        raise
-
-    mapped[Fields.HOSP.name] += extra_hosp
-    mapped[Fields.DEATH.name] += extra_death
-
     # Current hosp csv
     hosp = res[2]
     for r in hosp:
