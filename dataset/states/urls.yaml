@@ -508,6 +508,10 @@ TX:
   params: {where: HospitalData='COVIDPatientsHospitals', outFields: '*, Count_ as curr_hosp', f: 'json'}
   type: arcgis
   desc: Curr hosp
+- url: https://www.dshs.texas.gov/coronavirus/TexasCOVID-19HospitalizationsOverTimebyTSA.xlsx
+  params: {sheet_name: 'COVID-19 ICU'}
+  type: xlsx
+  desc: Current ICU
 UT:
 - url: https://services6.arcgis.com/KaHXE9OkiB9e63uE/ArcGIS/rest/services/Utah_COVID19_Cases_by_Local_Health_Department_View/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{"statisticType": "max", "onStatisticField": "Date_Updated"},

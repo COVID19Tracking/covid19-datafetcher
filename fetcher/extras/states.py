@@ -692,6 +692,19 @@ def handle_ma(res, mapping):
     return tagged
 
 
+def handle_tx(res, mapping):
+    tagged = {}
+    for result in res[:-1]:
+        partial = extract_arcgis_attributes(result, mapping, debug_state='TX')
+        tagged.update(partial)
+
+    # last item is the current ICU DataFrame
+    df = res[-1]
+    icu = df[df.columns[-1]].iloc[-1]
+    tagged[Fields.CURR_ICU.name] = icu
+    return tagged
+
+
 def handle_ut(res, mapping):
     tagged = {}
     soup_start = 1
