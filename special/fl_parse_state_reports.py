@@ -1,6 +1,4 @@
-from datetime import datetime
 import PyPDF4
-import numpy as np
 import os
 import pandas as pd
 import re
@@ -19,24 +17,27 @@ Default folder name, if not specified: 'state_reports'
 '''
 
 
-"""
-Parsing date from filenames
-This function takes in a filename usually of the format "state_reports_yyyy-mm-dd-randomnumbers.pdf" and extract
-date out in format "yyyy-mm-dd" as string
-Input:
-    filename: The filename (without full directory) ending in ".pdf"
-Output:
-    date: Date in format "yyyy-mm-dd" as string
-"""
 def date_parser(filename):
+    """
+    Parsing date from filenames
+    This function takes in a filename usually of the format "state_reports_yyyy-mm-dd-randomnumbers.pdf" and extract
+    date out in format "yyyy-mm-dd" as string
+    Input:
+    filename: The filename (without full directory) ending in ".pdf"
+    Output:
+    date: Date in format "yyyy-mm-dd" as string
+    """
+
     'file format: state_report_yyyy-mm-dd(_whatever)'
     return filename[len("state_reports_"):len("state_reports_")+10]
+
 
 def atoi(val):
     '''Raises exception on failure to parse'''
     if isinstance(val, int):
         return val
-    return int(val.replace(",",''))
+    return int(val.replace(",", ''))
+
 
 def parse_totals(totals):
     '''Getting an array of tokens, satrig with the string "Total"
@@ -71,16 +72,18 @@ def parse_totals(totals):
 
     return res
 
-"""
-Get page to look for data
-This function takes in the Florida pdf file and returns the testing numbers for positive, negative and totals.
-First, it searches for the phrase "Coronavirus: testing by laboratory", which is on the top of all the pages 
-relevant to testing. Then extracts the last page, split by lines, extract the last 4 lines, remove the percent
-positive and convert to integer. 
-Input: filepath for pdf file as string
-Output: total tests as list of integers in order Negative, Positive, Totals
-"""
+
 def get_data(filepath):
+    """
+    Get page to look for data
+    This function takes in the Florida pdf file and returns the testing numbers for positive, negative and totals.
+    First, it searches for the phrase "Coronavirus: testing by laboratory", which is on the top of all the pages
+    relevant to testing. Then extracts the last page, split by lines, extract the last 4 lines, remove the percent
+    positive and convert to integer.
+    Input: filepath for pdf file as string
+    Output: total tests as list of integers in order Negative, Positive, Totals
+    """
+
     title = "Coronavirus: testing by laboratory"
     pdf = PyPDF4.PdfFileReader(filepath)
 
@@ -98,7 +101,7 @@ def get_data(filepath):
                 break
 
     if testing_candidate:
-         # yay, we found the last page of with the title
+        # yay, we found the last page of with the title
         totals = testing_candidate.extractText().splitlines()
 
         # We need the last index for "Total"
@@ -106,13 +109,13 @@ def get_data(filepath):
         for i, row in enumerate(totals):
             if row == "Total":
                 index = i
-        what_we_need = totals[index:]
         return parse_totals(totals[index:])
     return None
 
+
 def main(base_dir):
-    res =[]
-    misses =[]
+    res = []
+    misses = []
     with os.scandir(base_dir) as it:
         for entry in it:
             if entry.is_file() and entry.name.endswith('.pdf'):
@@ -136,6 +139,7 @@ def main(base_dir):
 #    df.sort_values(by='Date', inplace=True)
     df.to_csv("specimens_tests_by_date.csv")
     print("Failed to parse: ", set(misses))
+
 
 if __name__ == "__main__":
     base_dir = 'state_reports'

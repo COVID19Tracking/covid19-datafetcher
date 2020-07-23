@@ -1,8 +1,9 @@
-import csv
-from fetcher.extras.common import MaContextManager
-from fetcher.utils import map_attributes, Fields
 from copy import copy
-
+from fetcher.extras.common import MaContextManager
+from fetcher.utils import map_attributes, Fields, extract_arcgis_attributes
+import csv
+import pandas as pd
+from datetime import datetime
 
 def handle_ma(res, mapping):
     """Returning a list of dictionaries (records)"""
@@ -27,3 +28,27 @@ def handle_ma(res, mapping):
                 tagged.extend(tagged_rows)
 
     return tagged
+
+
+def handle_mo(res, mapping):
+    # we're getting pretty good data that we need to cumsum
+    # TODO: this can be done elsewhere/by te lib, if there are other use cases
+    mapped = []
+    for result in res:
+        partial = extract_arcgis_attributes(result, mapping, 'MO')
+        mapped.extend(partial)
+
+    # expect the data to be sorted, because the query sorts it
+    # somewhat funny here with building a DF and instantly breaking it
+    df = pd.DataFrame(mapped)
+    df.set_index(Fields.TIMESTAMP.name, inplace=True)
+    cumsum_df = df.cumsum()
+    cumsum_df[Fields.TIMESTAMP.name] = cumsum_df.index
+    cumsum_df[Fields.FETCH_TIMESTAMP.name] = datetime.now()
+
+    print("DF")
+    print(df)
+
+    foobar = cumsum_df.to_dict('records')
+    print(foobar[:3])
+    return foobar

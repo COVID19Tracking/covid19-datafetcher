@@ -303,7 +303,7 @@ MO:
   type: arcgis
   desc: Serology total (people)
 - url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/PCR_Test_by_Date_Automated/FeatureServer/0/query
-  params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "Negative", "outStatisticFieldName": "PCR_Negative"},{"statisticType": "sum", "onStatisticField": "Positive", "outStatisticFieldName": "PCR_Positive"},{"statisticType": "sum", "onStatisticField": "Total", "outStatisticFieldName": "PCR_Total"}], f: json}
+  params: {where: test_date2>timestamp '2020-01-16 06:59:59', outStatistics: [{"statisticType": "sum", "onStatisticField": "Negative", "outStatisticFieldName": "PCR_Negative"},{"statisticType": "sum", "onStatisticField": "Positive", "outStatisticFieldName": "PCR_Positive"},{"statisticType": "sum", "onStatisticField": "Total", "outStatisticFieldName": "PCR_Total"}], f: json}
   type: arcgis
   desc: PCR (totals, pos/neg)
 - url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/ArcGIS/rest/services/Dashboard_Daily_Numbers_Automated/FeatureServer/0/query

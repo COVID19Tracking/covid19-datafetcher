@@ -124,7 +124,6 @@ class Fetcher(object):
                 for record in x:
                     self._tag_and_timestamp(state, record, mapping.get('__strptime'))
                     data.append(record)
-                # data.extend(x)
             else:
                 # should not happen
                 logging.warning("Unexpected type in results: %r", x)
