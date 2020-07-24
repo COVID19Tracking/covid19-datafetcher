@@ -229,6 +229,8 @@ MN:
   OutcmDied: DEATH_CONFIRMED
 MO:
   SUM_CASES: POSITIVE
+  # It'll override
+  positive: POSITIVE
   confirmed: CONFIRMED
   SUM_DEATHS: DEATH
   MAX_EditDate: TIMESTAMP # no longer used, TODO: find alternative
