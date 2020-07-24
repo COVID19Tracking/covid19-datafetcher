@@ -599,10 +599,13 @@ def handle_mi(res, mapping):
     for m in [pcr, antibody]:
         tagged[mapping[m]] = summed['Count'][m]
 
-    df = pd.read_excel(results_url)
-    summed = df[[negative, positive]].sum()
-    for x in [negative, positive]:
-        tagged[mapping[x]] = summed[x]
+    try:
+        df = pd.read_excel(results_url)
+        summed = df[[negative, positive]].sum()
+        for x in [negative, positive]:
+            tagged[mapping[x]] = summed[x]
+    except Exception:
+        logging.warning("[MI] Failed to fetch test results")
 
     return tagged
 
