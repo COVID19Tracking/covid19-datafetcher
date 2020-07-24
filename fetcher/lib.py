@@ -171,19 +171,19 @@ def _fix_index_and_columns(index, columns):
     return index
 
 
-def build_dataframe(results, states_to_index, dataset_cfg, output_date_format, filename):
+def build_dataframe(results, states_to_index, dataset_cfg, output_date_format, filename=None):
     # TODO: move file generation out of here
     # results is a *dict*: state -> []
     if not results:
         return {}
 
-    index = dataset_cfg.index
-    columns = dataset_cfg.fields
-
     # need to prepare the index and preparing the data, and the columns
     # data: a list of dicts
     # index: a string or a list of len 2+
     # columns: add state even if not listed, if it's in index
+    index = dataset_cfg.index
+    columns = dataset_cfg.fields
+    index = _fix_index_and_columns(index, columns)
 
     items = []
     for _, v in results.items():
@@ -194,12 +194,7 @@ def build_dataframe(results, states_to_index, dataset_cfg, output_date_format, f
         else:
             logging.warning("This shouldnt happen: %r", v)
 
-    index = _fix_index_and_columns(index, columns)
     df = pd.DataFrame(items, columns=columns)
-
-    if TS in index:
-        df['DATE'] = df[TS].dt.strftime(output_date_format)
-        # TODO: resample to day? in addition to 'DATE' field?
     df = df.set_index(index)
     df = df.groupby(level=df.index.names).last()
 
@@ -211,14 +206,24 @@ def build_dataframe(results, states_to_index, dataset_cfg, output_date_format, f
         df = df.reindex(pd.Series(states_to_index, name=STATE))
 
     if TS in df.index.names:
+        # For each state, we forward fill, and resample to 1-day intervals
+        # and forward fill the newely added days
+        df = df.reset_index(STATE).groupby(STATE).apply(
+            lambda d: d.ffill().resample('1D').ffill()
+        ).drop(columns=STATE)
         df.sort_index(level=TS, ascending=False, inplace=True)
-    df.sort_index(level=STATE, kind='mergesort', ascending=True, sort_remaining=False, inplace=True)
 
-    base_name = "{}.csv".format(filename)
-    now_name = '{}_{}.csv'.format(filename, datetime.now().strftime('%Y%m%d%H%M%S'))
-    df.to_csv('{}'.format(now_name))
-    df.to_csv('{}'.format(base_name))
-    # TODO: if indexing by more than state, store individual state files?
+    df.sort_index(level=STATE, kind='mergesort', ascending=True, sort_remaining=False, inplace=True)
+    # Add existing date format when we're done with all other updates
+    if TS in df.index.names:
+        df['DATE'] = df.index.get_level_values(level=TS).strftime(output_date_format)
+
+    if filename:
+        base_name = "{}.csv".format(filename)
+        now_name = '{}_{}.csv'.format(filename, datetime.now().strftime('%Y%m%d%H%M%S'))
+        df.to_csv('{}'.format(now_name))
+        df.to_csv('{}'.format(base_name))
+        # TODO: if indexing by more than state, store individual state files?
 
     # Report an interesting metric:
     total_non_empty = df.notnull().sum().sum()
