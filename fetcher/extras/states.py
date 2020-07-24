@@ -524,14 +524,44 @@ def handle_me(res, mapping):
 
 def handle_mi(res, mapping):
     tagged = {}
-    for result in res[:-2]:
+    for result in res[:2]:
         partial = extract_arcgis_attributes(result, mapping, 'MI')
         tagged.update(partial)
 
-    recovered_page = res[-2]
+    # Recoveries soup
+    recovered_page = res[-3]
     recover_p = recovered_page.find('div', 'fullContent')
     span = recover_p.find('span').get_text(strip=True)
     tagged[Fields.RECOVERED.name] = atoi(span)
+
+    # Hospitalization soup
+    hospitalization_page = res[-2]
+    tables = hospitalization_page.find_all('table')
+    vent = None
+    icu = None
+    hosp = None
+    for t in tables:
+        caption = t.find('caption').get_text(strip=True)
+        if caption.startswith('COVID-19 Metrics'):
+            # This is where we take vent data
+            title = '# on Ventilators'
+            # skip the first since it's just titles (th)
+            for tr in t.find_all('tr')[1:]:
+                if tr.find('td').get_text(strip=True) == title:
+                    # find the last item (assuming it's total)
+                    vent = tr.find_all('td')[-1].get_text(strip=True)
+        elif caption.startswith('Patient Census'):
+            # This is where we take icu and hosp data
+            last_row = t.find_all('tr')[-1]
+            tds = last_row.find_all('td')
+            hosp = tds[1].get_text(strip=True)
+            icu = tds[2].get_text(strip=True)
+
+    if vent is not None:
+        tagged[Fields.CURR_VENT.name] = atoi(vent)
+    if icu is not None and hosp is not None:
+        tagged[Fields.CURR_HOSP.name] = atoi(hosp)
+        tagged[Fields.CURR_ICU.name] = atoi(icu)
 
     # TODO: Can use the reverse mapping
     cases = 'Cases'

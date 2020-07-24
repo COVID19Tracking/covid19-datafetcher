@@ -264,6 +264,10 @@ MI:
   params: null
   type: html:soup
   desc: Recovered (soup)
+- url: https://www.michigan.gov/coronavirus/0,9753,7-406-98159-523641--,00.html
+  params: null
+  type: html:soup
+  desc: Hospitalization etc (soup)
 - url: https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html
   params: null
   type: html:soup
