@@ -389,9 +389,8 @@ NJ:
   params: {f: json, resultRecordCount: 1, orderByFields: _date desc, outFields: '*', where: 1=1}
   type: arcgis
   desc: Base data
-- url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/survey123_cb9a6e9a53ae45f6b9509a23ecdf7bcf/FeatureServer/0/query
-  params: {f: json, resultRecordCount: 1, orderByFields: _date desc, outFields: 'total_tests_reported',
-    where: total_tests_reported is not NULL}
+- url: https://services7.arcgis.com/Z0rixLlManVefxqY/ArcGIS/rest/services/DailyCaseCounts/FeatureServer/0/query
+  params: {f: json, outStatistics: [{"statisticType":"sum","onStatisticField":"PROBABLE_DEATHS","outStatisticFieldName":"probable_death"}], where: 1=1}
   type: arcgis
   desc: Probable death
 - url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query

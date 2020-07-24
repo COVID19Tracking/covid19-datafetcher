@@ -296,8 +296,7 @@ NJ:
   total_positives: POSITIVE
   # not a mistake:
   total_negatives: TOTAL
-  # not a mistake 2:
-  total_tests_reported: DEATH_PROBABLE
+  probable_death: DEATH_PROBABLE
   curr_hosp: CURR_HOSP
   curr_vent: CURR_VENT
   curr_icu: CURR_ICU
