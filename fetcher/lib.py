@@ -13,7 +13,9 @@ from fetcher.sources import Sources
 # - make a mapper of type to fetch method
 
 MS_FILTER = datetime(2020, 1, 1, 0, 0).timestamp() * 1000
+# Indices
 TS = 'TIMESTAMP'
+STATE = Fields.STATE.name
 
 
 class Fetcher(object):
@@ -27,12 +29,15 @@ class Fetcher(object):
     def has_state(self, state):
         return state in self.sources.keys()
 
-    def fetch_all(self):
+    def fetch_all(self, states):
         results = {}
         success = 0
         failures = []
 
-        for state in sorted(self.sources.keys()):
+        for state in states:
+            if not self.has_state(state):
+                # Nothing to do for a state without sources
+                continue
             try:
                 res, data = self.fetch_state(state)
                 if res:
@@ -134,7 +139,7 @@ class Fetcher(object):
 
     def _tag_and_timestamp(self, state, data, dateformat=None):
         data[Fields.FETCH_TIMESTAMP.name] = datetime.now().timestamp()
-        data[Fields.STATE.name] = state
+        data[STATE] = state
 
         # we should also make sure that the timestamp field is datetime format
         # or parse the Date field
@@ -166,19 +171,14 @@ def _fix_index_and_columns(index, columns):
     return index
 
 
-def build_dataframe(results, columns, index, output_date_format,
-                    filename, dump_all_states=False):
+def build_dataframe(results, states_to_index, dataset_cfg, output_date_format, filename):
     # TODO: move file generation out of here
-    # TODO: move this somewhere else
-    states = ['AK', 'AL', 'AR', 'AS', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'GU',
-              'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI',
-              'MN', 'MO', 'MP', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV',
-              'NY', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT',
-              'VA', 'VI', 'VT', 'WA', 'WI', 'WV', 'WY']
-
     # results is a *dict*: state -> []
     if not results:
         return {}
+
+    index = dataset_cfg.index
+    columns = dataset_cfg.fields
 
     # need to prepare the index and preparing the data, and the columns
     # data: a list of dicts
@@ -199,16 +199,20 @@ def build_dataframe(results, columns, index, output_date_format,
 
     if TS in index:
         df['DATE'] = df[TS].dt.strftime(output_date_format)
-        # TODO: resample to day? in addition to 'DATE' fild?
+        # TODO: resample to day? in addition to 'DATE' field?
     df = df.set_index(index)
     df = df.groupby(level=df.index.names).last()
 
-    if isinstance(index, list):
-        # df.sort_index(level=[1, 0], ascending=[False, True], inplace=True)
-        df.sort_index(ascending=False, inplace=True)
-    elif dump_all_states:
-        # no point doing it for backfill
-        df = df.reindex(pd.Series(states, name='STATE'))
+    # Notice: Reindexing and then sorting means that we're always sorting
+    # the index, and not using the order that comes from configuration
+    if not isinstance(index, list):
+        # Reindex based on the given states, when we don't have
+        # additional columns to index to (i.e., do not do it for backfill)
+        df = df.reindex(pd.Series(states_to_index, name=STATE))
+
+    if TS in df.index.names:
+        df.sort_index(level=TS, ascending=False, inplace=True)
+    df.sort_index(level=STATE, kind='mergesort', ascending=True, sort_remaining=False, inplace=True)
 
     base_name = "{}.csv".format(filename)
     now_name = '{}_{}.csv'.format(filename, datetime.now().strftime('%Y%m%d%H%M%S'))
@@ -225,22 +229,14 @@ def build_dataframe(results, columns, index, output_date_format,
 
 @hydra.main(config_path='..', config_name="config")
 def main(cfg):
-    print(cfg.pretty(resolve=True))
+    print(cfg.dataset.pretty(resolve=True))
 
     if cfg.state and isinstance(cfg.state, str):
         cfg.state = cfg.state.split(',')
 
     fetcher = Fetcher(cfg)
-    results = {}
-    if cfg.state:
-        for s in cfg.state:
-            _, mapped = fetcher.fetch_state(s)
-            results[s] = mapped
-    else:
-        results = fetcher.fetch_all()
+    results = fetcher.fetch_all(cfg.state)
 
     # This stores the CSV with the requsted fields in order
-    df = build_dataframe(results, cfg.dataset.fields, cfg.dataset.index,
-                         cfg.output_date_format,
-                         cfg.output, dump_all_states=not cfg.state)
+    df = build_dataframe(results, cfg.state, cfg.dataset, cfg.output_date_format, cfg.output)
     print(df)

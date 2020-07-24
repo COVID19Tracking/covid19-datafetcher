@@ -30,4 +30,8 @@ data_root: ${hydra:runtime.cwd}/dataset/${dataset.name}
 output_date_format: "%Y%m%d"
 
 # fetch a single state (or a list)
-state: null
+state: ['AK', 'AL', 'AR', 'AS', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'GU',
+        'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI',
+        'MN', 'MO', 'MP', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV',
+        'NY', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT',
+        'VA', 'VI', 'VT', 'WA', 'WI', 'WV', 'WY']
