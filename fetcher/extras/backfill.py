@@ -5,6 +5,7 @@ import csv
 import pandas as pd
 from datetime import datetime
 
+
 def handle_ma(res, mapping):
     """Returning a list of dictionaries (records)"""
     tagged = []
@@ -46,9 +47,4 @@ def handle_mo(res, mapping):
     cumsum_df[Fields.TIMESTAMP.name] = cumsum_df.index
     cumsum_df[Fields.FETCH_TIMESTAMP.name] = datetime.now()
 
-    print("DF")
-    print(df)
-
-    foobar = cumsum_df.to_dict('records')
-    print(foobar[:3])
-    return foobar
+    return cumsum_df.to_dict('records')
