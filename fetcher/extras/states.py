@@ -87,19 +87,6 @@ def handle_fl(res, mapping):
     pcr = map_attributes(res[0], mapping, 'FL')
     mapped.update(pcr)
 
-    extra_hosp = 0
-    extra_death = 0
-    stats = res[1]
-    try:
-        extra_hosp = stats['features'][0]['attributes']['SUM_C_HospYes_NonRes']
-        extra_death = stats['features'][0]['attributes']['SUM_C_NonResDeaths']
-    except Exception as ex:
-        logging.warning("Failed Florida extra processing: ", ex)
-        raise
-
-    mapped[Fields.HOSP.name] += extra_hosp
-    mapped[Fields.DEATH.name] += extra_death
-
     # Current hosp csv
     hosp = res[2]
     for r in hosp:
@@ -401,60 +388,6 @@ def handle_de(res, mapping):
     return mapped
 
 
-def handle_va(res, mapping):
-    '''Getting multiple CVS files from the state and parsing each for
-    the specific data it contains
-    '''
-    tagged = {}
-
-    # Res:
-    # 0 -- cases & death, probable & confirmed
-    # 1 -- testing info
-    # 2 -- hospital/icu/vent
-    cases = res[0]
-    testing = res[1]
-    hospital = res[2]
-
-    date_format = "%m/%d/%Y"
-
-    # Cases
-    # expecting 2 rows in the following format
-    # Report Date,Case Status,Number of Cases,Number of Hospitalizations,Number of Deaths
-    # 5/14/2020,Probable,1344,24,28
-    # 5/14/2020,Confirmed,26469,3568,927
-
-    PROB = 'Probable'
-    CONF = 'Confirmed'
-
-    for row in cases:
-        if (row['Case Status'] == CONF):
-            for k, v in row.items():
-                if (k in mapping):
-                    tagged[mapping[k]] = atoi(v)
-        elif (row['Case Status'] == PROB):
-            tagged[Fields.PROBABLE.name] = atoi(row['Number of Cases'])
-            tagged[Fields.DEATH_PROBABLE.name] = atoi(row['Number of Deaths'])
-    tagged[Fields.POSITIVE.name] = tagged[Fields.CONFIRMED.name] + tagged[Fields.PROBABLE.name]
-
-    # sum everything
-    rmapping = {v: k for k, v in mapping.items()}
-    testing_cols = [
-        rmapping[Fields.SPECIMENS.name], rmapping[Fields.SPECIMENS_POS.name],
-        'Total Number of Testing Encounters', 'Total Number of Positive Testing Encounters']
-    summed_testing = csv_sum(testing, testing_cols)
-    tagged[Fields.SPECIMENS.name] = summed_testing[testing_cols[0]]
-    tagged[Fields.SPECIMENS_POS.name] = summed_testing[testing_cols[1]]
-    tagged[Fields.ANTIBODY_TOTAL.name] = summed_testing[testing_cols[2]] - summed_testing[testing_cols[0]]
-    tagged[Fields.ANTIBODY_POS.name] = summed_testing[testing_cols[3]] - summed_testing[testing_cols[1]]
-
-    # Hospitalizations
-    hospital = sorted(hospital, key=lambda x: datetime.strptime(x['Date'], date_format), reverse=True)
-    mapped_hosp = map_attributes(hospital[0], mapping, 'VA')
-    tagged.update(mapped_hosp)
-
-    return tagged
-
-
 def handle_nj(res, mapping):
     '''Need to parse everything the same, and add past recoveries
     to the new query, because I do not know how to add a constant
@@ -591,14 +524,44 @@ def handle_me(res, mapping):
 
 def handle_mi(res, mapping):
     tagged = {}
-    for result in res[:-2]:
+    for result in res[:2]:
         partial = extract_arcgis_attributes(result, mapping, 'MI')
         tagged.update(partial)
 
-    recovered_page = res[-2]
+    # Recoveries soup
+    recovered_page = res[-3]
     recover_p = recovered_page.find('div', 'fullContent')
     span = recover_p.find('span').get_text(strip=True)
     tagged[Fields.RECOVERED.name] = atoi(span)
+
+    # Hospitalization soup
+    hospitalization_page = res[-2]
+    tables = hospitalization_page.find_all('table')
+    vent = None
+    icu = None
+    hosp = None
+    for t in tables:
+        caption = t.find('caption').get_text(strip=True)
+        if caption.startswith('COVID-19 Metrics'):
+            # This is where we take vent data
+            title = '# on Ventilators'
+            # skip the first since it's just titles (th)
+            for tr in t.find_all('tr')[1:]:
+                if tr.find('td').get_text(strip=True) == title:
+                    # find the last item (assuming it's total)
+                    vent = tr.find_all('td')[-1].get_text(strip=True)
+        elif caption.startswith('Patient Census'):
+            # This is where we take icu and hosp data
+            last_row = t.find_all('tr')[-1]
+            tds = last_row.find_all('td')
+            hosp = tds[1].get_text(strip=True)
+            icu = tds[2].get_text(strip=True)
+
+    if vent is not None:
+        tagged[Fields.CURR_VENT.name] = atoi(vent)
+    if icu is not None and hosp is not None:
+        tagged[Fields.CURR_HOSP.name] = atoi(hosp)
+        tagged[Fields.CURR_ICU.name] = atoi(icu)
 
     # TODO: Can use the reverse mapping
     cases = 'Cases'
@@ -636,10 +599,13 @@ def handle_mi(res, mapping):
     for m in [pcr, antibody]:
         tagged[mapping[m]] = summed['Count'][m]
 
-    df = pd.read_excel(results_url)
-    summed = df[[negative, positive]].sum()
-    for x in [negative, positive]:
-        tagged[mapping[x]] = summed[x]
+    try:
+        df = pd.read_excel(results_url)
+        summed = df[[negative, positive]].sum()
+        for x in [negative, positive]:
+            tagged[mapping[x]] = summed[x]
+    except Exception:
+        logging.warning("[MI] Failed to fetch test results")
 
     return tagged
 
@@ -743,6 +709,19 @@ def handle_ma(res, mapping):
         summed = csv_sum(hosprows, [hosp_key])
         tagged[Fields.HOSP.name] = summed[hosp_key]
 
+    return tagged
+
+
+def handle_tx(res, mapping):
+    tagged = {}
+    for result in res[:-1]:
+        partial = extract_arcgis_attributes(result, mapping, debug_state='TX')
+        tagged.update(partial)
+
+    # last item is the current ICU DataFrame
+    df = res[-1]
+    icu = df[df.columns[-1]].iloc[-1]
+    tagged[Fields.CURR_ICU.name] = icu
     return tagged
 
 

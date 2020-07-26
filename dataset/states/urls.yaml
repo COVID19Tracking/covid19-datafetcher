@@ -150,13 +150,7 @@ FL:
   type: json
   desc: PCR specimens
 - url: https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/arcgis/rest/services/Florida_COVID19_Cases/FeatureServer/0/query
-  params: {where: 1=1, outStatistics: [{statisticType: sum, onStatisticField: T_positive},
-      {statisticType: sum, onStatisticField: T_negative}, {statisticType: sum, onStatisticField: T_total},
-      {statisticType: sum, onStatisticField: T_Total_Res}, {statisticType: sum, onStatisticField: TPending},
-      {statisticType: sum, onStatisticField: TInconc}, {statisticType: sum, onStatisticField: C_HospYes_Res},
-      {statisticType: sum, onStatisticField: C_HospYes_NonRes}, {statisticType: sum,
-        onStatisticField: C_NonResDeaths}, {statisticType: sum, onStatisticField: C_FLResDeaths}],
-    f: json}
+  params: {where: COUNTY_1='State', outFields: 'T_positive, T_negative, T_total, T_Total_Res, TPending, TInconc, C_HospYes_Res, C_HospYes_NonRes, C_NonResDeaths, C_FLResDeaths, C_NonResDeaths + C_FLResDeaths as death,  C_HospYes_Res + C_HospYes_NonRes as hosp', f: json}
   type: arcgis
 - url: https://bi.ahca.myflorida.com/t/ABICC/views/Public/COVIDHospitalizationsCounty.csv
   params: null
@@ -270,6 +264,10 @@ MI:
   params: null
   type: html:soup
   desc: Recovered (soup)
+- url: https://www.michigan.gov/coronavirus/0,9753,7-406-98159-523641--,00.html
+  params: null
+  type: html:soup
+  desc: Hospitalization etc (soup)
 - url: https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html
   params: null
   type: html:soup
@@ -284,6 +282,10 @@ MO:
       {onStatisticField: DEATHS, statisticType: sum}], where: 1=1}
   type: arcgis
   desc: Cases, death
+- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/ArcGIS/rest/services/Dashboard_Daily_Numbers_Automated/FeatureServer/0/query
+  params: {where: Description='Lab Confirmed Cases in Missouri as of 2pm Today', outFields: 'Description, value as positive', f: json}
+  type: arcgis
+  desc: Total cases (2pm number)
 - url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/Daily_COVID19_Testing_Report_for_OPI/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{"statisticType":"count","onStatisticField":"FID", "outStatisticFieldName": "total"}], f: json}
   type: arcgis
@@ -387,9 +389,8 @@ NJ:
   params: {f: json, resultRecordCount: 1, orderByFields: _date desc, outFields: '*', where: 1=1}
   type: arcgis
   desc: Base data
-- url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/survey123_cb9a6e9a53ae45f6b9509a23ecdf7bcf/FeatureServer/0/query
-  params: {f: json, resultRecordCount: 1, orderByFields: _date desc, outFields: 'total_tests_reported',
-    where: total_tests_reported is not NULL}
+- url: https://services7.arcgis.com/Z0rixLlManVefxqY/ArcGIS/rest/services/DailyCaseCounts/FeatureServer/0/query
+  params: {f: json, outStatistics: [{"statisticType":"sum","onStatisticField":"PROBABLE_DEATHS","outStatisticFieldName":"probable_death"}], where: 1=1}
   type: arcgis
   desc: Probable death
 - url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query
@@ -508,6 +509,10 @@ TX:
   params: {where: HospitalData='COVIDPatientsHospitals', outFields: '*, Count_ as curr_hosp', f: 'json'}
   type: arcgis
   desc: Curr hosp
+- url: https://www.dshs.texas.gov/coronavirus/TexasCOVID-19HospitalizationsOverTimebyTSA.xlsx
+  params: {sheet_name: 'COVID-19 ICU'}
+  type: xlsx
+  desc: Current ICU
 UT:
 - url: https://services6.arcgis.com/KaHXE9OkiB9e63uE/ArcGIS/rest/services/Utah_COVID19_Cases_by_Local_Health_Department_View/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{"statisticType": "max", "onStatisticField": "Date_Updated"},
@@ -523,22 +528,31 @@ UT:
   type: html:soup
   desc: Hospitalization page (soup)
 VA:
-# Cases
-- url: https://www.vdh.virginia.gov/content/uploads/sites/182/2020/04/VDH-COVID-19-PublicUseDataset-Cases_By-Confirmation.csv
-  params: null
-  type: csv
-  desc: Cases
-# Test data
-- url: https://www.vdh.virginia.gov/content/uploads/sites/182/2020/05/VDH-COVID-19-PublicUseDataset-Tests_by-LabReportDate.csv
-  params: null
-  type: csv
+- url: https://data.virginia.gov/api/id/uqs3-x7zh.json
+  params: {$query: 'select report_date as date, sum(number_of_cases) as positive, sum(number_of_deaths) as death, sum(number_of_hospitalizations) as hosp group by report_date order by report_date desc limit 1'}
+  type: soda
+  data_path: [0]
+  desc: Cases, death, hospitalizations (lumped)
+- url: https://data.virginia.gov/api/id/uqs3-x7zh.json
+  params: {$query: 'select report_date as date, number_of_cases as confirmed, number_of_deaths as death_confirmed where case_status = "Confirmed" order by report_date desc limit 1'}
+  type: soda
+  data_path: [0]
+  desc: Cases, death (confirmed)
+- url: https://data.virginia.gov/api/id/uqs3-x7zh.json
+  params: {$query: 'select report_date as date, number_of_cases as probable, number_of_deaths as death_probable where case_status = "Probable" order by report_date desc limit 1'}
+  type: soda
+  data_path: [0]
+  desc: Cases, death (Probable)
+- url: https://data.virginia.gov/resource/3u5k-c2gr.json
+  params: {$query: 'select sum(number_of_pcr_testing) as pcr_specimens, sum(number_of_positive_pcr_testing) as pcr_specimens_pos, sum(total_number_of_testing) - sum(number_of_pcr_testing) as antibody_total, sum(number_of_pcr_testing) - sum(number_of_positive_pcr_testing) as antibody_pos'}
+  type: soda
+  data_path: [0]
   desc: Testing data (PCR and totals)
-# Hospital data
-- url: https://www.vdh.virginia.gov/content/uploads/sites/182/2020/05/VDH-COVID-19-PublicUseDataset-KeyMeasures-Hospitals.csv
-  params: null
-  type: csv
-  encoding: utf-8-sig
-  desc: Hospital data
+- url: https://data.virginia.gov/resource/28wk-762y.json
+  params: {$query: 'select total_covid_19_patients, icu_patients, vent_patients order by date desc limit 1'}
+  type: soda
+  data_path: [0]
+  desc: Current hosp, ICU & vent
 VI:
 - url: https://www.covid19usvi.com/
   params: null
