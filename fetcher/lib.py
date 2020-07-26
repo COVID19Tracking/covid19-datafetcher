@@ -22,21 +22,26 @@ class Fetcher(object):
         self.sources = Sources(
             cfg.dataset.sources_file, cfg.dataset.mapping_file, cfg.dataset.extras_module)
         self.extras = self.sources.extras
+        self.results = Result(cfg.output, cfg.dataset.fields, cfg.dataset.index,
+                              cfg.output_date_format, dump_all_states=not cfg.state)
 
     def has_state(self, state):
         return state in self.sources.keys()
 
-    def fetch_all(self):
-        results = Result()
+    def fetch_states(self, states=None):
+        self.results.clear()
         success = 0
         failures = []
 
-        for state in sorted(self.sources.keys()):
+        if states is None:
+            states = sorted(self.sources.keys())
+
+        for state in states:
             try:
-                res, data = self.fetch_state(state)
+                res, data = self._fetch_state(state)
                 if res:
                     if data:
-                        results[state] = data
+                        self.results.append(state, data)
                         success += 1
                     else:
                         # failed parsing
@@ -49,9 +54,9 @@ class Fetcher(object):
         logging.info("Fetched data for {} states".format(success))
         if failures:
             logging.info("Failed to fetch: %r", failures)
-        return results
+        return self.results
 
-    def fetch_state(self, state):
+    def _fetch_state(self, state):
         ''' Fetch data for a single state, returning a tuple of
         (fetched_result, parsed_data)
 
@@ -157,17 +162,10 @@ def main(cfg):
         cfg.state = cfg.state.split(',')
 
     fetcher = Fetcher(cfg)
-    results = Result()
-    if cfg.state:
-        for s in cfg.state:
-            _, mapped = fetcher.fetch_state(s)
-            results[s] = mapped
-    else:
-        results = fetcher.fetch_all()
+    results = fetcher.fetch_states(cfg.state)
 
     # This stores the CSV with the requsted fields in order
-    results.write_to_csv(cfg.output, cfg.dataset.fields, cfg.dataset.index,
-                         cfg.output_date_format, dump_all_states=not cfg.state)
+    data_frame = results.dataframe
+    results.write_to_csv()
 
-    print(results.get_dataframe(cfg.dataset.fields, cfg.dataset.index,
-                                cfg.output_date_format, dump_all_states=not cfg.state))
+    print(data_frame)

@@ -5,6 +5,7 @@ import csv
 import pandas as pd
 from datetime import datetime
 
+
 def handle_ma(res, mapping):
     """Returning a list of dictionaries (records)"""
     tagged = []
