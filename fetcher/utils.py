@@ -37,6 +37,7 @@ class Fields(Enum):
     SPECIMENS = 20
     SPECIMENS_POS = 21
     SPECIMENS_NEG = 22
+    PCR_TEST_ENCOUNTERS = 23
 
     # Death
     DEATH = 30  # total

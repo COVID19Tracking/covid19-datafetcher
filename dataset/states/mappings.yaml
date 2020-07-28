@@ -47,6 +47,7 @@ CO:
   MAX_State_Number_Hospitalizations: HOSP
   MAX_State_Number_Tested: TOTAL
   MAX_State_Pos_Cases: POSITIVE
+  MAX_State_Test_Encounters: PCR_TEST_ENCOUNTERS
   antibody_pos: ANTIBODY_POS
   antibody_neg: ANTIBODY_NEG
   cases_probable: PROBABLE

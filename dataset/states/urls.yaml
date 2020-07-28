@@ -94,10 +94,7 @@ CA:
   desc: Hospitalizations, ICU
 CO:
 - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/Colorado_COVID19_Positive_Cases/FeatureServer/0/query
-  params: {where: 1=1, outStatistics: [{statisticType: max, onStatisticField: State_Pos_Cases},
-      {statisticType: max, onStatisticField: State_Deaths}, {statisticType: max, onStatisticField: State_Number_Hospitalizations},
-      {statisticType: max, onStatisticField: State_Number_Tested}, {statisticType: max,
-        onStatisticField: Date_Data_Last_Updated}], f: json}
+  params: {where: 1=1, outStatistics: [{statisticType: max, onStatisticField: State_Pos_Cases}, {statisticType: max, onStatisticField: State_Deaths}, {statisticType: max, onStatisticField: State_Number_Hospitalizations}, {statisticType: max, onStatisticField: State_Number_Tested}, {statisticType: max, onStatisticField: Date_Data_Last_Updated}, {statisticType: max, onStatisticField: State_Test_Encounters}], f: json}
   type: arcgis
   desc: Main source
 # If this gets updated, this should be used as the main source
