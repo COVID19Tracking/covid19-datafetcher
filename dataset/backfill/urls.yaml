@@ -46,3 +46,16 @@ TN:
   params: {where: 1=1, outFields: '*', orderByFields: 'DATE desc', resultRecordCount: 300, f: json}
   type: arcgis
   desc: Main data
+TX:
+- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Cases_Service/FeatureServer/8/query
+  params: {where: 1=1, outFields: '*, CumulativeFatalities as DeathByDateOfDeath', orderByField: Date asc, resultRecordCount: 500, f: json}
+  type: arcgis
+  desc: Cases and deaths
+- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_TestData_Service/FeatureServer/1/query
+  params: {where: 1=1, outFields: '*', orderByField: Date asc, resultRecordCount: 500, f: json}
+  type: arcgis
+  desc: Curr. hospitalization
+- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_TestData_Service/FeatureServer/3/query
+  params: {where: 1=1, outFields: '*', orderByField: Date asc, resultRecordCount: 500, f: json}
+  type: arcgis
+  desc: Testing (PCR + Antibody)

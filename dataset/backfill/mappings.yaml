@@ -70,3 +70,11 @@ TN:
   TEST_TOT: SPECIMENS
   CASES_CONFIRMED: CONFIRMED
   CASES_PROBABLE: PROBABLE
+TX:
+  Date: TIMESTAMP
+  CumulativeCases: POSITIVE
+  CumulativeFatalities: DEATH
+  DeathByDateOfDeath: DEATH_BY_DATE_OF_DEATH
+  Hospitalizations: CURR_HOSP
+  ViralTests: SPECIMENS
+  AntibodyTests: ANTIBODY_TOTAL
