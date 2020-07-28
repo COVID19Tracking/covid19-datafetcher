@@ -262,6 +262,22 @@ def handle_la(res, mapping):
     return tagged
 
 
+def handle_in(res, mapping):
+    daily_stats = res[0]
+    mapped = map_attributes(daily_stats['metrics']['daily_statistics'], mapping, 'IN')
+
+    # rest of the data:
+    df = pd.DataFrame(daily_stats['metrics']['data'])
+    df = df[df['district_type'] == 'd']
+    df = df.groupby('date').sum()
+
+    last_row = df.iloc[-1]
+    for k, v in last_row.iteritems():
+        if k in mapping:
+            mapped[mapping[k]] = v
+    return mapped
+
+
 def handle_il(res, mapping):
     state = 'IL'
     state_name = 'Illinois'

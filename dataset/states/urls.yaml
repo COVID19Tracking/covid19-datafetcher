@@ -184,25 +184,10 @@ IL:
   type: json
   desc: Hospitalization
 IN:
-# https://www.coronavirus.in.gov/map/covid-19-indiana-daily-report-current.topojson
-# .objects | .daily_statistics
-- url: https://www.coronavirus.in.gov/map/covid-19-indiana-daily-report-current.topojson
+- url: https://www.coronavirus.in.gov/map/covid-19-indiana-universal-report-current-public.json
   params: null
-  data_path: [0, 'objects', 'daily_statistics']
+  data_path: ['metrics', 'daily_statistics']
   type: json
-#- url: https://hub.mph.in.gov/api/3/action/datastore_search
-#  params: {resource_id: 182b6742-edac-442d-8eeb-62f96b17773e, limit: 1, sort: DATE desc}
-#  type: json
-- url: https://hub.mph.in.gov/api/3/action/datastore_search
-  params: {resource_id: 0c00f7b6-05b0-4ebe-8722-ccf33e1a314f, limit: 1, sort: DATE desc}
-  data_path: ['result', 'records', 0]
-  type: ckan
-# - url: https://hub.mph.in.gov/api/3/action/datastore_search_sql
-#   params:
-#     sql: select "TOTAL" as "beds_all_occupied_beds_covid_19" from "882a7426-886f-48cc-bbe0-a8d14e3012e4" where "STATUS_TYPE" = 'beds_all_occupied_beds_covid_19'
-#   type: ckan
-#   data_path: ['result', 'records', 0]
-#   desc: Hosp
 KY:
 - url: https://kygisserver.ky.gov/arcgis/rest/services/WGS84WM_Services/Ky_Cnty_COVID19_Cases_WGS84WM/FeatureServer/0/query
   params: {f: json, outStatistics: [{outStatisticFieldName: Confirmed, onStatisticField: Confirmed,
