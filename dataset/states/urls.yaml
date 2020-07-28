@@ -492,7 +492,11 @@ TX:
 - url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Cases_Service/FeatureServer/8/query
   params: {where: 1=1, outFields: '*', orderByFields: Date desc, resultRecordCount: 1, f: json}
   type: arcgis
-  desc: Positives, death
+  desc: Positives
+- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Cases_Service/FeatureServer/8/query
+  params: {where: CumulativeFatalities is not NULL, outFields: 'Date, CumulativeFatalities', orderByFields: Date desc, resultRecordCount: 1, f: json}
+  type: arcgis
+  desc: Death
 - url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_TestData_Service/FeatureServer/3/query
   params: {where: 1=1, outFields: '*, ViralTests as totals', orderByFields: Date desc, resultRecordCount: 1, f: json}
   type: arcgis
