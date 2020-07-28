@@ -207,11 +207,18 @@ LA:
     where: 1=1}
   type: arcgis
   desc: Most dashboard data
-# the extra text that says vent and probable death numbers
-- url: https://www.arcgis.com/sharing/rest/content/items/69b726e2b82e408f89c3a54f96e8f776/data
-  params: {f: json}
+- url: https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/Combined_COVID_Reporting/FeatureServer/0/query
+  params: {where: Measure = 'COVID-positive' AND ValueType = 'hospitalized' AND Value is not NULL, outFields: '*', orderByFields: 'Timeframe desc', resultRecordCount: 31, f: json}
+  type: arcgis
+  desc: Current hospitalization (unordered)
+- url: https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/Combined_COVID_Reporting/FeatureServer/0/query
+  params: {where: Measure = 'COVID-positive' AND ValueType = 'on vent' AND Value is not NULL, outFields: '*', orderByFields: 'Timeframe desc', resultRecordCount: 31, f: json}
+  type: arcgis
+  desc: Current vent (unordered)
+- url: https://www.arcgis.com/sharing/rest/content/items/4a6de226701e45bdb542f09b73ee79e1/data?f=json
+  params: null
   type: json
-  desc: Probable death + vent (from dashboard description)
+  desc: Dashboard json (for recoveries)
 MA:
 - url: https://www.mass.gov/info-details/covid-19-response-reporting
   params: null

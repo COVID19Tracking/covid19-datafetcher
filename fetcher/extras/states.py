@@ -235,30 +235,33 @@ def handle_la(res, mapping):
         tests = tagged.pop(state_tests)
         tagged[Fields.TOTAL.name] += tests
 
-    # parse the probable death and vent and hospital data
-    # This is going to be fragile
-    hosp_title = "Reported COVID-19 Patients in Hospitals"
-    recovered_title = "Presumed Recovered"
-    curr_hosp = ""
-    curr_vent = ""
-    recovered = ""
+    # hospitalization
+    hosp_stats = res[1]
+    vent_stats = res[2]
+    dateformat = '%m/%d/%Y %H:%M:%S %p'
+    # need to parse dates to take the latest
+    # Timeframe, Value
+    for key, stats in [(Fields.CURR_HOSP.name, hosp_stats),
+                       (Fields.CURR_VENT.name, vent_stats)]:
+        values = []
+        for feature in stats['features']:
+            timeframe = feature.get('attributes', {}).get('Timeframe')
+            value = feature.get('attributes', {}).get('Value')
+            values.append((datetime.strptime(timeframe, dateformat), value))
 
-    widgets = res[1].get('widgets', {})
+        # sort by latest
+        values.sort(key=lambda x: x[0])
+        latest_val = values[-1][1]
+        tagged[key] = latest_val
+
+    # recoveries from dashboard
+    widgets = res[-1].get('widgets', {})
     for widget in widgets:
-        if widget.get('defaultSettings', {}) \
-                    .get('topSection', {}).get('textInfo', {}).get('text') == hosp_title:
-            # Take the hosp value from the main number, and vent number from the small text
-            curr_hosp = atoi(widget['datasets'][0]['data'])
-            vent_subtext = widget['defaultSettings']['bottomSection']['textInfo']['text']
-            curr_vent = atoi(vent_subtext.split()[0])
-        elif widget.get('defaultSettings', {}) \
-            .get('topSection', {}) \
-                .get('textInfo', {}).get('text', '').find(recovered_title) >= 0:
-            recovered = atoi(widget['datasets'][0]['data'])
+        if widget.get('name') == 'recovered':
+            val = widget.get('datasets')[0].get('data')
+            tagged[Fields.RECOVERED.name] = val
+            break
 
-    tagged[Fields.CURR_HOSP.name] = curr_hosp
-    tagged[Fields.CURR_VENT.name] = curr_vent
-    tagged[Fields.RECOVERED.name] = recovered
     return tagged
 
 
