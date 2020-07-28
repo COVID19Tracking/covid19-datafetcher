@@ -390,7 +390,7 @@ NJ:
   type: arcgis
   desc: Base data
 - url: https://services7.arcgis.com/Z0rixLlManVefxqY/ArcGIS/rest/services/DailyCaseCounts/FeatureServer/0/query
-  params: {f: json, outStatistics: [{"statisticType":"sum","onStatisticField":"PROBABLE_DEATHS","outStatisticFieldName":"probable_death"}], where: 1=1}
+  params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"PROBABLE_DEATHS"}], f: json}
   type: arcgis
   desc: Probable death
 - url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query
