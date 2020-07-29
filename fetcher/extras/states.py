@@ -651,6 +651,34 @@ def handle_mo(res, mapping):
     return tagged
 
 
+def handle_nc(res, mapping):
+    tagged = {}
+    for result in res[:-1]:
+        partial = extract_arcgis_attributes(result, mapping, debug_state='NC')
+        tagged.update(partial)
+
+    # CSV
+    df = res[-2]
+    df['Date'] = pd.to_datetime(df['Date'])
+    df = df.pivot(index='Date', columns='Measure Names')
+
+    for k, v in df.sum().iteritems():
+        if k[1] in mapping:
+            tagged[mapping[k[1]]] = v
+
+    # hospitalizations, we need daily
+    hosp_val = df['Measure Values']['Hospitalizations'].iloc[-1]
+    tagged[Fields.CURR_HOSP.name] = hosp_val
+
+    # deaths
+    df = res[-1]
+    df = df[df['Measure Names'] == 'Deaths']
+    death_val = pd.to_numeric(df['Measure Values']).sum()
+    tagged[Fields.DEATH.name] = death_val
+
+    return tagged
+
+
 def handle_nd(res, mapping):
     soup = res[-1]
     circles = soup.find_all("div", "circle")

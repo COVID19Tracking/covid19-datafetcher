@@ -270,6 +270,9 @@ NC:
   MAX_Hosp: CURR_HOSP
   SUM_Deaths: DEATH
   SUM_Total: POSITIVE
+  Hospitalizations: CURR_HOSP
+  New Cases by Report Date: CONFIRMED
+  NC Daily Tests: SPECIMENS
 ND:
   Positive Cases: POSITIVE
   Negative: NEGATIVE

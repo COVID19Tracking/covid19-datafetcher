@@ -349,6 +349,14 @@ NC:
       {onStatisticField: Total, statisticType: sum}, {onStatisticField: Deaths, statisticType: sum}],
     where: 1=1}
   type: arcgis
+- url: https://public.tableau.com/views/NCDHHS_COVID-19_DataDownload/DailyMetrics.csv
+  params: {parse_dates: True, thousands: ','}
+  type: pandas
+  desc: Summary table (testing, cases)
+- url: https://public.tableau.com/views/NCDHHS_COVID-19_DataDownload/CountyCasesandDeaths.csv'
+  params: {}
+  type: pandas
+  desc: Deaths (by county)
 ND:
 # - url: https://static.dwcdn.net/data/yuhr0.csv
 #   params: {}
