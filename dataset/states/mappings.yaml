@@ -333,6 +333,7 @@ OR:
   SUM_Recovered: RECOVERED
   SUM_NegativeTests: NEGATIVE
   # from page
+  Total cases: POSITIVE
   Positive tests: CONFIRMED
   Negative tests: NEGATIVE
   Total tested: TOTAL

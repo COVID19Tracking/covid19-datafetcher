@@ -469,7 +469,7 @@ def handle_ok(res, mapping):
 def handle_or(res, mapping):
     mapped = {}
     for result in res[:-1]:
-        partial = extract_arcgis_attributes(result, mapping, 'NJ')
+        partial = extract_arcgis_attributes(result, mapping, 'OR')
         mapped.update(partial)
 
     # The last item is the page that needs to be scraped
@@ -482,7 +482,10 @@ def handle_or(res, mapping):
         if len(tds) < 2:
             continue
         name = tds[0].get_text(strip=True)
-        value = tds[1].get_text(strip=True)
+        if tds[1].find('sup') is not None:
+            value = tds[1].find('b').find(text=True, recursive=False)
+        else:
+            value = tds[1].get_text(strip=True)
         if name in mapping:
             try:
                 mapped[mapping[name]] = atoi(value)
