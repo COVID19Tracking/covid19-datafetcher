@@ -323,6 +323,10 @@ MP:
   params: {where: 1=1, outStatistics: [{"statisticType": "max", "onStatisticField": "reportdt"},{"statisticType": "sum", "onStatisticField": "confirmedcases"}, {"statisticType": "sum", "onStatisticField": "totalspeccnmi"}, {"statisticType": "sum", "onStatisticField": "deaths"}, {"statisticType": "sum", "onStatisticField": "recovered"}, {"statisticType": "sum", "onStatisticField": "hospitalized"}], f: json}
   type: arcgis
   desc: All data
+- url: https://services8.arcgis.com/zkkZCub5I6ydvXQj/arcgis/rest/services/Coronavirus_PublicDashboardView/FeatureServer/1/query
+  params: {where: name = 'CNMI', outFields: 'totaltests', f: json}
+  type: arcgis
+  desc: State stats
 MT:
 - url: https://services.arcgis.com/qnjIrwR8z5Izc0ij/arcgis/rest/services/COVID_Cases_Production_View/FeatureServer/0/query
   params: {f: json, outStatistics: [{onStatisticField: Total, statisticType: sum},

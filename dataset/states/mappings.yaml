@@ -251,6 +251,9 @@ MP:
   MAX_reportdt: TIMESTAMP
   SUM_confirmedcases: CONFIRMED
   SUM_totalspeccnmi: SPECIMENS
+  # This will override the previous value
+  # Aggregate values differ from what they how on the dashboard
+  totaltests: SPECIMENS
   SUM_deaths: DEATH
   SUM_recovered: RECOVERED
   SUM_hospitalized: HOSP
