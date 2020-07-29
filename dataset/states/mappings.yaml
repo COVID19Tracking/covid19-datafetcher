@@ -245,8 +245,8 @@ MO:
   PCR_Positive: SPECIMENS_POS
   PCR_Negative: SPECIMENS_NEG
   # From the excel:
-  Hospitalized and Ventilated COVID Patients: CURR_VENT
-  Hospitalized COVID Patients: CURR_HOSP
+  Suspected and Confirmed Hospitalized and Ventilated Covid Patients: CURR_VENT
+  Total Suspected and Confirmed Hospitalized Covid Patients: CURR_HOSP
 MP:
   MAX_reportdt: TIMESTAMP
   SUM_confirmedcases: CONFIRMED
