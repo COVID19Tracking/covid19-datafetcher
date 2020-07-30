@@ -65,7 +65,9 @@ def request(url, query=None, encoding=None):
     if query:
         url = "{}?{}".format(url, urllib.parse.urlencode(query))
     res = {}
-    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    req = urllib.request.Request(url, headers={
+        'user-agent': 'Mozilla/5.0 Gecko/20100101 Firefox/78.0',
+    })
     with urllib.request.urlopen(req) as f:
         res = f.read().decode(encoding)
     return res
