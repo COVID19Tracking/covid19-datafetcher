@@ -58,7 +58,22 @@ MO:
   pcr_negative: SPECIMENS_NEG
   pcr_positive: SPECIMENS_POS
   pcr_total: SPECIMENS
-
+RI:
+  # Google doc:
+  "Cumulative positive tests (may count people more than once)": SPECIMENS_POS
+  "Cumulative negative tests (may count people more than once)": SPECIMENS_NEG
+  "Cumulative total tests completed (may count people more than once)": SPECIMENS
+  "Cumulative people who tested positive (counts first positive lab per person)": CONFIRMED
+  "Cumulative people who have only tested negative (counts first negative lab per person)": NEGATIVE
+  "Cumulative people tested (one count per person)": TOTAL
+  "Cumulative hospital admissions": HOSP
+  "Cumulative hospital discharges": RECOVERED
+  "Currently hospitalized": CURR_HOSP
+  "Currently in ICU": CURR_ICU
+  "Currently vented": CURR_VENT
+  "Total deaths": DEATH
+  Date: DATE
+  __strptime: "%m/%d/%Y"
 TN:
   CASES_TOT: POSITIVE
   HOSPITALIZED_TOT: HOSP

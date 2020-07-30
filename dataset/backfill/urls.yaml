@@ -41,6 +41,10 @@ MO:
   params: {where: Date>timestamp '2020-02-1 00:00:00', outFields: '*', orderByFields: Date asc, f: json}
   type: arcgis
   desc: Cases by report date
+RI:
+- url: 'https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/export?format=csv&gid=1592746937'
+  params: {parse_dates: True}
+  type: pandas
 TN:
 - url: https://services1.arcgis.com/HLC8bAygObK4fhPW/arcgis/rest/services/TN_COVID19_Daily/FeatureServer/0/query
   params: {where: 1=1, outFields: '*', orderByFields: 'DATE desc', resultRecordCount: 300, f: json}

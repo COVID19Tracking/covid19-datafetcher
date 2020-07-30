@@ -49,3 +49,12 @@ def handle_mo(res, mapping):
     cumsum_df[Fields.FETCH_TIMESTAMP.name] = datetime.now()
 
     return cumsum_df.to_dict('records')
+
+
+def handle_ri(res, mapping):
+    res = res[0]
+    res = res.rename(columns=mapping)
+    res = res[[v for k, v in mapping.items() if k != '__strptime']]
+    # TODO: consider working with DFs directly
+    records = res.to_dict(orient='records')
+    return records
