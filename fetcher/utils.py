@@ -59,6 +59,11 @@ class Fields(Enum):
     # Recovered
     RECOVERED = 50
 
+    ANTIGEN_TOTAL = 60
+    ANTIGEN_POS = 61
+    ANTIGEN_TOTAL_PEOPLE = 62
+    ANTIGEN_POS_PEOPLE = 63
+
     def __repr__(self):
         return self.__str__()
 
