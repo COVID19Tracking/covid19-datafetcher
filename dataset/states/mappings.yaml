@@ -94,9 +94,9 @@ FL:
   PCR_Positive: SPECIMENS_POS
   PCR_Total: SPECIMENS
   PCR_Date: DATE
-  SER_Summary_Negative: ANTIBODY_NEG
-  SER_Summary_Positive: ANTIBODY_POS
-  SER_Summary_Total: ANTIBODY_TOTAL
+  SER_Summary_Negative: ANTIBODY_NEG_PEOPLE
+  SER_Summary_Positive: ANTIBODY_POS_PEOPLE
+  SER_Summary_Total: ANTIBODY_TOTAL_PEOPLE
 GA:
   MAX_EditDate: TIMESTAMP
   SUM_COVID_Cases: POSITIVE
@@ -177,7 +177,7 @@ MA:
   DeathsProbTotal: DEATH_PROBABLE
   Molecular Total: TOTAL
   Molecular All Tests Total: SPECIMENS
-  Serology Total: ANTIBODY_TOTAL
+  Serology Total: ANTIBODY_TOTAL_PEOPLE
   Total number of COVID patients in hospital today: CURR_HOSP
   ICU: CURR_ICU
   Total number intubated: CURR_VENT
@@ -239,8 +239,8 @@ MO:
   #SUM_Total: ANTIBODY_TOTAL
   #SUM_Positive: ANTIBODY_POS
   #SUM_Negative: ANTIBODY_NEG
-  ser_positive: ANTIBODY_POS
-  ser_tested: ANTIBODY_TOTAL
+  ser_positive: ANTIBODY_POS_PEOPLE
+  ser_tested: ANTIBODY_TOTAL_PEOPLE
   PCR_Total: SPECIMENS
   PCR_Positive: SPECIMENS_POS
   PCR_Negative: SPECIMENS_NEG
