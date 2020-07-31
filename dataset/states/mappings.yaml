@@ -231,9 +231,8 @@ MN:
   RlsdFrmIso: RECOVERED
   OutcmDied: DEATH_CONFIRMED
 MO:
-  positive: POSITIVE
-  confirmed: CONFIRMED
   SUM_DEATHS: DEATH
+  SUM_CASES: POSITIVE
   MAX_EditDate: TIMESTAMP # no longer used, TODO: find alternative
   total_people: TOTAL
   #SUM_Total: ANTIBODY_TOTAL

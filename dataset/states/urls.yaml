@@ -298,10 +298,6 @@ MO:
   type: arcgis
   desc: PCR (totals, pos/neg)
 - url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/ArcGIS/rest/services/Dashboard_Daily_Numbers_Automated/FeatureServer/0/query
-  params: {where: Description='PCR Positive', outFields: 'value as confirmed, value as positive', f: json}
-  type: arcgis
-  desc: Positive PCR (people)
-- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/ArcGIS/rest/services/Dashboard_Daily_Numbers_Automated/FeatureServer/0/query
   params: {where: Description='PCR Tested', outFields: 'value as total_people', f: json}
   type: arcgis
   desc: Total PCR (people)
