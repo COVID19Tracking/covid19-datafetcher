@@ -193,6 +193,7 @@ MD:
   total_hospitalized: HOSP
   total_released: RECOVERED
   TotalTests: SPECIMENS
+  total_number_of_positives: SPECIMENS_POS
 ME:
   Date: TIMESTAMP
   TotalCases: POSITIVE

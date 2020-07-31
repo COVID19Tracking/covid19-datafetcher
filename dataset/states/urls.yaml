@@ -229,6 +229,10 @@ MD:
   params: {f: json, resultRecordCount: 1, orderByFields: ReportDate desc, outFields: 'ReportDate,TotalCases,NegativeTests,bedsICU,bedsAcute,bedsTotal,total_hospitalized,total_released,deaths,pdeaths,TotalTests',
     where: 1=1}
   type: arcgis
+- url: https://services.arcgis.com/njFNhDsUCentVYJW/arcgis/rest/services/MDCOVID19_TestingVolume/FeatureServer/0/query
+  params: {where: 1=1, outFields: '*', outStatistics: [{"statisticType": "sum", "onStatisticField": "number_of_positives", "outStatisticFieldName": "total_number_of_positives"}], f: json}
+  type: arcgis
+  desc: PCR Testing and positives
 ME:
 - url: https://services1.arcgis.com/RbMX0mRVOFNTdLzd/ArcGIS/rest/services/Statewide/FeatureServer/0/query
   params: {where: TotalCases is not NULL, outFields: '*', orderByFields: Date desc, resultRecordCount: 1, f: json}
