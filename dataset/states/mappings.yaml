@@ -145,14 +145,13 @@ IN:
   m2b_hospitalized_icu_occupied_covid: CURR_ICU
   m2b_hospitalized_vent_occupied_covid: CURR_VENT
 
-  total_case: POSITIVE
-  total_death: DEATH_CONFIRMED
-  total_test: TOTAL
-  total_case_prob: PROBABLE
-  total_death_prob: DEATH_PROBABLE
-  new_test_end_date: DATE
-  # is it only pcr?
+  covid_tests: TOTAL
+  covid_cases: POSITIVE
+  covid_deaths: DEATH_CONFIRMED
+  covid_cases_prob: PROBABLE
+  covid_deaths_prob: DEATH_PROBABLE
   total_test_administrated: SPECIMENS
+  report_date: DATE
 KY:
   Confirmed: POSITIVE
   Deceased: DEATH

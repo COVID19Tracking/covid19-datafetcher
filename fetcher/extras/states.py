@@ -269,17 +269,18 @@ def handle_la(res, mapping):
 
 def handle_in(res, mapping):
     daily_stats = res[0]
-    mapped = map_attributes(daily_stats['metrics']['daily_statistics'], mapping, 'IN')
+    mapped = map_attributes(daily_stats['metrics']['test_administrated'], mapping, 'IN')
+    partial = map_attributes(daily_stats, mapping, 'IN')
+    mapped.update(partial)
 
-    # rest of the data:
-    df = pd.DataFrame(daily_stats['metrics']['data'])
-    df = df[df['district_type'] == 'd']
-    df = df.groupby('date').sum()
-
-    last_row = df.iloc[-1]
-    for k, v in last_row.iteritems():
-        if k in mapping:
-            mapped[mapping[k]] = v
+    # Base data is in "daily statistics", hosp data in "data"
+    for metric_category in ['data', 'daily_statistics']:
+        df = pd.DataFrame(daily_stats['metrics'][metric_category])
+        df = df[df['district_type'] == 's']  # assuming "s" stands for State
+        last_row = df.iloc[-1]  # assume either unique or sorted by date (that's what we know)
+        for k, v in last_row.iteritems():
+            if k in mapping:
+                mapped[mapping[k]] = v
     return mapped
 
 
