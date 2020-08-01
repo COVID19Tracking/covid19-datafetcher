@@ -646,9 +646,9 @@ def handle_mo(res, mapping):
     hosp_title = [k for k, v in mapping.items() if v == Fields.CURR_HOSP.name][-1]
     vent_title = [k for k, v in mapping.items() if v == Fields.CURR_VENT.name][-1]
     for row in hosp.itertuples():
-        if isinstance(row[1], str) and row[1].startswith(hosp_title):
+        if isinstance(row[1], str) and row[1].find(hosp_title) >= 0:
             tagged[Fields.CURR_HOSP.name] = row[2]
-        if isinstance(row[1], str) and row[1].startswith(vent_title):
+        if isinstance(row[1], str) and row[1].find(vent_title) >= 0:
             tagged[Fields.CURR_VENT.name] = row[2]
 
     return tagged

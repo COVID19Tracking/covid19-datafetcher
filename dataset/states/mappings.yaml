@@ -233,6 +233,8 @@ MN:
 MO:
   SUM_DEATHS: DEATH
   SUM_CASES: POSITIVE
+  # overrides
+  positive: POSITIVE
   MAX_EditDate: TIMESTAMP # no longer used, TODO: find alternative
   total_people: TOTAL
   #SUM_Total: ANTIBODY_TOTAL
@@ -243,8 +245,9 @@ MO:
   PCR_Total: SPECIMENS
   PCR_Positive: SPECIMENS_POS
   PCR_Negative: SPECIMENS_NEG
+  hosp: CURR_HOSP
   # From the excel:
-  Suspected and Confirmed Hospitalized and Ventilated Covid Patients: CURR_VENT
+  Ventilated: CURR_VENT
   Total Suspected and Confirmed Hospitalized Covid Patients: CURR_HOSP
 MP:
   MAX_reportdt: TIMESTAMP
