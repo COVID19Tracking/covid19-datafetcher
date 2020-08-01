@@ -773,7 +773,7 @@ def handle_tx(res, mapping):
 
     # last item is the current ICU DataFrame
     df = res[-1]
-    icu = df.loc[df[df.columns[0]] == 'Total'][df.columns[-1]]
+    icu = df.loc[df[df.columns[0]] == 'Total'][df.columns[-1]].iloc[-1]
     tagged[Fields.CURR_ICU.name] = icu
     return tagged
 
