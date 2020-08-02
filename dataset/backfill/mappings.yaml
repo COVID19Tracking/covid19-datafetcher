@@ -17,6 +17,8 @@ CO:
   Tested: TOTAL
   Deaths: DEATH
   Hosp: HOSP
+  test_encounters: PCR_TEST_ENCOUNTERS
+  Attr_Date: DATE
   __strptime: "%m/%d/%Y"
 MA:
   Date: DATE

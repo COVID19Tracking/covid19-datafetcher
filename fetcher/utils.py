@@ -1,11 +1,12 @@
 from bs4 import BeautifulSoup
+from datetime import datetime
 from enum import Enum
 from io import StringIO
 import csv
 import json
 import logging
-import ssl
 import pandas as pd
+import ssl
 import typing
 import urllib
 import urllib.request
@@ -134,6 +135,17 @@ def map_attributes(original, mapping, debug_state=None):
         else:
             # report value without mapping
             logging.debug("[{}] Field {} has no mapping".format(debug_state, k))
+    # Date special casing: handle dates here
+    if Fields.TIMESTAMP.name not in tagged_attributes \
+       and Fields.DATE.name in tagged_attributes \
+       and '__strptime' in mapping:
+        # If we don't have a timestamp, but have a date and ways to parse it
+        # parse it now
+        d = tagged_attributes[Fields.DATE.name]
+        if d:
+            tagged_attributes[Fields.TIMESTAMP.name] = \
+                datetime.strptime(d, mapping['__strptime']).timestamp()
+
     return tagged_attributes
 
 

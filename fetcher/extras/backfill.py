@@ -15,6 +15,20 @@ def make_cumsum_df(data, timestamp_field=Fields.TIMESTAMP.name):
     return cumsum_df
 
 
+def handle_co(res, mapping):
+    mapped = []
+    for result in res[:-1]:
+        partial = extract_arcgis_attributes(result, mapping, 'CO')
+        mapped.extend(partial)
+
+    # PCR encounters
+    testing = res[-1]
+    testing = extract_arcgis_attributes(testing, mapping, 'CO')
+    cumsum_df = make_cumsum_df(testing)
+    mapped.extend(cumsum_df.to_dict(orient='records'))
+    return mapped
+
+
 def handle_ma(res, mapping):
     '''Returning a list of dictionaries (records)
     '''
