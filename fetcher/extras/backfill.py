@@ -6,6 +6,15 @@ import pandas as pd
 from datetime import datetime
 
 
+def make_cumsum_df(data, timestamp_field=Fields.TIMESTAMP.name):
+    df = pd.DataFrame(data)
+    df.set_index(timestamp_field, inplace=True)
+
+    cumsum_df = df.cumsum()
+    cumsum_df[Fields.TIMESTAMP.name] = cumsum_df.index
+    return cumsum_df
+
+
 def handle_ma(res, mapping):
     '''Returning a list of dictionaries (records)
     '''
@@ -32,6 +41,20 @@ def handle_ma(res, mapping):
     return tagged
 
 
+def handle_md(res, mapping):
+    mapped = []
+    for result in res[:-1]:
+        partial = extract_arcgis_attributes(result, mapping, 'MD')
+        mapped.extend(partial)
+
+    # PCR positives
+    testing = res[-1]
+    testing = extract_arcgis_attributes(testing, mapping, 'MD')
+    cumsum_df = make_cumsum_df(testing)
+    mapped.extend(cumsum_df.to_dict(orient='records'))
+    return mapped
+
+
 def handle_mo(res, mapping):
     # we're getting pretty good data that we need to cumsum
     # TODO: this can be done elsewhere/by te lib, if there are other use cases
@@ -42,12 +65,8 @@ def handle_mo(res, mapping):
 
     # expect the data to be sorted, because the query sorts it
     # somewhat funny here with building a DF and instantly breaking it
-    df = pd.DataFrame(mapped)
-    df.set_index(Fields.TIMESTAMP.name, inplace=True)
-    cumsum_df = df.cumsum()
-    cumsum_df[Fields.TIMESTAMP.name] = cumsum_df.index
+    cumsum_df = make_cumsum_df(mapped)
     cumsum_df[Fields.FETCH_TIMESTAMP.name] = datetime.now()
-
     return cumsum_df.to_dict('records')
 
 

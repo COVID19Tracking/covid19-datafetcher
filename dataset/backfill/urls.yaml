@@ -32,6 +32,10 @@ MD:
 - url: https://services.arcgis.com/njFNhDsUCentVYJW/ArcGIS/rest/services/MASTERCaseTracker/FeatureServer/0/query
   params: {f: json, resultRecordCount: 300, orderByFields: ReportDate desc, outFields: 'ReportDate,TotalCases,NegativeTests,bedsICU,bedsAcute,bedsTotal,total_hospitalized,total_released,deaths,pdeaths,TotalTests', where: 1=1}
   type: arcgis
+- url: https://services.arcgis.com/njFNhDsUCentVYJW/arcgis/rest/services/MDCOVID19_TestingVolume/FeatureServer/0/query
+  params: {where: 1=1, outFields: 'date,number_of_tests,number_of_positives', orderByFields: Date asc, f: json}
+  type: arcgis
+  desc: PCR Testing and positives
 MO:
 - url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/PCR_Test_by_Date_Automated/FeatureServer/0/query
   params: {where: test_date2>timestamp '2020-01-16 06:59:59', outFields: 'test_date2 as pcr_test_encouter_date, Negative as pcr_negative, Positive as pcr_positive, Total as pcr_total', orderByFields: test_date2 asc, f: json}

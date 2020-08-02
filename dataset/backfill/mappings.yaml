@@ -50,7 +50,9 @@ MD:
   total_hospitalized: HOSP
   total_released: RECOVERED
   TotalTests: SPECIMENS
-
+  # Testing volume:
+  number_of_positives: SPECIMENS_POS
+  date: TIMESTAMP
 MO:
   Number_Reported: POSITIVE
   Date: TIMESTAMP
