@@ -42,7 +42,6 @@ def handle_ma(res, mapping):
     })
     with MaContextManager(res) as zipdir:
         for filename in files:
-            print("Filename", filename)
             with open("{}/{}".format(zipdir, filename), 'r') as csvfile:
                 reader = csv.DictReader(csvfile, dialect='unix')
                 rows = list(reader)
