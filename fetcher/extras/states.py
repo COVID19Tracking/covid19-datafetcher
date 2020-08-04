@@ -478,8 +478,7 @@ def handle_or(res, mapping):
     # The last item is the page that needs to be scraped
     page = res[-1]
     # main stats
-    h4 = page.find('h4', string=re.compile("Overview"))
-    main_table = h4.find_next_sibling('table')
+    main_table = page.find('table')
     for row in main_table.find_all('tr'):
         tds = row.find_all('td')
         if len(tds) < 2:
