@@ -453,10 +453,10 @@ PA:
 {"statisticType": "sum", "onStatisticField": "Confirmed"},{"statisticType": "sum", "onStatisticField": "Probable"},{"statisticType": "sum", "onStatisticField": "Negative"},{"statisticType": "sum", "onStatisticField": "Deaths"}], f: json}
   type: arcgis
   desc: Positive/probable/negatives, death
-- url: https://services2.arcgis.com/xtuWQvb2YQnp0z3F/arcgis/rest/services/HOS_ResourceCapacity_Template/FeatureServer/0/query
-  params: { where: 1=1, f: json, outStatistics: [{"onStatisticField": "numc19mechventpats", "statisticType": "sum", "outStatisticFieldName": "curr_vent"}, {"onStatisticField": "ttlcvd19ptntecmo", "statisticType": "sum", "outStatisticFieldName": "ecmo"}, {"onStatisticField": "numc19hosppats", "statisticType": "sum", "outStatisticFieldName": "curr_hosp"}]}
+- url: https://services2.arcgis.com/xtuWQvb2YQnp0z3F/arcgis/rest/services/covid_hosp_current/FeatureServer/0/query
+  params: {where: county='Pennsylvania', outStatistics: [{"statisticType":"sum","onStatisticField":"covid_vents", outStatisticFieldName: "curr_vent"}, {"statisticType":"sum","onStatisticField":"covid_patients", outStatisticFieldName: "curr_hosp"}], f: json}
   type: arcgis
-  desc: Hosp, vent, ecmo
+  desc: Hosp, vent
 - url: https://www.health.pa.gov/topics/disease/coronavirus/Pages/Coronavirus.aspx
   params: null
   type: html:soup

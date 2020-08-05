@@ -1,4 +1,3 @@
-from copy import copy
 from datetime import datetime
 import csv
 import logging
@@ -172,17 +171,10 @@ def handle_vt(res, mapping):
 def handle_pa(res, mapping):
     '''Need to sum ECMO and Vent number for a total count
     '''
-    state = 'PA'
     tagged = {}
-    updated_mapping = copy(mapping)
-    ecmo = 'ecmo'
-    updated_mapping.update({ecmo: ecmo})
     for result in res[:-1]:
-        partial = extract_arcgis_attributes(result, updated_mapping, state)
+        partial = extract_arcgis_attributes(result, mapping, 'PA')
         tagged.update(partial)
-
-    tagged[Fields.CURR_VENT.name] += tagged[ecmo]
-    tagged.pop(ecmo)
 
     # soup time: recovered
     soup = res[-1]
@@ -201,7 +193,7 @@ def handle_pa(res, mapping):
         if total_cases and recover_pct:
             tagged[Fields.RECOVERED.name] = math.floor(total_cases * recover_pct / 100)
     except Exception:
-        logging.warning("RI: failed to parse recovered", exc_info=True)
+        logging.warning("PA: failed to parse recovered", exc_info=True)
     return tagged
 
 
