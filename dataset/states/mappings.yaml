@@ -1,14 +1,13 @@
 AK:
   Date_: TIMESTAMP
-  Cum_cases: POSITIVE
-  cum_recoveries: RECOVERED
-  cum_deaths: DEATH
-  cum_hospitalizations: HOSP
+  cases: POSITIVE
+  recoveries: RECOVERED
+  deaths: DEATH
   SUM_Pos_COVID_PUI_Pending: CURR_HOSP
   pos_susp_vent: CURR_VENT
-  cum_Total: TOTAL
-  # value to add to cases
-  non_residents: NON_RESIDENT
+  tests_total: SPECIMENS
+  tests_positive: SPECIMENS_POS
+  tests_negative: SPECIMENS_NEG
 AL:
   SUM_CONFIRMED: CONFIRMED
   SUM_DIED: DEATH_CONFIRMED

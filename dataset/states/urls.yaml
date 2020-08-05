@@ -8,31 +8,30 @@
 #
 # Only `url` and `type` are mandatory, but I fill `params` with `null` when it's empty, I think that it's nicer this way
 AK:
-- url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/cumulative_cases/FeatureServer/0/query
-  params: {where: Economic_Region='Statewide', outFields: '*', orderByFields: 'Date_ desc',
-  resultRecordCount: 1, f: json}
+- url: https://services1.arcgis.com/WzFsmainVTuD5KML/ArcGIS/rest/services/Geographic_Distribution_of_Confirmed_Cases/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"All_Cases","outStatisticFieldName":"cases"}, {"statisticType":"sum","onStatisticField":"Recovered","outStatisticFieldName":"recoveries"}, {"statisticType":"sum","onStatisticField":"Deaths","outStatisticFieldName":"deaths"}], f: json}
   type: arcgis
-  desc: Cases/recoveries/hosp/deaths
-- url: https://services1.arcgis.com/WzFsmainVTuD5KML/ArcGIS/rest/services/COVID_Tests/FeatureServer/0/query
-  params: {where: 1=1,
-    outFields: 'Date,cum_Total',
-    orderByFields: Date desc,
-    resultRecordCount: 1,
-    f: json}
+  desc: Positives, recovered, death
+- url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Tests_Dataset/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{"statisticType":"count","onStatisticField":"FID","outStatisticFieldName":"tests_total"}], f: json}
   type: arcgis
-  desc: Totals
+  desc: PCR Testing (total)
+- url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Tests_Dataset/FeatureServer/0/query
+  params: {where: Test_Result = 'Negative', outStatistics: [{"statisticType":"count","onStatisticField":"FID","outStatisticFieldName":"tests_negative"}], f: json}
+  type: arcgis
+  desc: PCR Testing (negative)
+- url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Tests_Dataset/FeatureServer/0/query
+  params: {where: Test_Result = 'Positive', outStatistics: [{"statisticType":"count","onStatisticField":"FID","outStatisticFieldName":"tests_positive"}], f: json}
+  type: arcgis
+  desc: PCR Testing (positive)
 - url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/COVID_Hospital_Dataset_(prod)/FeatureServer/0/query
-  params: {where: facility_filter=1, outStatistics: [{statisticType: sum, onStatisticField: Pos_COVID_PUI_Pending}], f: json}
+  params: {where: facility_filter=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "Pos_COVID_PUI_Pending"}], f: json}
   type: arcgis
-  desc: Hospitalization (current)
+  desc: Hospitalizations
 - url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/pos_susp_vent/FeatureServer/0/query
   params: {where: facility_filter=1, outFields: '*', f: json}
   type: arcgis
-  desc: Vent (current)
-- url: https://services1.arcgis.com/WzFsmainVTuD5KML/ArcGIS/rest/services/COVID_Cases_Out_of_State/FeatureServer/0/query
-  params: {where: 1=1, outFields: '*', outStatistics: [{"statisticType": "count", "onStatisticField": "FID", "outStatisticFieldName": "non_residents"}], f: json}
-  type: arcgis
-  desc: Non-resident cases
+  desc: Vent
 AL:
 - url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/COV19_Public_Dashboard_ReadOnly/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{statisticType: sum, onStatisticField: LabTestCount},
