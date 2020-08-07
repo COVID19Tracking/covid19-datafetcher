@@ -577,8 +577,7 @@ WA:
   type: arcgis
 WI:
 - url: https://services1.arcgis.com/ISZ89Z51ft1G16OK/ArcGIS/rest/services/COVID19_WI/FeatureServer/2/query
-  params: {f: json, outFields: 'LoadDttm,POSITIVE,NEGATIVE,HOSP_YES,IC_YES,DEATHS',
-    where: 1=1}
+  params: {f: json, outFields: 'DATE,POSITIVE,NEGATIVE,DEATHS,HOSP_YES,IC_YES', where: 1=1}
   type: arcgis
 WY:
 - url: https://services7.arcgis.com/BAwfvDcDhIO9Rm6L/arcgis/rest/services/COVID_Case_Totals_VIEW/FeatureServer/0/query
