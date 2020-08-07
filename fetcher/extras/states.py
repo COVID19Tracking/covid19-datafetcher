@@ -748,9 +748,20 @@ def handle_ma(res, mapping):
 
 def handle_tx(res, mapping):
     tagged = {}
-    for result in res[:-1]:
+    for result in res[:-2]:
         partial = extract_arcgis_attributes(result, mapping, debug_state='TX')
         tagged.update(partial)
+
+    # Antigen positives, take from dashboard
+    widgets = res[-2].get('widgets', {})
+    title = 'Positive Antigen'
+    for widget in widgets:
+        if widget.get('defaultSettings', {}) \
+                 .get('topSection', {}).get('textInfo', {}).get('text', "").find(title) >= 0:
+            # now check that it's a numeric value
+            val = widget['defaultSettings']['middleSection']['textInfo']['text'].strip()
+            if re.match("[1-9][0-9,]*", val) is not None:
+                tagged[Fields.ANTIGEN_POS.name] = atoi(val)
 
     # last item is the current ICU DataFrame
     df = res[-1]

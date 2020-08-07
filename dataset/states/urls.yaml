@@ -507,6 +507,10 @@ TX:
   params: {where: HospitalData='COVIDPatientsHospitals', outFields: '*, Count_ as curr_hosp', f: 'json'}
   type: arcgis
   desc: Curr hosp
+- url: https://txdshs.maps.arcgis.com/sharing/rest/content/items/0d8bdf9be927459d9cb11b9eaef6101f/data?f=json
+  params: null
+  type: json
+  desc: Desktop json for embedded Positive Antigen
 - url: https://www.dshs.texas.gov/coronavirus/TexasCOVID-19HospitalizationsOverTimebyTSA.xlsx
   params: {sheet_name: 'COVID-19 ICU'}
   type: xlsx
