@@ -499,6 +499,10 @@ TX:
   params: {where: TestType='PostiveAntibody', outFields: '*, Count_ as antibody_pos', f: json}
   type: arcgis
   desc: Positive antibody
+- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_TestData_Service/FeatureServer/2/query
+  params: {where: TestType='AntigenPositive', outFields: '*, Count_ as antigen_pos', f: json}
+  type: arcgis
+  desc: Positive antigen
 - url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Cases_Service/FeatureServer/7/query
   params: {where: 1=1, outFields: '*', f: json}
   type: arcgis
@@ -507,10 +511,6 @@ TX:
   params: {where: HospitalData='COVIDPatientsHospitals', outFields: '*, Count_ as curr_hosp', f: 'json'}
   type: arcgis
   desc: Curr hosp
-- url: https://txdshs.maps.arcgis.com/sharing/rest/content/items/0d8bdf9be927459d9cb11b9eaef6101f/data?f=json
-  params: null
-  type: json
-  desc: Desktop json for embedded Positive Antigen
 - url: https://www.dshs.texas.gov/coronavirus/TexasCOVID-19HospitalizationsOverTimebyTSA.xlsx
   params: {sheet_name: 'COVID-19 ICU'}
   type: xlsx

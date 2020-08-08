@@ -412,6 +412,7 @@ TX:
   AntibodyTests: ANTIBODY_TOTAL
   antibody_pos: ANTIBODY_POS
   AntigenTests: ANTIGEN_TOTAL
+  antigen_pos: ANTIGEN_POS
   CumulativeCases: POSITIVE
   CumulativeFatalities: DEATH
   Recovered: RECOVERED
