@@ -28,7 +28,6 @@ class MemoryCache(Cache):
 
 
 def _google_service_auth(key_filepath):
-    print(key_filepath)
     creds = ServiceAccountCredentials.from_json_keyfile_name(
         key_filepath, scopes=SCOPES)
     return creds

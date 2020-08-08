@@ -1,21 +1,21 @@
-from datetime import datetime
-import csv
-import logging
-import math
-import pandas as pd
-import os
-import re
-
-from fetcher.utils import map_attributes, Fields, csv_sum, extract_arcgis_attributes
-from fetcher.extras.common import MaContextManager
-
-
-''' This file contains extra handling needed for some states
+""" This file contains extra handling needed for some states
 To make it work, the method must be called "handle_{state_abbreviation:lower_case}"
 The parameters are:
 - query result
 - state mappings
-'''
+"""
+
+
+from datetime import datetime
+import csv
+import logging
+import math
+import os
+import re
+import pandas as pd
+
+from fetcher.utils import map_attributes, Fields, csv_sum, extract_arcgis_attributes
+from fetcher.extras.common import MaContextManager
 
 
 def atoi(val):
@@ -799,14 +799,14 @@ def handle_ut(res, mapping):
     curr_hosp = 0
     for td in tds:
         for x in td.next_siblings:
-            if (x.name == 'td'):
+            if x.name == 'td':
                 curr_hosp += atoi(x.get_text(strip=True))
     tagged[Fields.CURR_HOSP.name] = curr_hosp
 
     # TODO: code here can be improved, combined with top part
     td = curr_hosp_table.find('td', string=re.compile(revmap[Fields.CURR_ICU.name]))
     for x in td.next_siblings:
-        if (x.name == 'td'):
+        if x.name == 'td':
             val = atoi(x.get_text(strip=True))
             tagged[Fields.CURR_ICU.name] = val
 

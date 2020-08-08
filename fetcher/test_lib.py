@@ -1,15 +1,16 @@
 from datetime import datetime
-import fetcher.lib as lib
 import types
 import pandas as pd
 import numpy as np
+
+import fetcher.lib as lib
 
 
 COLUMNS = ['a', 'b', 'c']
 STATES = ['ARG', 'BAR', 'FOO']
 
 
-class TestDataFrame(object):
+class TestDataFrame:
 
     def build_and_compare_1col(self, items, expected_items):
         '''Helper function to create the expected input and handle

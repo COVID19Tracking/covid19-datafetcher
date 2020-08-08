@@ -1,15 +1,22 @@
-from bs4 import BeautifulSoup
+"""
+This is the utils module that handles the tasks of making a request and parsing
+a request. Utils methods are used both by the main library and by state specific
+extras module
+"""
+
 from datetime import datetime
 from enum import Enum
 from io import StringIO
 import csv
 import json
 import logging
-import pandas as pd
 import ssl
 import typing
 import urllib
 import urllib.request
+
+import pandas as pd
+from bs4 import BeautifulSoup
 
 
 # TODO: It's not used as an effective enum
@@ -100,11 +107,6 @@ def request_soup(url, query=None, encoding=None):
     return BeautifulSoup(res, 'html.parser')
 
 
-def request_cvs_folder(url, query=None, encoding=None):
-    # returning context?
-    pass
-
-
 def request_and_parse(url, query=None):
     res = request(url, query)
     res = json.loads(res)
@@ -155,7 +157,7 @@ def extract_arcgis_attributes(dict_result, mapping, debug_state=None):
 
 
 def extract_attributes(dict_result, path, mapping, debug_state=None):
-    res = _extract_attributes(dict_result, path, mapping, debug_state=None)
+    res = _extract_attributes(dict_result, path, mapping, debug_state)
     if isinstance(res, typing.List) and len(res) > 1:
         return res
     if isinstance(res, typing.List) and len(res) == 1:
@@ -183,7 +185,7 @@ def _extract_attributes(dict_result, path, mapping, debug_state=None):
             for item in res:
                 mapped.append(extract_attributes(item, path[i+1:], mapping, debug_state))
             return mapped
-        elif isinstance(res, typing.List) and isinstance(step, int):
+        if isinstance(res, typing.List) and isinstance(step, int):
             res = res[step]
         elif isinstance(res, typing.Dict) and not isinstance(step, list) and step in res:
             res = res[step]

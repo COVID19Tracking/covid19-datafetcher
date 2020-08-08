@@ -1,9 +1,10 @@
 from copy import copy
-from fetcher.extras.common import MaContextManager
-from fetcher.utils import map_attributes, Fields, extract_arcgis_attributes
+from datetime import datetime
 import csv
 import pandas as pd
-from datetime import datetime
+
+from fetcher.extras.common import MaContextManager
+from fetcher.utils import map_attributes, Fields, extract_arcgis_attributes
 
 
 def make_cumsum_df(data, timestamp_field=Fields.TIMESTAMP.name):

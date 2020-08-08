@@ -26,7 +26,7 @@ def _read_extras(extras_module_name, keys):
     return extras
 
 
-class Sources(object):
+class Sources:
     def __init__(self, url_file, mappings_file, extras_module=None):
         ''' Read sources and mappings '''
         self.sources = _read_yaml(".", url_file)

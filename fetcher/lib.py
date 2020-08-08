@@ -1,8 +1,8 @@
 from datetime import datetime
-import hydra
 import logging
-import pandas as pd
 import typing
+import hydra
+import pandas as pd
 
 from fetcher.utils import request, request_and_parse, extract_attributes, Fields, request_csv, \
     request_soup, request_pandas, extract_arcgis_attributes
@@ -18,7 +18,7 @@ TS = 'TIMESTAMP'
 STATE = Fields.STATE.name
 
 
-class Fetcher(object):
+class Fetcher:
     def __init__(self, cfg):
         '''Initialize source information'''
         self.dataset = cfg.dataset  # store dataset config
@@ -133,7 +133,6 @@ class Fetcher(object):
             else:
                 # should not happen
                 logging.warning("Unexpected type in results: %r", x)
-                pass
 
         return data
 
