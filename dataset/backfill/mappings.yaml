@@ -2,6 +2,11 @@
 # Timestamp is either seconds or ms since epoch, expecting int64
 # If timestamp is not available, date should exists together with
 # a format string to parse it. The format string mapped in __strptime
+AL:
+  Confirmed_AllWeekdays: CURR_HOSP
+  DateTxt: DATE
+  # 04-03
+  __strptime: "%m-%d"
 CA:
   confirmed: POSITIVE
   death: DEATH
@@ -62,6 +67,9 @@ MO:
   pcr_negative: SPECIMENS_NEG
   pcr_positive: SPECIMENS_POS
   pcr_total: SPECIMENS
+MT:
+  Total_Tests_Completed: TOTAL
+  Test_Date: TIMESTAMP
 RI:
   # Google doc:
   "Cumulative positive tests (may count people more than once)": SPECIMENS_POS

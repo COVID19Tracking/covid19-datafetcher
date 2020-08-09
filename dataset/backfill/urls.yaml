@@ -7,6 +7,11 @@
 # data_path: path in the query result from which to get the data
 #
 # Only `url` and `type` are mandatory, but I fill `params` with `null` when it's empty, I think that it's nicer this way
+AL:
+- url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/HospitalizedPatientTemporal_READ_ONLY/FeatureServer/1/query
+  params: {where: 1=1, outFields: '*', orderByFields: OBJECTID asc, f: json}
+  type: arcgis
+  desc: Current hospitalizations
 CA:
 - url: https://data.ca.gov/api/3/action/datastore_search_sql
   params: {sql: 'select date, sum(totalcountdeaths) as death, sum(totalcountconfirmed) as confirmed from "926fd08f-cc91-4828-af38-bd45de97f8c3" group by date order by date desc limit 200'}
@@ -49,6 +54,11 @@ MO:
   params: {where: Date>timestamp '2020-02-1 00:00:00', outFields: '*', orderByFields: Date asc, f: json}
   type: arcgis
   desc: Cases by report date
+MT:
+- url: https://services.arcgis.com/qnjIrwR8z5Izc0ij/ArcGIS/rest/services/COVID_Cases_Production_View/FeatureServer/1/query
+  params: {where: 1=1, outFields: '*', orderByFields: ScriptRunDate asc, f: json}
+  type: arcgis
+  desc: Total tested
 RI:
 - url: 'https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/export?format=csv&gid=1592746937'
   params: {parse_dates: True}
