@@ -299,13 +299,12 @@ NE:
   dash_update_date: TIMESTAMP
   rec_latest_pat_count: RECOVERED
 NH:
-  Number of Persons with COVID-19: CONFIRMED
   Recovered: RECOVERED
   Deaths Attributed to COVID-19: DEATH
   Persons Who Have Been Hospitalized for COVID-19: HOSP
   Current Hospitalizations: CURR_HOSP
   Total Persons Tested  at Selected Laboratories, Polymerase Chain Reaction (PCR)2: TOTAL
-  Number of Persons with COVID-191: POSITIVE
+  Number of Persons with COVID-191: CONFIRMED
   Total Persons Tested  at Selected Laboratories, Antibody Laboratory Tests2: ANTIBODY_TOTAL_PEOPLE
 NJ:
   _date: TIMESTAMP
