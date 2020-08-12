@@ -369,7 +369,7 @@ NE:
   params: {f: json, outStatistics: [{onStatisticField: ID, statisticType: count, outStatisticFieldName: total}], where: NE_JURIS='yes', returnGeometry: false}
   type: arcgis
   desc: Total
-- url: https://gis.ne.gov/Agency/rest/services/Covid19_Update_service/MapServer/0/query
+- url: https://gis.ne.gov/enterprise/rest/services/CovidUpdatePublic/MapServer/0/query
   params: {where: 1=1, outFields: 'hosp_latest_pat_count,hosp_cumulative_total,dash_update_date,rec_latest_pat_count', resultRecordCount: 1, orderByFields: dash_update_date desc, f: json, returnGeometry: false}
   type: arcgis
   desc: Hosp cum/cur, Recovered
