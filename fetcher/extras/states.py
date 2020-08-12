@@ -205,6 +205,24 @@ def handle_ne(res, mapping):
     return tagged
 
 
+def handle_nh(res, mapping):
+    # we love soup
+    t = res[0].find('table')
+
+    mapped = {}
+    for tr in t.find_all('tr'):
+        th = tr.find('th').get_text(strip=True)
+        td = tr.find('td').get_text(strip=True)
+        # numbers here are funny, need to clean a bit
+        td = td.split()[0]
+        if th in mapping:
+            # yay, the faster option
+            mapped[mapping[th]] = atoi(td)
+            continue
+
+    return mapped
+
+
 def handle_la(res, mapping):
     stats = res[0]
     state_tests = 'STATE_TESTS'
