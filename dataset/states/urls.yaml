@@ -562,7 +562,7 @@ VA:
   params: {$query: 'select sum(number_of_pcr_testing) as pcr_testing, sum(number_of_positive_pcr_testing) as pos_pcr_testing, sum(total_number_of_testing) - sum(number_of_pcr_testing) as antibody_total, sum(total_number_of_positive) - sum(number_of_positive_pcr_testing) as antibody_pos'}
   type: soda
   data_path: [0]
-  desc: Testing data (PCR and totals)
+  desc: Testing data (PCR and antibody)
 - url: https://data.virginia.gov/resource/28wk-762y.json
   params: {$query: 'select total_covid_19_patients, icu_patients, vent_patients order by date desc limit 1'}
   type: soda
