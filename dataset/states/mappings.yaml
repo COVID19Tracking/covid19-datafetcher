@@ -451,8 +451,8 @@ VA:
   death_confirmed: DEATH_CONFIRMED
   probable: PROBABLE
   death_probable: DEATH_PROBABLE
-  pcr_specimens: SPECIMENS
-  pcr_specimens_pos: SPECIMENS_POS
+  pcr_testing: PCR_TEST_ENCOUNTERS
+  pos_pcr_testing: SPECIMENS_POS  # should actually be positive testing encounters
   antibody_total: ANTIBODY_TOTAL
   antibody_pos: ANTIBODY_POS
   total_covid_19_patients: CURR_HOSP
