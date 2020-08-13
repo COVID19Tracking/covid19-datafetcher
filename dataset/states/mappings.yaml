@@ -242,6 +242,8 @@ MO:
   #SUM_Negative: ANTIBODY_NEG
   ser_positive: ANTIBODY_POS_PEOPLE
   ser_tested: ANTIBODY_TOTAL_PEOPLE
+  antigen_tested: ANTIGEN_TOTAL_PEOPLE
+  antigen_positive_people: ANTIGEN_POS_PEOPLE
   PCR_Total: SPECIMENS
   PCR_Positive: SPECIMENS_POS
   PCR_Negative: SPECIMENS_NEG
