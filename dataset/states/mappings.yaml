@@ -176,6 +176,7 @@ MA:
   Molecular Total: TOTAL
   Molecular All Tests Total: SPECIMENS
   Serology Total: ANTIBODY_TOTAL_PEOPLE
+  Antigen Total: ANTIGEN_TOTAL_PEOPLE
   Total number of COVID patients in hospital today: CURR_HOSP
   ICU: CURR_ICU
   Total number intubated: CURR_VENT
