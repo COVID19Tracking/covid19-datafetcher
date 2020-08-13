@@ -68,7 +68,7 @@ MO:
   pcr_positive: SPECIMENS_POS
   pcr_total: SPECIMENS
 MT:
-  Total_Tests_Completed: TOTAL
+  Total_Tests_Completed: SPECIMENS
   Test_Date: TIMESTAMP
 RI:
   # Google doc:

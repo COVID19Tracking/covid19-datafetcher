@@ -266,7 +266,7 @@ MT:
   SUM_TotalDeaths: DEATH
   SUM_TotalRecovered: RECOVERED
   Test_Date: TIMESTAMP
-  Total_Tests_Completed: TOTAL
+  Total_Tests_Completed: SPECIMENS
   hosp: HOSP
 NC:
   MAX_Hosp: CURR_HOSP
