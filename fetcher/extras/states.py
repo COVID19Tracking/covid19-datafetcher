@@ -739,7 +739,7 @@ def handle_ma(res, mapping):
     files = ['DeathsReported.csv', 'Testing2.csv',
              'Hospitalization from Hospitals.csv', 'Cases.csv']
 
-    with MaContextManager(res) as zipdir:
+    with MaContextManager(res[0]) as zipdir:
         for filename in files:
             with open(os.path.join(zipdir, filename), 'r') as csvfile:
                 reader = csv.DictReader(csvfile, dialect='unix')
@@ -758,6 +758,20 @@ def handle_ma(res, mapping):
         hosprows = [x for x in hosprows if x['Date'] == last_row['Date']]
         summed = csv_sum(hosprows, [hosp_key])
         tagged[Fields.HOSP.name] = summed[hosp_key]
+
+    # weekly report:
+    with MaContextManager(res[0], "Weekly Public Health Report - Raw Data", file_type='xls') as tmpfile:
+        df = pd.read_excel(tmpfile, sheet_name=None)
+
+        # recovered
+        rec = df['Quarantine and Isolation']
+        recovered = rec[rec['Status'] == 'Total Cases Released from Isolation'].iloc[-1]['Residents']
+        tagged[Fields.RECOVERED.name] = recovered
+
+        # probables
+        prob = df['CasesDeathsByReportDate'].iloc[-1]
+        tagged[Fields.DEATH_PROBABLE.name] = prob['Probable Deaths Total']
+        tagged[Fields.PROBABLE.name] = prob['Probable Cases Total']
 
     return tagged
 

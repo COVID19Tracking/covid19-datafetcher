@@ -57,7 +57,7 @@ def handle_ma(res, mapping):
         "Probable Total": Fields.DEATH_PROBABLE.name,
         "Confirmed Total": Fields.DEATH_CONFIRMED.name,
     })
-    with MaContextManager(res) as zipdir:
+    with MaContextManager(res[0]) as zipdir:
         for filename in files:
             with open("{}/{}".format(zipdir, filename), 'r') as csvfile:
                 reader = csv.DictReader(csvfile, dialect='unix')
