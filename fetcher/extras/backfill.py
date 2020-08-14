@@ -1,4 +1,3 @@
-from copy import copy
 from datetime import datetime
 import csv
 import pandas as pd
@@ -50,22 +49,32 @@ def handle_ma(res, mapping):
     '''Returning a list of dictionaries (records)
     '''
     tagged = []
-    # files we care about: attemting from mappings
-    files = [f for k, f in mapping.items() if k.endswith("_file")]
-    death_mapping = copy(mapping)
-    death_mapping.update({
-        "Probable Total": Fields.DEATH_PROBABLE.name,
-        "Confirmed Total": Fields.DEATH_CONFIRMED.name,
-    })
+    # break the mapping to {file -> {mapping}}
+    # not the most efficient, but the data is tiny
+    file_mapping = {x.split(":")[0]: {} for x in mapping.keys() if x.find(':') > 0}
+    for k, v in mapping.items():
+        if k.find(':') < 0:
+            continue
+        filename, field = k.split(":")
+        file_mapping[filename][field] = v
+
     with MaContextManager(res[0]) as zipdir:
-        for filename in files:
+        for filename in file_mapping.keys():
             with open("{}/{}".format(zipdir, filename), 'r') as csvfile:
+                if filename == 'TestingByDate.csv':
+                    # we need the cumsum of all columns
+                    df = pd.read_csv(csvfile)
+                    df = df.rename(columns=file_mapping.get(filename))[
+                        file_mapping.get(filename).values()]
+                    df['DATE'] = pd.to_datetime(df['DATE'])
+                    df = df.set_index('DATE').cumsum()
+                    df['DATE'] = df.index.strftime(mapping.get('__strptime'))
+                    tagged.extend(df.to_dict(orient='records'))
+                    continue
+
                 reader = csv.DictReader(csvfile, dialect='unix')
                 rows = list(reader)
-                m = mapping
-                if filename == 'DateofDeath.csv':
-                    m = death_mapping
-                tagged_rows = [map_attributes(r, m, 'MA') for r in rows]
+                tagged_rows = [map_attributes(r, file_mapping.get(filename), 'MA') for r in rows]
                 tagged.extend(tagged_rows)
 
     return tagged

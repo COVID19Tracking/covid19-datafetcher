@@ -70,7 +70,7 @@ TN:
   desc: Main data
 TX:
 - url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Cases_Service/FeatureServer/8/query
-  params: {where: 1=1, outFields: '*, CumulativeFatalities as DeathByDateOfDeath', orderByField: Date asc, resultRecordCount: 500, f: json}
+  params: {where: 1=1, outFields: '*', orderByField: Date asc, resultRecordCount: 500, f: json}
   type: arcgis
   desc: Cases and deaths
 - url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_TestData_Service/FeatureServer/1/query

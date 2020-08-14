@@ -26,23 +26,30 @@ CO:
   Attr_Date: DATE
   __strptime: "%m/%d/%Y"
 MA:
-  Date: DATE
-  Probable Total: PROBABLE
-  Positive Total: POSITIVE
+  # Testing something new here: {filename}:{fieldname} -> mapping
+  "CasesByDate.csv:Date": DATE
+  "CasesByDate.csv:Probable Total": PROBABLE
+  "CasesByDate.csv:Positive Total": POSITIVE
 
-  Molecular Total: TOTAL
-  Serology Total: ANTIBODY_TOTAL
-  Molecular All Tests Total: SPECIMENS
+  "Testing2.csv:Date": DATE
+  "Testing2.csv:Molecular Total": TOTAL
+  "Testing2.csv:Serology Total": ANTIBODY_TOTAL
+  "Testing2.csv:Molecular All Tests Total": SPECIMENS
 
-  Date of Death: DATE
-  #Confirmed Total: DEATH_CONFIRMED
-  #Probable Total: DEATH_PROBABLE
+  "DateofDeath.csv:Date of Death": DATE
+  "DateofDeath.csv:Confirmed Total": DEATH_CONFIRMED_BY_DATE_OF_DEATH
+  "DateofDeath.csv:Probable Total": DEATH_PROBABLE_BY_DATE_OF_DEATH
 
-  # Meta; trying something new
-  __case_file: CasesByDate.csv
-  __test_file: TestingByDate.csv
-  __death_file: DateofDeath.csv
-  __specimens_file: Testing2.csv
+  "TestingByDate.csv:Date": DATE
+  "TestingByDate.csv:Molecular New": PCR_PEOPLE_BY_COLLECTION_DATE #TOTAL
+  "TestingByDate.csv:All Molecular Tests": PCR_BY_COLLECTION_DATE
+  "TestingByDate.csv:All Positive Molecular Tests": PCR_POS_BY_COLLECTION_DATE
+
+  "TestingByDate.csv:Serology New": ANTIBODY_PEOPLE_BY_COLLECTION_DATE
+  "TestingByDate.csv:Serology Positive New": ANTIBODY_POS_PEOPLE_BY_COLLECTION_DATE
+
+  "TestingByDate.csv:Antigen New": ANTIGEN_PEOPLE_BY_COLLECTION_DATE
+  "TestingByDate.csv:Antigen Positive New": ANTIGEN_POS_PEOPLE_BY_COLLECTION_DATE
 
   __strptime: "%m/%d/%Y"
 
@@ -100,8 +107,7 @@ TN:
 TX:
   Date: TIMESTAMP
   CumulativeCases: POSITIVE
-  CumulativeFatalities: DEATH
-  DeathByDateOfDeath: DEATH_BY_DATE_OF_DEATH
+  CumulativeFatalities: DEATH_BY_DATE_OF_DEATH
   Hospitalizations: CURR_HOSP
   ViralTests: SPECIMENS
   AntibodyTests: ANTIBODY_TOTAL
