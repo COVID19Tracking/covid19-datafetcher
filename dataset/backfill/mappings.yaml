@@ -2,6 +2,11 @@
 # Timestamp is either seconds or ms since epoch, expecting int64
 # If timestamp is not available, date should exists together with
 # a format string to parse it. The format string mapped in __strptime
+AK:
+  Date_Collected: TIMESTAMP
+  tests_total: PCR_BY_COLLECTION_DATE
+  Negative: PCR_NEG_BY_COLLECTION_DATE
+  Positive: PCR_POS_BY_COLLECTION_DATE
 AL:
   Confirmed_AllWeekdays: CURR_HOSP
   DateTxt: DATE

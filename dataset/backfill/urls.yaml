@@ -7,6 +7,11 @@
 # data_path: path in the query result from which to get the data
 #
 # Only `url` and `type` are mandatory, but I fill `params` with `null` when it's empty, I think that it's nicer this way
+AK:
+- url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Tests_Dataset/FeatureServer/0/query
+  params: {where: 1=1, orderByFields: Date_Collected asc, groupByFieldsForStatistics: 'Date_Collected,Test_Result', outStatistics: [{'statisticType': 'count', 'onStatisticField': 'FID', 'outStatisticFieldName': 'tests_total'}], f: json}
+  type: arcgis
+  desc: PCR tests by specimen collection
 AL:
 - url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/HospitalizedPatientTemporal_READ_ONLY/FeatureServer/1/query
   params: {where: 1=1, outFields: '*', orderByFields: OBJECTID asc, f: json}

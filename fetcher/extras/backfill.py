@@ -15,12 +15,27 @@ def make_cumsum_df(data, timestamp_field=Fields.TIMESTAMP.name):
     return cumsum_df
 
 
+def handle_ak(res, mapping):
+    tests = res[0]
+    collected = [x['attributes'] for x in tests['features']]
+    df = pd.DataFrame(collected)
+    df = df.pivot(columns='Test_Result', index='Date_Collected')
+    df.columns = df.columns.droplevel()
+    df['tests_total'] = df.sum(axis=1)
+
+    df = df.rename(columns=mapping).cumsum()
+    df['TIMESTAMP'] = df.index
+
+    tagged = df.to_dict(orient='records')
+    return tagged
+
+
 def handle_al(res, mapping):
     '''AL hospitalization has only month-day, need to fix it
     by adding the correct year (2020)'''
     mapped = []
     for result in res:
-        partial = extract_arcgis_attributes(result, mapping, 'CO')
+        partial = extract_arcgis_attributes(result, mapping)
         mapped.extend(partial)
     # fix funny dates
     for x in mapped:
