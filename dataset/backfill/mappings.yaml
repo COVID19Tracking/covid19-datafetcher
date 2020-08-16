@@ -70,7 +70,8 @@ MD:
   total_released: RECOVERED
   TotalTests: SPECIMENS
   # Testing volume:
-  number_of_positives: SPECIMENS_POS
+  number_of_tests: PCR_BY_COLLECTION_DATE
+  number_of_positives: PCR_POS_BY_COLLECTION_DATE
   date: TIMESTAMP
 MO:
   Number_Reported: POSITIVE

@@ -46,6 +46,7 @@ MD:
 - url: https://services.arcgis.com/njFNhDsUCentVYJW/ArcGIS/rest/services/MASTERCaseTracker/FeatureServer/0/query
   params: {f: json, resultRecordCount: 300, orderByFields: ReportDate desc, outFields: 'ReportDate,TotalCases,NegativeTests,bedsICU,bedsAcute,bedsTotal,total_hospitalized,total_released,deaths,pdeaths,TotalTests', where: 1=1}
   type: arcgis
+  # The daily cumulative total of COVID-19 tests administered in Maryland
 - url: https://services.arcgis.com/njFNhDsUCentVYJW/arcgis/rest/services/MDCOVID19_TestingVolume/FeatureServer/0/query
   params: {where: 1=1, outFields: 'date,number_of_tests,number_of_positives', orderByFields: Date asc, f: json}
   type: arcgis
