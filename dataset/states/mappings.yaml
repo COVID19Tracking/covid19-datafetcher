@@ -315,7 +315,7 @@ NJ:
   total_deaths: DEATH_CONFIRMED
   total_positives: POSITIVE
   # not a mistake:
-  total_negatives: TOTAL
+  total_negatives: SPECIMENS
   SUM_PROBABLE_DEATHS: DEATH_PROBABLE
   curr_hosp: CURR_HOSP
   curr_vent: CURR_VENT
