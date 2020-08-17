@@ -30,6 +30,15 @@ CO:
   test_encounters: PCR_TEST_ENCOUNTERS
   Attr_Date: DATE
   __strptime: "%m/%d/%Y"
+
+CT:
+  sum_number_of_tests: PCR_BY_COLLECTION_DATE
+  sum_number_of_positives: PCR_POS_BY_COLLECTION_DATE
+  sum_number_of_negatives: PCR_NEG_BY_COLLECTION_DATE
+  date: DATE
+  # 2020-04-17T00:00:00.000
+  __strptime: "%Y-%m-%dT%H:%M:%S.000"
+
 MA:
   # Testing something new here: {filename}:{fieldname} -> mapping
   "CasesByDate.csv:Date": DATE

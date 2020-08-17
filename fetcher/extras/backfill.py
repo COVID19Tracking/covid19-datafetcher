@@ -1,5 +1,6 @@
 from datetime import datetime
 import csv
+import numpy as np
 import pandas as pd
 
 from fetcher.extras.common import MaContextManager
@@ -58,6 +59,20 @@ def handle_co(res, mapping):
     cumsum_df = make_cumsum_df(testing)
     mapped.extend(cumsum_df.to_dict(orient='records'))
     return mapped
+
+
+def handle_ct(res, mapping):
+    tests = res[0]
+    df = pd.DataFrame(tests).rename(columns=mapping).set_index(Fields.DATE.name)
+    for c in df.columns:
+        # convert to numeric
+        df[c] = pd.to_numeric(df[c])
+
+    df.index = df.index.fillna('2020-01-01T00:00:00.000')
+    df = df.sort_index().cumsum()
+    df[Fields.TIMESTAMP.name] = pd.to_datetime(df.index)
+    df[Fields.TIMESTAMP.name] = df[Fields.TIMESTAMP.name].values.astype(np.int64) // 10 ** 9
+    return df.to_dict(orient='records')
 
 
 def handle_ma(res, mapping):
