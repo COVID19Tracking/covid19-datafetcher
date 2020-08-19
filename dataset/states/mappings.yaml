@@ -465,7 +465,7 @@ VI:
   Positive: POSITIVE
   Negative: NEGATIVE
   Pending: PENDING
-  Tested: TOTAL
+  Tested: SPECIMENS
   Deaths: DEATH
   Recovered: RECOVERED
 VT:
