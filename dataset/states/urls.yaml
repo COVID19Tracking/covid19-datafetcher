@@ -275,7 +275,7 @@ MO:
   type: arcgis
   desc: Cases, death (cases not used from here)
 - url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/ArcGIS/rest/services/Dashboard_Daily_Numbers_Automated/FeatureServer/0/query
-  params: {where: Description='Lab Confirmed Cases in Missouri as of 2pm Today', outFields: 'Description, value as positive', f: json}
+  params: {where: Description='Lab Confirmed Cases in Missouri', outFields: 'Description, value as positive', f: json}
   type: arcgis
   desc: Total cases (2pm number)
 - url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/Daily_COVID19_Testing_Report_for_OPI/FeatureServer/0/query
