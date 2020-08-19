@@ -367,6 +367,14 @@ ND:
   params: {}
   type: html:soup
   desc: State page (soup)
+- url: https://static.dwcdn.net/data/sjzda.csv
+  params: null
+  type: csv
+  desc: Testing
+- url: https://www.health.nd.gov/sites/www/files/documents/Files/MSS/coronavirus/charts-data/Total_Tests_by_County_web.csv
+  params: null
+  type: csv
+  desc: Positives, negatives, total, recovered
 NE:
 - url: https://gis.ne.gov/enterprise/rest/services/Covid19MapV5/MapServer/2/query
   params: {where: case_status='Confirmed' AND NE_JURIS='yes' AND Did_Pat_Die_From_Illness='Y',

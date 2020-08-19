@@ -680,27 +680,8 @@ def handle_nc(res, mapping):
 
 
 def handle_nd(res, mapping):
-    soup = res[-1]
-    circles = soup.find_all("div", "circle")
+    soup = res[0]
     tagged = {}
-    for c in circles:
-        name = c.find('p').get_text(strip=True)
-        value = atoi(c.find('h2').get_text(strip=True))
-        if name in mapping:
-            tagged[mapping[name]] = value
-
-    # total tests
-    tests_text = soup.find(string=re.compile("Tests Completed"))
-    if tests_text:
-        # take the 1st value, after stripping everything, including "-"
-        tests_val = ""
-        try:
-            tests_text = tests_text.split()[0].split("-")[0]
-            tests_val = atoi(tests_text)
-        except Exception as e:
-            logging.warning("Failed to parrse tests/text", e)
-        if tests_val:
-            tagged[Fields.SPECIMENS.name] = tests_val
 
     # Serology testing
     table = soup.find('table')
@@ -729,6 +710,21 @@ def handle_nd(res, mapping):
         value = cols[1].get_text(strip=True)
         if name in mapping:
             tagged[mapping[name]] = atoi(value)
+
+    # tetal testing
+    testing = res[1]
+    columns = [k for k, v in mapping.items() if v == Fields.SPECIMENS.name]
+    specimens = csv_sum(testing, columns=columns)
+    tagged[Fields.SPECIMENS.name] = specimens[columns[0]]
+
+    # people tested
+    people = res[2]
+    columns = [k for k, v in mapping.items() if v in [
+        Fields.POSITIVE.name, Fields.NEGATIVE.name, Fields.TOTAL.name, Fields.RECOVERED.name
+        ]]
+    values = csv_sum(people, columns)
+    partial = map_attributes(values, mapping)
+    tagged.update(partial)
 
     return tagged
 

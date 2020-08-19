@@ -279,10 +279,13 @@ NC:
   New Cases by Report Date: CONFIRMED
   NC Daily Tests: SPECIMENS
 ND:
-  Positive Cases: POSITIVE
-  Negative: NEGATIVE
-  Total Unique Individuals Tested: TOTAL
-  Recovered: RECOVERED
+  # csvs
+  Total Tests Completed: SPECIMENS
+  Total Positive: POSITIVE
+  Total Negative: NEGATIVE
+  Unique Individuals Tested: TOTAL
+  Total Recovered: RECOVERED
+
   Currently Hospitalized: CURR_HOSP
   Total Hospitalized: HOSP
   # Serology tests table
