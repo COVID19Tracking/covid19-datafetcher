@@ -106,7 +106,7 @@ def request(url, query=None, encoding=None):
         url = "{}?{}".format(url, urllib.parse.urlencode(query))
     res = {}
     req = urllib.request.Request(url, headers={
-        'user-agent': 'Mozilla/5.0 Gecko/20100101 Firefox/78.0',
+        'user-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0'
     })
     with urllib.request.urlopen(req) as f:
         res = f.read().decode(encoding)
