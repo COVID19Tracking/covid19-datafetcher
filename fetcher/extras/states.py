@@ -567,11 +567,12 @@ def handle_mi(res, mapping):
     for t in tables:
         caption = t.find('caption').get_text(strip=True)
         if caption.startswith('COVID-19 Metrics'):
-            # last row:
-            last_tr = t.find_all('tr')[-1]
-            # verify that 1st item is th
-            if last_tr.find('th') is not None:
-                vent = last_tr.find_all('td')[1].get_text(strip=True)
+            for row in t.find_all('tr'):
+                th = row.find('th')
+                if th and th.get_text(strip=True).startswith('Hospitalized and Ventilated'):
+                    # take last td
+                    td = row.find_all('td')[-1]
+                    vent = td.get_text(strip=True)
         elif caption.startswith('Patient Census'):
             # This is where we take icu and hosp data
             last_row = t.find_all('tr')[-1]
