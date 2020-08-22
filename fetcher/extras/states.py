@@ -721,8 +721,11 @@ def handle_nc(res, mapping):
             tagged[mapping[k[1]]] = v
 
     # hospitalizations, we need daily
-    hosp_val = df['Measure Values']['Sum of Hospitalizations'].iloc[-1]
-    tagged[Fields.CURR_HOSP.name] = hosp_val
+    try:
+        hosp_val = df['Measure Values']['Sum of Hospitalizations'].iloc[-1]
+        tagged[Fields.CURR_HOSP.name] = hosp_val
+    except Exception:
+        logging.warning("NC: failed to parse recovered", exc_info=True)
 
     # deaths
     df = res[-1]
