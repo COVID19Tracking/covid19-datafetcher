@@ -499,6 +499,10 @@ SC:
 ] , f: json}
   type: arcgis
   desc: Everything
+- url: https://scdhec.gov/infectious-diseases/viruses/coronavirus-disease-2019-covid-19/hospital-bed-capacity-covid-19
+  params: null
+  type: html:soup
+  desc: Hospitalizations
 TN:
 - url: https://services1.arcgis.com/HLC8bAygObK4fhPW/arcgis/rest/services/TN_COVID19_Daily/FeatureServer/0/query
   params: {where: 1=1, outFields: '*', orderByFields: 'DATE desc', resultRecordCount: 1, f: json}

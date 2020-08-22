@@ -373,6 +373,23 @@ def handle_ri(res, mapping):
     return mapped
 
 
+def handle_sc(res, mapping):
+    mapped = {}
+    for result in res[:-1]:
+        partial = extract_arcgis_attributes(result, mapping, 'SC')
+        mapped.update(partial)
+
+    # hospitalizations
+    hosp_soup = res[-1]
+    t = hosp_soup.find('table')
+    for tr in t.find_all('tr'):
+        title = tr.find('td').get_text(strip=True).replace(':', '')
+        if title in mapping:
+            val = tr.find_all('td')[1].get_text(strip=True)
+            mapped[mapping[title]] = atoi(val)
+    return mapped
+
+
 def handle_dc(res, mapping):
     # expecting 1 file:
     df = res[0]

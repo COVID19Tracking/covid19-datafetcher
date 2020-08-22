@@ -410,6 +410,9 @@ SC:
   SUM_Death: DEATH_CONFIRMED
   SUM_Probable_Positives: PROBABLE
   SUM_Probable_Deaths: DEATH_PROBABLE
+  COVID patients hospitalized: CURR_HOSP
+  COVID patients in ICU: CURR_ICU
+  COVID patients ventilated: CURR_VENT
 TN:
   CASES_TOT: POSITIVE
   HOSPITALIZED_TOT: HOSP
