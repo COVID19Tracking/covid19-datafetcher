@@ -650,6 +650,42 @@ def handle_mi(res, mapping):
     return tagged
 
 
+def handle_mn(res, mapping):
+    mapped = {}
+    for result in res[:-1]:
+        partial = extract_arcgis_attributes(result, mapping, 'NJ')
+        mapped.update(partial)
+
+    # testing
+    soup = res[-1]
+    h2 = soup.find_all(['h2', 'h3'])
+    for x in h2:
+        title = x.get_text(strip=True).strip()
+        if title == 'Testing':
+            # do the testing thing
+            p = x.find_next_sibling('p').get_text(strip=True)
+            li = x.find_next_sibling('ul').get_text(strip=True)
+            pcr = p.split(":")[-1].strip()
+            pcr_people = li.split(":")[-1].strip()
+            mapped[Fields.SPECIMENS.name] = atoi(pcr)
+            mapped[Fields.TOTAL.name] = atoi(pcr_people)
+        elif title == 'Deaths':
+            li = x.find_next_sibling('ul').find_all('li')[-1]
+            for x in li.stripped_strings:
+                if x.strip().isnumeric():
+                    mapped[Fields.DEATH_PROBABLE.name] = atoi(x.strip())
+        elif title == 'Hospitalization':
+            li = x.find_next_sibling('ul').find('li')
+            for x in li.stripped_strings:
+                val = x.split(":")[-1].strip()
+                if 'ICU' in x:
+                    mapped[Fields.CURR_ICU.name] = atoi(val)
+                else:
+                    mapped[Fields.CURR_HOSP.name] = atoi(val)
+
+    return mapped
+
+
 def handle_mo(res, mapping):
     tagged = {}
     for result in res[:-1]:

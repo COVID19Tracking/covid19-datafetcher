@@ -268,6 +268,10 @@ MN:
 - url: https://services2.arcgis.com/V12PKGiMAH7dktkU/arcgis/rest/services/MyMapService/FeatureServer/0/query
   params: {where: 1=1, outFields: 'Date, Time,TotalCases, EvrHospYes + EvrICUYes as hosp, EvrICUYes, RlsdFrmIso, OutcmDied', f: json}
   type: arcgis
+- url: https://www.health.state.mn.us/diseases/coronavirus/situation.html
+  params: null
+  type: html:soup
+  desc: State page (soup)
 MO:
 - url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/county_MOHSIS_map/FeatureServer/0/query
   params: {f: json, outStatistics: [{onStatisticField: CASES, statisticType: sum},
