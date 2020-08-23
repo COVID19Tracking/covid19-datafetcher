@@ -31,13 +31,23 @@ def parse_totals(totals):
 
     if len(totals) == 6:
         # expected:
-        # ["Total", Inconclusive, Negative, Positive, Percent Positive, Total]
-        res = {
-            'Inconclusive': atoi(totals[1]),
-            'Negative': atoi(totals[2]),
-            'Positive': atoi(totals[3]),
-            'Total': atoi(totals[5])
-        }
+        # ["Title", Inconclusive, Negative, Positive, Percent Positive, Total]
+        # Or
+        # ["title", "Positive", "Negative", "Inconclusive", "Total", "Percent positivity"]
+        if totals[-1].strip().endswith("%"):
+            res = {
+                'Inconclusive': atoi(totals[3]),
+                'Negative': atoi(totals[2]),
+                'Positive': atoi(totals[1]),
+                'Total': atoi(totals[4])
+            }
+        else:
+            res = {
+                'Inconclusive': atoi(totals[1]),
+                'Negative': atoi(totals[2]),
+                'Positive': atoi(totals[3]),
+                'Total': atoi(totals[5])
+            }
     elif len(totals) == 5:
         # expected:
         # ["Total", Negative, Positive, Percent Positive, Total]
@@ -53,17 +63,18 @@ def parse_totals(totals):
     return res
 
 
-def get_antibody_people(page_text):
-    lines = page_text.splitlines()
+def get_antibody_tests(pages):
+    people_page = pages[0]
+    lines = people_page.splitlines()
     index = lines.index("Total tested")
     interesting = lines[index:index+10]
 
     # quick map:
     mapping = {
-        'Total tested': 'Summary_Total',
-        'Positive': 'Summary_Positive',
-        'Negative': 'Summary_Negative',
-        'Inconclusive': 'Summary_Inconclusive'
+        'Total tested': 'Total_people',
+        'Positive': 'Positive_people',
+        'Negative': 'Negative_people',
+        'Inconclusive': 'Inconclusive_people'
     }
 
     res = {}
@@ -71,14 +82,17 @@ def get_antibody_people(page_text):
         if interesting[i].strip() in mapping:
             res[mapping[interesting[i].strip()]] = atoi(interesting[i+1].strip())
 
+    # Tests
+    tests = pages[1].splitlines()
+    # small heuristic here about the location
+    index = tests.index('Total', len(tests) - 10)
+    part = parse_totals(tests[index:])
+    res.update(part)
     return res
 
 
-def get_data(filepath, prefix):
-    pdf = PyPDF4.PdfFileReader(filepath)
-
-    testing_candidate = pdf.getPage(pdf.getNumPages() - 1)
-    totals = testing_candidate.extractText().splitlines()
+def get_pcr_tests(page_text):
+    totals = page_text.splitlines()
 
     # We need the last index for "Total"
     index = None
@@ -94,10 +108,19 @@ def get_data(filepath, prefix):
         if not res:
             res = {}
         res['Date'] = date_str
+    return res
 
+def get_data(filepath, prefix):
+    pdf = PyPDF4.PdfFileReader(filepath)
+    res = {}
     # people vs tests
     if prefix == 'SER':
-        part = get_antibody_people(pdf.getPage(0).extractText())
+        part = get_antibody_tests([
+            pdf.getPage(0).extractText(), pdf.getPage(pdf.getNumPages() - 3).extractText()])
+        res.update(part)
+    else:
+        testing_candidate = pdf.getPage(pdf.getNumPages() - 1)
+        part = get_pcr_tests(testing_candidate.extractText())
         res.update(part)
 
     # apply prefix to all keys:
