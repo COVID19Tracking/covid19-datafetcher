@@ -680,7 +680,7 @@ def handle_mn(res, mapping):
                 val = x.split(":")[-1].strip()
                 if 'ICU' in x:
                     mapped[Fields.CURR_ICU.name] = atoi(val)
-                else:
+                elif 'Hospitalized' in x:
                     mapped[Fields.CURR_HOSP.name] = atoi(val)
 
     return mapped
