@@ -39,6 +39,10 @@ AL:
     f: json}
   type: arcgis
   desc: Tests/positive/death
+- url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/ArcGIS/rest/services/Labtest_Summary_by_County_PUBLIC/FeatureServer/1/query
+  params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "LabTestCount"}], f: json}
+  type: arcgis
+  desc: Total tests
 - url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/COVID19_probable_confirmed_PUBLIC/FeatureServer/1/query
   params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"PROBABLE_DEATH"},{"statisticType":"sum","onStatisticField":"PROBABLE"}], f: json}
   type: arcgis
