@@ -47,27 +47,6 @@ def handle_al(res, mapping):
     return tagged
 
 
-def handle_ar(res, mapping):
-    tagged = {}
-    for result in res[:-1]:
-        partial = extract_arcgis_attributes(result, mapping, 'AR')
-        tagged.update(partial)
-
-    soup = res[-1]
-    tables = soup.find_all("table")
-    table = tables[-1].find("tbody")
-    for tr in table.find_all("tr"):
-        cols = tr.find_all("td")
-        if len(cols) < 2:
-            continue
-        name = cols[0].get_text(strip=True)
-        value = cols[1].get_text(strip=True)
-        if name in mapping:
-            tagged[mapping[name]] = atoi(value)
-
-    return tagged
-
-
 def handle_fl(res, mapping):
     '''Need to add the non-FL residents to the totals:
     they separate it for death and hosp"
