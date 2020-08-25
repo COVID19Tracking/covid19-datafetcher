@@ -34,9 +34,13 @@ CO:
   type: arcgis
   desc: Cases, tested, death, hosp
 - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
-  params: {where: Metric='Count of people tested by CDPHE lab' or Metric='Count of people tested by non-CDPHE (commercial) lab', outFields: '*', orderByFields: Attr_Date asc, groupByFieldsForStatistics: Attr_Date, outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "test_encounters"}], f: json}
+  params: {where: (Metric='Cumulative People Tested at CDPHE State Lab' or Metric='Cumulative People Tested at Non-CDPHE (Commerical) Labs') and Desc_ like 'Daily%', outFields: '*', orderByFields: Attr_Date asc, groupByFieldsForStatistics: Attr_Date, outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "test_encounters"}], f: json}
   type: arcgis
   desc: Test encounters
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
+  params: {where: Metric = 'Cumulative Antibody Tests Performed' and Desc_ like 'Daily%', outFields: 'Attr_Date, Desc_, Metric, Value as antibody_totals', orderByFields: Attr_Date asc, f: json}
+  type: arcgis
+  desc: Antibody total tests
 CT:
 - url: https://data.ct.gov/api/id/qfkt-uahj.json
   params: {$query: 'select date, sum(number_of_tests), sum(number_of_positives), sum(number_of_negatives) group by date order by date asc'}

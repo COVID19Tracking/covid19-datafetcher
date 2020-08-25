@@ -47,20 +47,6 @@ def handle_al(res, mapping):
     return mapped
 
 
-def handle_co(res, mapping):
-    mapped = []
-    for result in res[:-1]:
-        partial = extract_arcgis_attributes(result, mapping, 'CO')
-        mapped.extend(partial)
-
-    # PCR encounters
-    testing = res[-1]
-    testing = extract_arcgis_attributes(testing, mapping, 'CO')
-    cumsum_df = make_cumsum_df(testing)
-    mapped.extend(cumsum_df.to_dict(orient='records'))
-    return mapped
-
-
 def handle_ct(res, mapping):
     tests = res[0]
     df = pd.DataFrame(tests).rename(columns=mapping).set_index(Fields.DATE.name)
