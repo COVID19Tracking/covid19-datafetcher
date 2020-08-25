@@ -127,3 +127,11 @@ TX:
   Hospitalizations: CURR_HOSP
   ViralTests: SPECIMENS
   AntibodyTests: ANTIBODY_TOTAL
+VA:
+  lab_report_date: DATE
+  # "1/26/2020"
+  __strptime: "%m/%d/%Y"
+  pcr_testing: PCR_TEST_ENCOUNTERS
+  pos_pcr_testing: SPECIMENS_POS  # should actually be positive testing encounters
+  antibody_total: ANTIBODY_TOTAL
+  antibody_pos: ANTIBODY_POS

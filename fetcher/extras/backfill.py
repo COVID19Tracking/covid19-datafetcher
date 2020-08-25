@@ -7,6 +7,11 @@ from fetcher.extras.common import MaContextManager
 from fetcher.utils import map_attributes, Fields, extract_arcgis_attributes
 
 
+NULL_DATE = datetime(2020, 1, 1)
+DATE = Fields.DATE.name
+TS = Fields.TIMESTAMP.name
+
+
 def make_cumsum_df(data, timestamp_field=Fields.TIMESTAMP.name):
     df = pd.DataFrame(data)
     df.set_index(timestamp_field, inplace=True)
@@ -25,7 +30,7 @@ def handle_ak(res, mapping):
     df['tests_total'] = df.sum(axis=1)
 
     df = df.rename(columns=mapping).cumsum()
-    df['TIMESTAMP'] = df.index
+    df[TS] = df.index
 
     tagged = df.to_dict(orient='records')
     return tagged
@@ -40,24 +45,24 @@ def handle_al(res, mapping):
         mapped.extend(partial)
     # fix funny dates
     for x in mapped:
-        d = x['DATE']
+        d = x[DATE]
         ts = datetime.strptime(d+"-2020", "%m-%d-%Y")
-        x['TIMESTAMP'] = ts.timestamp()
+        x[TS] = ts.timestamp()
 
     return mapped
 
 
 def handle_ct(res, mapping):
     tests = res[0]
-    df = pd.DataFrame(tests).rename(columns=mapping).set_index(Fields.DATE.name)
+    df = pd.DataFrame(tests).rename(columns=mapping).set_index(DATE)
     for c in df.columns:
         # convert to numeric
         df[c] = pd.to_numeric(df[c])
 
-    df.index = df.index.fillna('2020-01-01T00:00:00.000')
+    df.index = df.index.fillna(NULL_DATE.strftime(mapping.get('__strptime')))
     df = df.sort_index().cumsum()
-    df[Fields.TIMESTAMP.name] = pd.to_datetime(df.index)
-    df[Fields.TIMESTAMP.name] = df[Fields.TIMESTAMP.name].values.astype(np.int64) // 10 ** 9
+    df[TS] = pd.to_datetime(df.index)
+    df[TS] = df[TS].values.astype(np.int64) // 10 ** 9
     return df.to_dict(orient='records')
 
 
@@ -82,9 +87,9 @@ def handle_ma(res, mapping):
                     df = pd.read_csv(csvfile)
                     df = df.rename(columns=file_mapping.get(filename))[
                         file_mapping.get(filename).values()]
-                    df['DATE'] = pd.to_datetime(df['DATE'])
-                    df = df.set_index('DATE').cumsum()
-                    df['DATE'] = df.index.strftime(mapping.get('__strptime'))
+                    df[DATE] = pd.to_datetime(df[DATE])
+                    df = df.set_index(DATE).cumsum()
+                    df[DATE] = df.index.strftime(mapping.get('__strptime'))
                     tagged.extend(df.to_dict(orient='records'))
                     continue
 
@@ -132,3 +137,18 @@ def handle_ri(res, mapping):
     # TODO: consider working with DFs directly
     records = res.to_dict(orient='records')
     return records
+
+
+def handle_va(res, mapping):
+    tests = res[0]
+    df = pd.DataFrame(tests).rename(columns=mapping).set_index(DATE)
+    for c in df.columns:
+        # convert to numeric
+        df[c] = pd.to_numeric(df[c])
+
+    df.index = pd.to_datetime(df.index, errors='coerce', format=mapping.get('__strptime'))
+    df.index = df.index.fillna(NULL_DATE)
+    df = df.sort_index().cumsum()
+    df[TS] = pd.to_datetime(df.index)
+    df[TS] = df[TS].values.astype(np.int64) // 10 ** 9
+    return df.to_dict(orient='records')

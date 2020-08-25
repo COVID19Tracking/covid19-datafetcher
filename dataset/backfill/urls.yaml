@@ -96,3 +96,9 @@ TX:
   params: {where: 1=1, outFields: '*', orderByField: Date asc, resultRecordCount: 500, f: json}
   type: arcgis
   desc: Testing (PCR + Antibody)
+VA:
+- url: https://data.virginia.gov/resource/3u5k-c2gr.json
+  params: {$query: 'select lab_report_date, sum(number_of_pcr_testing) as pcr_testing, sum(number_of_positive_pcr_testing) as pos_pcr_testing, sum(total_number_of_testing) - sum(number_of_pcr_testing) as antibody_total, sum(total_number_of_positive) - sum(number_of_positive_pcr_testing) as antibody_pos group by lab_report_date order by lab_report_date asc'}
+  type: soda
+  data_path: [[]]
+  desc: Testing data (PCR and antibody)
