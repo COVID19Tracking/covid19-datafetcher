@@ -153,11 +153,14 @@ FL:
   type: csv
   desc: Hospitalizations (current)
 GA:
-- url: https://services1.arcgis.com/2iUE8l8JKrP2tygQ/arcgis/rest/services/COVID_19_Cases/FeatureServer/0/query
-  params: {f: json, outStatistics: [{onStatisticField: COVID_Cases, statisticType: sum},
-      {onStatisticField: COVID_Deaths, statisticType: sum}, {onStatisticField: EditDate,
-        statisticType: max}], where: 1=1}
+- url: https://services7.arcgis.com/Za9Nk6CPIPbvR1t7/arcgis/rest/services/Georgia_Cases_Current_Prod_May5/FeatureServer/0/query
+  params: {where: NAME = 'All Georgia', outFields: 'DATESTAMP,C_CUM,D_CUM,H_CUM', f: json}
   type: arcgis
+  desc: Cases, death, cum. hospitalization
+- url: https://services7.arcgis.com/Za9Nk6CPIPbvR1t7/arcgis/rest/services/Join_Features_to_GHA_Regions_Admin/FeatureServer/0/query
+  params: {where: 1=1, orderByFields: Entry_Date desc, groupByFieldsForStatistics: Entry_Date, outStatistics: [{"statisticType": "sum", "onStatisticField": "COVID_Patients"}], resultRecordCount: 1, f: json}
+  type: arcgis
+  desc: Curr. hosp
 GU:
 - url: https://services2.arcgis.com/FPJlJZYRsD8OhCWA/ArcGIS/rest/services/Testing_and_Status_Query/FeatureServer/0/query
   params: {where: '1=1', outFields: '*', f: json}
