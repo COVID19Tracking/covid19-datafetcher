@@ -241,7 +241,12 @@ def handle_la(res, mapping):
         if widget.get('name') == 'recovered':
             val = widget.get('datasets')[0].get('data')
             tagged[Fields.RECOVERED.name] = val
-            break
+        if widget.get('defaultSettings', {}) \
+                 .get('topSection', {}).get('textInfo', {}).get('text', '').find("Probable") >= 0:
+            datasets = widget.get('datasets')
+            for ds in datasets:
+                if ds.get('type') == 'staticDataset':
+                    tagged[Fields.PROBABLE.name] = atoi(ds.get('data'))
 
     return tagged
 
