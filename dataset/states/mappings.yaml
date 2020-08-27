@@ -364,6 +364,7 @@ OR:
   Positive tests: CONFIRMED
   Negative tests: NEGATIVE
   Total tested: TOTAL
+  Total deaths: DEATH
   Current hospitalized patients: CURR_HOSP
   Current patients in ICU beds: CURR_ICU
   Current patients on ventilators: CURR_VENT
