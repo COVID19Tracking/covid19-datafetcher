@@ -167,7 +167,7 @@ KY:
   Serology: ANTIBODY_TOTAL
   PCR: SPECIMENS
 LA:
-  Case Count: POSITIVE
+  Case Count: CONFIRMED
   Deaths: DEATH
   Commercial Tests: TOTAL
   State Tests: STATE_TESTS
