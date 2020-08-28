@@ -158,7 +158,7 @@ GA:
   type: arcgis
   desc: Cases, death, cum. hospitalization
 - url: https://services7.arcgis.com/Za9Nk6CPIPbvR1t7/arcgis/rest/services/Join_Features_to_GHA_Regions_Admin/FeatureServer/0/query
-  params: {where: 1=1, orderByFields: Entry_Date desc, groupByFieldsForStatistics: Entry_Date, outStatistics: [{"statisticType": "sum", "onStatisticField": "COVID_Patients"}], resultRecordCount: 1, f: json}
+  params: {where: 1=1, orderByFields: Entry_Date desc, groupByFieldsForStatistics: Entry_Date, outStatistics: [{"statisticType": "sum", "onStatisticField": "COVID_Patients"},{"statisticType":"sum","onStatisticField":"Patients_Under_Investigation"}], resultRecordCount: 1, f: json}
   type: arcgis
   desc: Curr. hosp
 GU:

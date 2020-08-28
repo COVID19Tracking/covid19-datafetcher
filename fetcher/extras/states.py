@@ -308,6 +308,15 @@ def handle_il(res, mapping):
     return mapped
 
 
+def handle_ga(res, mapping):
+    tagged = {}
+    for result in res:
+        partial = extract_arcgis_attributes(result, mapping, debug_state='GA')
+        tagged.update(partial)
+    tagged[Fields.CURR_HOSP.name] += tagged.pop('CURR_HOSP_PUI')
+    return tagged
+
+
 def handle_gu(res, mapping):
     res = res[0]
     tagged = {}

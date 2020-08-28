@@ -105,6 +105,7 @@ GA:
   D_Cum: DEATH
   H_Cum: HOSP
   SUM_COVID_Patients: CURR_HOSP
+  SUM_Patients_Under_Investigation: CURR_HOSP_PUI
 GU:
   Case Count: POSITIVE
   Death: DEATH
