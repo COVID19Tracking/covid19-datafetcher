@@ -175,7 +175,8 @@ LA:
 MA:
   Date: DATE
   Probable Total: PROBABLE
-  Positive Total: POSITIVE
+  Positive Total: CONFIRMED
+  All Cases: POSITIVE
   Deaths: DEATH
   DeathsConfTotal: DEATH_CONFIRMED
   DeathsProbTotal: DEATH_PROBABLE
