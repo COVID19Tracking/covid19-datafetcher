@@ -794,16 +794,17 @@ def handle_ma(res, mapping):
                 partial = map_attributes(last_row, mapping, 'MA')
                 tagged.update(partial)
 
-        hosp_key = ""
-        for k, v in mapping.items():
-            if v == Fields.HOSP.name:
-                hosp_key = k
+        inverse_mapping = {v: k for k, v in mapping.items()}
+        hosp_key = inverse_mapping[Fields.HOSP.name]
+        death_key = inverse_mapping[Fields.DEATH.name]
+
         hospfile = csv.DictReader(open(os.path.join(zipdir, "RaceEthnicity.csv"), 'r'))
         hosprows = list(hospfile)
         last_row = hosprows[-1]
         hosprows = [x for x in hosprows if x['Date'] == last_row['Date']]
-        summed = csv_sum(hosprows, [hosp_key])
+        summed = csv_sum(hosprows, [hosp_key, death_key])
         tagged[Fields.HOSP.name] = summed[hosp_key]
+        tagged[Fields.DEATH.name] = summed[death_key]
 
     # weekly report:
     with MaContextManager(res[0], "Weekly Public Health Report - Raw Data", file_type='xls') as tmpfile:
