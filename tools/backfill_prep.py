@@ -16,7 +16,7 @@ def get_states_daily_content(gw, file_id):
     '''
     gw: google wrapper
     '''
-    values = gw.get_sheet_values(file_id, "'States Daily'!A:AL")
+    values = gw.get_sheet_values(file_id, "'States Daily'!A2:AK")
     if not values:
         return None
 
@@ -102,7 +102,7 @@ def main(cfg: DictConfig) -> None:
 
     # Find all state files
     result = drive.files().list(
-        q='"{}" in parents'.format(cfg.backfill.folder),
+        q='"{}" in parents and not trashed'.format(cfg.backfill.folder),
         pageSize=60, fields="nextPageToken, files(id, name)").execute()
     files = result.get('files', [])
     files = {x['name']: x['id'] for x in files}
