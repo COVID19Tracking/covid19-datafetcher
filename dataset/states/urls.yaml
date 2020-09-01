@@ -297,6 +297,10 @@ MO:
   params: {where: Description='SER Tested', outFields: 'Description, value as ser_tested', f: json}
   type: arcgis
   desc: Serology total (people)
+- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/SER_Test_by_Date_Automated/FeatureServer/0/query
+  params: {where: test_date2>timestamp '2020-04-05 06:59:59', outStatistics: [{"statisticType": "sum", "onStatisticField": "Negative", "outStatisticFieldName": "ser_negative_tests"}, {"statisticType": "sum", "onStatisticField": "Positive", "outStatisticFieldName": "ser_positive_tests"}, {"statisticType": "sum", "onStatisticField": "Total", "outStatisticFieldName": "ser_total_tests"}], f: json}
+  type: arcgis
+  desc: Serology specimens (total, pos, neg)
 - url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/ArcGIS/rest/services/Dashboard_Daily_Numbers_Automated/FeatureServer/0/query
   params: {where: "Description='Antigen Tested Individuals'", outFields: 'Description, value as antigen_tested', f: json}
   type: arcgis

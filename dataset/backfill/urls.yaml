@@ -69,6 +69,10 @@ MO:
   params: {where: Date>timestamp '2020-02-1 00:00:00', outFields: '*', orderByFields: Date asc, f: json}
   type: arcgis
   desc: Cases by report date
+- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/SER_Test_by_Date_Automated/FeatureServer/0/query
+  params: {where: test_date2>timestamp '2020-04-05 06:59:59', outFields: 'test_date2 as ser_test_encouter_date, Negative as ser_negative, Positive as ser_positive, Total as ser_total', orderByFields: test_date2 asc, f: json}
+  type: arcgis
+  desc: Antibody testing, by test date
 MT:
 - url: https://services.arcgis.com/qnjIrwR8z5Izc0ij/ArcGIS/rest/services/COVID_Cases_Production_View/FeatureServer/1/query
   params: {where: 1=1, outFields: '*', orderByFields: ScriptRunDate asc, f: json}

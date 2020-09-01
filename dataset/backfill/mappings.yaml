@@ -90,6 +90,10 @@ MO:
   pcr_negative: SPECIMENS_NEG
   pcr_positive: SPECIMENS_POS
   pcr_total: SPECIMENS
+  ser_test_encouter_date: TIMESTAMP
+  ser_negative: ANTIBODY_NEG
+  ser_positive: ANTIBODY_POS
+  ser_total: ANTIBODY_TOTAL
 MT:
   Total_Tests_Completed: SPECIMENS
   Test_Date: TIMESTAMP

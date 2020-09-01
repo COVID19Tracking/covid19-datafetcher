@@ -254,6 +254,9 @@ MO:
   PCR_Total: SPECIMENS
   PCR_Positive: SPECIMENS_POS
   PCR_Negative: SPECIMENS_NEG
+  ser_total_tests: ANTIBODY_TOTAL
+  ser_positive_tests: ANTIBODY_POS
+  ser_negative_tests: ANTIBODY_NEG
   hosp: CURR_HOSP
   # From the excel:
   Ventilated: CURR_VENT
