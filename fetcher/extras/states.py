@@ -253,9 +253,7 @@ def handle_la(res, mapping):
 
 def handle_in(res, mapping):
     daily_stats = res[0]
-    mapped = map_attributes(daily_stats['metrics']['test_administrated'], mapping, 'IN')
-    partial = map_attributes(daily_stats, mapping, 'IN')
-    mapped.update(partial)
+    mapped = map_attributes(daily_stats, mapping, 'IN')
 
     # Base data is in "daily statistics", hosp data in "data"
     for metric_category in ['data', 'daily_statistics']:

@@ -155,7 +155,7 @@ IN:
   covid_deaths: DEATH_CONFIRMED
   covid_cases_prob: PROBABLE
   covid_deaths_prob: DEATH_PROBABLE
-  total_test_administrated: SPECIMENS
+  covid_tests_adm: SPECIMENS
   report_date: DATE
 KY:
   Confirmed: POSITIVE
