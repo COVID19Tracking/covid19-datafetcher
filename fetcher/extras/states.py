@@ -813,11 +813,6 @@ def handle_ma(res, mapping):
         recovered = rec[rec['Status'] == 'Total Cases Released from Isolation'].iloc[-1]['Residents']
         tagged[Fields.RECOVERED.name] = recovered
 
-        # probables
-        prob = df['CasesDeathsByReportDate'].iloc[-1]
-        tagged[Fields.DEATH_PROBABLE.name] = prob['Probable Deaths Total']
-        tagged[Fields.PROBABLE.name] = prob['Probable Cases Total']
-
     return tagged
 
 
