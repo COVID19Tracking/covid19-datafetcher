@@ -102,14 +102,18 @@ CO:
   type: arcgis
   desc: Death counts
 - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
-  params: {where: Metric='Number of positive tests',
+  params: {where: Metric='Cumulative Antibody Tests Performed' AND Desc_ LIKE 'Daily COVID-19 Antibody%', outFields: '*, Value as antibody_total', orderByFields: Attr_Date desc, resultRecordCount: 1, f: json}
+  type: arcgis
+  desc: Total serological tests
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
+  params: {where: Metric='Number of positive tests' AND Desc_ LIKE 'Daily COVID-19 Antibody%',
     outStatistics: [{"statisticType": "max", "onStatisticField": "Attr_Date"},
     {"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "antibody_pos"}],
     f: json}
   type: arcgis
   desc: Positive serological tests
 - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
-  params: {where: Metric='Number of negative tests',
+  params: {where: Metric='Number of negative tests' AND Desc_ LIKE 'Daily COVID-19 Antibody%',
     outStatistics: [{"statisticType": "max", "onStatisticField": "Attr_Date"},
     {"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "antibody_neg"}],
     f: json}

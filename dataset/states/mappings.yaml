@@ -49,6 +49,7 @@ CO:
   MAX_State_Test_Encounters: PCR_TEST_ENCOUNTERS
   antibody_pos: ANTIBODY_POS
   antibody_neg: ANTIBODY_NEG
+  antibody_total: ANTIBODY_TOTAL
   cases_probable: PROBABLE
   cases_confirmed: CONFIRMED
 CT:
