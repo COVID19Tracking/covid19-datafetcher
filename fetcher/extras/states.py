@@ -81,23 +81,24 @@ def handle_ky(res, mapping):
     for item in datadiv.find_all("div", "info-card"):
         title = item.find("span", "title")
         value = item.find("span", "number")
-        probable = item.find("span", "probable")
         if not value:
             continue
 
+        probable = item.find_all("span", "probable")
         pattern = "([a-zA-Z ]*): ([0-9,]*)"
 
         # class = title, number, probable
         title = title.get_text(strip=True)
         value = value.get_text(strip=True)
-        probable = probable.get_text(strip=True) if probable else ""
-        if probable:
+
+        probable = " ".join([p.get_text(strip=True) if p else "" for p in probable])
+        if probable and probable.strip():
             probable = re.findall(pattern, probable)
 
         if title.lower().find("total test") >= 0:
             for (k, v) in probable:
                 if k.lower().find("pcr") >= 0:
-                    tagged[Fields.TOTAL.name] = atoi(v)
+                    tagged[Fields.SPECIMENS.name] = atoi(v)
                 elif k.lower().find("serology") >= 0:
                     tagged[Fields.ANTIBODY_TOTAL.name] = atoi(v)
                 elif k.lower().find('antigen') >= 0:
