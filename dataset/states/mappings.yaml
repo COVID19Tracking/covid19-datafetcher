@@ -13,8 +13,9 @@ AL:
   SUM_DIED: DEATH_CONFIRMED
   SUM_PROBABLE: PROBABLE
   SUM_PROBABLE_DEATH: DEATH_PROBABLE
-  SUM_LabTestCount: SPECIMENS
   hospitalization: HOSP
+  antibody_total: ANTIBODY_TOTAL
+  pcr_specimens: SPECIMENS
   CLN_ICU: ICU
   CLN_VENT: VENT
   Confirmed_AllWeekdays: CURR_HOSP

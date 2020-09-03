@@ -145,7 +145,7 @@ class Fetcher:
         if TS in data and data[TS]:
             # Check whether it's s or ms and convert to datetime
             ts = data[TS]
-            data[TS] = datetime.utcfromtimestamp(ts/1000 if ts > MS_FILTER else ts)
+            data[TS] = datetime.fromtimestamp(ts/1000 if ts > MS_FILTER else ts)
         elif 'DATE' in data and data['DATE'] and dateformat:
             d = data['DATE']
             data[TS] = datetime.strptime(d, dateformat)
@@ -208,7 +208,7 @@ def build_dataframe(results, states_to_index, dataset_cfg, output_date_format, f
         # For each state, we forward fill, and resample to 1-day intervals
         # and forward fill the newely added days
         df = df.reset_index(STATE).groupby(STATE).apply(
-            lambda d: d.ffill().resample('1D').ffill()
+            lambda d: d.ffill().resample('1D', closed='right').ffill()
         ).drop(columns=STATE)
         df.sort_index(level=TS, ascending=False, inplace=True)
 

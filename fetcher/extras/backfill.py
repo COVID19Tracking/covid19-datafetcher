@@ -15,6 +15,9 @@ TS = Fields.TIMESTAMP.name
 def make_cumsum_df(data, timestamp_field=Fields.TIMESTAMP.name):
     df = pd.DataFrame(data)
     df.set_index(timestamp_field, inplace=True)
+    df.sort_index(inplace=True)
+    df = df.select_dtypes(exclude=['string', 'object'])
+    # .groupby(level=0).last() # can do it here, but not mandatory
 
     cumsum_df = df.cumsum()
     cumsum_df[Fields.TIMESTAMP.name] = cumsum_df.index
@@ -40,14 +43,21 @@ def handle_al(res, mapping):
     '''AL hospitalization has only month-day, need to fix it
     by adding the correct year (2020)'''
     mapped = []
-    for result in res:
+    for result in res[:-1]:
         partial = extract_arcgis_attributes(result, mapping)
         mapped.extend(partial)
+
+    cumsum_df = make_cumsum_df(mapped)
+    mapped = cumsum_df.to_dict(orient='records')
+
     # fix funny dates
-    for x in mapped:
+    mapping['__strptime'] = "%m-%d"
+    partial = extract_arcgis_attributes(res[-1], mapping)
+    for x in partial:
         d = x[DATE]
         ts = datetime.strptime(d+"-2020", "%m-%d-%Y")
         x[TS] = ts.timestamp()
+    mapped.extend(partial)
 
     return mapped
 

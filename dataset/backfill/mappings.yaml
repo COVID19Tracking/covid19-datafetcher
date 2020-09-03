@@ -8,10 +8,17 @@ AK:
   Negative: PCR_NEG_BY_COLLECTION_DATE
   Positive: PCR_POS_BY_COLLECTION_DATE
 AL:
+  antigen_specimens: ANTIGEN_TOTAL
+  pcr_specimens: SPECIMENS
+  ReceivedDate: DATE
+  __strptime: "%Y/%m/%d"   # 2020/06/08
+
   Confirmed_AllWeekdays: CURR_HOSP
   DateTxt: DATE
+  # This is for hospitalization
+  # Need better date mapping
   # 04-03
-  __strptime: "%m-%d"
+  # __strptime: "%m-%d"
 CA:
   confirmed: POSITIVE
   death: DEATH

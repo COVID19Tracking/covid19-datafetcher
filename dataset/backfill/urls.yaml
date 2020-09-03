@@ -13,6 +13,14 @@ AK:
   type: arcgis
   desc: PCR tests by specimen collection
 AL:
+- url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/AL_COVID_labtest_antibody_diagnostic_PUBLIC/FeatureServer/2/query
+  params: {where: TestCategory = 'Antigen', orderByField: ReceivedDate asc, groupByFieldsForStatistics: ReceivedDate, outStatistics: [{"statisticType":"sum","onStatisticField":"DiagnosticTest","outStatisticFieldName":"antigen_specimens"}], f: json}
+  type: arcgis
+  desc: Antigen tests
+- url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/AL_COVID_labtest_antibody_diagnostic_PUBLIC/FeatureServer/2/query
+  params: {where: TestCategory = 'NAAT', orderByField: ReceivedDate asc, groupByFieldsForStatistics: ReceivedDate, outStatistics: [{"statisticType":"sum","onStatisticField":"DiagnosticTest","outStatisticFieldName":"pcr_specimens"}], f: json}
+  type: arcgis
+  desc: PCR tests
 - url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/HospitalizedPatientTemporal_READ_ONLY/FeatureServer/1/query
   params: {where: 1=1, outFields: '*', orderByFields: OBJECTID asc, f: json}
   type: arcgis
