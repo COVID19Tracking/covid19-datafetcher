@@ -14,7 +14,7 @@ AL:
   SUM_PROBABLE: PROBABLE
   SUM_PROBABLE_DEATH: DEATH_PROBABLE
   hospitalization: HOSP
-  antibody_total: ANTIBODY_TOTAL
+  antibody_total: ANTIBODY_TOTAL_PEOPLE
   pcr_specimens: SPECIMENS
   CLN_ICU: ICU
   CLN_VENT: VENT
