@@ -160,7 +160,7 @@ def handle_pa(res, mapping):
             elif text.startswith('Recovered'):
                 recover_pct = atoi(text[len('Recovered***'):-1])
             elif text.startswith('Total PCR Tests'):
-                specimens = atoi(text[len('Total PCR Tests'):-1])
+                specimens = atoi(text[len('Total PCR Tests'):])
                 tagged[Fields.SPECIMENS.name] = specimens
 
         if total_cases and recover_pct:
