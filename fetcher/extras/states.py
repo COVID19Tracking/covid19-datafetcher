@@ -155,10 +155,13 @@ def handle_pa(res, mapping):
         for td in table.find_all("td"):
             text = td.get_text(strip=True)
             text = text.strip(u'\u200b')
-            if text.startswith('Total'):
+            if text.startswith('Total Cases'):
                 total_cases = atoi(text[len('Total Cases*'):])
             elif text.startswith('Recovered'):
                 recover_pct = atoi(text[len('Recovered***'):-1])
+            elif text.startswith('Total PCR Tests'):
+                specimens = atoi(text[len('Total PCR Tests'):-1])
+                tagged[Fields.SPECIMENS.name] = specimens
 
         if total_cases and recover_pct:
             tagged[Fields.RECOVERED.name] = math.floor(total_cases * recover_pct / 100)
