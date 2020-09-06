@@ -705,26 +705,30 @@ def handle_ms(res, mapping):
     mapped = {}
 
     tables = soup.find_all('table')
-    # expecting [county table, someting else, cases/death table, testing]
+    # expecting [<some number of tables>, cases/death table, testing]
 
-    status = tables[2]
-    header = status.find('thead').get_text(strip=True)
-    # verify that we're in the correct place
-    if header.lower() == 'confirmedprobabletotal':
-        trs = status.find('tbody').find_all('tr')
-        cases = trs[0]
-        cases_fields = [Fields.CONFIRMED, Fields.PROBABLE, Fields.POSITIVE]
-        deaths = trs[1]
-        deaths_fields = [Fields.DEATH_CONFIRMED, Fields.DEATH_PROBABLE, Fields.DEATH]
-        for tr, title, fields in [(cases, 'cases', cases_fields),
-                                  (deaths, 'deaths', deaths_fields)]:
-            tds = tr.find_all('td')
-            if tds[0].get_text(strip=True).lower() == title:
-                # we're in the right place
-                for i, field in enumerate(fields):
-                    mapped[field.name] = atoi(tds[i+1].get_text(strip=True))
+    # skip tables until we get to the cases table
+    for i, t in enumerate(tables):
+        header = t.find('thead').get_text(strip=True)
+        if header.lower() == 'confirmedprobabletotal':
+            break
+    tables = tables[i:]
 
-    testing = tables[3]
+    status = tables[0]
+    trs = status.find('tbody').find_all('tr')
+    cases = trs[0]
+    cases_fields = [Fields.CONFIRMED, Fields.PROBABLE, Fields.POSITIVE]
+    deaths = trs[1]
+    deaths_fields = [Fields.DEATH_CONFIRMED, Fields.DEATH_PROBABLE, Fields.DEATH]
+    for tr, title, fields in [(cases, 'cases', cases_fields),
+                              (deaths, 'deaths', deaths_fields)]:
+        tds = tr.find_all('td')
+        if tds[0].get_text(strip=True).lower() == title:
+            # we're in the right place
+            for i, field in enumerate(fields):
+                mapped[field.name] = atoi(tds[i+1].get_text(strip=True))
+
+    testing = tables[1]
     fields = [Fields.SPECIMENS, Fields.ANTIBODY_TOTAL, Fields.ANTIGEN_TOTAL]
     titles = ['pcr', 'antibody', 'antigen']
     header = [x.get_text(strip=True) for x in testing.find('tr').find_all('td')]
