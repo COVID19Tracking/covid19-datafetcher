@@ -129,12 +129,12 @@ CO:
     f: json}
   type: arcgis
   desc: Negative serological tests
-- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_state_statistics_cumulative/FeatureServer/0/query
-  params: {where: metric = 'Number of Cases' AND attribute = 'Probable', outFields: 'metric, attribute, value as cases_probable', orderByfields: rep_date desc, f: json}
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/CDPHE_COVID19_StateLevel_Expanded_Case_Data_Summary/FeatureServer/0/query
+  params: {where: metric = 'Probable cases', outFields: '*, value as cases_probable', orderByFields: report_date desc, f: json}
   type: arcgis
   desc: Cases probable
-- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_state_statistics_cumulative/FeatureServer/0/query
-  params: {where: metric = 'Number of Cases' AND attribute = 'Confirmed', outFields: 'metric, attribute, value as cases_confirmed', orderByfields: rep_date desc, f: json}
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/CDPHE_COVID19_StateLevel_Expanded_Case_Data_Summary/FeatureServer/0/query
+  params: {where: metric = 'Confirmed cases', outFields: '*, value as cases_confirmed', orderByFields: report_date desc, f: json}
   type: arcgis
   desc: Cases confirmed
 CT:
