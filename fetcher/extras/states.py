@@ -700,6 +700,42 @@ def handle_mo(res, mapping):
     return tagged
 
 
+def handle_ms(res, mapping):
+    soup = res[0]
+    mapped = {}
+
+    tables = soup.find_all('table')
+    # expecting [county table, someting else, cases/death table, testing]
+
+    status = tables[2]
+    header = status.find('thead').get_text(strip=True)
+    # verify that we're in the correct place
+    if header.lower() == 'confirmedprobabletotal':
+        trs = status.find('tbody').find_all('tr')
+        cases = trs[0]
+        cases_fields = [Fields.CONFIRMED, Fields.PROBABLE, Fields.POSITIVE]
+        deaths = trs[1]
+        deaths_fields = [Fields.DEATH_CONFIRMED, Fields.DEATH_PROBABLE, Fields.DEATH]
+        for tr, title, fields in [(cases, 'cases', cases_fields),
+                                  (deaths, 'deaths', deaths_fields)]:
+            tds = tr.find_all('td')
+            if tds[0].get_text(strip=True).lower() == title:
+                # we're in the right place
+                for i, field in enumerate(fields):
+                    mapped[field.name] = atoi(tds[i+1].get_text(strip=True))
+
+    testing = tables[3]
+    fields = [Fields.SPECIMENS, Fields.ANTIBODY_TOTAL, Fields.ANTIGEN_TOTAL]
+    titles = ['pcr', 'antibody', 'antigen']
+    header = [x.get_text(strip=True) for x in testing.find('tr').find_all('td')]
+    totals = testing.find_all('tr')[-1].find_all('td')
+    for i in range(len(titles)):
+        if header[i+2].lower() == titles[i]:
+            mapped[fields[i].name] = atoi(totals[i+2].get_text(strip=True))
+
+    return mapped
+
+
 def handle_nc(res, mapping):
     tagged = {}
     for result in res[:-1]:

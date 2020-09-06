@@ -275,6 +275,8 @@ MP:
   SUM_recovered: RECOVERED
   SUM_hospitalized: HOSP
   totaltestedcnmi: TOTAL
+MS:
+  Confirmed: CONFIRMED
 MT:
   SUM_HospitalizationCount: CURR_HOSP
   SUM_Total: POSITIVE
