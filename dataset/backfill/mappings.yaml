@@ -104,6 +104,16 @@ MO:
 MT:
   Total_Tests_Completed: SPECIMENS
   Test_Date: TIMESTAMP
+ND:
+  Date: DATE
+  __strptime: "%Y-%m-%d"
+  Cases (Confirmed Only): CONFIRMED
+  Negative PCR tests (susceptible test encounters): PCR_NEG_BY_COLLECTION_DATE
+  Total PCR tests (people): TOTAL
+  Total PCR tests (susceptible test encounters): PCR_TEST_ENCOUNTERS
+  Total PCR tests (specimens): PCR_BY_COLLECTION_DATE
+  Total Recovered: RECOVERED
+  Deaths: DEATH
 RI:
   # Google doc:
   "Cumulative positive tests (may count people more than once)": SPECIMENS_POS

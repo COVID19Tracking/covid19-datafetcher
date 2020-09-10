@@ -140,6 +140,17 @@ def handle_mo(res, mapping):
     return cumsum_df.to_dict('records')
 
 
+def handle_nd(res, mapping):
+    # simply a cumsum table
+    res = res[0]
+    res = res.rename(columns=mapping).set_index('DATE')
+    res = res.cumsum()
+    res['DATE'] = res.index
+    res = res[[v for k, v in mapping.items() if k != '__strptime']]
+    records = res.to_dict(orient='records')
+    return records
+
+
 def handle_ri(res, mapping):
     res = res[0]
     res = res.rename(columns=mapping)

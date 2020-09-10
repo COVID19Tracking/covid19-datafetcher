@@ -86,6 +86,11 @@ MT:
   params: {where: 1=1, outFields: '*', orderByFields: ScriptRunDate asc, f: json}
   type: arcgis
   desc: Total tested
+ND:
+- url: https://www.health.nd.gov/sites/www/files/documents/Files/MSS/coronavirus/charts-data/CovidTracking.csv
+  params: {parse_dates: True}
+  type: pandas
+  desc: PCR (encounters, specimens, negatives, people, confirmed)
 RI:
 - url: 'https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/export?format=csv&gid=1592746937'
   params: {parse_dates: True}
