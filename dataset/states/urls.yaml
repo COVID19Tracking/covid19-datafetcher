@@ -393,10 +393,10 @@ ND:
   params: {}
   type: html:soup
   desc: State page (soup)
-- url: https://static.dwcdn.net/data/sjzda.csv
+- url: https://static.dwcdn.net/data/yuhr0.csv
   params: null
   type: csv
-  desc: Testing
+  desc: By county testing (for negatives)
 - url: https://www.health.nd.gov/sites/www/files/documents/Files/MSS/coronavirus/charts-data/CovidTracking.csv
   params: null
   type: csv

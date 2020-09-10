@@ -803,11 +803,11 @@ def handle_nd(res, mapping):
         if name in mapping:
             tagged[mapping[name]] = atoi(value)
 
-    # tetal testing
-    testing = res[1]
-    columns = [k for k, v in mapping.items() if v == Fields.SPECIMENS.name]
-    specimens = csv_sum(testing, columns=columns)
-    tagged[Fields.SPECIMENS.name] = specimens[columns[0]]
+    # by county testing snapshot
+    county_testing = res[1]
+    columns = [k for k, v in mapping.items() if v == Fields.NEGATIVE.name]
+    specimens = csv_sum(county_testing, columns=columns)
+    tagged[Fields.NEGATIVE.name] = specimens[columns[0]]
 
     # PCR encounters and other metrics
     pcr = res[2]

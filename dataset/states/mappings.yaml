@@ -301,6 +301,8 @@ ND:
   Total PCR tests (specimens): SPECIMENS
   Total Recovered: RECOVERED
 
+  Total Negative: NEGATIVE
+
   Currently Hospitalized: CURR_HOSP
   Total Hospitalized: HOSP
   # Serology tests table
