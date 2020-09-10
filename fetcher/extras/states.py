@@ -809,12 +809,13 @@ def handle_nd(res, mapping):
     specimens = csv_sum(testing, columns=columns)
     tagged[Fields.SPECIMENS.name] = specimens[columns[0]]
 
-    # people tested
-    people = res[2]
+    # PCR encounters and other metrics
+    pcr = res[2]
     columns = [k for k, v in mapping.items() if v in [
-        Fields.POSITIVE.name, Fields.NEGATIVE.name, Fields.TOTAL.name, Fields.RECOVERED.name
+        Fields.TOTAL.name, Fields.SPECIMENS_NEG.name, Fields.PCR_TEST_ENCOUNTERS.name,
+        Fields.CONFIRMED.name, Fields.SPECIMENS.name, Fields.RECOVERED.name
         ]]
-    values = csv_sum(people, columns)
+    values = csv_sum(pcr, columns)
     partial = map_attributes(values, mapping)
     tagged.update(partial)
 

@@ -389,10 +389,6 @@ NC:
   type: pandas
   desc: Deaths (by county)
 ND:
-# - url: https://static.dwcdn.net/data/yuhr0.csv
-#   params: {}
-#   type: csv
-#   desc: Cases/tests/neg, etc (CSV)
 - url: https://www.health.nd.gov/diseases-conditions/coronavirus/north-dakota-coronavirus-cases
   params: {}
   type: html:soup
@@ -401,10 +397,10 @@ ND:
   params: null
   type: csv
   desc: Testing
-- url: https://www.health.nd.gov/sites/www/files/documents/Files/MSS/coronavirus/charts-data/Total_Tests_by_County_web.csv
+- url: https://www.health.nd.gov/sites/www/files/documents/Files/MSS/coronavirus/charts-data/CovidTracking.csv
   params: null
   type: csv
-  desc: Positives, negatives, total, recovered
+  desc: PCR (encounters, specimens, negatives, people, confirmed)
 NE:
 - url: https://gis.ne.gov/enterprise/rest/services/Covid19MapV5/MapServer/2/query
   params: {where: case_status='Confirmed' AND NE_JURIS='yes' AND Did_Pat_Die_From_Illness='Y',
