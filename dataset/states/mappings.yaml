@@ -20,16 +20,20 @@ AL:
   CLN_VENT: VENT
   Confirmed_AllWeekdays: CURR_HOSP
 AR:
-  SUM_Recoveries: RECOVERED
-  SUM_deaths: DEATH
-  SUM_negative: NEGATIVE
-  SUM_pending: PENDING
   SUM_positive: POSITIVE
-  SUM_total_tests: SPECIMENS
-  Currently Hospitalized: CURR_HOSP
-  Ever Hospitalized: HOSP
-  Currently on Ventilator: CURR_VENT
-  Ever on Ventilator: VENT
+  SUM_deaths: DEATH
+  SUM_confirmed_death: DEATH_CONFIRMED
+  SUM_probable_death: DEATH_PROBABLE
+  SUM_confirmed_pos: CONFIRMED
+  SUM_probable_pos: PROBABLE
+  SUM_Recoveries: RECOVERED
+
+  SUM_pcr_test: SPECIMENS
+  SUM_pcr_pos_test: SPECIMENS_POS
+  SUM_pcr_neg_test: SPECIMENS_NEG
+  SUM_antigen_test: ANTIGEN_TOTAL
+  SUM_antigen_pos_test: ANTIGEN_POS
+  SUM_antigen_neg_test: ANTIGEN_NEG
 AZ:
   SUM_Number_Confirmed: POSITIVE
   Deaths: DEATH
