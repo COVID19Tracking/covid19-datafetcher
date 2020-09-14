@@ -19,6 +19,11 @@ AL:
   # Need better date mapping
   # 04-03
   # __strptime: "%m-%d"
+AR:
+  Date: TIMESTAMP
+  pcr_tests: SPECIMENS
+  antigen_tests: ANTIGEN_TOTAL
+  total_pos: SPECIMENS_POS
 CA:
   confirmed: POSITIVE
   death: DEATH

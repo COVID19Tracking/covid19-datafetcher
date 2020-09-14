@@ -62,6 +62,13 @@ def handle_al(res, mapping):
     return mapped
 
 
+def handle_ar(res, mapping):
+    # simply a cumsum table
+    data = extract_arcgis_attributes(res[0], mapping)
+    cumsum_df = make_cumsum_df(data)
+    return cumsum_df.to_dict(orient='records')
+
+
 def handle_ct(res, mapping):
     tests = res[0]
     df = pd.DataFrame(tests).rename(columns=mapping).set_index(DATE)
