@@ -74,6 +74,11 @@ AR:
   params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"confirmed_death"},{"statisticType":"sum","onStatisticField":"probable_death"},{"statisticType":"sum","onStatisticField":"confirmed_pos"},{"statisticType":"sum","onStatisticField":"probable_pos"},{"statisticType":"sum","onStatisticField":"positive"},{"statisticType":"sum","onStatisticField":"deaths"},{"statisticType":"sum","onStatisticField":"Recoveries"},{"statisticType":"sum","onStatisticField":"negative"},{"statisticType":"sum","onStatisticField":"pcr_pos_test"},{"statisticType":"sum","onStatisticField":"pcr_neg_test"},{"statisticType":"sum","onStatisticField":"pcr_test"},{"statisticType":"sum","onStatisticField":"antigen_pos_test"},{"statisticType":"sum","onStatisticField":"antigen_neg_test"},{"statisticType":"sum","onStatisticField":"antigen_test"}], f: json}
   type: arcgis
   desc: Pos (confirmed/probable), death (confirmed/probable)
+- url: https://services.arcgis.com/PwY9ZuZRDiI5nXUB/arcgis/rest/services/UPDATED_ADH_COVID19_HEALTH_REGION_METRICS/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"PositiveAdmits"},
+{"statisticType":"sum","onStatisticField":"SuspectedAdmits"}, {"statisticType":"sum","onStatisticField":"ICUAdmit"}, {"statisticType":"sum","onStatisticField":"OnVents"}], f: json}
+  type: arcgis
+  desc: Hospitalizations
 AZ:
 - url: https://services6.arcgis.com/l7uujk4hHifqabRB/ArcGIS/rest/services/COVID19_County_Level_View_Layer/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "Number_Confirmed"}], f: json}

@@ -27,6 +27,9 @@ AR:
   SUM_confirmed_pos: CONFIRMED
   SUM_probable_pos: PROBABLE
   SUM_Recoveries: RECOVERED
+  SUM_PositiveAdmits: CURR_HOSP
+  SUM_ICUAdmit: CURR_ICU
+  SUM_OnVents: CURR_VENT
 
   SUM_pcr_test: SPECIMENS
   SUM_pcr_pos_test: SPECIMENS_POS
