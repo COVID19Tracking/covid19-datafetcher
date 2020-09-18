@@ -662,7 +662,7 @@ def handle_mn(res, mapping):
             li = x.find_next_sibling('ul').get_text(strip=True)
             pcr = p.split(":")[-1].strip()
             pcr_people = li.split(":")[-1].strip()
-            mapped[Fields.SPECIMENS.name] = atoi(pcr)
+            mapped[Fields.PCR_TEST_ENCOUNTERS.name] = atoi(pcr)
             mapped[Fields.TOTAL.name] = atoi(pcr_people)
         elif title == 'Deaths':
             li = x.find_next_sibling('ul').find_all('li')[-1]
