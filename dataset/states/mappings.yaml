@@ -34,9 +34,9 @@ AR:
   SUM_pcr_test: SPECIMENS
   SUM_pcr_pos_test: SPECIMENS_POS
   SUM_pcr_neg_test: SPECIMENS_NEG
-  SUM_antigen_test: ANTIGEN_TOTAL
-  SUM_antigen_pos_test: ANTIGEN_POS
-  SUM_antigen_neg_test: ANTIGEN_NEG
+  SUM_antigen_test: ANTIGEN_TOTAL_PEOPLE
+  SUM_antigen_pos_test: ANTIGEN_POS_PEOPLE
+  SUM_antigen_neg_test: ANTIGEN_NEG_PEOPLE
 AZ:
   SUM_Number_Confirmed: POSITIVE
   Deaths: DEATH
