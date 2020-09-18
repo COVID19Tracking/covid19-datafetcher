@@ -82,9 +82,9 @@ class Fetcher:
                         query['url'], query['params'],
                         header=query.get('header', True), encoding=query.get('encoding'))
                 elif query['type'] in ['html']:
-                    res = request(query['url'], query['params'])
+                    res = request(query['url'], query['params'], query.get('encoding'))
                 elif query['type'] in ['html:soup']:
-                    res = request_soup(query['url'], query['params'])
+                    res = request_soup(query['url'], query['params'], query.get('encoding'))
                 elif query['type'] in ['pandas', 'xls', 'xlsx']:
                     res = request_pandas(query)
                 results.append(res)

@@ -353,6 +353,7 @@ MP:
   desc: State stats
 MS:
 - url: https://msdh.ms.gov/msdhsite/_static/14,0,420.html
+  encoding: ISO-8859-1
   params: null
   type: html:soup
   desc: Main page
