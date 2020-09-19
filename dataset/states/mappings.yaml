@@ -71,8 +71,8 @@ CT:
   confirmeddeaths: DEATH_CONFIRMED
   probabledeaths: DEATH_PROBABLE
 DC:
-  Total Overall Tested: TOTAL
-  Total Tests Overall: TOTAL
+  Total Overall Number of Tests: PCR_TEST_ENCOUNTERS
+  Total Residents Tested: TOTAL
   Total Positives: POSITIVE
   Number of Deaths: DEATH
   Cleared From Isolation: RECOVERED
