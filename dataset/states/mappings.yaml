@@ -118,7 +118,7 @@ GA:
 GU:
   Case Count: POSITIVE
   Death: DEATH
-  Recovered: RECOVERED
+  Not in isolation: RECOVERED
   Confirmed cases: CONFIRMED
   Probable cases: PROBABLE
   Negative: NEGATIVE
