@@ -328,6 +328,9 @@ NE:
   hosp_cumulative_total: HOSP
   dash_update_date: TIMESTAMP
   rec_latest_pat_count: RECOVERED
+  AllTestsAsOfThisDate: SPECIMENS
+  TotalNotDetectedAsOfThisDate: SPECIMENS_NEG
+  TotalPositiveAsOfThisDate: SPECIMENS_POS
 NH:
   Recovered: RECOVERED
   Deaths Attributed to COVID-19: DEATH

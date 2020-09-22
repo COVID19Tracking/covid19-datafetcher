@@ -419,11 +419,15 @@ NE:
   params: {where: 1=1, outFields: 'hosp_latest_pat_count,hosp_cumulative_total,dash_update_date,rec_latest_pat_count', resultRecordCount: 1, orderByFields: dash_update_date desc, f: json, returnGeometry: false}
   type: arcgis
   desc: Hosp cum/cur, Recovered
+- url: https://gis.ne.gov/enterprise/rest/services/Covid19MapV5/MapServer/11/query
+  params: {where: 1=1, outFields: '*', orderByFields: LAB_REPORT_DATE desc, resultRecordCount: 1, f: json}
+  type: arcgis
+  desc: Specimens
 - url: https://gis.ne.gov/enterprise/rest/services/Covid19MapV5/MapServer/1/query
   params: {f: json, outStatistics: [{onStatisticField: ID, statisticType: count}],
     groupByFieldsForStatistics: lab_status, outFields: '*', where: NE_JURIS='yes', returnGeometry: false}
   type: arcgis
-  desc: Lab results (pos, inconclusive, neg)
+  desc: Lab results residents (pos, inconclusive, neg)
 NH:
 - url: https://www.nh.gov/covid19/
   params: null

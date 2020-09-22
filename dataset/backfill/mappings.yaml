@@ -119,6 +119,11 @@ ND:
   Total PCR tests (specimens): PCR_BY_COLLECTION_DATE
   Total Recovered: RECOVERED
   Deaths: DEATH
+NE:
+  LAB_REPORT_DATE: TIMESTAMP
+  AllTestsAsOfThisDate: SPECIMENS
+  TotalNotDetectedAsOfThisDate: SPECIMENS_NEG
+  TotalPositiveAsOfThisDate: SPECIMENS_POS
 RI:
   # Google doc:
   "Cumulative positive tests (may count people more than once)": SPECIMENS_POS

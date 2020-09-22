@@ -96,6 +96,11 @@ ND:
   params: {parse_dates: True}
   type: pandas
   desc: PCR (encounters, specimens, negatives, people, confirmed)
+NE:
+- url: https://gis.ne.gov/enterprise/rest/services/Covid19MapV5/MapServer/11/query
+  params: {where: 1=1, outFields: '*', orderByFields: LAB_REPORT_DATE asc, f: json}
+  type: arcgis
+  desc: Tests and results by lab report date
 RI:
 - url: 'https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/export?format=csv&gid=1592746937'
   params: {parse_dates: True}
