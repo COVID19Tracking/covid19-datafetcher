@@ -571,7 +571,7 @@ TX:
   type: arcgis
   desc: Curr hosp
 - url: https://www.dshs.texas.gov/coronavirus/TexasCOVID-19HospitalizationsOverTimebyTSA.xlsx
-  params: {sheet_name: 'COVID in ICU'}
+  params: {sheet_name: 'COVID-19 ICU'}
   type: xlsx
   desc: Current ICU
 UT:
