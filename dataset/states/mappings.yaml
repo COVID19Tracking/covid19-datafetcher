@@ -356,7 +356,7 @@ NM:
   currentHospitalizations: CURR_HOSP
   deaths: DEATH
   recovered: RECOVERED
-  tests: TOTAL
+  tests: SPECIMENS
   totalHospitalizations: HOSP
 NY:
   test_date: DATE
