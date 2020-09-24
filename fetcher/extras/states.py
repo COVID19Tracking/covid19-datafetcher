@@ -786,10 +786,10 @@ def handle_nd(res, mapping):
             tagged[mapping[name]] = atoi(value)
 
     # by county testing snapshot
-    county_testing = res[1]
-    columns = [k for k, v in mapping.items() if v == Fields.NEGATIVE.name]
-    specimens = csv_sum(county_testing, columns=columns)
-    tagged[Fields.NEGATIVE.name] = specimens[columns[0]]
+    # county_testing = res[1]
+    # columns = [k for k, v in mapping.items() if v == Fields.NEGATIVE.name]
+    # specimens = csv_sum(county_testing, columns=columns)
+    # tagged[Fields.NEGATIVE.name] = specimens[columns[0]]
 
     # PCR encounters and other metrics
     pcr = res[2]
