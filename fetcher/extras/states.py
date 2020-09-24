@@ -681,25 +681,6 @@ def handle_mn(res, mapping):
     return mapped
 
 
-def handle_mo(res, mapping):
-    tagged = {}
-    for result in res[:-1]:
-        partial = extract_arcgis_attributes(result, mapping, debug_state='MO')
-        tagged.update(partial)
-
-    hosp = res[-1]
-    # kinda funny, yes
-    hosp_title = [k for k, v in mapping.items() if v == Fields.CURR_HOSP.name][-1]
-    vent_title = [k for k, v in mapping.items() if v == Fields.CURR_VENT.name][-1]
-    for row in hosp.itertuples():
-        if isinstance(row[1], str) and row[1].find(hosp_title) >= 0:
-            tagged[Fields.CURR_HOSP.name] = row[2]
-        if isinstance(row[1], str) and row[1].find(vent_title) >= 0:
-            tagged[Fields.CURR_VENT.name] = row[2]
-
-    return tagged
-
-
 def handle_ms(res, mapping):
     soup = res[0]
     mapped = {}

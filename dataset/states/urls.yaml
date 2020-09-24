@@ -338,10 +338,6 @@ MO:
   params: {where: 1=1, outFields: '*, covid_total as hosp', orderByFields: entry_date desc, resultRecordCount: 1, f: json}
   type: arcgis
   desc: Current Hosp. query
-- url: https://www.mhanet.com/mhaimages/covid-19/daily.dashboard/Statewide_Dashboard.xlsx
-  params: null
-  type: xlsx
-  desc: Current hosp+vent excel
 # -------------------------------
 MP:
 - url: https://services8.arcgis.com/zkkZCub5I6ydvXQj/ArcGIS/rest/services/Coronavirus_PublicDashboardView/FeatureServer/3/query
