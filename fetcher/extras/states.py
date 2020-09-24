@@ -671,12 +671,13 @@ def handle_mn(res, mapping):
                     mapped[Fields.DEATH_PROBABLE.name] = atoi(x.strip())
         elif title == 'Hospitalization':
             li = x.find_next_sibling('ul').find('li')
-            for x in li.stripped_strings:
-                val = x.split(":")[-1].strip()
-                if 'ICU' in x:
-                    mapped[Fields.CURR_ICU.name] = atoi(val)
-                elif 'Hospitalized' in x:
-                    mapped[Fields.CURR_HOSP.name] = atoi(val)
+            items = list(li.stripped_strings)
+            for i in range(0, len(items), 2):
+                if items[i].find(":") >= 0:
+                    if 'ICU' in items[i]:
+                        mapped[Fields.CURR_ICU.name] = atoi(items[i+1])
+                    if 'Hospitalized' in items[i]:
+                        mapped[Fields.CURR_HOSP.name] = atoi(items[i+1])
 
     return mapped
 
