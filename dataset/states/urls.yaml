@@ -35,18 +35,22 @@ AK:
 AL:
 - url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/COV19_Public_Dashboard_ReadOnly/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{statisticType: sum, onStatisticField: LabTestCount},
-      {statisticType: sum, onStatisticField: CONFIRMED}, {statisticType: sum, onStatisticField: DIED}],
+      {statisticType: sum, onStatisticField: CONFIRMED, outStatisticFieldName: 'positives'}, {statisticType: sum, onStatisticField: DIED}],
     f: json}
   type: arcgis
-  desc: Tests/positive/death
+  desc: OLD Tests/positive/death
 - url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/ArcGIS/rest/services/Labtest_Summary_by_County_PUBLIC/FeatureServer/1/query
   params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "LabTestCount"}], f: json}
   type: arcgis
   desc: Total tests
-- url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/COVID19_probable_confirmed_PUBLIC/FeatureServer/1/query
-  params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"PROBABLE_DEATH"},{"statisticType":"sum","onStatisticField":"PROBABLE"}], f: json}
+- url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/ArcGIS/rest/services/C19_dashboard_homepage_PUBLIC/FeatureServer/2/query
+  params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"Confirmed"}, {"statisticType":"sum","onStatisticField":"Probable"}], f: json}
   type: arcgis
-  desc: Probable (death, cases)
+  desc: Cases (confirmed, probable)
+- url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/C19_dashboard_homepage_PUBLIC/FeatureServer/1/query
+  params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"ProbDied"}, {"statisticType":"sum","onStatisticField":"ConfDied"}], f: json}
+  type: arcgis
+  desc: Death (confirmed, probable)
 - url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/c19v2_hcw_ltcf_PUBLIC/FeatureServer/1/query
   params: {where: 1=1, outFields: 'CLN_ICU,CLN_VENT,hospitalization', returnGeometry: false, f: json}
   type: arcgis
