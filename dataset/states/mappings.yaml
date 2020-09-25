@@ -302,6 +302,12 @@ NC:
   Hospitalizations: CURR_HOSP
   New Cases by Report Date: CONFIRMED
   NC Daily Tests: SPECIMENS
+
+  Cases by Report Date: POSITIVE
+  Molecular (PCR) Positive Cases by Specimen Date: CONFIRMED
+  Antigen Positive Cases by Specimen Date: PROBABLE
+  Antigen Tests: ANTIGEN_TOTAL
+  Molecular (PCR) Tests: SPECIMENS
 ND:
   # csvs
   Cases (Confirmed Only): CONFIRMED

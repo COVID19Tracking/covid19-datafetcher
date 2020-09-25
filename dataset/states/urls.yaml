@@ -384,14 +384,14 @@ NC:
       {onStatisticField: Total, statisticType: sum}, {onStatisticField: Deaths, statisticType: sum}],
     where: 1=1}
   type: arcgis
-- url: https://public.tableau.com/views/NCDHHS_COVID-19_DataDownload/DailyMetrics.csv
+- url: https://public.tableau.com/views/NCDHHS_COVID-19_DataDownload/DailyCasesandDeathsMetrics.csv
   params: {parse_dates: True, thousands: ','}
   type: pandas
-  desc: Summary table (testing, cases)
-- url: https://public.tableau.com/views/NCDHHS_COVID-19_DataDownload/CountyCasesandDeaths.csv'
-  params: {}
+  desc: Cases, Deaths
+- url: https://public.tableau.com/views/NCDHHS_COVID-19_DataDownload/DailyTestingMetrics.csv
+  params: {parse_dates: True, thousands: ','}
   type: pandas
-  desc: Deaths (by county)
+  desc: Testing
 ND:
 - url: https://www.health.nd.gov/diseases-conditions/coronavirus/north-dakota-coronavirus-cases
   params: {}

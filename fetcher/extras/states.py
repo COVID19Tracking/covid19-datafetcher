@@ -731,24 +731,24 @@ def handle_nc(res, mapping):
     # CSV
     df = res[-2]
     df['Date'] = pd.to_datetime(df['Date'])
+    df['Measure Names'] = df['Measure Names'].str.strip()
     df = df.pivot(index='Date', columns='Measure Names')
+
+    # deaths are already cumulative, take the latest
+    tagged[Fields.DEATH.name] = df['Measure Values']["NC Deaths"].iloc[-1]
 
     for k, v in df.sum().iteritems():
         if k[1] in mapping:
             tagged[mapping[k[1]]] = v
 
-    # hospitalizations, we need daily
-    try:
-        hosp_val = df['Measure Values']['Sum of Hospitalizations'].iloc[-1]
-        tagged[Fields.CURR_HOSP.name] = hosp_val
-    except Exception:
-        logging.warning("NC: failed to parse recovered", exc_info=True)
-
-    # deaths
     df = res[-1]
-    df = df[df['Measure Names'] == 'Deaths']
-    death_val = pd.to_numeric(df['Measure Values']).sum()
-    tagged[Fields.DEATH.name] = death_val
+    df['Date'] = pd.to_datetime(df['Date'])
+    df['Measure Names'] = df['Measure Names'].str.strip()
+    df = df.pivot(index='Date', columns='Measure Names')
+    for k, v in df.sum().iteritems():
+        if k[1] in mapping:
+            print(k[1], v)
+            tagged[mapping[k[1]]] = v + tagged.get(mapping[k[1]], 0)
 
     return tagged
 
