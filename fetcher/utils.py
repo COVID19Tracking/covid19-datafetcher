@@ -147,9 +147,9 @@ def request_csv(url, query=None, dialect=None, header=True, encoding=None):
     if not dialect:
         dialect = 'unix'
     if header:
-        reader = csv.DictReader(StringIO(res), dialect='unix')
+        reader = csv.DictReader(StringIO(res, newline=None), dialect='unix')
     else:
-        reader = csv.reader(StringIO(res), dialect='unix')
+        reader = csv.reader(StringIO(res, newline=None), dialect='unix')
     res = list(reader)
     return res
 
