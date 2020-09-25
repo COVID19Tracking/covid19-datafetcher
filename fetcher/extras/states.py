@@ -85,7 +85,7 @@ def handle_ky(res, mapping):
             continue
 
         probable = item.find_all("span", "probable")
-        pattern = "([a-zA-Z ]*): ([0-9,]*)"
+        pattern = "([a-zA-Z ]*): ?([0-9,]*)"
 
         # class = title, number, probable
         title = title.get_text(strip=True)
