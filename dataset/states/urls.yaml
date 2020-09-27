@@ -290,7 +290,7 @@ MI:
   desc: Main page for links (soup)
 MN:
 - url: https://services2.arcgis.com/V12PKGiMAH7dktkU/arcgis/rest/services/MyMapService/FeatureServer/0/query
-  params: {where: 1=1, outFields: 'Date, Time,TotalCases, EvrHospYes + EvrICUYes as hosp, EvrICUYes, RlsdFrmIso, OutcmDied', f: json}
+  params: {where: 1=1, outFields: 'Date, Time,TotalCases, EvrHospYes as hosp, EvrICUYes, RlsdFrmIso, OutcmDied', f: json}
   type: arcgis
 - url: https://www.health.state.mn.us/diseases/coronavirus/situation.html
   params: null
