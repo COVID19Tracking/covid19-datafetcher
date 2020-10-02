@@ -359,6 +359,23 @@ def handle_hi(res, mapping):
             val = gr.group(1)
             tagged[Fields.TOTAL.name] = atoi(val)
 
+    probables = res[2]
+    h2 = probables.find('h3', id='probables')
+    table = h2.find_next('table')
+    probables_index = -1
+    for i, th in enumerate(table.find('thead').find_all('th')):
+        if th.get_text(strip=True).find("Total Probable Cases") >= 0:
+            probables_index = i
+            break
+
+    probables_val = 0
+    if probables_index >= 0:
+        for tr in table.find('tbody').find_all('tr'):
+            td = tr.find_all('td')[probables_index]
+            probables_val += atoi(td.get_text(strip=True))
+
+    tagged[Fields.PROBABLE.name] = probables_val
+
     return tagged
 
 
@@ -747,7 +764,6 @@ def handle_nc(res, mapping):
     df = df.pivot(index='Date', columns='Measure Names')
     for k, v in df.sum().iteritems():
         if k[1] in mapping:
-            print(k[1], v)
             tagged[mapping[k[1]]] = v + tagged.get(mapping[k[1]], 0)
 
     return tagged

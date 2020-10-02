@@ -193,6 +193,11 @@ HI:
 - url: https://hawaiicovid19.com/
   params: null
   type: html:soup
+  desc: Total tested people (soup)
+- url: https://health.hawaii.gov/coronavirusdisease2019/what-you-should-know/current-situation-in-hawaii/
+  params: null
+  type: html:soup
+  desc: Probables (soup)
 IA:
 - url: https://services.arcgis.com/vPD5PVLI6sfkZ5E4/arcgis/rest/services/IACOVID19Cases_Demographics/FeatureServer/0/query
   params: {f: json, outFields: '*', where: 1=1}
