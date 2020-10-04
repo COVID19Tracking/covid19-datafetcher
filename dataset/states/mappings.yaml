@@ -186,6 +186,8 @@ LA:
   Deaths: DEATH
   Commercial Tests: TOTAL
   State Tests: STATE_TESTS
+  on_vent: CURR_VENT
+  hospitalized: CURR_HOSP
 MA:
   Date: DATE
   Probable Total: PROBABLE

@@ -221,23 +221,9 @@ def handle_la(res, mapping):
         tagged[Fields.TOTAL.name] += tests
 
     # hospitalization
-    hosp_stats = res[1]
-    vent_stats = res[2]
-    dateformat = '%m/%d/%Y %H:%M:%S %p'
-    # need to parse dates to take the latest
-    # Timeframe, Value
-    for key, stats in [(Fields.CURR_HOSP.name, hosp_stats),
-                       (Fields.CURR_VENT.name, vent_stats)]:
-        values = []
-        for feature in stats['features']:
-            timeframe = feature.get('attributes', {}).get('Timeframe')
-            value = feature.get('attributes', {}).get('Value')
-            values.append((datetime.strptime(timeframe, dateformat), value))
-
-        # sort by latest
-        values.sort(key=lambda x: x[0])
-        latest_val = values[-1][1]
-        tagged[key] = latest_val
+    for result in res[1:3]:
+        partial = extract_arcgis_attributes(result, mapping, 'LA')
+        tagged.update(partial)
 
     # recoveries from dashboard
     widgets = res[-1].get('widgets', {})
