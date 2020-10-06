@@ -87,6 +87,9 @@ class Fetcher:
                     res = request_soup(query['url'], query['params'], query.get('encoding'))
                 elif query['type'] in ['pandas', 'xls', 'xlsx']:
                     res = request_pandas(query)
+                else:
+                    # the default is to send the URL as is
+                    res = query['url']
                 results.append(res)
             except Exception:
                 logging.error("{}: Failed to fetch {}".format(state, query['url']), exc_info=True)

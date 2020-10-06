@@ -589,6 +589,10 @@ UT:
   params: null
   type: html:soup
   desc: Hospitalization page (soup)
+- url: https://coronavirus-dashboard.utah.gov/Utah_COVID19_data.zip
+  params: null
+  type: zip
+  desc: Zip download
 VA:
 - url: https://data.virginia.gov/api/id/uqs3-x7zh.json
   params: {$query: 'select report_date as date, sum(number_of_cases) as positive, sum(number_of_deaths) as death, sum(number_of_hospitalizations) as hosp group by report_date order by report_date desc limit 1'}

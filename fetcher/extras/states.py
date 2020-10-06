@@ -15,7 +15,7 @@ import re
 import pandas as pd
 
 from fetcher.utils import map_attributes, Fields, csv_sum, extract_arcgis_attributes
-from fetcher.extras.common import MaContextManager
+from fetcher.extras.common import MaContextManager, zipContextManager
 
 
 def atoi(val):
@@ -886,6 +886,42 @@ def handle_ut(res, mapping):
             td = t.find_all('td', limit=2)[1]
             tagged[mapping[t.caption.get_text(strip=True)]] = atoi(td.get_text(strip=True))
 
+    # Downloadable file
+    zipurl = res[-1]
+    specimens_file_prefix = 'Overview_Total Tests by'
+    people_tested_file = 'Overview_Number of People Tested by'
+    test_type = ['PCR/amplification', 'Antigen by DFA/IF']
+    result = ['POSITIVE', 'NEGATIVE']
+    with zipContextManager(zipurl) as zipdir:
+        with os.scandir(zipdir) as it:
+            for entry in it:
+                df = None
+                fields = []
+                if not entry.is_file:
+                    # just in case
+                    continue
+                if entry.name.startswith(specimens_file_prefix):
+                    # specimens
+                    fields = [Fields.SPECIMENS_POS.name, Fields.SPECIMENS_NEG.name,
+                              Fields.ANTIGEN_POS, Fields.ANTIGEN_NEG]
+                    df = pd.read_csv(os.path.join(zipdir, entry.name))
+                elif entry.name.startswith(people_tested_file):
+                    # people tested
+                    fields = ['people_pos', 'people_neg',
+                              Fields.ANTIGEN_POS_PEOPLE, Fields.ANTIGEN_NEG_PEOPLE,
+                              Fields.TOTAL, Fields.ANTIGEN_TOTAL_PEOPLE]
+                    df = pd.read_csv(os.path.join(zipdir, entry.name))
+                if fields:
+                    df = pd.read_csv(os.path.join(zipdir, entry.name))
+                    summed = df.groupby(['Test Type', 'Result']).sum()
+                    i = 0
+                    for tt in test_type:
+                        for rr in result:
+                            tag = fields[i]
+                            tag = tag if isinstance(tag, str) else tag.name
+                            value = summed.loc[tt, rr]['Count']
+                            tagged[tag] = value
+                            i += 1
     return tagged
 
 
