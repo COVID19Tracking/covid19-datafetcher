@@ -921,3 +921,17 @@ def handle_vi(res, mapping):
             tagged[mapping[name]] = atoi(value)
 
     return tagged
+
+
+def handle_wi(res, mapping):
+    tagged = {}
+    for result in res[:-1]:
+        partial = extract_arcgis_attributes(result, mapping, 'WI')
+        tagged.update(partial)
+
+    # testing encounters
+    testing = res[-1]
+    encounters = [k for k, v in mapping.items() if v == Fields.PCR_TEST_ENCOUNTERS.name][0]
+    value = testing[testing['Measure Names'] == encounters]['Totals'].sum()
+    tagged[mapping[encounters]] = value
+    return tagged

@@ -644,6 +644,10 @@ WI:
   params: {where: GEO='State', outFields: 'DATE,POSITIVE,NEGATIVE,POSITIVE + NEGATIVE as TOTAL,DEATHS,HOSP_YES,IC_YES', orderByFields: DATE desc, resultRecordCount: 1, f: json}
   type: arcgis
   desc: Main metrics (pos, neg, death, hosp, icu)
+- url: https://bi.wisconsin.gov/t/DHS/views/PercentPositivebyTestPersonandaComparisonandTestCapacity/TestCapacityDashboard.csv
+  params: {parse_dates: ['Day of displaydateonly'], thousands: ','}
+  type: pandas
+  desc: Testing encounters
 WY:
 - url: https://services7.arcgis.com/BAwfvDcDhIO9Rm6L/arcgis/rest/services/COVID_Case_Totals_VIEW/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"Deaths"},
