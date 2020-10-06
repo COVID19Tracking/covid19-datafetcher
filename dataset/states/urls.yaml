@@ -402,7 +402,7 @@ ND:
   params: {}
   type: html:soup
   desc: State page (soup)
-- url: https://static.dwcdn.net/data/yuhr0.csv
+- url: https://static.dwcdn.net/data/NVwou.csv
   params: null
   type: csv
   desc: By county testing (for negatives)

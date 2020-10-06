@@ -770,7 +770,7 @@ def handle_nd(res, mapping):
         if name in mapping:
             tagged[mapping[name]] = atoi(value)
 
-    # by county testing snapshot
+    # by county testing snapshot: for negatives
     county_testing = res[1]
     columns = [k for k, v in mapping.items() if v == Fields.NEGATIVE.name]
     specimens = csv_sum(county_testing, columns=columns)
