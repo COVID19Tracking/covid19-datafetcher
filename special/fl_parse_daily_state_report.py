@@ -8,9 +8,8 @@ import os
 import sys
 
 
-URL = 'http://ww11.doh.state.fl.us/comm/_partners/covid19_report_archive/state_reports_latest.pdf'
-SER_URL = 'http://ww11.doh.state.fl.us/comm/_partners/covid19_report_archive/serology_latest.pdf'
-
+URL = 'http://ww11.doh.state.fl.us/comm/_partners/covid19_report_archive/cases-monitoring-and-pui-information/state-report/state_reports_latest.pdf'
+SER_URL = 'http://ww11.doh.state.fl.us/comm/_partners/covid19_report_archive/total-antibody-results/serology-reports/serology_latest.pdf'
 
 def atoi(val):
     '''Raises exception on failure to parse'''
