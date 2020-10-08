@@ -220,6 +220,7 @@ ME:
   Date: TIMESTAMP
   TotalCases: POSITIVE
   ConfirmedCases: CONFIRMED
+  ProbableCases: PROBABLE
   PresumptiveCases: PROBABLE
   Deaths: DEATH
   Hospitalizations: HOSP
