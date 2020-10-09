@@ -190,10 +190,10 @@ HI:
 - url: 'https://docs.google.com/spreadsheets/d/1sd-L317Je9ZhiQh3_uH9jTkl3ckc_o3sgrVauShcwCk/export?format=csv&sheet=Data'
   params: null
   type: csv
-- url: https://hawaiicovid19.com/
+- url: https://public.tableau.com/views/EpiCurveApr4/CSVDownload.csv?:showVizHome=no
   params: null
-  type: html:soup
-  desc: Total tested people (soup)
+  type: pandas
+  desc: PCR Testing encounters and positives
 - url: https://health.hawaii.gov/coronavirusdisease2019/what-you-should-know/current-situation-in-hawaii/
   params: null
   type: html:soup

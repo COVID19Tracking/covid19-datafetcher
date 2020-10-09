@@ -335,15 +335,11 @@ def handle_hi(res, mapping):
         if k in mapping:
             tagged[mapping[k]] = v
 
-    people = res[1]
-    h2 = people.find('h2', string=re.compile("COVID-19 Cases"))
-    h2par = h2.find_parent()
-    for p in h2par.find_all("p"):
-        text = p.get_text(strip=True)
-        gr = re.search('[aA] total of ([0-9,]+) individuals', text)
-        if gr:
-            val = gr.group(1)
-            tagged[Fields.TOTAL.name] = atoi(val)
+    testing = res[1]
+    for k, v in testing.sum().items():
+        # need to ignore date
+        if k != 'Date' and k in mapping:
+            tagged[mapping[k]] = v
 
     probables = res[2]
     h2 = probables.find('h3', id='probables')

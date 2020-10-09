@@ -132,7 +132,8 @@ HI:
   Hospitalized_Tot: HOSP
   Deaths_Tot: DEATH
   Total Probable Cases: PROBABLE
-
+  New Positive Lab: SPECIMENS_POS
+  Total Lab Encounters: PCR_TEST_ENCOUNTERS
 IA:
   CurrHospitalized: CURR_HOSP
   Deceased: DEATH
