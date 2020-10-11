@@ -768,15 +768,17 @@ def handle_nd(res, mapping):
 
     # by county testing snapshot: for negatives
     county_testing = res[1]
-    columns = [k for k, v in mapping.items() if v == Fields.NEGATIVE.name]
-    specimens = csv_sum(county_testing, columns=columns)
-    tagged[Fields.NEGATIVE.name] = specimens[columns[0]]
+    columns = [k for k, v in mapping.items() if v in [
+        Fields.CONFIRMED.name, Fields.NEGATIVE.name
+        ]]
+    values = csv_sum(county_testing, columns=columns)
+    tagged.update(map_attributes(values, mapping))
 
     # PCR encounters and other metrics
     pcr = res[2]
     columns = [k for k, v in mapping.items() if v in [
         Fields.TOTAL.name, Fields.SPECIMENS_NEG.name, Fields.PCR_TEST_ENCOUNTERS.name,
-        Fields.CONFIRMED.name, Fields.SPECIMENS.name, Fields.RECOVERED.name
+        Fields.SPECIMENS.name, Fields.RECOVERED.name
         ]]
     values = csv_sum(pcr, columns)
     partial = map_attributes(values, mapping)

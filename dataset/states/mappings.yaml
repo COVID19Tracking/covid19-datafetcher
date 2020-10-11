@@ -316,7 +316,7 @@ NC:
   Molecular (PCR) Tests: SPECIMENS
 ND:
   # csvs
-  Cases (Confirmed Only): CONFIRMED
+  #Cases (Confirmed Only): CONFIRMED
   Negative PCR tests (susceptible test encounters): SPECIMENS_NEG
   Total PCR tests (people): TOTAL
   Total PCR tests (susceptible test encounters): PCR_TEST_ENCOUNTERS
@@ -324,6 +324,7 @@ ND:
   Total Recovered: RECOVERED
 
   Total Negative: NEGATIVE
+  Total Positive: CONFIRMED
 
   Currently Hospitalized: CURR_HOSP
   Total Hospitalized: HOSP
