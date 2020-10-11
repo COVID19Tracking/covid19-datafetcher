@@ -507,9 +507,8 @@ OR:
   type: html:soup
   desc: Main page
 PA:
-- url: https://services2.arcgis.com/xtuWQvb2YQnp0z3F/ArcGIS/rest/services/Pennsylvania_Public_COVID19_Dashboard_Data/FeatureServer/0/query
-  params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "Cases"},
-{"statisticType": "sum", "onStatisticField": "Confirmed"},{"statisticType": "sum", "onStatisticField": "Probable"},{"statisticType": "sum", "onStatisticField": "Negative"},{"statisticType": "sum", "onStatisticField": "Deaths"}], f: json}
+- url: https://services1.arcgis.com/Nifc7wlHaBPig3Q3/arcgis/rest/services/COVID_PA_Counties/FeatureServer/0/query
+  params: {where: County='Pennsylvania', outFields: '*', resultRecordCount: 1, f: json}
   type: arcgis
   desc: Positive/probable/negatives, death
 - url: https://services2.arcgis.com/xtuWQvb2YQnp0z3F/arcgis/rest/services/covid_hosp_current/FeatureServer/0/query
