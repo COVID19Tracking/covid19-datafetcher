@@ -511,8 +511,8 @@ PA:
   params: {where: County='Pennsylvania', outFields: '*', resultRecordCount: 1, f: json}
   type: arcgis
   desc: Positive/probable/negatives, death
-- url: https://services2.arcgis.com/xtuWQvb2YQnp0z3F/arcgis/rest/services/covid_hosp_current/FeatureServer/0/query
-  params: {where: county='Pennsylvania', outStatistics: [{"statisticType":"sum","onStatisticField":"covid_vents", outStatisticFieldName: "curr_vent"}, {"statisticType":"sum","onStatisticField":"covid_patients", outStatisticFieldName: "curr_hosp"}], f: json}
+- url: https://services1.arcgis.com/Nifc7wlHaBPig3Q3/arcgis/rest/services/covid_hosp_single_day/FeatureServer/0/query
+  params: {where: county='Pennsylvania', outFields: 'covid_vents, covid_patients', f: json}
   type: arcgis
   desc: Hosp, vent
 - url: https://www.health.pa.gov/topics/disease/coronavirus/Pages/Coronavirus.aspx

@@ -408,8 +408,8 @@ OR:
   Current patients on ventilators: CURR_VENT
 PA:
   SUM_COVID19onVents: CURR_VENT
-  curr_vent: CURR_VENT
-  curr_hosp: CURR_HOSP
+  covid_vents: CURR_VENT
+  covid_patients: CURR_HOSP
 
   Cases: POSITIVE
   Confirmed: CONFIRMED
