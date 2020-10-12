@@ -510,9 +510,19 @@ def handle_or(res, mapping):
 
 def handle_me(res, mapping):
     tagged = {}
-    for result in res[:-1]:
-        partial = extract_arcgis_attributes(result, mapping, 'MI')
-        tagged.update(partial)
+    # this is an unreliable source now
+    # for result in res[:-1]:
+    #     partial = extract_arcgis_attributes(result, mapping, 'MI')
+    #     tagged.update(partial)
+
+    # google spreadsheet
+    csv = res[1]
+    columns = [k for k, v in mapping.items() if v in [
+        Fields.POSITIVE.name, Fields.DEATH.name, Fields.RECOVERED.name,
+        Fields.HOSP.name
+    ]]
+    values = csv_sum(csv, columns)
+    tagged.update(map_attributes(values, mapping))
 
     soup = res[-1]
     th = soup.find("th", string=re.compile("Reported COVID-19 Tests"))
