@@ -525,7 +525,7 @@ def handle_me(res, mapping):
     tagged.update(map_attributes(values, mapping))
 
     soup = res[-1]
-    th = soup.find("th", string=re.compile("Reported COVID-19 Tests"))
+    th = soup.find("th", string=re.compile("Results from Labs Reporting Electronically"))
     table = th.find_parent('table')
     for tr in table.find_all('tr'):
         tds = tr.find_all('td')
