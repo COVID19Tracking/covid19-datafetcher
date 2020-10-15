@@ -648,28 +648,14 @@ def handle_mn(res, mapping):
     h2 = soup.find_all(['h2', 'h3'])
     for x in h2:
         title = x.get_text(strip=True).strip()
-        if title == 'Testing':
-            # do the testing thing
-            p = x.find_next_sibling('p').get_text(strip=True)
-            li = x.find_next_sibling('ul').get_text(strip=True)
-            pcr = p.split(":")[-1].strip()
-            pcr_people = li.split(":")[-1].strip()
-            mapped[Fields.PCR_TEST_ENCOUNTERS.name] = atoi(pcr)
-            mapped[Fields.TOTAL.name] = atoi(pcr_people)
-        elif title == 'Deaths':
-            li = x.find_next_sibling('ul').find_all('li')[-1]
-            for x in li.stripped_strings:
-                if x.strip().isnumeric():
-                    mapped[Fields.DEATH_PROBABLE.name] = atoi(x.strip())
-        # elif title == 'Hospitalization':
-        #     li = x.find_next_sibling('ul').find('li')
-        #     items = list(li.stripped_strings)
-        #     for i in range(0, len(items), 2):
-        #         if items[i].find(":") >= 0:
-        #             if 'ICU' in items[i]:
-        #                 mapped[Fields.CURR_ICU.name] = atoi(items[i+1])
-        #             if 'Hospitalized' in items[i]:
-        #                 mapped[Fields.CURR_HOSP.name] = atoi(items[i+1])
+        if title in ['Testing', 'Deaths', 'Hospitalizations']:
+            tables = x.find_next_siblings('table', limit=2)
+            for t in tables:
+                for tr in t.find_all('tr'):
+                    title = tr.find('th').get_text(strip=True).strip()
+                    value = tr.find('td').get_text(strip=True).strip()
+                    if title in mapping:
+                        mapped[mapping[title]] = atoi(value)
 
     return mapped
 
