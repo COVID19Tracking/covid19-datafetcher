@@ -176,8 +176,8 @@ FL:
   type: csv
   desc: Hospitalizations (current)
 GA:
-- url: https://services7.arcgis.com/Za9Nk6CPIPbvR1t7/arcgis/rest/services/Georgia_Cases_Current_Prod_May5/FeatureServer/0/query
-  params: {where: NAME = 'All Georgia', outFields: 'DATESTAMP,C_CUM,D_CUM,H_CUM', f: json}
+- url: https://services7.arcgis.com/Za9Nk6CPIPbvR1t7/ArcGIS/rest/services/Cumulative_Cases_(Current_Date)/FeatureServer/0/query
+  params: {where: NAME = 'All Georgia', outFields: 'DATESTAMP,C_CUM,D_CUM,H_CUM', f: json, returnGeometry: false}
   type: arcgis
   desc: Cases, death, cum. hospitalization
 - url: https://services7.arcgis.com/Za9Nk6CPIPbvR1t7/arcgis/rest/services/Join_Features_to_GHA_Regions_Admin/FeatureServer/0/query

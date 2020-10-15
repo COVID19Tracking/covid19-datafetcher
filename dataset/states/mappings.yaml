@@ -113,9 +113,9 @@ FL:
   SER_Total: ANTIBODY_TOTAL
 GA:
   DATESTAMP: TIMESTAMP
-  C_Cum: POSITIVE
-  D_Cum: DEATH
-  H_Cum: HOSP
+  C_CUM: POSITIVE
+  D_CUM: DEATH
+  H_CUM: HOSP
   SUM_COVID_Patients: CURR_HOSP
   SUM_Patients_Under_Investigation: CURR_HOSP_PUI
 GU:
