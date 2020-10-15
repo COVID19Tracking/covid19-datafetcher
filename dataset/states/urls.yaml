@@ -24,8 +24,8 @@ AK:
   params: {where: Test_Result = 'Positive', outStatistics: [{"statisticType":"count","onStatisticField":"FID","outStatisticFieldName":"tests_positive"}], f: json}
   type: arcgis
   desc: PCR Testing (positive)
-- url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Table_6_Geographic_Distribution_of_Hospital_Survey_Results/FeatureServer/0/query
-  params: {where: Facility_Type='GACH and CAH', outStatistics: [], f: json}
+# - url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Table_6_Geographic_Distribution_of_Hospital_Survey_Results/FeatureServer/0/query
+#   params: {where: Facility_Type='GACH and CAH', outStatistics: [], f: json}
 - url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/COVID_Hospital_Dataset_(prod)/FeatureServer/0/query
   params: {where: facility_filter=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "Pos_COVID_PUI_Pending"}], f: json}
   type: arcgis
