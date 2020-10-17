@@ -253,6 +253,10 @@ def handle_in(res, mapping):
         for k, v in last_row.iteritems():
             if k in mapping:
                 mapped[mapping[k]] = v
+
+    partial = map_attributes(res[1]['result']['records'][0], mapping, 'IN')
+    mapped.update(partial)
+
     return mapped
 
 

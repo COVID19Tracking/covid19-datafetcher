@@ -165,13 +165,16 @@ IN:
   m2b_hospitalized_icu_occupied_covid: CURR_ICU
   m2b_hospitalized_vent_occupied_covid: CURR_VENT
 
+  max_date: DATE
   covid_tests: TOTAL
   covid_cases: POSITIVE
   covid_deaths: DEATH_CONFIRMED
+  # Don't have probables in the dataset, only topjson
   covid_cases_prob: PROBABLE
   covid_deaths_prob: DEATH_PROBABLE
   covid_tests_adm: SPECIMENS
-  report_date: DATE
+  pos_tests: SPECIMENS_POS
+  death: DEATH
 KY:
   Confirmed: POSITIVE
   Deceased: DEATH
