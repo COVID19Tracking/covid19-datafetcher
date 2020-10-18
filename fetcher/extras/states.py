@@ -290,7 +290,7 @@ def handle_il(res, mapping):
     mapped.update(hosp_mapped)
 
     # fill in the date
-    last_update = res[1]['LastUpdateDate']
+    last_update = res[1]['lastUpdatedDate']
     y = last_update['year']
     m = last_update['month']
     d = last_update['day']

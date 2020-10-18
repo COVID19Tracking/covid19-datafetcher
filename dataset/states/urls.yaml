@@ -209,7 +209,7 @@ IL:
   params: null
   type: json
   desc: Cases/tests
-- url: http://www.dph.illinois.gov/sitefiles/COVIDHospitalRegions.json
+- url: https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetHospitalizationResults
   params: {nocache: 1}
   type: json
   desc: Hospitalization
