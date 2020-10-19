@@ -1,0 +1,13 @@
+# @package _group_
+name: positivity
+index: [STATE, TIMESTAMP]
+#extras_module: fetcher.extras.backfill
+extras_module: null
+
+fields: [STATE, FETCH_TIMESTAMP, TIMESTAMP, DATE,
+POSITIVE, TESTS, PPR,
+ROLLING_POSITIVE, ROLLING_TESTS, ROLLING_PPR
+ROLLING_DAYS
+]
+
+

@@ -1,0 +1,8 @@
+AK:
+# The rolling values are rolling 7-day avg (.rolling(7).mean())
+- url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Testing_Positivity/FeatureServer/0/query
+  params: {where: 1=1, outFields: '*', f: json}
+  type: arcgis
+  desc: Positivity
+  constants:
+    ROLLING_DAYS: 7

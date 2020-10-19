@@ -1,0 +1,8 @@
+AK:
+  Date_Collected: TIMESTAMP
+  daily_positive: POSITIVE
+  daily_tests: TESTS
+  pct_positive: PPR
+  rolling_positive: ROLLING_POSITIVE
+  rolling_tests: ROLLING_TESTS
+  rolling_positivity: ROLLING_PPR
