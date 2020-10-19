@@ -382,13 +382,23 @@ def handle_dc(res, mapping):
 def handle_de(res, mapping):
     df = res[0]
     df['Date'] = pd.to_datetime(df[['Year', 'Month', 'Day']])
-    df = df[(df['Unit'].isin(['people', 'tests'])) & (df['Statistic'].isin(mapping.keys()))]
+    people = df[(df['Unit'].isin(['people'])) & (df['Statistic'].isin(mapping.keys()))]
     max_date = df['Date'].max()
-    df = df[df['Date'] == max_date]
-    df = df.set_index('Statistic')
+    people = people[people['Date'] == max_date]
+    people = people.set_index('Statistic')
 
-    mapped = map_attributes(df['Value'], mapping, 'DE')
+    mapped = map_attributes(people['Value'], mapping, 'DE')
     mapped.update({Fields.DATE.name: max_date})
+
+    # Here's the funny thing, while we need to *max* date for most metrics, we need
+    # a 2-day lagged testing metric
+    tests = df[(df['Unit'].isin(['tests'])) & (df['Statistic'].isin(mapping.keys()))]
+    tests_date = tests['Date'].sort_values().unique()[-3]
+    tests = tests[tests['Date'] == tests_date]
+    tests = tests.set_index('Statistic')
+    partial = map_attributes(tests['Value'], mapping, 'DE')
+    mapped.update(partial)
+
     return mapped
 
 
