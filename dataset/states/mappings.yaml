@@ -87,12 +87,16 @@ DE:
   Confirmed Deaths: DEATH_CONFIRMED
   Deaths: DEATH
   Probable Deaths: DEATH_PROBABLE
-  Tested Negative: NEGATIVE
+
+  Total Persons Tested: TOTAL
+  Total Tests: SPECIMENS
+  Positive Tests: SPECIMENS_POS
+  Persons Tested Negative: NEGATIVE
+
   Cumulative Number of Confirmed Positive Cases: CONFIRMED
   Cumulative Number of Positive Cases: POSITIVE
   Cumulative Number of Probable Positive Cases: PROBABLE
   Recoveries: RECOVERED
-  Total Persons Tested: TOTAL
 FL:
   death: DEATH
   hosp: HOSP
