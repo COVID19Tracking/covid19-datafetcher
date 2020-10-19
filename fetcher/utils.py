@@ -116,10 +116,10 @@ def request(url, query=None, encoding=None):
 
 
 def request_pandas(query):
-    url = query['url']
-    params = {} if not query.get('params') else query.get('params')
+    url = query.url
+    params = {} if not query.params else query.params
     # Use params as **kwargs for pandas call
-    if query['type'] in ['xlsx', 'xls']:
+    if query.type in ['xlsx', 'xls']:
         df = pd.read_excel(url, **params)
     else:
         # assume csv

@@ -4,9 +4,9 @@ import typing
 import hydra
 import pandas as pd
 
-from fetcher.utils import request, request_and_parse, extract_attributes, Fields, request_csv, \
-    request_soup, request_pandas, extract_arcgis_attributes
-from fetcher.sources import Sources
+from fetcher.utils import Fields
+from fetcher.source_utils import fetch_source, process_source_responses
+from fetcher.sources import build_sources
 
 
 # TODO:
@@ -22,12 +22,11 @@ class Fetcher:
     def __init__(self, cfg):
         '''Initialize source information'''
         self.dataset = cfg.dataset  # store dataset config
-        self.sources = Sources(
+        self.sources = build_sources(
             cfg.dataset.sources_file, cfg.dataset.mapping_file, cfg.dataset.extras_module)
-        self.extras = self.sources.extras
 
     def has_state(self, state):
-        return state in self.sources.keys()
+        return state in self.sources
 
     def fetch_all(self, states):
         results = {}
@@ -65,50 +64,13 @@ class Fetcher:
         '''
         logging.debug("Fetching: %s", state)
         res = None
-
-        queries = self.sources.queries_for(state)
-        if not queries:
+        source = self.sources.get(state)
+        if not source or not source.queries:
             return res, {}
 
-        results = []
-        mapping = self.sources.mapping_for(state)
-        for query in queries:
-            # TODO: make a better mapping here
-            try:
-                if query['type'] in ['arcgis', 'json', 'ckan', 'soda']:
-                    res = request_and_parse(query['url'], query['params'])
-                elif query['type'] in ['csv']:
-                    res = request_csv(
-                        query['url'], query['params'],
-                        header=query.get('header', True), encoding=query.get('encoding'))
-                elif query['type'] in ['html']:
-                    res = request(query['url'], query['params'], query.get('encoding'))
-                elif query['type'] in ['html:soup']:
-                    res = request_soup(query['url'], query['params'], query.get('encoding'))
-                elif query['type'] in ['pandas', 'xls', 'xlsx']:
-                    res = request_pandas(query)
-                else:
-                    # the default is to send the URL as is
-                    res = query['url']
-                results.append(res)
-            except Exception:
-                logging.error("{}: Failed to fetch {}".format(state, query['url']), exc_info=True)
-                raise
-
-        processed_results = []
-        if state in self.extras:
-            processed_results = self.extras[state](results, mapping)
-        else:
-            for i, result in enumerate(results):
-                if queries[i].get('type') == 'arcgis':
-                    partial = extract_arcgis_attributes(result, mapping, state)
-                else:
-                    # This is a guess; getting an unknown top level object
-                    partial = extract_attributes(
-                        result, queries[i].get('data_path', []), mapping, state)
-                processed_results.append(partial)
-
-        data = self._aggregate_state_results(state, processed_results, mapping)
+        results = fetch_source(source)
+        processed_results = process_source_responses(source, results)
+        data = self._aggregate_state_results(state, processed_results, source.mapping)
         return results, data
 
     def _aggregate_state_results(self, state, results, mapping):
