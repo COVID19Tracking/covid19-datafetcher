@@ -123,12 +123,14 @@ GA:
   SUM_COVID_Patients: CURR_HOSP
   SUM_Patients_Under_Investigation: CURR_HOSP_PUI
 GU:
-  Case Count: POSITIVE
-  Death: DEATH
-  Not in isolation: RECOVERED
-  Confirmed cases: CONFIRMED
-  Probable cases: PROBABLE
-  Negative: NEGATIVE
+  date: TIMESTAMP
+  total_cases: POSITIVE
+  cases_not_in_iso: RECOVERED
+  #total_deaths: DEATH
+  hospitalizations: CURR_HOSP
+  confirmed: CONFIRMED
+  probables: PROBABLE
+  SUM_Death: DEATH
 HI:
   Date: DATE
   Cases_Tot: CONFIRMED
