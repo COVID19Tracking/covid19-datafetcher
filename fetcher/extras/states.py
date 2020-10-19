@@ -398,7 +398,7 @@ def handle_dc(res, mapping):
 def handle_de(res, mapping):
     df = res[0]
     df['Date'] = pd.to_datetime(df[['Year', 'Month', 'Day']])
-    df = df[((df['Unit'] == 'people') | (df['Unit'] == 'tests')) & (df['Statistic'].isin(mapping.keys()))]
+    df = df[(df['Unit'].isin(['people', 'tests'])) & (df['Statistic'].isin(mapping.keys()))]
     max_date = df['Date'].max()
     df = df[df['Date'] == max_date]
     df = df.set_index('Statistic')
