@@ -635,8 +635,8 @@ def handle_mn(res, mapping):
     soup = res[-1]
     h2 = soup.find_all(['h2', 'h3'])
     for x in h2:
-        title = x.get_text(strip=True).strip()
-        if title in ['Testing', 'Deaths', 'Hospitalizations']:
+        title = x.get_text(strip=True).strip().strip(":")
+        if title in ['Testing', 'Deaths', 'Hospitalizations', 'Daily Update']:
             tables = x.find_next_siblings('table', limit=2)
             for t in tables:
                 for tr in t.find_all('tr'):

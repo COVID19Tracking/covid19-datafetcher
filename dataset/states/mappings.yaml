@@ -271,6 +271,9 @@ MN:
   EvrICUYes: ICU
   RlsdFrmIso: RECOVERED
   OutcmDied: DEATH
+  #Total positive cases (cumulative): POSITIVE
+  Total confirmed cases (PCR positive) (cumulative): CONFIRMED
+  Total probable cases (Antigen positive) (cumulative): PROBABLE
   Total approximate number of people tested (cumulative): TOTAL
   Total approximate number of completed antigen tests (cumulative): ANTIGEN_TOTAL
   Total approximate number of completed PCR tests (cumulative): PCR_TEST_ENCOUNTERS
