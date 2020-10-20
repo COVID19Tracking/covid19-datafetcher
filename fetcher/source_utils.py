@@ -31,6 +31,7 @@ def fetch_query(state, query):
 
     return res
 
+
 def fetch_source(source):
     results = []
 
