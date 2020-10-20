@@ -802,7 +802,11 @@ def handle_ma(res, mapping):
 
         hospfile = csv.DictReader(open(os.path.join(zipdir, "RaceEthnicity.csv"), 'r'))
         hosprows = list(hospfile)
-        last_row = hosprows[-1]
+        # last non empty row
+        for rn in range(1, len(hosprows)):
+            if hosprows[-rn]['Date']:
+                last_row = hosprows[-rn]
+                break
         hosprows = [x for x in hosprows if x['Date'] == last_row['Date']]
         summed = csv_sum(hosprows, keys)
         for k in keys:
