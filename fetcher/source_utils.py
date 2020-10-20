@@ -47,12 +47,22 @@ def process_source_responses(source, results):
         processed_results = source.extras(results, source.mapping)
     else:
         for i, result in enumerate(results):
-            if source.queries[i].type == 'arcgis':
+            query = source.queries[i]
+            if query.type == 'arcgis':
                 partial = extract_arcgis_attributes(result, source.mapping, source.name)
             else:
                 # This is a guess; getting an unknown top level object
                 partial = extract_attributes(
-                    result, source.queries[i].data_path, source.mapping, source.name)
+                    result, query.data_path, source.mapping, source.name)
+
+            # and now for the super special casing
+            if query.constants:
+                if isinstance(partial, dict):
+                    partial.update(query.constants)
+                elif isinstance(partial, list):
+                    for x in partial:
+                        x.update(query.constants)
+
             processed_results.append(partial)
 
     return processed_results
