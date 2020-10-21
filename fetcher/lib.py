@@ -69,54 +69,8 @@ class Fetcher:
             return res, {}
 
         results = fetch_source(source)
-        processed_results = process_source_responses(source, results)
-        data = self._aggregate_state_results(state, processed_results, source.mapping)
+        data = process_source_responses(source, results)
         return results, data
-
-    def _aggregate_state_results(self, state, results, mapping):
-        '''
-        This function handles all the results (post-processing) from
-        all queries to a single state.
-        Result is always a flat list of dictionary records
-        '''
-        # Hiding any special casing for backdating or anything of the sorts
-
-        # special casing here for extras handling
-        if isinstance(results, typing.Dict):
-            results = [results]
-
-        data = []
-        for x in results:
-            if isinstance(x, typing.Dict):
-                self._tag_and_timestamp(state, x, mapping.get('__strptime'))
-                data.append(x)
-            elif isinstance(x, typing.List):
-                # do the same for each element
-                for record in x:
-                    self._tag_and_timestamp(state, record, mapping.get('__strptime'))
-                    data.append(record)
-            else:
-                # should not happen
-                logging.warning("Unexpected type in results: %r", x)
-
-        return data
-
-    def _tag_and_timestamp(self, state, data, dateformat=None):
-        data[Fields.FETCH_TIMESTAMP.name] = datetime.now().timestamp()
-        data[STATE] = state
-
-        # we should also make sure that the timestamp field is datetime format
-        # or parse the Date field
-        if TS in data and data[TS]:
-            # Check whether it's s or ms and convert to datetime
-            ts = data[TS]
-            data[TS] = datetime.fromtimestamp(ts/1000 if ts > MS_FILTER else ts)
-        elif 'DATE' in data and data['DATE'] and dateformat:
-            d = data['DATE']
-            data[TS] = datetime.strptime(d, dateformat)
-        else:
-            # TODO: Should I add now time?
-            pass
 
 
 def _fix_index_and_columns(index, columns):
@@ -160,7 +114,8 @@ def build_dataframe(results, states_to_index, dataset_cfg, output_date_format, f
 
     df = pd.DataFrame(items, columns=columns)
     df = df.set_index(index)
-    df = df.groupby(level=df.index.names).last()
+    df = df.groupby(level=df.index.names, dropna=False).last()
+    print(df)
 
     # Notice: Reindexing and then sorting means that we're always sorting
     # the index, and not using the order that comes from configuration

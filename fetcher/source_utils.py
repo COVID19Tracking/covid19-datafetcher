@@ -1,8 +1,15 @@
+from datetime import datetime
 import logging
+import typing
 
-from fetcher.utils import extract_attributes, extract_arcgis_attributes
-from fetcher.utils import request, request_and_parse, request_csv, \
-    request_soup, request_pandas
+from fetcher.utils import Fields, request, request_and_parse, request_csv, request_soup, \
+    request_pandas, extract_attributes, extract_arcgis_attributes
+
+
+MS_FILTER = datetime(2020, 1, 1, 0, 0).timestamp() * 1000
+# Indices
+TS = 'TIMESTAMP'
+STATE = Fields.STATE.name
 
 
 def fetch_query(state, query):
@@ -54,19 +61,74 @@ def process_source_responses(source, results):
                 # This is a guess; getting an unknown top level object
                 partial = extract_attributes(
                     result, query.data_path, source.mapping, source.name)
-
-            # and now for the super special casing
-            if query.constants:
-                if isinstance(partial, dict):
-                    partial.update(query.constants)
-                elif isinstance(partial, list):
-                    for x in partial:
-                        x.update(query.constants)
-
             processed_results.append(partial)
 
-    return processed_results
+    data = _aggregate_state_results(source, processed_results)
+    return data
 
 
-def parse_query_response(state, queries, results, mapping,):
-    pass
+def _update_constants(data, updates):
+    for k, v in updates.items():
+        if isinstance(v, str) and v.startswith("$"):
+            copy_key = v[1:]
+            target_key = k
+            data[target_key] = data.get(copy_key)
+        else:
+            data[k] = v
+
+
+def _aggregate_state_results(source, results):
+    '''
+    This function handles all the results (post-processing) from
+    all queries to a single state.
+    Result is always a flat list of dictionary records
+    '''
+    # Hiding any special casing for backdating or anything of the sorts
+
+    # special casing here for extras handling
+    if isinstance(results, typing.Dict):
+        # does it ever happen??
+        results = [results]
+
+    mapping = source.mapping
+    state = source.name
+    data = []
+
+    # all the stuff we need to append to the results
+    timestamp = datetime.now()
+    for i, x in enumerate(results):
+        constants = source.queries[i].constants
+        if constants is None:
+            constants = {}
+        if isinstance(x, typing.Dict):
+            _tag_and_timestamp(state, x, timestamp, mapping.get('__strptime'))
+            _update_constants(x, constants)
+            data.append(x)
+        elif isinstance(x, typing.List):
+            for record in x:
+                _tag_and_timestamp(state, record, timestamp, mapping.get('__strptime'))
+                _update_constants(record, constants)
+                data.append(record)
+        else:
+            # should not happen
+            logging.warning("Unexpected type in results: %r", x)
+
+    return data
+
+
+def _tag_and_timestamp(state, data, timestamp, dateformat=None):
+    data[Fields.FETCH_TIMESTAMP.name] = timestamp
+    data[STATE] = state
+
+    # we should also make sure that the timestamp field is datetime format
+    # or parse the Date field
+    if TS in data and data[TS]:
+        # Check whether it's s or ms and convert to datetime
+        ts = data[TS]
+        data[TS] = datetime.fromtimestamp(ts/1000 if ts > MS_FILTER else ts)
+    elif 'DATE' in data and data['DATE'] and dateformat:
+        d = data['DATE']
+        data[TS] = datetime.strptime(d, dateformat)
+    else:
+        # TODO: Should I add now time?
+        pass
