@@ -1,8 +1,7 @@
 # @package _group_
 name: positivity
 index: [STATE, TIMESTAMP]
-#extras_module: fetcher.extras.backfill
-extras_module: null
+extras_module: fetcher.extras.positivity
 
 fields: [STATE, FETCH_TIMESTAMP, TIMESTAMP, DATE,
 POSITIVE, TESTS, PPR,

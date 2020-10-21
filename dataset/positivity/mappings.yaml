@@ -6,3 +6,6 @@ AK:
   rolling_positive: ROLLING_POSITIVE
   rolling_tests: ROLLING_TESTS
   rolling_positivity: ROLLING_PPR
+AR:
+  SUM_pcr_pos_test: POSITIVE
+  SUM_pcr_test: TESTS

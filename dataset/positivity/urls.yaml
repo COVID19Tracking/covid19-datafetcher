@@ -6,3 +6,11 @@ AK:
   desc: Positivity
   constants:
     ROLLING_DAYS: 7
+AR:
+- url: https://services.arcgis.com/PwY9ZuZRDiI5nXUB/ArcGIS/rest/services/UPDATED_ADH_COVID19_COUNTY_METRICS/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "pcr_pos_test"}, {"statisticType": "sum", "onStatisticField": "pcr_test"}, {"statisticType": "sum", "onStatisticField": "antigen_test"}, {"statisticType": "sum", "onStatisticField": "antigen_pos_test"}], f: json}
+  type: arcgis
+  desc: Data for pct-pos calc
+  constants:
+    # more special casing
+    TIMESTAMP: $FETCH_TIMESTAMP
