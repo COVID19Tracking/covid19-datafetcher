@@ -14,3 +14,20 @@ AR:
   constants:
     # more special casing
     TIMESTAMP: $FETCH_TIMESTAMP
+CO:
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
+  params: {where: Desc_ like 'Daily%PCR%' and Metric = '3-Day Average Percent Positivity', outFields: '*, Value as Value3', orderByFields: 'Attr_Date asc', f: json}
+  type: arcgis
+  desc: Percent Positivity (3d)
+  constants:
+    ROLLING_DAYS: 3
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
+  params: {where: Desc_ like 'Daily%PCR%' and Metric = '7-Day Average Percent Positivity', outFields: '*, Value as Value7', orderByFields: Attr_Date, f: json}
+  type: arcgis
+  desc: Percent Positivity (7d)
+  constants:
+    ROLLING_DAYS2: 7
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
+  params: {where: Desc_ like 'Daily%PCR%' and Metric = 'Percent Positivity', outFields: '*', orderByFields: Attr_Date, f: json}
+  type: arcgis
+  desc: Percent Positivity

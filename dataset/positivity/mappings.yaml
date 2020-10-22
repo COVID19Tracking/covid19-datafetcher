@@ -9,3 +9,10 @@ AK:
 AR:
   SUM_pcr_pos_test: POSITIVE
   SUM_pcr_test: TESTS
+CO:
+  Attr_Date: DATE
+  Value3: ROLLING_PPR
+  Value7: ROLLING_PPR2
+  Value: PPR
+  # 03/02/2020
+  __strptime: "%m/%d/%Y"
