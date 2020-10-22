@@ -115,7 +115,6 @@ def build_dataframe(results, states_to_index, dataset_cfg, output_date_format, f
     df = pd.DataFrame(items, columns=columns)
     df = df.set_index(index)
     df = df.groupby(level=df.index.names, dropna=False).last()
-    print(df)
 
     # Notice: Reindexing and then sorting means that we're always sorting
     # the index, and not using the order that comes from configuration
