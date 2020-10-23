@@ -83,7 +83,6 @@ def _aggregate_state_results(source, results):
     all queries to a single state.
     Result is always a flat list of dictionary records
     '''
-    # Hiding any special casing for backdating or anything of the sorts
 
     # special casing here for extras handling
     if isinstance(results, typing.Dict):
@@ -97,7 +96,7 @@ def _aggregate_state_results(source, results):
     # all the stuff we need to append to the results
     timestamp = datetime.now()
     for i, x in enumerate(results):
-        constants = source.queries[i].constants
+        constants = source.queries[i].constants if not source.extras else {}
         if constants is None:
             constants = {}
         if isinstance(x, typing.Dict):
