@@ -800,6 +800,12 @@ def handle_ma(res, mapping):
         keys = [Fields.HOSP.name, Fields.DEATH.name, Fields.POSITIVE.name]
         keys = [inverse_mapping[k] for k in keys]
 
+        # positive molecular
+        testing = csv.DictReader(open(os.path.join(zipdir,  'TestingByDate.csv'), 'r'))
+        summed = csv_sum(testing, ['All Positive Molecular Tests'])
+        partial = map_attributes(summed, mapping, 'MA')
+        tagged.update(partial)
+
         hospfile = csv.DictReader(open(os.path.join(zipdir, "RaceEthnicity.csv"), 'r'))
         hosprows = list(hospfile)
         # last non empty row
