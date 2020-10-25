@@ -302,10 +302,21 @@ def handle_il(res, mapping):
 
 def handle_ga(res, mapping):
     tagged = {}
-    for result in res:
+    for result in res[:-1]:
         partial = extract_arcgis_attributes(result, mapping, debug_state='GA')
         tagged.update(partial)
     tagged[Fields.CURR_HOSP.name] += tagged.pop('CURR_HOSP_PUI')
+
+    # last item is zip
+    files = ["total_testing.csv", "summary_totals.csv"]
+    with zipContextManager(res[-1]) as zipdir:
+        for filename in files:
+            summary = csv.DictReader(open(os.path.join(zipdir, filename), 'r'))
+            summary = list(summary)
+            summary = summary[-1]
+            partial = map_attributes(summary, mapping, 'GA')
+            tagged.update(partial)
+
     return tagged
 
 

@@ -184,6 +184,10 @@ GA:
   params: {where: 1=1, orderByFields: Entry_Date desc, groupByFieldsForStatistics: Entry_Date, outStatistics: [{"statisticType": "sum", "onStatisticField": "COVID_Patients"},{"statisticType":"sum","onStatisticField":"Patients_Under_Investigation"}], resultRecordCount: 1, f: json}
   type: arcgis
   desc: Curr. hosp
+- url: https://ga-covid19.ondemand.sas.com/docs/ga_covid_data.zip
+  params: null
+  type: zip
+  desc: Zip download
 GU:
 - url: https://services2.arcgis.com/FPJlJZYRsD8OhCWA/ArcGIS/rest/services/COVID19_Dashboard_Counts_by_Date/FeatureServer/0/query
   params: {where: '1=1', outFields: '*', orderByFields: date desc, resultRecordCount: 1, f: json}
