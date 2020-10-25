@@ -425,12 +425,11 @@ PA:
   SUM_COVID19onVents: CURR_VENT
   covid_vents: CURR_VENT
   covid_patients: CURR_HOSP
-
   Cases: POSITIVE
   Confirmed: CONFIRMED
   Probable: PROBABLE
   Negative: NEGATIVE
-  Death: DEATH
+  Deaths: DEATH
 PR:
   T_Casos_Unicos: POSITIVE
   T_Fatalidades: DEATH_CONFIRMED
