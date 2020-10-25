@@ -126,7 +126,7 @@ GA:
   Total Anitbody tests (serology): ANTIBODY_TOTAL
   Total PCR tests that are positive: SPECIMENS_POS
   Total Antibody tests that are positive: ANTIBODY_POS
-  icu: CURR_ICU
+  icu: ICU
 
 GU:
   date: TIMESTAMP
