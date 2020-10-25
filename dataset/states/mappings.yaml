@@ -127,6 +127,7 @@ GA:
   Total PCR tests that are positive: SPECIMENS_POS
   Total Antibody tests that are positive: ANTIBODY_POS
   icu: CURR_ICU
+
 GU:
   date: TIMESTAMP
   total_cases: POSITIVE
@@ -289,30 +290,11 @@ MN:
   Total cases hospitalized (cumulative): HOSP
   Total cases hospitalized in ICU (cumulative): ICU
 MO:
-  SUM_DEATHS: DEATH
-  SUM_CASES: POSITIVE
-  # overrides
-  positive: POSITIVE
-  MAX_EditDate: TIMESTAMP # no longer used, TODO: find alternative
-  total_people: TOTAL
-  #SUM_Total: ANTIBODY_TOTAL
-  #SUM_Positive: ANTIBODY_POS
-  #SUM_Negative: ANTIBODY_NEG
-  ser_positive: ANTIBODY_POS_PEOPLE
-  ser_tested: ANTIBODY_TOTAL_PEOPLE
-  antigen_tested: ANTIGEN_TOTAL_PEOPLE
-  antigen_positive_people: ANTIGEN_POS_PEOPLE
-  PCR_Total: SPECIMENS
-  PCR_Positive: SPECIMENS_POS
-  PCR_Negative: SPECIMENS_NEG
-  ser_total_tests: ANTIBODY_TOTAL
-  ser_positive_tests: ANTIBODY_POS
-  ser_negative_tests: ANTIBODY_NEG
-  hosp: CURR_HOSP
-  # From the excel:
-  Ventilated: CURR_VENT
-  #'Total.* Hospitalized': CURR_HOSP
-  Total Confirmed and Suspected Hospitalized: CURR_HOSP
+  Total Antigen Tests: ANTIGEN_TOTAL
+  Total Cases: POSITIVE
+  Total PCR Tests: SPECIMENS
+  Total Serology Tests: ANTIBODY_TOTAL
+  Total Deaths: DEATH
 MP:
   MAX_reportdt: TIMESTAMP
   SUM_confirmedcases: CONFIRMED

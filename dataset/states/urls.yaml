@@ -330,52 +330,14 @@ MN:
   type: html:soup
   desc: State page (soup)
 MO:
-- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/county_MOHSIS_map/FeatureServer/0/query
-  params: {f: json, outStatistics: [{onStatisticField: CASES, statisticType: sum},
-      {onStatisticField: DEATHS, statisticType: sum}], where: 1=1}
-  type: arcgis
-  desc: Cases, death (cases not used from here)
-- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/ArcGIS/rest/services/Dashboard_Daily_Numbers_Automated/FeatureServer/0/query
-  params: {where: Description='Lab Confirmed Cases in Missouri', outFields: 'Description, value as positive', f: json}
-  type: arcgis
-  desc: Total cases (2pm number)
-- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/Daily_COVID19_Testing_Report_for_OPI/FeatureServer/0/query
-  params: {where: 1=1, outStatistics: [{"statisticType":"count","onStatisticField":"FID", "outStatisticFieldName": "total"}], f: json}
-  type: arcgis
-  desc: Testing
-- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/ArcGIS/rest/services/Dashboard_Daily_Numbers_Automated/FeatureServer/0/query
-  params: {where: Description='SER Positive', outFields: 'Description, value as ser_positive', f: json}
-  type: arcgis
-  desc: Serology positive (people)
-- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/ArcGIS/rest/services/Dashboard_Daily_Numbers_Automated/FeatureServer/0/query
-  params: {where: Description='SER Tested', outFields: 'Description, value as ser_tested', f: json}
-  type: arcgis
-  desc: Serology total (people)
-- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/SER_Test_by_Date_Automated/FeatureServer/0/query
-  params: {where: test_date2>timestamp '2020-04-05 06:59:59', outStatistics: [{"statisticType": "sum", "onStatisticField": "Negative", "outStatisticFieldName": "ser_negative_tests"}, {"statisticType": "sum", "onStatisticField": "Positive", "outStatisticFieldName": "ser_positive_tests"}, {"statisticType": "sum", "onStatisticField": "Total", "outStatisticFieldName": "ser_total_tests"}], f: json}
-  type: arcgis
-  desc: Serology specimens (total, pos, neg)
-- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/ArcGIS/rest/services/Dashboard_Daily_Numbers_Automated/FeatureServer/0/query
-  params: {where: "Description='Antigen Tested Individuals'", outFields: 'Description, value as antigen_tested', f: json}
-  type: arcgis
-  desc: Antigen total (people)
-- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/ArcGIS/rest/services/Dashboard_Daily_Numbers_Automated/FeatureServer/0/query
-  params: {where: "Description='Individuals with Positive Antigen Results'", outFields: 'Description, value as antigen_positive_people', f: json}
-  type: arcgis
-  desc: Antigen positive (people)
-- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/PCR_Test_by_Date_Automated/FeatureServer/0/query
-  params: {where: test_date2>timestamp '2020-01-16 06:59:59', outStatistics: [{"statisticType": "sum", "onStatisticField": "Negative", "outStatisticFieldName": "PCR_Negative"},{"statisticType": "sum", "onStatisticField": "Positive", "outStatisticFieldName": "PCR_Positive"},{"statisticType": "sum", "onStatisticField": "Total", "outStatisticFieldName": "PCR_Total"}], f: json}
-  type: arcgis
-  desc: PCR totals, pos, neg (tests)
-- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/ArcGIS/rest/services/Dashboard_Daily_Numbers_Automated/FeatureServer/0/query
-  params: {where: Description='PCR Tested', outFields: 'value as total_people', f: json}
-  type: arcgis
-  desc: Total PCR (people)
-- url: https://services6.arcgis.com/Bd4MACzvEukoZ9mR/arcgis/rest/services/hospital_by_date_production/FeatureServer/0/query
-  params: {where: 1=1, outFields: '*, covid_total as hosp', orderByFields: entry_date desc, resultRecordCount: 1, f: json}
-  type: arcgis
-  desc: Current Hosp. query
-# -------------------------------
+- url: https://results.mo.gov/t/COVID19/views/COVID-19DataforDownload/MetricsbyTestDate.csv
+  params: {thousands: ','}
+  type: pandas
+  desc: Testing and cases CSV
+- url: https://results.mo.gov/t/COVID19/views/COVID-19DataforDownload/MetricsbyCounty.csv
+  params: {thousands: ','}
+  type: pandas
+  desc: Metrics by county CSV
 MP:
 - url: https://services8.arcgis.com/zkkZCub5I6ydvXQj/ArcGIS/rest/services/Coronavirus_PublicDashboardView/FeatureServer/3/query
   params: {where: totaltestedcnmi is not NULL, outFields: 'reportdt as totals_date, totaltestedcnmi', orderByFields: reportdt desc, resultRecordCount: 1, f: json}

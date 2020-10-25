@@ -669,6 +669,19 @@ def handle_mn(res, mapping):
     return mapped
 
 
+def handle_mo(res, mapping):
+    testing = res[0]
+    foo = testing.groupby('Measure Names', as_index=True).sum()
+    mapped = map_attributes(foo['Measure Values'], mapping, 'MO')
+
+    county = res[1]
+    county = county[county['County'] == 'All'].set_index('Measure Names')
+    partial = map_attributes(county['Measure Values'], mapping, 'MO')
+    mapped.update(partial)
+
+    return mapped
+
+
 def handle_ms(res, mapping):
     soup = res[0]
     mapped = {}
