@@ -914,8 +914,11 @@ def handle_ut(res, mapping):
 
     # Downloadable file
     zipurl = res[-1]
+    # Sometimes there are files for multiple dates, we need the most recent
     specimens_file_prefix = 'Overview_Total Tests by'
+    specimens_file_latest = specimens_file_prefix
     people_tested_file = 'Overview_Number of People Tested by'
+    people_tested_latest = people_tested_file
     test_type = ['PCR/amplification', 'Antigen by DFA/IF']
     result = ['POSITIVE', 'NEGATIVE']
     with zipContextManager(zipurl) as zipdir:
@@ -927,15 +930,21 @@ def handle_ut(res, mapping):
                     # just in case
                     continue
                 if entry.name.startswith(specimens_file_prefix):
+                    if entry.name < specimens_file_latest:
+                        continue
                     # specimens
                     fields = [Fields.SPECIMENS_POS.name, Fields.SPECIMENS_NEG.name,
                               Fields.ANTIGEN_POS, Fields.ANTIGEN_NEG]
+                    specimens_file_latest = entry.name
                     df = pd.read_csv(os.path.join(zipdir, entry.name))
                 elif entry.name.startswith(people_tested_file):
+                    if entry.name < people_tested_latest:
+                        continue
                     # people tested
                     fields = ['people_pos', 'people_neg',
                               Fields.ANTIGEN_POS_PEOPLE, Fields.ANTIGEN_NEG_PEOPLE,
                               Fields.TOTAL, Fields.ANTIGEN_TOTAL_PEOPLE]
+                    people_tested_latest = entry.name
                     df = pd.read_csv(os.path.join(zipdir, entry.name))
                 if fields:
                     df = pd.read_csv(os.path.join(zipdir, entry.name))
