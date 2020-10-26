@@ -1,0 +1,37 @@
+output: ri
+data_root: ${hydra:runtime.cwd}/dataset/${dataset.name}
+output_date_format: "%Y%m%d"
+
+# system
+hydra:
+  run:
+    dir: 'outputs'
+  output_subdir: null
+  job_logging:
+    formatters:
+      simple:
+        format: '%(levelname).1s %(asctime)s %(name)s:%(lineno)d %(message)s'
+        datefmt: '%Y%m%d_%H%M%S'
+
+
+backfill:
+  lookback: '7d'
+  shift: 1
+  skip: 1
+  fill: 2
+  DOW: 'Sunday'
+
+creds:
+  token: ${env:TOKEN}
+
+api:
+  staging: True
+  url: http://localhost:5000/api/v1/batches/edit
+  username: ctp-bot
+
+dataset:
+  name: backfill
+  # Dataset defaults to override
+  sources_file: ${data_root}/urls.yaml
+  mapping_file: ${data_root}/mappings.yaml
+  index: STATE
