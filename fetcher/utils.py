@@ -22,25 +22,28 @@ from bs4 import BeautifulSoup
 # TODO: It's not used as an effective enum
 # fields
 class Fields(Enum):
-    STATE = 100
+    STATE = "state"
 
     # time
-    FETCH_TIMESTAMP = 0
-    TIMESTAMP = 1
-    DATE = 2
+    FETCH_TIMESTAMP = "fetchTimestamp"
+    TIMESTAMP = "timestamp"
+    DATE = "date"
 
     # Tests
-    POSITIVE = 10
-    NEGATIVE = 11
-    CONFIRMED = 12
-    TOTAL = 13  # total tests
-    INCONCLUSIVE = 14  # tests
-    PROBABLE = 15
-    PENDING = 16
+    POSITIVE = "positive"
+    NEGATIVE = "negative"
+    CONFIRMED = "positiveCasesViral"
+    TOTAL = "totalTestsPeopleViral"
+    INCONCLUSIVE = "inconclusive"
+    PROBABLE = "probableCases"
+    PENDING = "pending"
 
-    ANTIBODY_POS = 17
-    ANTIBODY_NEG = 18
-    ANTIBODY_TOTAL = 19
+    ANTIBODY_POS = "positiveTestsAntibody"
+    ANTIBODY_NEG = "negativeTestsAntibody"
+    ANTIBODY_TOTAL = "totalTestsAntibody"
+    ANTIBODY_POS_PEOPLE = "positiveTestsPeopleAntibody"
+    ANTIBODY_NEG_PEOPLE = "negativeTestsPeopleAntibody"
+    ANTIBODY_TOTAL_PEOPLE = "totalTestsPeopleAntibody"
 
     ANTIBODY_BY_COLLECTION_DATE = 110
     ANTIBODY_POS_BY_COLLECTION_DATE = 111
@@ -48,14 +51,10 @@ class Fields(Enum):
     ANTIBODY_PEOPLE_BY_COLLECTION_DATE = 113
     ANTIBODY_POS_PEOPLE_BY_COLLECTION_DATE = 114
 
-    ANTIBODY_POS_PEOPLE = 117
-    ANTIBODY_NEG_PEOPLE = 118
-    ANTIBODY_TOTAL_PEOPLE = 119
-
-    SPECIMENS = 20
-    SPECIMENS_POS = 21
-    SPECIMENS_NEG = 22
-    PCR_TEST_ENCOUNTERS = 23
+    SPECIMENS = "totalTestsViral"
+    SPECIMENS_POS = "positiveTestsViral"
+    SPECIMENS_NEG = "negativeTestsViral"
+    PCR_TEST_ENCOUNTERS = "totalTestEncountersViral"
 
     # try a better naming
     PCR_BY_COLLECTION_DATE = 24
@@ -64,41 +63,47 @@ class Fields(Enum):
     PCR_PEOPLE_BY_COLLECTION_DATE = 27
 
     # Death
-    DEATH = 30  # total
-    DEATH_CONFIRMED = 31
-    DEATH_PROBABLE = 32  # probable cases, or any secondary number published
+    DEATH = "death"
+    DEATH_CONFIRMED = "deathConfirmed"
+    DEATH_PROBABLE = "deathProbable"
     DEATH_BY_DATE_OF_DEATH = 33
     DEATH_CONFIRMED_BY_DATE_OF_DEATH = 34
     DEATH_PROBABLE_BY_DATE_OF_DEATH = 35
 
     # Holpitalization
-    HOSP = 40  # ever hospital
-    ICU = 41  # ever ICU
-    VENT = 42
-    CURR_HOSP = 43
-    CURR_ICU = 44
-    CURR_VENT = 45
+    HOSP = "hospitalizedCumulative"
+    ICU = "inIcuCumulative"
+    VENT = "onVentilatorCumulative"
+    CURR_HOSP = "hospitalizedCurrently"
+    CURR_ICU = "inIcuCurrently"
+    CURR_VENT = "onVentilatorCurrently"
 
     # Recovered
-    RECOVERED = 50
+    RECOVERED = "recovered"
 
-    ANTIGEN_TOTAL = 60
-    ANTIGEN_POS = 61
-    ANTIGEN_NEG = 62
-    ANTIGEN_TOTAL_PEOPLE = 63
-    ANTIGEN_POS_PEOPLE = 64
-    ANTIGEN_NEG_PEOPLE = 65
+    ANTIGEN_TOTAL = "totalTestsAntigen"
+    ANTIGEN_POS = "positiveTestsAntigen"
+    ANTIGEN_NEG = "negativeTestsAntigen"
+    ANTIGEN_TOTAL_PEOPLE = "totalTestsPeopleAntigen"
+    ANTIGEN_POS_PEOPLE = "positiveTestsPeopleAntigen"
+    ANTIGEN_NEG_PEOPLE = "negativeTestsPeopleAntigen"
 
     # specimens
     ANTIGEN_BY_COLLECTION_DATE = 64
     ANTIGEN_POS_BY_COLLECTION_DATE = 65
     ANTIGEN_NEG_BY_COLLECTION_DATE = 66
-    # people
     ANTIGEN_PEOPLE_BY_COLLECTION_DATE = 67
     ANTIGEN_POS_PEOPLE_BY_COLLECTION_DATE = 68
 
+    @property
+    def value(self):
+        supervalue = super().value
+        if not isinstance(supervalue, str):
+            return self.name
+        return supervalue
+
     def __repr__(self):
-        return self.__str__()
+        return self.value
 
 
 def request(url, query=None, encoding=None):
