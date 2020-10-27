@@ -169,7 +169,7 @@ FL:
   type: json
   desc: PCR specimens
 - url: https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/arcgis/rest/services/Florida_COVID19_Cases/FeatureServer/0/query
-  params: {where: COUNTY_1='State', outFields: 'T_positive, T_negative, T_total, T_Total_Res, TPending, TInconc, C_HospYes_Res, C_HospYes_NonRes, C_NonResDeaths, C_FLResDeaths, C_NonResDeaths + C_FLResDeaths as death,  C_HospYes_Res + C_HospYes_NonRes as hosp, C_AllResTypes, C_NegRes', f: json}
+  params: {where: COUNTY_1='State', outFields: 'T_positive, T_negative, T_total, T_Total_Res, TPending, TInconc, C_HospYes_Res, C_HospYes_NonRes, C_NonResDeaths, C_FLResDeaths, C_NonResDeaths + C_FLResDeaths as death,  C_HospYes_Res + C_HospYes_NonRes as hosp, C_AllResTypes, T_NegRes', f: json}
   type: arcgis
 - url: https://bi.ahca.myflorida.com/t/ABICC/views/Public/COVIDHospitalizationsCounty.csv
   params: null
