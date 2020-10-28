@@ -102,9 +102,10 @@ FL:
   hosp: HOSP
   TInconc: INCONCLUSIVE
   TPending: PENDING
-  T_negative: NEGATIVE
+  T_NegRes: NEGATIVE
   T_positive: POSITIVE
-  T_total: TOTAL
+  total_pcr_people: TOTAL
+  pcr_encounters: PCR_TEST_ENCOUNTERS
   PCR_Negative: SPECIMENS_NEG
   PCR_Positive: SPECIMENS_POS
   PCR_Total: SPECIMENS

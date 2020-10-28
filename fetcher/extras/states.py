@@ -51,12 +51,14 @@ def handle_fl(res, mapping):
     '''Need to add the non-FL residents to the totals:
     they separate it for death and hosp"
     '''
-    mapped = extract_arcgis_attributes(res[1], mapping, 'FL')
-    pcr = map_attributes(res[0], mapping, 'FL')
-    mapped.update(pcr)
+    mapped = map_attributes(res[0], mapping, 'FL')
+
+    for result in res[1:-1]:
+        partial = extract_arcgis_attributes(result, mapping, 'FL')
+        mapped.update(partial)
 
     # Current hosp csv
-    hosp = res[2]
+    hosp = res[-1]
     for r in hosp:
         if r.get('County') == 'All':
             mapped[Fields.CURR_HOSP.name] = atoi(r.get('COVID Hospitalizations'))
