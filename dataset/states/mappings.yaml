@@ -103,7 +103,7 @@ FL:
   TInconc: INCONCLUSIVE
   TPending: PENDING
   T_NegRes: NEGATIVE
-  T_positive: POSITIVE
+  positives: POSITIVE
   total_pcr_people: TOTAL
   pcr_encounters: PCR_TEST_ENCOUNTERS
   PCR_Negative: SPECIMENS_NEG
