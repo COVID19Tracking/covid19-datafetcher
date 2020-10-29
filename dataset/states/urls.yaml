@@ -632,9 +632,13 @@ VT:
   type: arcgis
   desc: Cases/death/recovered
 - url: https://services1.arcgis.com/BkFxaEFNwHqX3tAw/ArcGIS/rest/services/VIEW_EMR_Hospitalization_PUBLIC/FeatureServer/0/query
-  params: {where: 1=1, outFields: '*', orderByFields: date desc, resultRecordCount: 1, f: json}
+  params: {where: 1=1, outFields: '*, current_hospitalizations+hosp_pui as curr_hosp', orderByFields: date desc, resultRecordCount: 1, f: json}
   type: arcgis
   desc: Hospitalizations
+- url: https://services1.arcgis.com/BkFxaEFNwHqX3tAw/ArcGIS/rest/services/V_EPI_LabSpecimensDaily_PUBLIC/FeatureServer/0/query
+  params: {where: 1=1, outFields: 'Date_Received_by_PH,Cumulative_tests', orderByFields: Date_Received_by_PH desc, resultRecordCount: 1, f: json}
+  type: arcgis
+  desc: Total PCR Tests
 WA:
 - url: https://services8.arcgis.com/rGGrs6HCnw87OFOT/ArcGIS/rest/services/CountyCases/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{"statisticType": "max", "onStatisticField": "CV_Updated"},

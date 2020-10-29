@@ -128,18 +128,6 @@ def handle_ky(res, mapping):
     return tagged
 
 
-def handle_vt(res, mapping):
-    tagged = {}
-    pui = 'HOSP_PUI'
-    for result in res:
-        partial = extract_arcgis_attributes(result, mapping, 'VT')
-        tagged.update(partial)
-
-    tagged[Fields.CURR_HOSP.name] += tagged[pui]
-    tagged.pop(pui)
-    return tagged
-
-
 def handle_pa(res, mapping):
     '''Need to sum ECMO and Vent number for a total count
     '''
