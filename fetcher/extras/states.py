@@ -806,7 +806,11 @@ def handle_ma(res, mapping):
             with open(os.path.join(zipdir, filename), 'r') as csvfile:
                 reader = csv.DictReader(csvfile, dialect='unix')
                 rows = list(reader)
-                last_row = rows[-1]
+                for rn in range(1, len(rows)):
+                    # find last non-empty
+                    if rows[-rn]['Date']:
+                        last_row = rows[-rn]
+                        break
                 partial = map_attributes(last_row, mapping, 'MA')
                 tagged.update(partial)
 
