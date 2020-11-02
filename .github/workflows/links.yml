@@ -12,6 +12,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        ref: gh-pages
 
     - name: Setup Conda env
       run: |
@@ -22,11 +24,7 @@ jobs:
         eval "$(conda shell.bash hook)"
         conda activate c19-data
         python tools/links.py && mv outputs/index.html docs/links.html
-    
-    - uses: actions/checkout@v2
-      with:
-        ref: gh-pages
-    
+
     - name: Compare and commit generated links page
       run: |
           if [ "$(git status --porcelain)" != "" ]; then
