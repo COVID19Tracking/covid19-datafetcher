@@ -22,12 +22,13 @@ jobs:
 
     - name: Setup Conda env
       run: |
+        cd main
         conda env create -f environment.yml
 
     - name: Generate links page
       run: |
-        eval "$(conda shell.bash hook)"
         cd main
+        eval "$(conda shell.bash hook)"
         conda activate c19-data
         python tools/links.py
 
