@@ -565,30 +565,31 @@ def handle_mi(res, mapping):
     # Hospitalization soup
     hospitalization_page = res[-2]
     tables = hospitalization_page.find_all('table')
-    vent = None
-    icu = None
-    hosp = None
+    vent = 0
+    icu = 0
+    hosp = 0
     for t in tables:
         caption = t.find('caption').get_text(strip=True)
         if caption.startswith('COVID-19 Metrics'):
             for row in t.find_all('tr'):
                 th = row.find('th')
-                if th and th.get_text(strip=True).startswith('Hospitalized and Ventilated'):
+                if th and th.get_text(strip=True).startswith('Total Hospitalized Adult'):
                     # take last td
                     td = row.find_all('td')[-1]
-                    vent = td.get_text(strip=True)
-        elif caption.startswith('Patient Census'):
-            # This is where we take icu and hosp data
-            last_row = t.find_all('tr')[-1]
-            tds = last_row.find_all('td')
-            hosp = tds[1].get_text(strip=True)
-            icu = tds[2].get_text(strip=True)
+                    hosp += atoi(td.get_text(strip=True))
+                elif th and th.get_text(strip=True).startswith('Hospitalized Peds'):
+                    td = row.find_all('td')[-1]
+                    hosp += atoi(td.get_text(strip=True))
+                elif th and th.get_text(strip=True).startswith('Adult ICU Confirmed/Suspected'):
+                    td = row.find_all('td')[-1]
+                    icu += atoi(td.get_text(strip=True))
+                elif th and th.get_text(strip=True).startswith('Hospitalized and Ventilated'):
+                    td = row.find_all('td')[-1]
+                    vent += atoi(td.get_text(strip=True))
 
-    if vent is not None:
-        tagged[Fields.CURR_VENT.name] = atoi(vent)
-    if icu is not None and hosp is not None:
-        tagged[Fields.CURR_HOSP.name] = atoi(hosp)
-        tagged[Fields.CURR_ICU.name] = atoi(icu)
+    tagged[Fields.CURR_VENT.name] = atoi(vent)
+    tagged[Fields.CURR_HOSP.name] = atoi(hosp)
+    tagged[Fields.CURR_ICU.name] = atoi(icu)
 
     # TODO: Can use the reverse mapping
     cases = 'Cases'
