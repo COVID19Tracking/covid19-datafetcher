@@ -79,7 +79,8 @@ def handle_ky(res, mapping):
         # quick fail
         return tagged
 
-    datadiv = h3.find_next_sibling("div", "row")
+    datadiv = h3.find_next_siblings("div", "row")
+    datadiv = datadiv[1]
     for item in datadiv.find_all("div", "info-card"):
         title = item.find("span", "title")
         value = item.find("span", "number")
