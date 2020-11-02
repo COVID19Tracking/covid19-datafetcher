@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>COVID19: US State Data</title>
+
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 80%;
+      }
+
+      table td, table th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      table tr:nth-child(even){background-color: #f2f2f2;}
+      table tr:hover {background-color: #ddd;}
+
+      table th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: darkslategray;
+        color: white;
+      }
+    </style>
+
+  </head>
+  <body>
+    <h1>Data </h1>
+    <p><a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRdaMJLlt8mnqz3CPFazU_2STWkKCgoxdGe-F6kFevURqU6eTg4tTul8Zj7n6AmSWUDW7Q5RVKfkIYt/pubhtml?gid=900391523&single=true">Google Spreadsheet with the data (humane readable timestamps)</a>
+      <br/>
+      Google has an option to download CSV for published spreadsheets.
+    </p>
+
+    <h1>State Data Sources</h1>
+    <table id="data_sources">
+      <tr>
+        <th>State</th>
+        <th>Query Links</th>
+      </tr>
+      
+      <tr id="AK">
+      <td><a name="AK"/><b>AK</b></td>
+      <td>
+        
+        <a href="https://services1.arcgis.com/WzFsmainVTuD5KML/ArcGIS/rest/services/Geographic_Distribution_of_Confirmed_Cases/FeatureServer/0/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27All_Cases%27%2C+%27outStatisticFieldName%27%3A+%27cases%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Recovered%27%2C+%27outStatisticFieldName%27%3A+%27recoveries%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Deaths%27%2C+%27outStatisticFieldName%27%3A+%27deaths%27%7D%5D">
+            Positives, recovered, death
+        </a><br/>
+        
+        <a href="https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Tests_Dataset/FeatureServer/0/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27count%27%2C+%27onStatisticField%27%3A+%27FID%27%2C+%27outStatisticFieldName%27%3A+%27tests_total%27%7D%5D">
+            PCR Testing (total)
+        </a><br/>
+        
+        <a href="https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Tests_Dataset/FeatureServer/0/query?where=Test_Result+%3D+%27Negative%27&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27count%27%2C+%27onStatisticField%27%3A+%27FID%27%2C+%27outStatisticFieldName%27%3A+%27tests_negative%27%7D%5D">
+            PCR Testing (negative)
+        </a><br/>
+        
+        <a href="https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Tests_Dataset/FeatureServer/0/query?where=Test_Result+%3D+%27Positive%27&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27count%27%2C+%27onStatisticField%27%3A+%27FID%27%2C+%27outStatisticFieldName%27%3A+%27tests_positive%27%7D%5D">
+            PCR Testing (positive)
+        </a><br/>
+        
+        <a href="https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/COVID_Hospital_Dataset_(prod)/FeatureServer/0/query?where=facility_filter%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Pos_COVID_PUI_Pending%27%7D%5D">
+            Hospitalizations
+        </a><br/>
+        
+        <a href="https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/pos_susp_vent/FeatureServer/0/query?where=facility_filter%3D1&amp;outFields=%2A">
+            Vent
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="AL">
+      <td><a name="AL"/><b>AL</b></td>
+      <td>
+        
+        <a href="https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/COV19_Public_Dashboard_ReadOnly/FeatureServer/0/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27LabTestCount%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27CONFIRMED%27%2C+%27outStatisticFieldName%27%3A+%27positives%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27DIED%27%7D%5D">
+            OLD Tests/positive/death
+        </a><br/>
+        
+        <a href="https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/ArcGIS/rest/services/Labtest_Summary_by_County_PUBLIC/FeatureServer/1/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27LabTestCount%27%7D%5D">
+            Total tests
+        </a><br/>
+        
+        <a href="https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/ArcGIS/rest/services/C19_dashboard_homepage_PUBLIC/FeatureServer/2/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Confirmed%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Probable%27%7D%5D">
+            Cases (confirmed, probable)
+        </a><br/>
+        
+        <a href="https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/C19_dashboard_homepage_PUBLIC/FeatureServer/1/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27ProbDied%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27ConfDied%27%7D%5D">
+            Death (confirmed, probable)
+        </a><br/>
+        
+        <a href="https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/c19v2_hcw_ltcf_PUBLIC/FeatureServer/1/query?where=1%3D1&amp;outFields=CLN_ICU%2CCLN_VENT%2Chospitalization&amp;returnGeometry=False">
+            Hosp/ICU/Vent
+        </a><br/>
+        
+        <a href="https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/HospitalizedPatientTemporal_READ_ONLY/FeatureServer/1/query?where=1%3D1&amp;orderbyfields=DateTxt+desc&amp;outFields=%2A&amp;resultRecordCount=1">
+            Curr. hosp
+        </a><br/>
+        
+        <a href="https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/AL_COVID_labtest_antibody_diagnostic_PUBLIC/FeatureServer/1/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27AntibodyTest%27%2C+%27outStatisticFieldName%27%3A+%27antibody_total%27%7D%5D">
+            Antibody total
+        </a><br/>
+        
+        <a href="https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/AL_COVID_labtest_antibody_diagnostic_PUBLIC/FeatureServer/2/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27DiagnosticTest%27%2C+%27outStatisticFieldName%27%3A+%27pcr_specimens%27%7D%5D">
+            PCR tests
+        </a><br/>
+        
+        <a href="https://alpublichealth.maps.arcgis.com/sharing/rest/content/items/6d2771faa9da4a2786a509d82c8cf0f7/data">
+            Recoveries (embedded in dashboard)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="AR">
+      <td><a name="AR"/><b>AR</b></td>
+      <td>
+        
+        <a href="https://services.arcgis.com/PwY9ZuZRDiI5nXUB/arcgis/rest/services/UPDATED_ADH_COVID19_COUNTY_METRICS/FeatureServer/0/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27confirmed_death%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27probable_death%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27confirmed_pos%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27probable_pos%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27positive%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27deaths%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Recoveries%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27negative%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27pcr_pos_test%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27pcr_neg_test%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27pcr_test%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27antigen_pos_test%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27antigen_neg_test%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27antigen_test%27%7D%5D">
+            Pos (confirmed/probable), death (confirmed/probable)
+        </a><br/>
+        
+        <a href="https://services.arcgis.com/PwY9ZuZRDiI5nXUB/arcgis/rest/services/UPDATED_ADH_COVID19_HEALTH_REGION_METRICS/FeatureServer/0/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27PositiveAdmits%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27SuspectedAdmits%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27ICUAdmit%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27OnVents%27%7D%5D">
+            Hospitalizations
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="AZ">
+      <td><a name="AZ"/><b>AZ</b></td>
+      <td>
+        
+        <a href="https://services6.arcgis.com/l7uujk4hHifqabRB/ArcGIS/rest/services/COVID19_County_Level_View_Layer/FeatureServer/0/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Number_Confirmed%27%7D%5D">
+            Cases
+        </a><br/>
+        
+        <a href="https://services6.arcgis.com/l7uujk4hHifqabRB/ArcGIS/rest/services/ADHS_Count/FeatureServer/0/query?where=1%3D1&amp;outFields=Deaths">
+            Deaths
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="CA">
+      <td><a name="CA"/><b>CA</b></td>
+      <td>
+        
+        <a href="https://data.ca.gov/api/3/action/datastore_search_sql?sql=select+date%2C+sum%28totalcountdeaths%29+as+death%2C+sum%28totalcountconfirmed%29+as+confirmed+from+%22926fd08f-cc91-4828-af38-bd45de97f8c3%22+group+by+date+order+by+date+desc+limit+1">
+            Cases, death
+        </a><br/>
+        
+        <a href="https://data.ca.gov/api/3/action/datastore_search?resource_id=b6648a0d-ff0a-4111-b80b-febda2ac9e09&amp;limit=1&amp;sort=date+desc">
+            Testing total
+        </a><br/>
+        
+        <a href="https://data.ca.gov/api/3/action/datastore_search_sql?sql=SELECT+todays_date%2C+sum%28icu_covid_confirmed_patients%29+%2B+sum%28icu_suspected_covid_patients%29+as+icu_covid_patients%2C+sum%28hospitalized_covid_patients%29+as+hospitalized_covid_patients+from+%2242d33765-20fd-44b8-a978-b083b7542225%22+where+todays_date+is+not+null+GROUP+BY+todays_date+ORDER+BY+todays_date+desc+limit+1">
+            Hospitalizations, ICU
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="CO">
+      <td><a name="CO"/><b>CO</b></td>
+      <td>
+        
+        <a href="https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/Colorado_COVID19_Positive_Cases/FeatureServer/0/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27max%27%2C+%27onStatisticField%27%3A+%27State_Pos_Cases%27%7D%2C+%7B%27statisticType%27%3A+%27max%27%2C+%27onStatisticField%27%3A+%27State_Deaths%27%7D%2C+%7B%27statisticType%27%3A+%27max%27%2C+%27onStatisticField%27%3A+%27State_Number_Hospitalizations%27%7D%2C+%7B%27statisticType%27%3A+%27max%27%2C+%27onStatisticField%27%3A+%27State_Number_Tested%27%7D%2C+%7B%27statisticType%27%3A+%27max%27%2C+%27onStatisticField%27%3A+%27Date_Data_Last_Updated%27%7D%2C+%7B%27statisticType%27%3A+%27max%27%2C+%27onStatisticField%27%3A+%27State_Test_Encounters%27%7D%5D">
+            Main source
+        </a><br/>
+        
+        <a href="https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_daily_state_statistics_cumulative/FeatureServer/0/query?where=1%3D1&amp;outFields=%2A&amp;resultRecordCount=1&amp;orderByFields=Date+desc">
+            Death counts
+        </a><br/>
+        
+        <a href="https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query?where=Metric%3D%27Cumulative+Antibody+Tests+Performed%27+AND+Desc_+LIKE+%27Daily+COVID-19+Antibody%25%27&amp;outFields=%2A%2C+Value+as+antibody_total&amp;orderByFields=Attr_Date+desc&amp;resultRecordCount=1">
+            Total serological tests
+        </a><br/>
+        
+        <a href="https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query?where=Metric%3D%27Number+of+positive+tests%27+AND+Desc_+LIKE+%27Daily+COVID-19+Antibody%25%27&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27max%27%2C+%27onStatisticField%27%3A+%27Attr_Date%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Value%27%2C+%27outStatisticFieldName%27%3A+%27antibody_pos%27%7D%5D">
+            Positive serological tests
+        </a><br/>
+        
+        <a href="https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query?where=Metric%3D%27Number+of+negative+tests%27+AND+Desc_+LIKE+%27Daily+COVID-19+Antibody%25%27&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27max%27%2C+%27onStatisticField%27%3A+%27Attr_Date%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Value%27%2C+%27outStatisticFieldName%27%3A+%27antibody_neg%27%7D%5D">
+            Negative serological tests
+        </a><br/>
+        
+        <a href="https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/CDPHE_COVID19_StateLevel_Expanded_Case_Data_Summary/FeatureServer/0/query?where=metric+%3D+%27Probable+cases%27&amp;outFields=%2A%2C+value+as+cases_probable&amp;orderByFields=report_date+desc">
+            Cases probable
+        </a><br/>
+        
+        <a href="https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/CDPHE_COVID19_StateLevel_Expanded_Case_Data_Summary/FeatureServer/0/query?where=metric+%3D+%27Confirmed+cases%27&amp;outFields=%2A%2C+value+as+cases_confirmed&amp;orderByFields=report_date+desc">
+            Cases confirmed
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="CT">
+      <td><a name="CT"/><b>CT</b></td>
+      <td>
+        
+        <a href="https://data.ct.gov/api/id/rf3k-f8fg.json?%24query=select+%2A+order+by+date+desc+limit+1">
+            JSON (cases, death, hosp, date, SODA API)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="DC">
+      <td><a name="DC"/><b>DC</b></td>
+      <td>
+        
+        <a href="https://dcgov.app.box.com/index.php?rm=box_download_shared_file&amp;vanity_name=DCHealthStatisticsData&amp;file_id=f_645422184765?sheet_name=%5B%27Overall+Stats%27%2C+%27Hospital+Data%27%5D&amp;parse_dates=True">
+            link
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="DE">
+      <td><a name="DE"/><b>DE</b></td>
+      <td>
+        
+        <a href="https://myhealthycommunity.dhss.delaware.gov/locations/state/download_covid_19_data">
+            Full dataset (sans hosp)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="FL">
+      <td><a name="FL"/><b>FL</b></td>
+      <td>
+        
+        <a href="https://notbroken.dev/covid19/fl_pcr_specimens.json">
+            PCR specimens
+        </a><br/>
+        
+        <a href="https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/arcgis/rest/services/Florida_COVID19_Cases/FeatureServer/0/query?where=COUNTY_1%3D%27State%27&amp;outFields=C_FLResOut+%2B+C_FLRes+as+positives%2C+TPending%2C+TInconc%2C+C_HospYes_Res%2C+C_HospYes_NonRes%2C+C_NonResDeaths%2C+C_FLResDeaths%2C+C_NonResDeaths+%2B+C_FLResDeaths+as+death%2C++C_HospYes_Res+%2B+C_HospYes_NonRes+as+hosp%2C+C_AllResTypes+%2B+T_NegRes+as+total_pcr_people%2C+T_NegRes">
+            link
+        </a><br/>
+        
+        <a href="https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/arcgis/rest/services/state_daily_testing/FeatureServer/0/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Total%27%2C+%27outStatisticFieldName%27%3A+%27pcr_encounters%27%7D%5D">
+            PCR Test Encounters
+        </a><br/>
+        
+        <a href="https://bi.ahca.myflorida.com/t/ABICC/views/Public/COVIDHospitalizationsCounty.csv">
+            Hospitalizations (current)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="GA">
+      <td><a name="GA"/><b>GA</b></td>
+      <td>
+        
+        <a href="https://services7.arcgis.com/Za9Nk6CPIPbvR1t7/ArcGIS/rest/services/Cumulative_Cases_(Current_Date)/FeatureServer/0/query?where=NAME+%3D+%27All+Georgia%27&amp;outFields=DATESTAMP%2CC_CUM%2CD_CUM%2CH_CUM&amp;returnGeometry=False">
+            Cases, death, cum. hospitalization
+        </a><br/>
+        
+        <a href="https://services7.arcgis.com/Za9Nk6CPIPbvR1t7/arcgis/rest/services/Join_Features_to_GHA_Regions_Admin/FeatureServer/0/query?where=1%3D1&amp;orderByFields=Entry_Date+desc&amp;groupByFieldsForStatistics=Entry_Date&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27COVID_Patients%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Patients_Under_Investigation%27%7D%5D&amp;resultRecordCount=1">
+            Curr. hosp
+        </a><br/>
+        
+        <a href="https://ga-covid19.ondemand.sas.com/docs/ga_covid_data.zip">
+            Zip download
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="GU">
+      <td><a name="GU"/><b>GU</b></td>
+      <td>
+        
+        <a href="https://services2.arcgis.com/FPJlJZYRsD8OhCWA/ArcGIS/rest/services/COVID19_Dashboard_Counts_by_Date/FeatureServer/0/query?where=1%3D1&amp;outFields=%2A&amp;orderByFields=date+desc&amp;resultRecordCount=1">
+            General summary
+        </a><br/>
+        
+        <a href="https://services2.arcgis.com/FPJlJZYRsD8OhCWA/ArcGIS/rest/services/COVID19_GIS_Dashboard_Linelist/FeatureServer/0/query?where=Case_status+%3D+%27Probable%27&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27count%27%2C+%27onStatisticField%27%3A+%27FID%27%2C+%27outStatisticFieldName%27%3A+%27probables%27%7D%5D">
+            Probable cases
+        </a><br/>
+        
+        <a href="https://services2.arcgis.com/FPJlJZYRsD8OhCWA/ArcGIS/rest/services/COVID19_GIS_Dashboard_Linelist/FeatureServer/0/query?where=Case_status+%3D+%27Confirmed%27&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27count%27%2C+%27onStatisticField%27%3A+%27FID%27%2C+%27outStatisticFieldName%27%3A+%27confirmed%27%7D%5D">
+            Confirmed cases
+        </a><br/>
+        
+        <a href="https://services2.arcgis.com/FPJlJZYRsD8OhCWA/ArcGIS/rest/services/COVID19_GIS_Dashboard_Linelist/FeatureServer/0/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Death%27%7D%5D">
+            Death
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="HI">
+      <td><a name="HI"/><b>HI</b></td>
+      <td>
+        
+        <a href="https://docs.google.com/spreadsheets/d/1sd-L317Je9ZhiQh3_uH9jTkl3ckc_o3sgrVauShcwCk/export?format=csv&amp;sheet=Data">
+            link
+        </a><br/>
+        
+        <a href="https://public.tableau.com/views/EpiCurveApr4/CSVDownload.csv?:showVizHome=no">
+            PCR Testing encounters and positives
+        </a><br/>
+        
+        <a href="https://health.hawaii.gov/coronavirusdisease2019/what-you-should-know/current-situation-in-hawaii/">
+            Probables (soup)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="IA">
+      <td><a name="IA"/><b>IA</b></td>
+      <td>
+        
+        <a href="https://services.arcgis.com/vPD5PVLI6sfkZ5E4/arcgis/rest/services/IACOVID19Cases_Demographics/FeatureServer/0/query?outFields=%2A&amp;where=1%3D1">
+            link
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="IL">
+      <td><a name="IL"/><b>IL</b></td>
+      <td>
+        
+        <a href="http://www.dph.illinois.gov/sitefiles/COVIDTestResults.json">
+            Cases/tests
+        </a><br/>
+        
+        <a href="https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetHospitalizationResults?nocache=1">
+            Hospitalization
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="IN">
+      <td><a name="IN"/><b>IN</b></td>
+      <td>
+        
+        <a href="https://www.coronavirus.in.gov/map/covid-19-indiana-universal-report-current-public.json">
+            link
+        </a><br/>
+        
+        <a href="https://hub.mph.in.gov/api/3/action/datastore_search_sql?sql=SELECT+sum%28%22COVID_COUNT%22%29+as+covid_cases%2C+sum%28%22COVID_DEATHS%22%29+as+deaths%2C+max%28%22DATE%22%29+as+max_date%2C+sum%28%22COVID_TESTS%22%29+as+covid_tests%2C+sum%28%22COVID_TESTS_ADMINISTRATED%22%29+as+covid_tests_adm%2C+sum%28%22COVID_POSITIVE_TESTS_ADMIN%22%29+as+pos_tests+from+%22afaa225d-ac4e-4e80-9190-f6800c366b58%22">
+            Tests (total, positives), counts, death
+        </a><br/>
+        
+        <a href="https://hub.mph.in.gov/api/3/action/datastore_search_sql?sql=SELECT+sum%28%22COVID_POSITIVE_TESTS_ADMIN%22%29+as+pos_tests+from+%22afaa225d-ac4e-4e80-9190-f6800c366b58%22">
+            Tests (only positives)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="KY">
+      <td><a name="KY"/><b>KY</b></td>
+      <td>
+        
+        <a href="https://kygisserver.ky.gov/arcgis/rest/services/WGS84WM_Services/Ky_Cnty_COVID19_Cases_WGS84WM/FeatureServer/0/query?outStatistics=%5B%7B%27outStatisticFieldName%27%3A+%27Confirmed%27%2C+%27onStatisticField%27%3A+%27Confirmed%27%2C+%27statisticType%27%3A+%27sum%27%7D%2C+%7B%27outStatisticFieldName%27%3A+%27Deceased%27%2C+%27onStatisticField%27%3A+%27Deceased%27%2C+%27statisticType%27%3A+%27sum%27%7D%2C+%7B%27outStatisticFieldName%27%3A+%27Hospitalized%27%2C+%27onStatisticField%27%3A+%27Hospitalized%27%2C+%27statisticType%27%3A+%27sum%27%7D%2C+%7B%27outStatisticFieldName%27%3A+%27ICU%27%2C+%27onStatisticField%27%3A+%27ICU%27%2C+%27statisticType%27%3A+%27sum%27%7D%5D&amp;where=1%3D1">
+            link
+        </a><br/>
+        
+        <a href="https://govstatus.egov.com/kycovid19">
+            Page (soup)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="LA">
+      <td><a name="LA"/><b>LA</b></td>
+      <td>
+        
+        <a href="https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/Combined_COVID_Reporting/FeatureServer/0/query?groupByFieldsForStatistics=Measure&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Value%27%7D%5D&amp;where=1%3D1">
+            Most dashboard data
+        </a><br/>
+        
+        <a href="https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/Combined_COVID_Reporting/FeatureServer/0/query?where=Measure+%3D+%27COVID-positive%27+AND+ValueType+%3D+%27hospitalized%27+AND+Value+is+not+NULL&amp;outFields=%2A%2C+Value+as+hospitalized&amp;orderByFields=FeatureID+desc&amp;resultRecordCount=1">
+            Current hospitalization
+        </a><br/>
+        
+        <a href="https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/Combined_COVID_Reporting/FeatureServer/0/query?where=Measure+%3D+%27COVID-positive%27+AND+ValueType+%3D+%27on+vent%27+AND+Value+is+not+NULL&amp;outFields=%2A%2C+Value+as+on_vent&amp;orderByFields=FeatureID+desc&amp;resultRecordCount=1">
+            Current vent (unordered)
+        </a><br/>
+        
+        <a href="https://www.arcgis.com/sharing/rest/content/items/4a6de226701e45bdb542f09b73ee79e1/data?f=json">
+            Dashboard json (for recoveries)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="MA">
+      <td><a name="MA"/><b>MA</b></td>
+      <td>
+        
+        <a href="https://www.mass.gov/info-details/covid-19-response-reporting">
+            None, just need a trigger
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="MD">
+      <td><a name="MD"/><b>MD</b></td>
+      <td>
+        
+        <a href="https://services.arcgis.com/njFNhDsUCentVYJW/ArcGIS/rest/services/MASTERCaseTracker/FeatureServer/0/query?resultRecordCount=1&amp;orderByFields=ReportDate+desc&amp;outFields=ReportDate%2CTotalCases%2CNegativeTests%2CbedsICU%2CbedsAcute%2CbedsTotal%2Ctotal_hospitalized%2Ctotal_released%2Cdeaths%2Cpdeaths%2CTotalTests&amp;where=1%3D1">
+            link
+        </a><br/>
+        
+        <a href="https://services.arcgis.com/njFNhDsUCentVYJW/arcgis/rest/services/MDCOVID19_TestingVolume/FeatureServer/0/query?where=1%3D1&amp;outFields=%2A&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27number_of_positives%27%2C+%27outStatisticFieldName%27%3A+%27total_number_of_positives%27%7D%5D">
+            PCR Testing and positives
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="ME">
+      <td><a name="ME"/><b>ME</b></td>
+      <td>
+        
+        <a href="https://services1.arcgis.com/RbMX0mRVOFNTdLzd/ArcGIS/rest/services/Statewide/FeatureServer/0/query?where=TotalCases+is+not+NULL&amp;outFields=%2A&amp;orderByFields=Date+desc&amp;resultRecordCount=1">
+            Main metrics
+        </a><br/>
+        
+        <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSncnMccl7ut47zMprsHK7lX65OhNLoqsHUkRem5tV_T8hyEOkqXF0B5LW6ggUJIoY-Jh1AysT3fNIa/pub?gid=0&amp;single=true&amp;output=csv">
+            Cases by county (for up-to-date cases)
+        </a><br/>
+        
+        <a href="https://www.maine.gov/dhhs/mecdc/infectious-disease/epi/airborne/coronavirus/data.shtml">
+            Page, for testing (soup)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="MI">
+      <td><a name="MI"/><b>MI</b></td>
+      <td>
+        
+        <a href="https://services5.arcgis.com/ZqUZ99cjRiEOyN05/ArcGIS/rest/services/jX9FD/FeatureServer/0/query?where=1%3D1&amp;outFields=f1+as+date%2Cf3+as+positives%2C+Total_Deaths&amp;orderByFields=f1+desc&amp;resultRecordCount=1">
+            Cases and death
+        </a><br/>
+        
+        <a href="https://services5.arcgis.com/ZqUZ99cjRiEOyN05/ArcGIS/rest/services/COVID_Metrics/FeatureServer/0/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27F__in_Critical_Care%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27F__on_Ventilators%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Inpatients%27%7D%5D">
+            Hospitalization/vent/icu
+        </a><br/>
+        
+        <a href="https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173-531113--,00.html">
+            Recovered (soup)
+        </a><br/>
+        
+        <a href="https://www.michigan.gov/coronavirus/0,9753,7-406-98159-523641--,00.html">
+            Hospitalization etc (soup)
+        </a><br/>
+        
+        <a href="https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html">
+            Main page for links (soup)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="MN">
+      <td><a name="MN"/><b>MN</b></td>
+      <td>
+        
+        <a href="https://services2.arcgis.com/V12PKGiMAH7dktkU/arcgis/rest/services/MyMapService/FeatureServer/0/query?where=1%3D1&amp;outFields=Date%2C+Time%2CTotalCases%2C+EvrHospYes+as+hosp%2C+EvrICUYes%2C+RlsdFrmIso%2C+OutcmDied">
+            link
+        </a><br/>
+        
+        <a href="https://www.health.state.mn.us/diseases/coronavirus/situation.html">
+            State page (soup)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="MO">
+      <td><a name="MO"/><b>MO</b></td>
+      <td>
+        
+        <a href="https://results.mo.gov/t/COVID19/views/COVID-19DataforDownload/MetricsbyTestDate.csv?thousands=%2C">
+            Testing and cases CSV
+        </a><br/>
+        
+        <a href="https://results.mo.gov/t/COVID19/views/COVID-19DataforDownload/MetricsbyCounty.csv?thousands=%2C">
+            Metrics by county CSV
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="MP">
+      <td><a name="MP"/><b>MP</b></td>
+      <td>
+        
+        <a href="https://services8.arcgis.com/zkkZCub5I6ydvXQj/ArcGIS/rest/services/Coronavirus_PublicDashboardView/FeatureServer/3/query?where=totaltestedcnmi+is+not+NULL&amp;outFields=reportdt+as+totals_date%2C+totaltestedcnmi&amp;orderByFields=reportdt+desc&amp;resultRecordCount=1">
+            Total tested peopel
+        </a><br/>
+        
+        <a href="https://services8.arcgis.com/zkkZCub5I6ydvXQj/ArcGIS/rest/services/Coronavirus_PublicDashboardView/FeatureServer/3/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27max%27%2C+%27onStatisticField%27%3A+%27reportdt%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27confirmedcases%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27totalspeccnmi%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27deaths%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27recovered%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27hospitalized%27%7D%5D">
+            All data
+        </a><br/>
+        
+        <a href="https://services8.arcgis.com/zkkZCub5I6ydvXQj/arcgis/rest/services/Coronavirus_PublicDashboardView/FeatureServer/1/query?where=name+%3D+%27CNMI%27&amp;outFields=totaltests">
+            State stats
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="MS">
+      <td><a name="MS"/><b>MS</b></td>
+      <td>
+        
+        <a href="https://msdh.ms.gov/msdhsite/_static/14,0,420.html">
+            Main page
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="MT">
+      <td><a name="MT"/><b>MT</b></td>
+      <td>
+        
+        <a href="https://services.arcgis.com/qnjIrwR8z5Izc0ij/arcgis/rest/services/COVID_Cases_Production_View/FeatureServer/0/query?outStatistics=%5B%7B%27onStatisticField%27%3A+%27Total%27%2C+%27statisticType%27%3A+%27sum%27%7D%2C+%7B%27onStatisticField%27%3A+%27TotalDeaths%27%2C+%27statisticType%27%3A+%27sum%27%7D%2C+%7B%27onStatisticField%27%3A+%27HospitalizationCount%27%2C+%27statisticType%27%3A+%27sum%27%7D%2C+%7B%27onStatisticField%27%3A+%27TotalRecovered%27%2C+%27statisticType%27%3A+%27sum%27%7D%2C+%7B%27onStatisticField%27%3A+%27LAST_UPDATE%27%2C+%27statisticType%27%3A+%27max%27%7D%5D&amp;where=1%3D1">
+            Cases, death, hospitalization, recovered
+        </a><br/>
+        
+        <a href="https://services.arcgis.com/qnjIrwR8z5Izc0ij/ArcGIS/rest/services/COVID_Cases_Production_View/FeatureServer/1/query?where=1%3D1&amp;outFields=%2A&amp;orderByFields=ScriptRunDate+desc&amp;resultRecordCount=1">
+            Totals
+        </a><br/>
+        
+        <a href="https://services.arcgis.com/qnjIrwR8z5Izc0ij/ArcGIS/rest/services/COVID_Cases_Production_View/FeatureServer/2/query?where=Hospitalization%3D%27Y%27+OR+Hospitalization%3D%27P%27&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27count%27%2C+%27onStatisticField%27%3A+%27OBJECTID%27%2C+%27outStatisticFieldName%27%3A+%27hosp%27%7D%5D">
+            Hospitalization
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="NC">
+      <td><a name="NC"/><b>NC</b></td>
+      <td>
+        
+        <a href="https://services.arcgis.com/iFBq2AW9XO0jYYF7/ArcGIS/rest/services/NCCovid19/FeatureServer/0/query?outStatistics=%5B%7B%27onStatisticField%27%3A+%27Hosp%27%2C+%27statisticType%27%3A+%27max%27%7D%2C+%7B%27onStatisticField%27%3A+%27Total%27%2C+%27statisticType%27%3A+%27sum%27%7D%2C+%7B%27onStatisticField%27%3A+%27Deaths%27%2C+%27statisticType%27%3A+%27sum%27%7D%5D&amp;where=1%3D1">
+            link
+        </a><br/>
+        
+        <a href="https://public.tableau.com/views/NCDHHS_COVID-19_DataDownload/DailyCasesandDeathsMetrics.csv?parse_dates=True&amp;thousands=%2C">
+            Cases, Deaths
+        </a><br/>
+        
+        <a href="https://public.tableau.com/views/NCDHHS_COVID-19_DataDownload/DailyTestingMetrics.csv?parse_dates=True&amp;thousands=%2C">
+            Testing
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="ND">
+      <td><a name="ND"/><b>ND</b></td>
+      <td>
+        
+        <a href="https://www.health.nd.gov/diseases-conditions/coronavirus/north-dakota-coronavirus-cases">
+            State page (soup)
+        </a><br/>
+        
+        <a href="https://static.dwcdn.net/data/NVwou.csv">
+            By county testing (for negatives)
+        </a><br/>
+        
+        <a href="https://www.health.nd.gov/sites/www/files/documents/Files/MSS/coronavirus/charts-data/CovidTracking.csv">
+            PCR (encounters, specimens, negatives, people, confirmed)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="NE">
+      <td><a name="NE"/><b>NE</b></td>
+      <td>
+        
+        <a href="https://gis.ne.gov/enterprise/rest/services/Covid19MapV5/MapServer/2/query?where=case_status%3D%27Confirmed%27+AND+NE_JURIS%3D%27yes%27+AND+Did_Pat_Die_From_Illness%3D%27Y%27&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27count%27%2C+%27onStatisticField%27%3A+%27ID%27%2C+%27outStatisticFieldName%27%3A+%27death%27%7D%5D&amp;returnGeometry=False&amp;f=json">
+            Death
+        </a><br/>
+        
+        <a href="https://gis.ne.gov/enterprise/rest/services/Covid19MapV5/MapServer/1/query?f=json&amp;outStatistics=%5B%7B%27onStatisticField%27%3A+%27ID%27%2C+%27statisticType%27%3A+%27count%27%2C+%27outStatisticFieldName%27%3A+%27total%27%7D%5D&amp;where=NE_JURIS%3D%27yes%27&amp;returnGeometry=False">
+            Total
+        </a><br/>
+        
+        <a href="https://gis.ne.gov/enterprise/rest/services/CovidUpdatePublic/MapServer/0/query?where=1%3D1&amp;outFields=hosp_latest_pat_count%2Chosp_cumulative_total%2Cdash_update_date%2Crec_latest_pat_count&amp;resultRecordCount=1&amp;orderByFields=dash_update_date+desc&amp;f=json&amp;returnGeometry=False">
+            Hosp cum/cur, Recovered
+        </a><br/>
+        
+        <a href="https://gis.ne.gov/enterprise/rest/services/Covid19MapV5/MapServer/11/query?where=1%3D1&amp;outFields=%2A&amp;orderByFields=LAB_REPORT_DATE+desc&amp;resultRecordCount=1&amp;f=json">
+            Specimens
+        </a><br/>
+        
+        <a href="https://gis.ne.gov/enterprise/rest/services/Covid19MapV5/MapServer/1/query?f=json&amp;outStatistics=%5B%7B%27onStatisticField%27%3A+%27ID%27%2C+%27statisticType%27%3A+%27count%27%7D%5D&amp;groupByFieldsForStatistics=lab_status&amp;outFields=%2A&amp;where=NE_JURIS%3D%27yes%27&amp;returnGeometry=False">
+            Lab results residents (pos, inconclusive, neg)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="NH">
+      <td><a name="NH"/><b>NH</b></td>
+      <td>
+        
+        <a href="https://www.nh.gov/covid19/">
+            State page (soup)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="NJ">
+      <td><a name="NJ"/><b>NJ</b></td>
+      <td>
+        
+        <a href="https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/survey123_cb9a6e9a53ae45f6b9509a23ecdf7bcf/FeatureServer/0/query?resultRecordCount=1&amp;orderByFields=_date+desc&amp;outFields=%2A&amp;where=1%3D1">
+            Base data
+        </a><br/>
+        
+        <a href="https://services7.arcgis.com/Z0rixLlManVefxqY/ArcGIS/rest/services/DailyCaseCounts/FeatureServer/0/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27PROBABLE_DEATHS%27%7D%5D">
+            Probable death
+        </a><br/>
+        
+        <a href="https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query?where=survey_period%3E%3Dtimestamp+%272020-04-27+07%3A00%3A00%27+AND+structure_measure_identifier+LIKE+%27%25ischarge%25Excluding+Deaths%25%27&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Value%27%2C+%27outStatisticFieldName%27%3A+%27recoveries%27%7D%5D">
+            Discharged (new)
+        </a><br/>
+        
+        <a href="https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query?where=structure_measure_identifier%3D%27Case+count+of+COVID-19+positive+cases+currently+in+the+hospital%27+OR+structure_measure_identifier%3D%27Case+count+of+persons+under+investigation+%28PUI%29+%2F+presumptive+positive+cases+currently+in+the+hospital%27&amp;orderByFields=survey_period+desc&amp;groupByFieldsForStatistics=survey_period&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Value%27%2C+%27outStatisticFieldName%27%3A+%27curr_hosp%27%7D%5D&amp;resultRecordCount=1">
+            Hospitalized
+        </a><br/>
+        
+        <a href="https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query?where=structure_measure_identifier+LIKE+%27Total+%25+of+COVID+Patients+Currently+on+a+Ventilator%27&amp;orderByFields=survey_period+desc&amp;groupByFieldsForStatistics=survey_period&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Value%27%2C+%27outStatisticFieldName%27%3A+%27curr_vent%27%7D%5D&amp;resultRecordCount=1">
+            Curr vent
+        </a><br/>
+        
+        <a href="https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query?where=structure_measure_identifier%3D%27COVID-19+Positive+and+PUI+Patients+Combined+in+a+-+Critical+Care+Bed%27+OR+structure_measure_identifier%3D%27COVID-19+Positive+and+PUI+Patients+Combined+in+a+-+Intensive+Care+Bed%27&amp;orderByFields=survey_period+desc&amp;groupByFieldsForStatistics=survey_period&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Value%27%2C+%27outStatisticFieldName%27%3A+%27curr_icu%27%7D%5D&amp;resultRecordCount=1">
+            Critical &amp; Intensive Care
+        </a><br/>
+        
+        <a href="https://maps.arcgis.com/sharing/rest/content/items/0cc7684992b942eb81c21ff3c252c1ee/data">
+            Hospitalizations (embedded in dashboard)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="NM">
+      <td><a name="NM"/><b>NM</b></td>
+      <td>
+        
+        <a href="https://e7p503ngy5.execute-api.us-west-2.amazonaws.com/prod/GetPublicStatewideData">
+            link
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="NY">
+      <td><a name="NY"/><b>NY</b></td>
+      <td>
+        
+        <a href="https://health.data.ny.gov/resource/xdss-u53e.json?%24select=test_date%2Csum%28cumulative_number_of_positives%29%2Csum%28cumulative_number_of_tests%29&amp;%24group=test_date&amp;%24order=test_date+desc&amp;%24limit=1">
+            Total &amp; positives
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="OH">
+      <td><a name="OH"/><b>OH</b></td>
+      <td>
+        
+        <a href="https://coronavirus.ohio.gov/wps/portal/gov/covid-19/home">
+            Main page (for soup)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="OK">
+      <td><a name="OK"/><b>OK</b></td>
+      <td>
+        
+        <a href="https://storage.googleapis.com/ok-covid-gcs-public-download/oklahoma_cases_county.csv">
+            link
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="OR">
+      <td><a name="OR"/><b>OR</b></td>
+      <td>
+        
+        <a href="https://services.arcgis.com/uUvqNMGPm7axC2dD/arcgis/rest/services/COVID_Cases_Oregon_Public/FeatureServer/0/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Cases%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Deaths%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Recovered%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27NegativeTests%27%7D%5D">
+            Cases, death, recovered, negative tests
+        </a><br/>
+        
+        <a href="https://govstatus.egov.com/OR-OHA-COVID-19">
+            Main page
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="PA">
+      <td><a name="PA"/><b>PA</b></td>
+      <td>
+        
+        <a href="https://services1.arcgis.com/Nifc7wlHaBPig3Q3/arcgis/rest/services/COVID_PA_Counties/FeatureServer/0/query?where=County%3D%27Pennsylvania%27&amp;outFields=%2A&amp;resultRecordCount=1">
+            Positive/probable/negatives, death
+        </a><br/>
+        
+        <a href="https://services1.arcgis.com/Nifc7wlHaBPig3Q3/arcgis/rest/services/covid_hosp_single_day/FeatureServer/0/query?where=county%3D%27Pennsylvania%27&amp;outFields=covid_vents%2C+covid_patients">
+            Hosp, vent
+        </a><br/>
+        
+        <a href="https://www.health.pa.gov/topics/disease/coronavirus/Pages/Coronavirus.aspx">
+            Main page, for recovery percentages (soup)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="PR">
+      <td><a name="PR"/><b>PR</b></td>
+      <td>
+        
+        <a href="https://services5.arcgis.com/klquQoHA0q9zjblu/ArcGIS/rest/services/Datos_Totales_View7/FeatureServer/0/query?where=1%3D1&amp;outFields=T_Muertes_COVID_RD%2CT_Muertes_Combinadas%2CT_Pacientes_Int_Covid%2CT_Vent_Covid%2CT_Serologicos_Pos%2CT_Casos_Unicos%2CT_Molecular_Pos%2CT_Fatalidades%2CT_Hospitalizados">
+            link
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="RI">
+      <td><a name="RI"/><b>RI</b></td>
+      <td>
+        
+        <a href="https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/export?format=csv&amp;sheet=264100583">
+            link
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="SC">
+      <td><a name="SC"/><b>SC</b></td>
+      <td>
+        
+        <a href="https://services2.arcgis.com/XZg2efAbaieYAXmu/ArcGIS/rest/services/COVID19/FeatureServer/0/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Confirmed%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Recovered%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Death%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Probable_Positives%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Probable_Deaths%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Total_Neg_Tests%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Total_Pos_Tests%27%7D%2C+%7B%27statisticType%27%3A+%27max%27%2C+%27onStatisticField%27%3A+%27Date_%27%7D%5D">
+            Everything
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="TN">
+      <td><a name="TN"/><b>TN</b></td>
+      <td>
+        
+        <a href="https://services1.arcgis.com/HLC8bAygObK4fhPW/arcgis/rest/services/TN_COVID19_Daily/FeatureServer/0/query?where=1%3D1&amp;outFields=%2A&amp;orderByFields=DATE+desc&amp;resultRecordCount=1">
+            link
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="TX">
+      <td><a name="TX"/><b>TX</b></td>
+      <td>
+        
+        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Cases_Service/FeatureServer/8/query?where=1%3D1&amp;outFields=%2A&amp;orderByFields=Date+desc&amp;resultRecordCount=1">
+            Positives
+        </a><br/>
+        
+        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Cases_Service/FeatureServer/8/query?where=CumulativeFatalities+is+not+NULL&amp;outFields=Date%2C+CumulativeFatalities&amp;orderByFields=Date+desc&amp;resultRecordCount=1">
+            Death
+        </a><br/>
+        
+        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_TestData_Service/FeatureServer/3/query?where=1%3D1&amp;outFields=%2A%2C+ViralTests+as+totals&amp;orderByFields=Date+desc&amp;resultRecordCount=1">
+            Tests (PCR + Antibody)
+        </a><br/>
+        
+        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_TestData_Service/FeatureServer/2/query?where=TestType%3D%27PostiveAntibody%27&amp;outFields=%2A%2C+Count_+as+antibody_pos">
+            Positive antibody
+        </a><br/>
+        
+        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_TestData_Service/FeatureServer/2/query?where=TestType%3D%27AntigenPositive%27&amp;outFields=%2A%2C+Count_+as+antigen_pos">
+            Positive antigen
+        </a><br/>
+        
+        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Cases_Service/FeatureServer/7/query?where=1%3D1&amp;outFields=%2A">
+            Recoveries
+        </a><br/>
+        
+        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID_Hospital_Data/FeatureServer/1/query?where=HospitalData%3D%27COVIDPatientsHospitals%27&amp;outFields=%2A%2C+Count_+as+curr_hosp">
+            Curr hosp
+        </a><br/>
+        
+        <a href="https://www.dshs.texas.gov/coronavirus/TexasCOVID-19HospitalizationsOverTimebyTSA.xlsx?sheet_name=COVID-19+ICU">
+            Current ICU
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="UT">
+      <td><a name="UT"/><b>UT</b></td>
+      <td>
+        
+        <a href="https://services6.arcgis.com/KaHXE9OkiB9e63uE/ArcGIS/rest/services/Utah_COVID19_Cases_by_Local_Health_Department_View/FeatureServer/0/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27max%27%2C+%27onStatisticField%27%3A+%27Date_Updated%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27COVID_Cases_Total%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Hospitalizations%27%7D%5D">
+            link
+        </a><br/>
+        
+        <a href="https://coronavirus-dashboard.utah.gov/">
+            State page (soup)
+        </a><br/>
+        
+        <a href="https://coronavirus-dashboard.utah.gov/#hospitalizations-mortality">
+            Hospitalization page (soup)
+        </a><br/>
+        
+        <a href="https://coronavirus-dashboard.utah.gov/Utah_COVID19_data.zip">
+            Zip download
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="VA">
+      <td><a name="VA"/><b>VA</b></td>
+      <td>
+        
+        <a href="https://data.virginia.gov/api/id/uqs3-x7zh.json?%24query=select+report_date+as+date%2C+sum%28number_of_cases%29+as+positive%2C+sum%28number_of_deaths%29+as+death%2C+sum%28number_of_hospitalizations%29+as+hosp+group+by+report_date+order+by+report_date+desc+limit+1">
+            Cases, death, hospitalizations (lumped)
+        </a><br/>
+        
+        <a href="https://data.virginia.gov/api/id/uqs3-x7zh.json?%24query=select+report_date+as+date%2C+number_of_cases+as+confirmed%2C+number_of_deaths+as+death_confirmed+where+case_status+%3D+%22Confirmed%22+order+by+report_date+desc+limit+1">
+            Cases, death (confirmed)
+        </a><br/>
+        
+        <a href="https://data.virginia.gov/api/id/uqs3-x7zh.json?%24query=select+report_date+as+date%2C+number_of_cases+as+probable%2C+number_of_deaths+as+death_probable+where+case_status+%3D+%22Probable%22+order+by+report_date+desc+limit+1">
+            Cases, death (Probable)
+        </a><br/>
+        
+        <a href="https://data.virginia.gov/resource/3u5k-c2gr.json?%24query=select+sum%28number_of_pcr_testing%29+as+pcr_testing%2C+sum%28number_of_positive_pcr_testing%29+as+pos_pcr_testing%2C+sum%28total_number_of_testing%29+-+sum%28number_of_pcr_testing%29+as+antibody_total%2C+sum%28total_number_of_positive%29+-+sum%28number_of_positive_pcr_testing%29+as+antibody_pos">
+            Testing data (PCR and antibody)
+        </a><br/>
+        
+        <a href="https://data.virginia.gov/resource/28wk-762y.json?%24query=select+total_covid_19_patients%2C+icu_patients%2C+vent_patients+order+by+date+desc+limit+1">
+            Current hosp, ICU &amp; vent
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="VI">
+      <td><a name="VI"/><b>VI</b></td>
+      <td>
+        
+        <a href="https://www.covid19usvi.com/">
+            Covid page (soup)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="VT">
+      <td><a name="VT"/><b>VT</b></td>
+      <td>
+        
+        <a href="https://services1.arcgis.com/BkFxaEFNwHqX3tAw/ArcGIS/rest/services/VIEW_EPI_DailyCount_PUBLIC/FeatureServer/0/query?resultRecordCount=1&amp;orderByFields=date+DESC&amp;outFields=%2A&amp;where=1%3D1">
+            Cases/death/recovered
+        </a><br/>
+        
+        <a href="https://services1.arcgis.com/BkFxaEFNwHqX3tAw/ArcGIS/rest/services/VIEW_EMR_Hospitalization_PUBLIC/FeatureServer/0/query?where=1%3D1&amp;outFields=%2A%2C+current_hospitalizations%2Bhosp_pui+as+curr_hosp&amp;orderByFields=date+desc&amp;resultRecordCount=1">
+            Hospitalizations
+        </a><br/>
+        
+        <a href="https://services1.arcgis.com/BkFxaEFNwHqX3tAw/ArcGIS/rest/services/V_EPI_LabSpecimensDaily_PUBLIC/FeatureServer/0/query?where=1%3D1&amp;outFields=Date_Received_by_PH%2CCumulative_tests&amp;orderByFields=Date_Received_by_PH+desc&amp;resultRecordCount=1">
+            Total PCR Tests
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="WA">
+      <td><a name="WA"/><b>WA</b></td>
+      <td>
+        
+        <a href="https://services8.arcgis.com/rGGrs6HCnw87OFOT/ArcGIS/rest/services/CountyCases/FeatureServer/0/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27max%27%2C+%27onStatisticField%27%3A+%27CV_Updated%27%7D%2C+%7B%27statisticType%27%3A+%27max%27%2C+%27onStatisticField%27%3A+%27CV_State_Cases%27%7D%2C+%7B%27statisticType%27%3A+%27max%27%2C+%27onStatisticField%27%3A+%27CV_State_Deaths%27%7D%5D">
+            link
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="WI">
+      <td><a name="WI"/><b>WI</b></td>
+      <td>
+        
+        <a href="https://dhsgis.wi.gov/server/rest/services/DHS_COVID19/COVID19_WI/FeatureServer/10/query?where=GEO%3D%27State%27&amp;outFields=DATE%2CPOSITIVE%2CNEGATIVE%2CPOSITIVE+%2B+NEGATIVE+as+TOTAL%2CDEATHS%2CHOSP_YES%2CIC_YES&amp;orderByFields=DATE+desc&amp;resultRecordCount=1">
+            Main metrics (pos, neg, death, hosp, icu)
+        </a><br/>
+        
+        <a href="https://bi.wisconsin.gov/t/DHS/views/PercentPositivebyTestPersonandaComparisonandTestCapacity/TestCapacityDashboard.csv?parse_dates=%5B%27Day+of+displaydateonly%27%5D&amp;thousands=%2C">
+            Testing encounters
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="WY">
+      <td><a name="WY"/><b>WY</b></td>
+      <td>
+        
+        <a href="https://services7.arcgis.com/BAwfvDcDhIO9Rm6L/arcgis/rest/services/COVID_Case_Totals_VIEW/FeatureServer/0/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Deaths%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27TotalCases%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27TotlaRecov%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Probca%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27COVID%27%7D%5D">
+            link
+        </a><br/>
+        
+    </td></tr>
+    
+    </table>
+  </body>
+</html>
