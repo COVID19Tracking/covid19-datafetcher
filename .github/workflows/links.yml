@@ -13,7 +13,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
+        ref: gh-pages
+        path: gh-pages
+    - uses: actions/checkout@v2
+      with:
         ref: master
+        path: main
 
     - name: Setup Conda env
       run: |
@@ -22,17 +27,16 @@ jobs:
     - name: Generate links page
       run: |
         eval "$(conda shell.bash hook)"
+        cd main
         conda activate c19-data
         python tools/links.py
 
-    - uses: actions/checkout@v2
-      with:
-        ref: gh-pages
     - name: copy generated links.html
-      run: mv outputs/index.html docs/links.html
+      run: mv main/outputs/index.html gh-pages/docs/links.html
 
     - name: Compare and commit generated links page
       run: |
+          cd gh-pages
           if [ "$(git status --porcelain)" != "" ]; then
             git add -u
             git config user.name github-actions
