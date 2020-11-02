@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        ref: gh-pages
+        ref: master
 
     - name: Setup Conda env
       run: |
@@ -23,7 +23,13 @@ jobs:
       run: |
         eval "$(conda shell.bash hook)"
         conda activate c19-data
-        python tools/links.py && mv outputs/index.html docs/links.html
+        python tools/links.py
+
+    - uses: actions/checkout@v2
+      with:
+        ref: gh-pages
+    - name: copy generated links.html
+      run: mv outputs/index.html docs/links.html
 
     - name: Compare and commit generated links page
       run: |
