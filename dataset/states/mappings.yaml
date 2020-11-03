@@ -218,9 +218,9 @@ MA:
   All Positive Molecular Tests: SPECIMENS_POS
   Serology Total: ANTIBODY_TOTAL_PEOPLE
   Antigen Total: ANTIGEN_TOTAL_PEOPLE
-  Total number of COVID patients in hospital today: CURR_HOSP
-  ICU: CURR_ICU
-  Total number intubated: CURR_VENT
+  Total number of confirmed COVID patients in hospital today: CURR_HOSP
+  Confirmed ICU: CURR_ICU
+  Confirmed intubated: CURR_VENT
   Ever Hospitaltized: HOSP
 MD:
   NegativeTests: NEGATIVE

@@ -800,8 +800,7 @@ def handle_nd(res, mapping):
 def handle_ma(res, mapping):
     tagged = {}
 
-    files = ['DeathsReported.csv', 'Testing2.csv',
-             'Hospitalization from Hospitals.csv', 'Cases.csv']
+    files = ['DeathsReported.csv', 'Testing2.csv', 'Cases.csv']
 
     with MaContextManager(res[0]) as zipdir:
         for filename in files:
@@ -820,23 +819,12 @@ def handle_ma(res, mapping):
         keys = [Fields.HOSP.name, Fields.DEATH.name, Fields.POSITIVE.name]
         keys = [inverse_mapping[k] for k in keys]
 
-        # positive molecular
-        testing = csv.DictReader(open(os.path.join(zipdir,  'TestingByDate.csv'), 'r'))
-        summed = csv_sum(testing, ['All Positive Molecular Tests'])
-        partial = map_attributes(summed, mapping, 'MA')
+        df = pd.read_excel(open(os.path.join(zipdir, 'Hospitalization from Hospitals.xlsx'), 'rb'))
+        partial = map_attributes(df.iloc[-1].to_dict(), mapping, 'MA')
         tagged.update(partial)
 
-        hospfile = csv.DictReader(open(os.path.join(zipdir, "RaceEthnicity.csv"), 'r'))
-        hosprows = list(hospfile)
-        # last non empty row
-        for rn in range(1, len(hosprows)):
-            if hosprows[-rn]['Date']:
-                last_row = hosprows[-rn]
-                break
-        hosprows = [x for x in hosprows if x['Date'] == last_row['Date']]
-        summed = csv_sum(hosprows, keys)
-        for k in keys:
-            tagged[mapping[k]] = summed[k]
+        df = pd.read_excel(open(os.path.join(zipdir, 'TestingByDate.xlsx'), 'rb'))
+        tagged[Fields.SPECIMENS_POS.name] = df.sum()['All Positive Molecular Tests']
 
     # weekly report:
     with MaContextManager(res[0], "Weekly Public Health Report - Raw Data", file_type='xls') as tmpfile:
