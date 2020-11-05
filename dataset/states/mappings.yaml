@@ -248,7 +248,7 @@ ME:
   DATA_AS_OF_DT: DATE
   CASES: POSITIVE
   DEATHS: DEATH
-  RECOVERIES: RECOVERED
+  # RECOVERIES: RECOVERED  # arcgis is better, again
   HOSPITALIZATIONS: HOSP
 
   # This is all tests lumped, PCR an antibody

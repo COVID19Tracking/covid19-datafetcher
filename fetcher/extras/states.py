@@ -517,8 +517,7 @@ def handle_me(res, mapping):
     # google spreadsheet
     csv = res[1]
     columns = [k for k, v in mapping.items() if v in [
-        Fields.POSITIVE.name, Fields.DEATH.name, Fields.RECOVERED.name,
-        Fields.HOSP.name
+        Fields.POSITIVE.name, Fields.DEATH.name, Fields.HOSP.name
     ]]
     values = csv_sum(csv, columns)
     tagged.update(map_attributes(values, mapping))
