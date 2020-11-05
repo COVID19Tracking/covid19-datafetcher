@@ -236,14 +236,14 @@ MD:
   TotalTests: SPECIMENS
   total_number_of_positives: SPECIMENS_POS
 ME:
-  # Date: TIMESTAMP
-  # TotalCases: POSITIVE
-  # ConfirmedCases: CONFIRMED
-  # ProbableCases: PROBABLE
-  # PresumptiveCases: PROBABLE
-  # Deaths: DEATH
-  # Hospitalizations: HOSP
-  # Recovered: RECOVERED
+  Date: TIMESTAMP
+  TotalCases: POSITIVE
+  ConfirmedCases: CONFIRMED
+  ProbableCases: PROBABLE
+  PresumptiveCases: PROBABLE
+  Deaths: DEATH
+  Hospitalizations: HOSP
+  Recovered: RECOVERED
 
   DATA_AS_OF_DT: DATE
   CASES: POSITIVE

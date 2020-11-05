@@ -510,10 +510,9 @@ def handle_or(res, mapping):
 
 def handle_me(res, mapping):
     tagged = {}
-    # this is an unreliable source now
-    # for result in res[:-1]:
-    #     partial = extract_arcgis_attributes(result, mapping, 'MI')
-    #     tagged.update(partial)
+    for result in res[:1]:
+        partial = extract_arcgis_attributes(result, mapping, 'ME')
+        tagged.update(partial)
 
     # google spreadsheet
     csv = res[1]
