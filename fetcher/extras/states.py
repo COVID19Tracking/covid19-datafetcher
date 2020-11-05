@@ -534,16 +534,20 @@ def handle_me(res, mapping):
         if name not in ['Positive', 'Negative', 'Total']:
             continue
         antibody_val = atoi(tds[1].get_text(strip=True))
-        pcr_val = atoi(tds[2].get_text(strip=True))
+        antigen_val = atoi(tds[2].get_text(strip=True))
+        pcr_val = atoi(tds[3].get_text(strip=True))
 
         if name == 'Positive':
             tagged[Fields.ANTIBODY_POS.name] = antibody_val
+            tagged[Fields.ANTIGEN_POS.name] = antigen_val
             tagged[Fields.SPECIMENS_POS.name] = pcr_val
         elif name == 'Negative':
             tagged[Fields.ANTIBODY_NEG.name] = antibody_val
+            tagged[Fields.ANTIGEN_NEG.name] = antigen_val
             tagged[Fields.SPECIMENS_NEG.name] = pcr_val
         elif name == 'Total':
             tagged[Fields.ANTIBODY_TOTAL.name] = antibody_val
+            tagged[Fields.ANTIGEN_TOTAL.name] = antigen_val
             tagged[Fields.SPECIMENS.name] = pcr_val
 
     return tagged
