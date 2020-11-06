@@ -152,6 +152,11 @@ CT:
   type: soda
   desc: JSON (cases, death, hosp, date, SODA API)
   data_path: [0, 0]
+- url: https://data.ct.gov/resource/qfkt-uahj.json
+  params: {$query: 'select sum(number_of_pcr_tests), sum(number_of_pcr_positives), sum(number_of_pcr_negatives), sum(number_of_antigen_tests), sum(number_of_antigen_positives), sum(number_of_antigen_negatives), max(date)'}
+  type: soda
+  desc: Tests (pcr, antigen)
+  data_path: [0, 0]
 DC:
 - url: https://dcgov.app.box.com/index.php?rm=box_download_shared_file&vanity_name=DCHealthStatisticsData&file_id=f_645422184765
   params: {sheet_name: ["Overall Stats", "Hospital Data"], parse_dates: true}

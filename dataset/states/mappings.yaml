@@ -73,6 +73,12 @@ CT:
   totaldeaths: DEATH
   confirmeddeaths: DEATH_CONFIRMED
   probabledeaths: DEATH_PROBABLE
+  sum_number_of_pcr_tests: SPECIMENS
+  sum_number_of_pcr_positives: SPECIMENS_POS
+  sum_number_of_pcr_negatives: SPECIMENS_NEG
+  sum_number_of_antigen_tests: ANTIGEN_TOTAL
+  sum_number_of_antigen_positives: ANTIGEN_POS
+  sum_number_of_antigen_negatives: ANTIGEN_NEG
 DC:
   Total Overall Number of Tests: PCR_TEST_ENCOUNTERS
   Total Residents Tested: TOTAL
