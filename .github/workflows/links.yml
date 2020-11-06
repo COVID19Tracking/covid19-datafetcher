@@ -33,7 +33,7 @@ jobs:
         python tools/links.py
 
     - name: copy generated links.html
-      run: mv main/outputs/index.html gh-pages/docs/links.html
+      run: mv main/outputs/index.html gh-pages/docs/index.html
 
     - name: Compare and commit generated links page
       run: |
