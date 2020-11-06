@@ -153,7 +153,7 @@ CT:
   desc: JSON (cases, death, hosp, date, SODA API)
   data_path: [0, 0]
 - url: https://data.ct.gov/resource/qfkt-uahj.json
-  params: {$query: 'select sum(number_of_pcr_tests), sum(number_of_pcr_positives), sum(number_of_pcr_negatives), sum(number_of_antigen_tests), sum(number_of_antigen_positives), sum(number_of_antigen_negatives), max(date)'}
+  params: {$query: 'select sum(number_of_pcr_tests), sum(number_of_pcr_positives), sum(number_of_pcr_negatives), sum(number_of_ag_tests), sum(number_of_ag_positives), sum(number_of_ag_negatives), max(date)'}
   type: soda
   desc: Tests (pcr, antigen)
   data_path: [0, 0]
