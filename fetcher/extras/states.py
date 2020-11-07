@@ -922,7 +922,6 @@ def handle_ut(res, mapping):
                     fields = [Fields.SPECIMENS_POS.name, Fields.SPECIMENS_NEG.name,
                               Fields.ANTIGEN_POS, Fields.ANTIGEN_NEG]
                     specimens_file_latest = entry.name
-                    df = pd.read_csv(os.path.join(zipdir, entry.name))
                 elif entry.name.startswith(people_tested_file):
                     if entry.name < people_tested_latest:
                         continue
@@ -931,7 +930,6 @@ def handle_ut(res, mapping):
                               Fields.ANTIGEN_POS_PEOPLE, Fields.ANTIGEN_NEG_PEOPLE,
                               Fields.TOTAL, Fields.ANTIGEN_TOTAL_PEOPLE]
                     people_tested_latest = entry.name
-                    df = pd.read_csv(os.path.join(zipdir, entry.name))
                 if fields:
                     df = pd.read_csv(os.path.join(zipdir, entry.name))
                     summed = df.groupby(['Test Type', 'Result']).sum()
@@ -943,6 +941,10 @@ def handle_ut(res, mapping):
                             value = summed.loc[tt, rr]['Count']
                             tagged[tag] = value
                             i += 1
+                    # handle totals
+                    if 'people_pos' in fields:
+                        tagged[Fields.TOTAL.name] = sum([
+                            summed.loc[test_type[0], rr]['Count'] for rr in result])
     return tagged
 
 

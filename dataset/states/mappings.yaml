@@ -510,7 +510,6 @@ UT:
   SUM_Hospitalizations: HOSP
   # double mapping here, that's from the site:
   total-covid-19-cases: POSITIVE
-  total-people-tested: TOTAL
   total-covid-19-hospitalizations: HOSP
   total-covid-19-deaths: DEATH
   Intubation/Ventilator Use: VENT
