@@ -919,14 +919,14 @@ def handle_ut(res, mapping):
                     if entry.name < specimens_file_latest:
                         continue
                     # specimens
-                    fields = [Fields.SPECIMENS_POS.name, Fields.SPECIMENS_NEG.name,
+                    fields = [Fields.SPECIMENS_POS, Fields.SPECIMENS_NEG,
                               Fields.ANTIGEN_POS, Fields.ANTIGEN_NEG]
                     specimens_file_latest = entry.name
                 elif entry.name.startswith(people_tested_file):
                     if entry.name < people_tested_latest:
                         continue
                     # people tested
-                    fields = ['people_pos', 'people_neg',
+                    fields = [Fields.CONFIRMED, Fields.NEGATIVE,
                               Fields.ANTIGEN_POS_PEOPLE, Fields.ANTIGEN_NEG_PEOPLE,
                               Fields.TOTAL, Fields.ANTIGEN_TOTAL_PEOPLE]
                     people_tested_latest = entry.name
@@ -942,7 +942,7 @@ def handle_ut(res, mapping):
                             tagged[tag] = value
                             i += 1
                     # handle totals
-                    if 'people_pos' in fields:
+                    if Fields.CONFIRMED in fields:
                         tagged[Fields.TOTAL.name] = sum([
                             summed.loc[test_type[0], rr]['Count'] for rr in result])
     return tagged
