@@ -16,3 +16,11 @@ CO:
   Value: PPR
   # 03/02/2020
   __strptime: "%m/%d/%Y"
+GU:
+  date: TIMESTAMP
+  sma_positivity: ROLLING_PPR
+  positive_tests_day: POSITIVE
+  total_tests_day: TESTS
+  # overall positivity is just a division between total_positives/total_tests
+  total_tests: TOTAL_TESTS
+  total_positive: TOTAL_POSITIVE

@@ -31,3 +31,12 @@ CO:
   params: {where: Desc_ like 'Daily%PCR%' and Metric = 'Percent Positivity', outFields: '*', orderByFields: Attr_Date, f: json}
   type: arcgis
   desc: Percent Positivity
+GU:
+  #rolling(window=7).mean() for daily positives, daily tests, and then divide
+- url: https://services2.arcgis.com/FPJlJZYRsD8OhCWA/arcgis/rest/services/COVID19_Dashboard_Counts_by_Date/FeatureServer/0/query
+  # sma = simple moving average
+  params: {where: 1=1, outFields: '*', orderByFields: 'date asc', f: json}
+  type: arcgis
+  desc: Percent positivity (7d)
+  constants:
+    ROLLING_DAYS: 7
