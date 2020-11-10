@@ -2,10 +2,11 @@
 This is only one step over just dumping everything to a txt file, nothing fancy
 '''
 
-from jinja2 import Environment, PackageLoader, select_autoescape
-import hydra
+from datetime import datetime
 import sys
 import urllib.parse
+import hydra
+from jinja2 import Environment, PackageLoader, select_autoescape
 import yaml
 
 # TODO: take it from configs
@@ -37,7 +38,7 @@ def main(cfg):
         autoescape=select_autoescape(['html'])
     )
     template = env.get_template('links.html')
-    template.stream(sources=sources).dump(open(FILENAME, 'w'))
+    template.stream(sources=sources, timestamp=datetime.now()).dump(open(FILENAME, 'w'))
 
 
 if __name__ == "__main__":
