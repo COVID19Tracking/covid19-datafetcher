@@ -24,3 +24,9 @@ GU:
   # overall positivity is just a division between total_positives/total_tests
   total_tests: TOTAL_TESTS
   total_positive: TOTAL_POSITIVE
+VT:
+  Date_Received_by_PH: TIMESTAMP
+  Percent_positive: PPR
+  Percent_positive_7day: ROLLING_PPR
+  Total_Tests: TESTS
+  Cumulative_tests: TOTAL_TESTS

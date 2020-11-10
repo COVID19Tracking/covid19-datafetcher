@@ -40,3 +40,12 @@ GU:
   desc: Percent positivity (7d)
   constants:
     ROLLING_DAYS: 7
+VT:
+  # might not be able to repro the values ourselves because we don't have
+  # matching (by date) totals + positives
+- url: https://services1.arcgis.com/BkFxaEFNwHqX3tAw/arcgis/rest/services/V_EPI_LabSpecimensDaily_PUBLIC/FeatureServer/0/query
+  params: {where: 1=1, outFields: '*', orderByFields: Date_Received_by_PH asc, f: json}
+  type: arcgis
+  desc: Positivity
+  constants:
+    ROLLING_DAYS: 7
