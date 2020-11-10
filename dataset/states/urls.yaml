@@ -82,7 +82,7 @@ AR:
   desc: Pos (confirmed/probable), death (confirmed/probable)
 - url: https://services.arcgis.com/PwY9ZuZRDiI5nXUB/arcgis/rest/services/UPDATED_ADH_COVID19_HEALTH_REGION_METRICS/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"PositiveAdmits"},
-{"statisticType":"sum","onStatisticField":"SuspectedAdmits"}, {"statisticType":"sum","onStatisticField":"ICUAdmit"}, {"statisticType":"sum","onStatisticField":"OnVents"}], f: json}
+{"statisticType":"sum","onStatisticField":"SuspectedAdmits"}, {"statisticType":"sum","onStatisticField":"ICUAdmit"}, {"statisticType":"sum","onStatisticField":"OnVents"}], returnGeometry: false, f: json}
   type: arcgis
   desc: Hospitalizations
 AZ:
