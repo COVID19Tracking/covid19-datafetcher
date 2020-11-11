@@ -12,7 +12,7 @@ from fetcher.sources import build_sources
 # TODO:
 # - make a mapper of type to fetch method
 
-MS_FILTER = datetime(2020, 1, 1, 0, 0).timestamp() * 1000
+#MS_FILTER = datetime(2020, 1, 1, 0, 0).timestamp() * 1000
 # Indices
 TS = 'TIMESTAMP'
 STATE = Fields.STATE.name
@@ -113,6 +113,10 @@ def build_dataframe(results, states_to_index, dataset_cfg, output_date_format, f
             logging.warning("This shouldnt happen: %r", v)
 
     df = pd.DataFrame(items, columns=columns)
+    # special casing here, because of groupby+dropna bug
+    if isinstance(index, list) and len(index) > 1:
+        for c in index:
+            df[c] = df[c].fillna('n/a')
     df = df.set_index(index)
     df = df.groupby(level=df.index.names, dropna=False).last()
 
@@ -126,9 +130,10 @@ def build_dataframe(results, states_to_index, dataset_cfg, output_date_format, f
     if TS in df.index.names:
         # For each state, we forward fill, and resample to 1-day intervals
         # and forward fill the newely added days
-        df = df.reset_index(STATE).groupby(STATE).apply(
+        part = [x for x in index if x != TS]
+        df = df.reset_index(part).groupby(part).apply(
             lambda d: d.ffill().resample('1D', closed='right').ffill()
-        ).drop(columns=STATE)
+        ).drop(columns=part)
         df.sort_index(level=TS, ascending=False, inplace=True)
 
     df.sort_index(level=STATE, kind='mergesort', ascending=True, sort_remaining=False, inplace=True)

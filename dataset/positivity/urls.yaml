@@ -6,6 +6,7 @@ AK:
   desc: Positivity
   constants:
     ROLLING_DAYS: 7
+    UNITS: Tests
 AR:
 - url: https://services.arcgis.com/PwY9ZuZRDiI5nXUB/ArcGIS/rest/services/UPDATED_ADH_COVID19_COUNTY_METRICS/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "pcr_pos_test"}, {"statisticType": "sum", "onStatisticField": "pcr_test"}, {"statisticType": "sum", "onStatisticField": "antigen_test"}, {"statisticType": "sum", "onStatisticField": "antigen_pos_test"}], f: json}
@@ -56,3 +57,13 @@ VT:
   desc: Positivity
   constants:
     ROLLING_DAYS: 7
+    UNITS: "Tests"
+WI:
+- url: https://bi.wisconsin.gov/t/DHS/views/PercentPositivebyTestPersonandaComparisonandTestCapacity/ByTestDashboard.csv
+  params: {thousands: ',', parse_dates: ['Day of displaydateonly'], index_col: 'Day of displaydateonly'}
+  type: pandas
+  desc: Positivity by test
+- url: https://bi.wisconsin.gov/t/DHS/views/PercentPositivebyTestPersonandaComparisonandTestCapacity/ByPersonDashboard.csv
+  params: {thousands: ',', parse_dates: ['Day of Result Date'], index_col: 'Day of Result Date'}
+  type: pandas
+  desc: Positivity by person

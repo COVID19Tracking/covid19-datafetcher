@@ -124,7 +124,8 @@ def _tag_and_timestamp(state, data, timestamp, dateformat=None):
     if TS in data and data[TS]:
         # Check whether it's s or ms and convert to datetime
         ts = data[TS]
-        data[TS] = datetime.fromtimestamp(ts/1000 if ts > MS_FILTER else ts)
+        if not isinstance(ts, datetime):
+            data[TS] = datetime.fromtimestamp(ts/1000 if ts > MS_FILTER else ts)
     elif 'DATE' in data and data['DATE'] and dateformat:
         d = data['DATE']
         data[TS] = datetime.strptime(d, dateformat)
