@@ -40,6 +40,13 @@ GU:
   desc: Percent positivity (7d)
   constants:
     ROLLING_DAYS: 7
+KY:
+- url: https://govstatus.egov.com/kycovid19
+  params: null
+  type: html:soup
+  desc: State Page
+  constants:
+    TIMESTAMP: $FETCH_TIMESTAMP
 VT:
   # might not be able to repro the values ourselves because we don't have
   # matching (by date) totals + positives

@@ -46,7 +46,7 @@ def build_sources(url_file, mappings_file, extras_module=None):
             state_queries.append(query)
 
         extras_func = extras.get(state)
-        source = Source(state, state_queries, mapping=mappings.get(state), extras=extras_func)
+        source = Source(state, state_queries, mapping=mappings.get(state, {}), extras=extras_func)
         sources[state] = source
     return sources
 
