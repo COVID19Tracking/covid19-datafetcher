@@ -17,11 +17,11 @@ AL:
   SUM_Confirmed: CONFIRMED
   SUM_Probable: PROBABLE
   hospitalization: HOSP
-  antibody_total: ANTIBODY_TOTAL_PEOPLE
-  pcr_specimens: SPECIMENS
   CLN_ICU: ICU
   CLN_VENT: VENT
   Confirmed_AllWeekdays: CURR_HOSP
+  SUM_AntibodyTest: ANTIBODY_TOTAL_PEOPLE
+  SUM_DiagnosticTest: SPECIMENS
 AR:
   SUM_positive: POSITIVE
   SUM_deaths: DEATH
