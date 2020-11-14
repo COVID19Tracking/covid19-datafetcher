@@ -206,10 +206,14 @@ KY:
   Serology: ANTIBODY_TOTAL
   PCR: SPECIMENS
 LA:
-  Case Count: CONFIRMED
-  Deaths: DEATH
-  Commercial Tests: TOTAL
-  State Tests: STATE_TESTS
+  Antigen Tests: ANTIGEN_TOTAL
+  Molecular Tests: SPECIMENS
+  Confirmed Cases: CONFIRMED
+  Probable Cases: PROBABLE
+  Confirmed Deaths: DEATH_CONFIRMED
+  Probable Deaths: DEATH_PROBABLE
+  Total Cases: POSITIVE
+  Total Deaths: DEATH
   on_vent: CURR_VENT
   hospitalized: CURR_HOSP
 MA:

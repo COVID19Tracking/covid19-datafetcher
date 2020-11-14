@@ -198,21 +198,16 @@ def handle_nh(res, mapping):
 
 
 def handle_la(res, mapping):
-    stats = res[0]
-    state_tests = 'STATE_TESTS'
     tagged = {}
-    if 'features' in stats and len(stats['features']) > 0:
-        attributes = stats['features']
-        attributes = {attr.get('attributes', {}).get('Measure'):
-                      attr.get('attributes', {}).get('SUM_Value') for attr in attributes}
-        tagged = map_attributes(attributes, mapping, 'LA')
-
-    if state_tests in tagged:
-        tests = tagged.pop(state_tests)
-        tagged[Fields.TOTAL.name] += tests
+    for stats in res[:2]:
+        if 'features' in stats and len(stats['features']) > 0:
+            attributes = stats['features']
+            attributes = {attr.get('attributes', {}).get('Measure'):
+                          attr.get('attributes', {}).get('SUM_Value') for attr in attributes}
+            tagged.update(map_attributes(attributes, mapping, 'LA'))
 
     # hospitalization
-    for result in res[1:3]:
+    for result in res[2:4]:
         partial = extract_arcgis_attributes(result, mapping, 'LA')
         tagged.update(partial)
 
@@ -222,12 +217,6 @@ def handle_la(res, mapping):
         if widget.get('name') == 'recovered':
             val = widget.get('datasets')[0].get('data')
             tagged[Fields.RECOVERED.name] = val
-        if widget.get('defaultSettings', {}) \
-                 .get('topSection', {}).get('textInfo', {}).get('text', '').find("Probable") >= 0:
-            datasets = widget.get('datasets')
-            for ds in datasets:
-                if ds.get('type') == 'staticDataset':
-                    tagged[Fields.PROBABLE.name] = atoi(ds.get('data'))
 
     return tagged
 

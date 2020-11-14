@@ -268,11 +268,14 @@ KY:
   type: html:soup
   desc: Page (soup)
 LA:
-- url: https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/Combined_COVID_Reporting/FeatureServer/0/query
-  params: {f: json, groupByFieldsForStatistics: Measure, outStatistics: [{"statisticType": "sum", "onStatisticField": "Value"}],
-    where: 1=1}
+- url: https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/test_this_sheet/FeatureServer/0/query
+  params: {where: timeframe='cumulative' AND Group_Num<>38 AND Measure NOT LIKE '%Test', groupByFieldsForStatistics: Measure, outStatistics: [{"statisticType": "sum", "onStatisticField": "Value"}], f: json}
   type: arcgis
-  desc: Most dashboard data
+  desc: Non-test dashboard data
+- url: https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/test_this_sheet/FeatureServer/0/query
+  params: {where: timeframe='cumulative' and Measure like '%Test%', groupByFieldsForStatistics: Measure, outStatistics: [{"statisticType": "sum", "onStatisticField": "Value"}], f: json}
+  type: arcgis
+  desc: Test dashboard data
 - url: https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/Combined_COVID_Reporting/FeatureServer/0/query
   params: {where: Measure = 'COVID-positive' AND ValueType = 'hospitalized' AND Value is not NULL, outFields: '*, Value as hospitalized', orderByFields: 'FeatureID desc', resultRecordCount: 1, f: json}
   type: arcgis
