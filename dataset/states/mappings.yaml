@@ -298,8 +298,8 @@ MN:
   Total approximate number of completed antigen tests (cumulative): ANTIGEN_TOTAL
   Total approximate number of completed PCR tests (cumulative): PCR_TEST_ENCOUNTERS
   Total deaths (cumulative): DEATH
-  Deaths from confirmed  cases (cumulative): DEATH_CONFIRMED
-  Deaths from probable  cases (cumulative): DEATH_PROBABLE
+  Deaths from confirmed cases (cumulative): DEATH_CONFIRMED
+  Deaths from probable cases (cumulative): DEATH_PROBABLE
   Total cases hospitalized (cumulative): HOSP
   Total cases hospitalized in ICU (cumulative): ICU
 MO:

@@ -631,7 +631,7 @@ def handle_mi(res, mapping):
 
 def handle_mn(res, mapping):
     mapped = {}
-    for result in res[:-1]:
+    for result in res[:1]:
         partial = extract_arcgis_attributes(result, mapping, 'NJ')
         mapped.update(partial)
 

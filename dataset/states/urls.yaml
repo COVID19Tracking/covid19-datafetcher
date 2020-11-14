@@ -338,6 +338,11 @@ MN:
 - url: https://services2.arcgis.com/V12PKGiMAH7dktkU/arcgis/rest/services/MyMapService/FeatureServer/0/query
   params: {where: 1=1, outFields: 'Date, Time,TotalCases, EvrHospYes as hosp, EvrICUYes, RlsdFrmIso, OutcmDied', f: json}
   type: arcgis
+# This is too unstable
+# - url: https://mn.gov/covid19/assets/HospitalCapacity_HistoricCSV_tcm1148-449110.csv
+#   params: {} #{parse_dates: ['Data Date (MM/DD/YYYY)']}
+#   type: pandas
+#   desc: Hospital
 - url: https://www.health.state.mn.us/diseases/coronavirus/situation.html
   params: null
   type: html:soup
