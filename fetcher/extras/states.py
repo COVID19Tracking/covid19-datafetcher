@@ -825,6 +825,13 @@ def handle_ma(res, mapping):
         rec = df['Quarantine and Isolation']
         recovered = rec[rec['Status'] == 'Total Cases Released from Isolation'].iloc[-1]['Residents']
         tagged[Fields.RECOVERED.name] = recovered
+        antibody = df['Antibody'].sum()
+        tagged[Fields.ANTIBODY_TOTAL.name] = antibody['Total Tests']
+        tagged[Fields.ANTIBODY_POS.name] = antibody['Positive Tests']
+
+        hosp = df['RaceEthnicity']
+        maxdate = hosp['Date'].max()
+        tagged[Fields.HOSP.name] = hosp[hosp['Date'] == maxdate].sum()['Ever Hospitaltized']
 
     return tagged
 
