@@ -453,6 +453,7 @@ PR:
   T_Molecular_Pos: SPECIMENS_POS
   T_Vent_Covid: CURR_VENT
   T_Hospitalizados: CURR_HOSP
+  T_Recuperados: RECOVERED
 RI:
   # ArcGIS query:
   Covid_Deaths: DEATH
