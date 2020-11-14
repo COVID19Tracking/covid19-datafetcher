@@ -655,10 +655,10 @@ WA:
 {"statisticType": "max", "onStatisticField": "CV_State_Deaths"}], f: json}
   type: arcgis
 WI:
-- url: https://dhsgis.wi.gov/server/rest/services/DHS_COVID19/COVID19_WI/FeatureServer/10/query
-  params: {where: GEO='State', outFields: 'DATE,POSITIVE,NEGATIVE,POSITIVE + NEGATIVE as TOTAL,DEATHS,HOSP_YES,IC_YES', orderByFields: DATE desc, resultRecordCount: 1, f: json}
+- url: https://dhsgis.wi.gov/server/rest/services/DHS_COVID19/COVID19_WI/MapServer/11/query
+  params: {where: 1=1, outFields: 'DATE,POSITIVE,NEGATIVE,DEATHS,HOSP_YES,IC_YES', returnGeometry: False, orderByFields: Date desc, resultRecordCount: 1, f: json}
   type: arcgis
-  desc: Main metrics (pos, neg, death, hosp, icu)
+  desc: Main metrics
 - url: https://bi.wisconsin.gov/t/DHS/views/PercentPositivebyTestPersonandaComparisonandTestCapacity/TestCapacityDashboard.csv
   params: {parse_dates: ['Day of displaydateonly'], thousands: ','}
   type: pandas
