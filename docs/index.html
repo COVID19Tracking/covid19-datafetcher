@@ -361,8 +361,12 @@
       <td><a name="LA"/><b>LA</b></td>
       <td>
         
-        <a href="https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/Combined_COVID_Reporting/FeatureServer/0/query?groupByFieldsForStatistics=Measure&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Value%27%7D%5D&amp;where=1%3D1">
-            Most dashboard data
+        <a href="https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/test_this_sheet/FeatureServer/0/query?where=timeframe%3D%27cumulative%27+AND+Group_Num%3C%3E38+AND+Measure+NOT+LIKE+%27%25Test%27&amp;groupByFieldsForStatistics=Measure&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Value%27%7D%5D">
+            Non-test dashboard data
+        </a><br/>
+        
+        <a href="https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/test_this_sheet/FeatureServer/0/query?where=timeframe%3D%27cumulative%27+and+Measure+like+%27%25Test%25%27&amp;groupByFieldsForStatistics=Measure&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Value%27%7D%5D">
+            Test dashboard data
         </a><br/>
         
         <a href="https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/Combined_COVID_Reporting/FeatureServer/0/query?where=Measure+%3D+%27COVID-positive%27+AND+ValueType+%3D+%27hospitalized%27+AND+Value+is+not+NULL&amp;outFields=%2A%2C+Value+as+hospitalized&amp;orderByFields=FeatureID+desc&amp;resultRecordCount=1">
@@ -888,6 +892,6 @@
     </td></tr>
     
     </table>
-    Generated on 2020-11-11 22:18:45.467519
+    Generated on 2020-11-14 09:51:12.620849
   </body>
 </html>
