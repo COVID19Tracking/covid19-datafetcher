@@ -444,7 +444,7 @@ PA:
   Negative: NEGATIVE
   Deaths: DEATH
 PR:
-  T_Casos_Unicos: POSITIVE
+  T_Casos_Unicos: CONFIRMED
   T_Fatalidades: DEATH_CONFIRMED
   T_Muertes_COVID_RD: DEATH_PROBABLE
   T_Muertes_Combinadas: DEATH
@@ -454,6 +454,8 @@ PR:
   T_Vent_Covid: CURR_VENT
   T_Hospitalizados: CURR_HOSP
   T_Recuperados: RECOVERED
+  T_Casos_Probables_Anticuerpo_Acumulados: ANTIBODY_POS
+  T_Casos_Probables_Antigeno_Acumulados: PROBABLE
 RI:
   # ArcGIS query:
   Covid_Deaths: DEATH

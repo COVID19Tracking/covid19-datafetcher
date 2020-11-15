@@ -532,6 +532,10 @@ PR:
   params: {where: 1=1, outFields: 'T_Muertes_COVID_RD,T_Muertes_Combinadas,T_Pacientes_Int_Covid,T_Vent_Covid,T_Serologicos_Pos,T_Casos_Unicos,T_Molecular_Pos,T_Fatalidades,T_Hospitalizados,T_Recuperados',
     f: json}
   type: arcgis
+- url: https://services5.arcgis.com/klquQoHA0q9zjblu/arcgis/rest/services/Datos_Totales_View8/FeatureServer/0/query
+  params: {where: 1=1, outFields: 'T_Casos_Probables_Anticuerpo_Acumulados, T_Casos_Probables_Antigeno_Acumulados', f: json}
+  type: arcgis
+  desc: Testing
 RI:
 # historic data: https://static.dwcdn.net/data/dO7k8.csv
 - url: 'https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/export?format=csv&sheet=264100583'
