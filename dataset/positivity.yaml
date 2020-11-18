@@ -1,19 +1,15 @@
 # @package _group_
 name: positivity
-index: [STATE, TIMESTAMP, UNITS]
+index: [STATE, TIMESTAMP, UNITS, WINDOW]
 extras_module: fetcher.extras.positivity
 
 fields: [STATE, FETCH_TIMESTAMP, TIMESTAMP, DATE,
-CUM_POSITIVE, CUM_TESTS, # CUMULATIVE
-POSITIVE, TOTAL, PPR, # DAILY
 
-ROLLING_POSITIVE, ROLLING_TOTAL, ROLLING_PPR,
-ROLLING_DAYS,
+TOTAL, POSITIVE, PPR,
+UNITS, WINDOW
 
-ROLLING_POSITIVE2, ROLLING_TOTAL2, ROLLING_PPR2,
-ROLLING_DAYS2,
-
-UNITS
+# Expected values for window: Day, Week, Alltime, <others>
+# Expected values for unit: Tests, People, unknown
 ]
 
 

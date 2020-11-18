@@ -1,11 +1,19 @@
 AK:
 # The rolling values are rolling 7-day avg (.rolling(7).mean())
 - url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Testing_Positivity/FeatureServer/0/query
-  params: {where: 1=1, outFields: '*', f: json}
+  params: {where: 1=1, outFields: 'Date_Collected, daily_positive, daily_tests, pct_positive', f: json}
   type: arcgis
   desc: Positivity
   constants:
-    ROLLING_DAYS: 7
+    WINDOW: Day
+    UNITS: Tests
+# The rolling values are rolling 7-day avg (.rolling(7).mean())
+- url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Testing_Positivity/FeatureServer/0/query
+  params: {where: 1=1, outFields: 'Date_Collected, rolling_positive, rolling_tests, rolling_positivity', f: json}
+  type: arcgis
+  desc: Positivity
+  constants:
+    WINDOW: Week
     UNITS: Tests
 AR:
 - url: https://services.arcgis.com/PwY9ZuZRDiI5nXUB/ArcGIS/rest/services/UPDATED_ADH_COVID19_COUNTY_METRICS/FeatureServer/0/query
@@ -15,32 +23,53 @@ AR:
   constants:
     # more special casing
     TIMESTAMP: $FETCH_TIMESTAMP
+    UNITS: Tests
+    WINDOW: Alltime
 CO:
 - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
   params: {where: Desc_ like 'Daily%PCR%' and Metric = '3-Day Average Percent Positivity', outFields: '*, Value as Value3', orderByFields: 'Attr_Date asc', f: json}
   type: arcgis
   desc: Percent Positivity (3d)
   constants:
-    ROLLING_DAYS: 3
+    WINDOW: 3Days
+#    UNITS:
 - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
   params: {where: Desc_ like 'Daily%PCR%' and Metric = '7-Day Average Percent Positivity', outFields: '*, Value as Value7', orderByFields: Attr_Date, f: json}
   type: arcgis
   desc: Percent Positivity (7d)
   constants:
-    ROLLING_DAYS2: 7
+    WINDOW: Week
 - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
   params: {where: Desc_ like 'Daily%PCR%' and Metric = 'Percent Positivity', outFields: '*', orderByFields: Attr_Date, f: json}
   type: arcgis
   desc: Percent Positivity
+  constants:
+    WINDOW: Day
+#    UNITS: ??
 GU:
   #rolling(window=7).mean() for daily positives, daily tests, and then divide
 - url: https://services2.arcgis.com/FPJlJZYRsD8OhCWA/arcgis/rest/services/COVID19_Dashboard_Counts_by_Date/FeatureServer/0/query
   # sma = simple moving average
-  params: {where: 1=1, outFields: '*', orderByFields: 'date asc', f: json}
+  params: {where: 1=1, outFields: 'date, sma_positivity', orderByFields: 'date asc', f: json}
   type: arcgis
   desc: Percent positivity (7d)
   constants:
-    ROLLING_DAYS: 7
+    WINDOW: Week
+    UNITS: Tests
+- url: https://services2.arcgis.com/FPJlJZYRsD8OhCWA/arcgis/rest/services/COVID19_Dashboard_Counts_by_Date/FeatureServer/0/query
+  params: {where: 1=1, outFields: 'date, positive_tests_day, total_tests_day', orderByFields: 'date asc', f: json}
+  type: arcgis
+  desc: Daily tests
+  constants:
+    WINDOW: Day
+    UNITS: Tests
+- url: https://services2.arcgis.com/FPJlJZYRsD8OhCWA/arcgis/rest/services/COVID19_Dashboard_Counts_by_Date/FeatureServer/0/query
+  params: {where: 1=1, outFields: 'date, total_tests, total_positive', orderByFields: 'date asc', f: json}
+  type: arcgis
+  desc: Daily tests
+  constants:
+    WINDOW: Alltime
+    UNITS: Tests
 KY:
 - url: https://govstatus.egov.com/kycovid19
   params: null
@@ -48,15 +77,24 @@ KY:
   desc: State Page
   constants:
     TIMESTAMP: $FETCH_TIMESTAMP
+    # WINDOW: ??
+    # UNITS: ??
 VT:
   # might not be able to repro the values ourselves because we don't have
   # matching (by date) totals + positives
 - url: https://services1.arcgis.com/BkFxaEFNwHqX3tAw/arcgis/rest/services/V_EPI_LabSpecimensDaily_PUBLIC/FeatureServer/0/query
-  params: {where: 1=1, outFields: '*', orderByFields: Date_Received_by_PH asc, f: json}
+  params: {where: 1=1, outFields: 'Date_Received_by_PH, Percent_positive_7day, Total_Tests', orderByFields: Date_Received_by_PH asc, f: json}
   type: arcgis
   desc: Positivity
   constants:
-    ROLLING_DAYS: 7
+    WINDOW: Week
+    UNITS: "Tests"
+- url: https://services1.arcgis.com/BkFxaEFNwHqX3tAw/arcgis/rest/services/V_EPI_LabSpecimensDaily_PUBLIC/FeatureServer/0/query
+  params: {where: 1=1, outFields: 'Date_Received_by_PH, Percent_positive', orderByFields: Date_Received_by_PH asc, f: json}
+  type: arcgis
+  desc: Positivity
+  constants:
+    # WINDOW: ??
     UNITS: "Tests"
 WI:
 - url: https://bi.wisconsin.gov/t/DHS/views/PercentPositivebyTestPersonandaComparisonandTestCapacity/ByTestDashboard.csv

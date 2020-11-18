@@ -3,39 +3,40 @@ AK:
   daily_positive: POSITIVE
   daily_tests: TOTAL
   pct_positive: PPR
-  rolling_positive: ROLLING_POSITIVE
-  rolling_tests: ROLLING_TOTAL
-  rolling_positivity: ROLLING_PPR
+
+  rolling_positive: POSITIVE
+  rolling_tests: TOTAL
+  rolling_positivity: PPR
 AR:
   SUM_pcr_pos_test: POSITIVE
-  SUM_pcr_test: TESTS
+  SUM_pcr_test: TOTAL
 CO:
   Attr_Date: DATE
-  Value3: ROLLING_PPR
-  Value7: ROLLING_PPR2
+  Value3: PPR
+  Value7: PPR
   Value: PPR
   # 03/02/2020
   __strptime: "%m/%d/%Y"
 GU:
   date: TIMESTAMP
-  sma_positivity: ROLLING_PPR
+  sma_positivity: PPR # 7-day rolling
   positive_tests_day: POSITIVE
-  total_tests_day: TESTS
+  total_tests_day: TOTAL
   # overall positivity is just a division between total_positives/total_tests
-  total_tests: CUM_TOTAL
-  total_positive: CUM_POSITIVE
+  total_tests: TOTAL
+  total_positive: POSITIVE
 VT:
   Date_Received_by_PH: TIMESTAMP
   Percent_positive: PPR
-  Percent_positive_7day: ROLLING_PPR
+  Percent_positive_7day: PPR
   Total_Tests: TOTAL
-  Cumulative_tests: CUM_TOTAL
+  Cumulative_tests: TOTAL
 WI:
   Date: TIMESTAMP
   Positive.y: POSITIVE
   Total.Y: TOTAL
-  Testing Perc Pos moving avg: ROLLING_PPR
-  Positives: POSITIVE,
-  Totals: TOTAL,
-  Encounter_7day_avg (copy): ROLLING_PPR
+  Testing Perc Pos moving avg: PPR
+  Positives: POSITIVE
+  Totals: TOTAL
+  Encounter_7day_avg (copy): PPR
   __strptime: "%y-%m-%d"

@@ -9,10 +9,6 @@ from fetcher.source_utils import fetch_source, process_source_responses
 from fetcher.sources import build_sources
 
 
-# TODO:
-# - make a mapper of type to fetch method
-
-#MS_FILTER = datetime(2020, 1, 1, 0, 0).timestamp() * 1000
 # Indices
 TS = 'TIMESTAMP'
 STATE = Fields.STATE.name
