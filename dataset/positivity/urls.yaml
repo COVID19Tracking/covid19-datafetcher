@@ -46,6 +46,20 @@ CO:
   constants:
     WINDOW: Day
 #    UNITS: ??
+DC:
+- url: https://dataviz1.dc.gov/t/OCTO/views/Reopening_Metrics/Positivity_dash.csv
+  params: {parse_dates: ['Day of Specimen_Coll_Dt','Max. Specimen_Coll_Dt']}
+  type: pandas
+  desc: Moving avg 7 day positivity
+  constants:
+    WINDOW: Week
+    UNITS: Tests
+GA:
+# method: (positive / total).rolling(7).mean()
+- url: https://ga-covid19.ondemand.sas.com/docs/ga_covid_data.zip
+  params: null
+  type: zip
+  desc: Zip download
 GU:
   #rolling(window=7).mean() for daily positives, daily tests, and then divide
 - url: https://services2.arcgis.com/FPJlJZYRsD8OhCWA/arcgis/rest/services/COVID19_Dashboard_Counts_by_Date/FeatureServer/0/query

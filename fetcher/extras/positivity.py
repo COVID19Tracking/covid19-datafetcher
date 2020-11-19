@@ -1,5 +1,40 @@
 from datetime import datetime
+import os
 import re
+
+import pandas as pd
+from fetcher.extras.common import zipContextManager
+
+
+def handle_dc(res, mapping):
+    ppr = res[0]
+
+    ppr = ppr.filter(mapping.keys()).rename(columns=mapping)
+    ppr['UNITS'] = 'Tests'
+    ppr['WINDOW'] = 'Week'
+    return ppr.to_dict(orient='records')
+
+
+def handle_ga(res, mapping):
+    tagged = []
+    files = ["pcr_positives.csv"]
+    with zipContextManager(res[-1]) as zipdir:
+        for filename in files:
+            df = pd.read_csv(open(os.path.join(zipdir, filename), 'r'),
+                             parse_dates=['report_date'])
+            df = df[df['county'] == 'Georgia'].filter(mapping.keys())
+            df['UNITS'] = 'Tests'
+
+            # separate it to 7 & 14 rates
+            windows = {'Week': '7 day percent positive',
+                       '14Days': '14 day percent positive'}
+            for window, column in windows.items():
+                pct = df.rename(columns=mapping).drop(columns='PPR')
+                pct['PPR'] = df[column]
+                pct['WINDOW'] = window
+                tagged.append(pct.to_dict(orient='records'))
+
+    return tagged
 
 
 def handle_ky(res, mapping):

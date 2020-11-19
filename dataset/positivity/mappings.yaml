@@ -17,6 +17,15 @@ CO:
   Value: PPR
   # 03/02/2020
   __strptime: "%m/%d/%Y"
+DC:
+  Max. Specimen_Coll_Dt: TIMESTAMP
+  Moving Average of sample_results: PPR
+GA:
+  ALL PCR tests performed: TOTAL
+  All PCR positive tests: POSITIVE
+  7 day percent positive: PPR
+  14 day percent positive: PPR
+  report_date: TIMESTAMP
 GU:
   date: TIMESTAMP
   sma_positivity: PPR # 7-day rolling
