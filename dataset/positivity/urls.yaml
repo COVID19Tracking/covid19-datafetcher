@@ -77,7 +77,7 @@ KY:
   desc: State Page
   constants:
     TIMESTAMP: $FETCH_TIMESTAMP
-    # WINDOW: ??
+    WINDOW: Week
     # UNITS: ??
 VT:
   # might not be able to repro the values ourselves because we don't have
@@ -88,14 +88,14 @@ VT:
   desc: Positivity
   constants:
     WINDOW: Week
-    UNITS: "Tests"
+    UNITS: Tests
 - url: https://services1.arcgis.com/BkFxaEFNwHqX3tAw/arcgis/rest/services/V_EPI_LabSpecimensDaily_PUBLIC/FeatureServer/0/query
   params: {where: 1=1, outFields: 'Date_Received_by_PH, Percent_positive', orderByFields: Date_Received_by_PH asc, f: json}
   type: arcgis
   desc: Positivity
   constants:
     # WINDOW: ??
-    UNITS: "Tests"
+    UNITS: Tests
 WI:
 - url: https://bi.wisconsin.gov/t/DHS/views/PercentPositivebyTestPersonandaComparisonandTestCapacity/ByTestDashboard.csv
   params: {thousands: ',', parse_dates: ['Day of displaydateonly'], index_col: 'Day of displaydateonly'}
