@@ -68,6 +68,30 @@ def handle_ky(res, mapping):
     return tagged
 
 
+def handle_wa(res, mapping):
+    tagged = []
+    tests = res[0].groupby('Day').sum()
+
+    columns = tests.columns
+    columns7 = [x for x in columns if x.startswith('7 day rolling')]
+    columns1 = [x for x in columns if not x.startswith('7 day rolling')]
+
+    windows = {'Day': columns1, 'Week': columns7}
+    for window, columns in windows.items():
+        pct = tests.filter(columns).rename(columns=mapping)
+        pct['TIMESTAMP'] = pct.index
+        pct['POSITIVE'] = pct.filter(like='POSITIVE').sum(axis=1)
+        pct['NEGATIVE'] = pct.filter(like='NEGATIVE').sum(axis=1)
+        pct = pct.drop(columns=['NEGATIVE_PART', 'POSITIVE_PART'], errors='ignore')
+
+        pct['TOTAL'] = pct['POSITIVE'] + pct['NEGATIVE']
+        pct['UNITS'] = 'Tests'
+        pct['WINDOW'] = window
+        tagged.extend(pct.to_dict(orient='records'))
+
+    return tagged
+
+
 def handle_wi(res, mapping):
     # 0 - by tests
     # 1 - by people

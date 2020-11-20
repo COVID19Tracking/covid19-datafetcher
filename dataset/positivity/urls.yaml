@@ -110,6 +110,13 @@ VT:
   constants:
     # WINDOW: ??
     UNITS: Tests
+WA:
+# method: there are time series for daily tests and 7-day average
+# the ppr is a division: daily = simple division, weekly = also simple division, because the averaging already done
+- url: https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC_Tests_by_Specimen_Collection.xlsx
+  params: {parse_dates: ['Day']}
+  type: xlsx
+  desc: Testing and positivity
 WI:
 - url: https://bi.wisconsin.gov/t/DHS/views/PercentPositivebyTestPersonandaComparisonandTestCapacity/ByTestDashboard.csv
   params: {thousands: ',', parse_dates: ['Day of displaydateonly'], index_col: 'Day of displaydateonly'}

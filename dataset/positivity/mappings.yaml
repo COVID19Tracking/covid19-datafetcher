@@ -40,6 +40,16 @@ VT:
   Percent_positive_7day: PPR
   Total_Tests: TOTAL
   Cumulative_tests: TOTAL
+WA:
+  Day: TIMESTAMP
+  #Positive tests (%): PPR
+  #7 day rolling average positive (%): PPR
+  7 day rolling average POS: POSITIVE
+  7 day rolling average NEG: NEGATIVE
+  Positive: POSITIVE
+  Positive (Data Incomplete): POSITIVE_PART
+  Negative: NEGATIVE
+  Negative (Data Incomplete): NEGATIVE_PART
 WI:
   Date: TIMESTAMP
   Positive.y: POSITIVE
