@@ -68,6 +68,21 @@ def handle_ky(res, mapping):
     return tagged
 
 
+def handle_md(res, mapping):
+    tagged = []
+    df = res[0].rename(columns=mapping)
+    df['UNITS'] = 'Tests'
+
+    df['WINDOW'] = 'Day'
+    tagged.extend(df.to_dict(orient='records'))
+
+    weekly = df.drop(columns=['TOTAL', 'POSITIVE', 'PPR'])
+    weekly['PPR'] = df['rolling_avg']
+    weekly['WINDOW'] = 'Week'
+    tagged.extend(weekly.to_dict(orient='records'))
+    return tagged
+
+
 def handle_wa(res, mapping):
     tagged = []
     tests = res[0].groupby('Day').sum()

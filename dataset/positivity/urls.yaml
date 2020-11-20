@@ -93,6 +93,14 @@ KY:
     TIMESTAMP: $FETCH_TIMESTAMP
     WINDOW: Week
     # UNITS: ??
+MD:
+# method:
+# daily: positive / total => ppr
+# rolling 7 day: daily_ppr.rolling(7).mean()
+- url: https://state-of-maryland.github.io/TestingGraph/DailyTestingData.csv
+  params: {parse_dates: ['date', 'ReportDate']}
+  type: pandas
+  desc: Positivity & testing volume
 VT:
   # might not be able to repro the values ourselves because we don't have
   # matching (by date) totals + positives
