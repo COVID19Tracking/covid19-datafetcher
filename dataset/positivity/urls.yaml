@@ -101,6 +101,14 @@ MD:
   params: {parse_dates: ['date', 'ReportDate']}
   type: pandas
   desc: Positivity & testing volume
+VA:
+- url: https://data.virginia.gov/resource/3ves-mpfr.json
+  params: {summary_indicator: 'Current 7-Day Percent Positivity'}
+  type: soda
+  desc: 7-day positivity rate
+  constants:
+    WINDOW: Week
+    UNITS: Tests
 VT:
   # might not be able to repro the values ourselves because we don't have
   # matching (by date) totals + positives

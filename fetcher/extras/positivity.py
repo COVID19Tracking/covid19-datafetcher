@@ -83,6 +83,15 @@ def handle_md(res, mapping):
     return tagged
 
 
+def handle_va(res, mapping):
+    df = pd.DataFrame(res[0]).rename(columns=mapping)
+    df['TIMESTAMP'] = pd.to_datetime(df['TIMESTAMP'])
+    df['PPR'] = pd.to_numeric(df['PPR'].str.rstrip('%'))
+    df['WINDOW'] = 'Week'
+    df['UNITS'] = 'Tests'
+    return df.to_dict(orient='records')
+
+
 def handle_wa(res, mapping):
     tagged = []
     tests = res[0].groupby('Day').sum()
