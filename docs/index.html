@@ -613,11 +613,11 @@
             Discharged (new)
         </a><br/>
         
-        <a href="https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query?where=structure_measure_identifier%3D%27Case+count+of+COVID-19+positive+cases+currently+in+the+hospital%27+OR+structure_measure_identifier%3D%27Case+count+of+persons+under+investigation+%28PUI%29+%2F+presumptive+positive+cases+currently+in+the+hospital%27&amp;orderByFields=survey_period+desc&amp;groupByFieldsForStatistics=survey_period&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Value%27%2C+%27outStatisticFieldName%27%3A+%27curr_hosp%27%7D%5D&amp;resultRecordCount=1">
+        <a href="https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query?where=structure_measure_identifier+LIKE+%27%25hospitalized%25COVID+patients%27&amp;orderByFields=survey_period+desc&amp;groupByFieldsForStatistics=survey_period&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Value%27%2C+%27outStatisticFieldName%27%3A+%27curr_hosp%27%7D%5D&amp;resultRecordCount=1">
             Hospitalized
         </a><br/>
         
-        <a href="https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query?where=structure_measure_identifier+LIKE+%27Total+%25+of+COVID+Patients+Currently+on+a+Ventilator%27&amp;orderByFields=survey_period+desc&amp;groupByFieldsForStatistics=survey_period&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Value%27%2C+%27outStatisticFieldName%27%3A+%27curr_vent%27%7D%5D&amp;resultRecordCount=1">
+        <a href="https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query?where=structure_measure_identifier+LIKE+%27%25ventilated%25%27&amp;orderByFields=survey_period+desc&amp;groupByFieldsForStatistics=survey_period&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Value%27%2C+%27outStatisticFieldName%27%3A+%27curr_vent%27%7D%5D&amp;resultRecordCount=1">
             Curr vent
         </a><br/>
         
@@ -896,6 +896,6 @@
     </td></tr>
     
     </table>
-    Generated on 2020-11-22 05:27:54.931627
+    Generated on 2020-11-22 17:57:24.272660
   </body>
 </html>
