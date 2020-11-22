@@ -93,6 +93,13 @@ KY:
     TIMESTAMP: $FETCH_TIMESTAMP
     WINDOW: Week
     # UNITS: ??
+MO:
+- url: https://results.mo.gov/t/COVID19/views/COVID-19DataforDownload/MetricsbyCounty.csv
+  params: {parse_dates: ['7-Day Range End Date']}
+  type: pandas
+  desc: County and state 7-day positivity
+  constants:
+    WINDOW: Week
 MD:
 # method:
 # daily: positive / total => ppr
@@ -101,6 +108,15 @@ MD:
   params: {parse_dates: ['date', 'ReportDate']}
   type: pandas
   desc: Positivity & testing volume
+UT:
+# Method for 7-day positivity:
+# positive.rolling(7).sum() / total.rolling(7).sum()
+- url: https://coronavirus-dashboard.utah.gov/Utah_COVID19_data.zip
+  params: null
+  type: zip
+  desc: Data download
+  constants:
+    UNITS: People
 VA:
 - url: https://data.virginia.gov/resource/3ves-mpfr.json
   params: {summary_indicator: 'Current 7-Day Percent Positivity'}

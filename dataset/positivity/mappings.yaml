@@ -40,6 +40,16 @@ MD:
   number_of_positives: POSITIVE
   percent_positive: PPR
   #rolling_avg: PPR
+MO:
+  7-Day Range End Date: TIMESTAMP
+  Measure Values: PPR
+  7-Day Positivity Rate (Dedup. to the Individual): PPR
+  7-Day Positivity Rate (Positive Tests / Total Tests): PPR
+UT:
+  Collection Date: TIMESTAMP
+  7-Day Percent Positivity: PPR
+  Daily Negative: NEGATIVE
+  Daily Positive: POSITIVE
 VA:
   report_date: TIMESTAMP
   summary_indicator_value: PPR
