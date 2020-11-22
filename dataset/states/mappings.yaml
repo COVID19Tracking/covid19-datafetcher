@@ -253,7 +253,7 @@ ME:
   # ProbableCases: PROBABLE
   # PresumptiveCases: PROBABLE
   # Deaths: DEATH
-  # Hospitalizations: HOSP
+  Hospitalizations: HOSP
   Recovered: RECOVERED
 
   DATA_AS_OF_DT: DATE

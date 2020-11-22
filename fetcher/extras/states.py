@@ -503,13 +503,9 @@ def handle_me(res, mapping):
         partial = extract_arcgis_attributes(result, mapping, 'ME')
         tagged.update(partial)
 
-    # google spreadsheet
-    csv = res[1]
-    columns = [k for k, v in mapping.items() if v in [
-        Fields.POSITIVE.name, Fields.DEATH.name, Fields.HOSP.name
-    ]]
-    values = csv_sum(csv, columns)
-    tagged.update(map_attributes(values, mapping))
+    # excel
+    df = res[1]
+    tagged.update(map_attributes(df.sum(), mapping))
 
     soup = res[-1]
     th = soup.find("th", string=re.compile("Results from Labs Reporting Electronically"))

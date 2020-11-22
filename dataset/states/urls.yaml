@@ -303,9 +303,9 @@ ME:
   params: {where: TotalCases is not NULL, outFields: '*', orderByFields: Date desc, resultRecordCount: 1, f: json}
   type: arcgis
   desc: Main metrics
-- url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSncnMccl7ut47zMprsHK7lX65OhNLoqsHUkRem5tV_T8hyEOkqXF0B5LW6ggUJIoY-Jh1AysT3fNIa/pub?gid=0&single=true&output=csv'
+- url: 'https://gateway.maine.gov/dhhs-apps/mecdc_covid/Maine_COVID19_Summary.xlsx'
   params: null
-  type: csv
+  type: xlsx
   desc: Cases by county (for up-to-date cases)
 - url: https://www.maine.gov/dhhs/mecdc/infectious-disease/epi/airborne/coronavirus/data.shtml
   params: null
