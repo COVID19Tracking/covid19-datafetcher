@@ -8,10 +8,14 @@
 #
 # Only `url` and `type` are mandatory, but I fill `params` with `null` when it's empty, I think that it's nicer this way
 AK:
-- url: https://services1.arcgis.com/WzFsmainVTuD5KML/ArcGIS/rest/services/Geographic_Distribution_of_Confirmed_Cases/FeatureServer/0/query
-  params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"All_Cases","outStatisticFieldName":"cases"}, {"statisticType":"sum","onStatisticField":"Recovered","outStatisticFieldName":"recoveries"}, {"statisticType":"sum","onStatisticField":"Deaths","outStatisticFieldName":"deaths"}], f: json}
+- url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Report_Date/FeatureServer/0/query
+  params: {where: Resident='Y', outStatistics: [{"statisticType":"count","onStatisticField":"FID","outStatisticFieldName":"cases"}], f: json}
   type: arcgis
-  desc: Positives, recovered, death
+  desc: Positives (residents)
+- url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Cumulative_Deceased_Recovered_Active/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"daily_hosp"}, {"statisticType":"sum","onStatisticField":"daily_deaths"}], f: json}
+  type: arcgis
+  desc: Hospitalizations, death
 - url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Tests_Dataset/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{"statisticType":"count","onStatisticField":"FID","outStatisticFieldName":"tests_total"}], f: json}
   type: arcgis

@@ -1,8 +1,8 @@
 AK:
   Date_: TIMESTAMP
   cases: POSITIVE
-  recoveries: RECOVERED
-  deaths: DEATH
+  SUM_daily_hosp: HOSP
+  SUM_daily_deaths: DEATH
   SUM_Pos_COVID_PUI_Pending: CURR_HOSP
   pos_susp_vent: CURR_VENT
   tests_total: SPECIMENS
