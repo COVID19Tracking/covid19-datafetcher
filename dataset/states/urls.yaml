@@ -464,11 +464,11 @@ NJ:
   type: arcgis
   desc: Discharged (new)
 - url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query
-  params: {where: structure_measure_identifier='Case count of COVID-19 positive cases currently in the hospital' OR structure_measure_identifier='Case count of persons under investigation (PUI) / presumptive positive cases currently in the hospital', orderByFields: 'survey_period desc', groupByFieldsForStatistics: survey_period, outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "curr_hosp"}], resultRecordCount: 1, f: json}
+  params: {where: structure_measure_identifier LIKE '%hospitalized%COVID patients', orderByFields: 'survey_period desc', groupByFieldsForStatistics: survey_period, outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "curr_hosp"}], resultRecordCount: 1, f: json}
   type: arcgis
   desc: Hospitalized
 - url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query
-  params: {where: structure_measure_identifier LIKE 'Total % of COVID Patients Currently on a Ventilator',
+  params: {where: structure_measure_identifier LIKE '%ventilated%',
   orderByFields: 'survey_period desc',
   groupByFieldsForStatistics: survey_period,
   outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "curr_vent"}], resultRecordCount: 1, f: json}
