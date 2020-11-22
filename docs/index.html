@@ -39,8 +39,12 @@
       <td><a name="AK"/><b>AK</b></td>
       <td>
         
-        <a href="https://services1.arcgis.com/WzFsmainVTuD5KML/ArcGIS/rest/services/Geographic_Distribution_of_Confirmed_Cases/FeatureServer/0/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27All_Cases%27%2C+%27outStatisticFieldName%27%3A+%27cases%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Recovered%27%2C+%27outStatisticFieldName%27%3A+%27recoveries%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Deaths%27%2C+%27outStatisticFieldName%27%3A+%27deaths%27%7D%5D">
-            Positives, recovered, death
+        <a href="https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Report_Date/FeatureServer/0/query?where=Resident%3D%27Y%27&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27count%27%2C+%27onStatisticField%27%3A+%27FID%27%2C+%27outStatisticFieldName%27%3A+%27cases%27%7D%5D">
+            Positives (residents)
+        </a><br/>
+        
+        <a href="https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Cumulative_Deceased_Recovered_Active/FeatureServer/0/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27daily_hosp%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27daily_deaths%27%7D%5D">
+            Hospitalizations, death
         </a><br/>
         
         <a href="https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Tests_Dataset/FeatureServer/0/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27count%27%2C+%27onStatisticField%27%3A+%27FID%27%2C+%27outStatisticFieldName%27%3A+%27tests_total%27%7D%5D">
@@ -411,7 +415,7 @@
             Main metrics
         </a><br/>
         
-        <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSncnMccl7ut47zMprsHK7lX65OhNLoqsHUkRem5tV_T8hyEOkqXF0B5LW6ggUJIoY-Jh1AysT3fNIa/pub?gid=0&amp;single=true&amp;output=csv">
+        <a href="https://gateway.maine.gov/dhhs-apps/mecdc_covid/Maine_COVID19_Summary.xlsx">
             Cases by county (for up-to-date cases)
         </a><br/>
         
@@ -892,6 +896,6 @@
     </td></tr>
     
     </table>
-    Generated on 2020-11-20 20:11:20.471384
+    Generated on 2020-11-22 05:22:41.911374
   </body>
 </html>
