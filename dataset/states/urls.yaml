@@ -31,7 +31,7 @@ AK:
 # - url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Table_6_Geographic_Distribution_of_Hospital_Survey_Results/FeatureServer/0/query
 #   params: {where: Facility_Type='GACH and CAH', outStatistics: [], f: json}
 - url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/COVID_Hospital_Dataset_(prod)/FeatureServer/0/query
-  params: {where: facility_filter=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "Pos_COVID_PUI_Pending"}], f: json}
+  params: {where: facility_filter=0, outStatistics: [{"statisticType": "sum", "onStatisticField": "Pos_COVID_PUI_Pending"}], f: json}
   type: arcgis
   desc: Hospitalizations
 - url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/pos_susp_vent/FeatureServer/0/query
