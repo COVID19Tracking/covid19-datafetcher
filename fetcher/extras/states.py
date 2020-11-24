@@ -191,7 +191,7 @@ def handle_nh(res, mapping):
         td = td.split()[0]
         if th in mapping:
             # yay, the faster option
-            mapped[mapping[th]] = atoi(td)
+            mapped[mapping[th]] = atoi(re.search("[0-9,]+", td).group(0))
             continue
 
     return mapped
