@@ -276,18 +276,18 @@ LA:
   params: {where: timeframe='cumulative' and Measure like '%Test%', groupByFieldsForStatistics: Measure, outStatistics: [{"statisticType": "sum", "onStatisticField": "Value"}], f: json}
   type: arcgis
   desc: Test dashboard data
-- url: https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/Combined_COVID_Reporting/FeatureServer/0/query
+- url: https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/test_this_sheet/FeatureServer/0/query
   params: {where: Measure = 'COVID-positive' AND ValueType = 'hospitalized' AND Value is not NULL, outFields: '*, Value as hospitalized', orderByFields: 'FeatureID desc', resultRecordCount: 1, f: json}
   type: arcgis
   desc: Current hospitalization
-- url: https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/Combined_COVID_Reporting/FeatureServer/0/query
+- url: https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/test_this_sheet/FeatureServer/0/query
   params: {where: Measure = 'COVID-positive' AND ValueType = 'on vent' AND Value is not NULL, outFields: '*, Value as on_vent', orderByFields: 'FeatureID desc', resultRecordCount: 1, f: json}
   type: arcgis
-  desc: Current vent (unordered)
-- url: https://www.arcgis.com/sharing/rest/content/items/4a6de226701e45bdb542f09b73ee79e1/data?f=json
-  params: null
-  type: json
-  desc: Dashboard json (for recoveries)
+  desc: Current vent
+- url: https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/test_this_sheet/FeatureServer/0/query
+  params: {where: Measure = 'Presumed Recovered', outFields: '*, Value as recovered', orderByFields: 'FeatureID desc', resultRecordCount: 1, f: json}
+  type: arcgis
+  desc: Recovered
 MA:
 - url: https://www.mass.gov/info-details/covid-19-response-reporting
   params: null

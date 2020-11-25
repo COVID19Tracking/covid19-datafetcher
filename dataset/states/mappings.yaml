@@ -216,6 +216,7 @@ LA:
   Total Deaths: DEATH
   on_vent: CURR_VENT
   hospitalized: CURR_HOSP
+  recovered: RECOVERED
 MA:
   Date: DATE
   Probable Total: PROBABLE

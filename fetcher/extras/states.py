@@ -206,17 +206,10 @@ def handle_la(res, mapping):
                           attr.get('attributes', {}).get('SUM_Value') for attr in attributes}
             tagged.update(map_attributes(attributes, mapping, 'LA'))
 
-    # hospitalization
-    for result in res[2:4]:
+    # everything else
+    for result in res[2:]:
         partial = extract_arcgis_attributes(result, mapping, 'LA')
         tagged.update(partial)
-
-    # recoveries from dashboard
-    widgets = res[-1].get('widgets', {})
-    for widget in widgets:
-        if widget.get('name') == 'recovered':
-            val = widget.get('datasets')[0].get('data')
-            tagged[Fields.RECOVERED.name] = val
 
     return tagged
 
