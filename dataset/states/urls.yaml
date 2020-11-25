@@ -527,7 +527,7 @@ PA:
   params: {where: county='Pennsylvania', outFields: 'covid_vents, covid_patients', f: json}
   type: arcgis
   desc: Hosp, vent
-- url: https://www.health.pa.gov/topics/disease/coronavirus/Pages/Coronavirus.aspx
+- url: https://www.health.pa.gov/topics/disease/coronavirus/Pages/Cases.aspx
   params: null
   type: html:soup
   desc: Main page, for recovery percentages (soup)
