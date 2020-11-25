@@ -439,6 +439,7 @@ PA:
   SUM_COVID19onVents: CURR_VENT
   covid_vents: CURR_VENT
   covid_patients: CURR_HOSP
+  covid_icu: CURR_ICU
   Cases: POSITIVE
   Confirmed: CONFIRMED
   Probable: PROBABLE

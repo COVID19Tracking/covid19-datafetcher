@@ -527,6 +527,10 @@ PA:
   params: {where: county='Pennsylvania', outFields: 'covid_vents, covid_patients', f: json}
   type: arcgis
   desc: Hosp, vent
+- url: https://services1.arcgis.com/Nifc7wlHaBPig3Q3/arcgis/rest/services/covid_hosp_single_day_icu/FeatureServer/0/query
+  params: {where: county='Pennsylvania', outFields: '*', f: json}
+  type: arcgis
+  desc: ICU
 - url: https://www.health.pa.gov/topics/disease/coronavirus/Pages/Cases.aspx
   params: null
   type: html:soup
