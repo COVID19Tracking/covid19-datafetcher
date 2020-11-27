@@ -639,7 +639,7 @@ def handle_mn(res, mapping):
 
 def handle_mo(res, mapping):
     testing = res[0]
-    foo = testing.groupby('Measure Names', as_index=True).sum()
+    foo = testing[testing['Test Date'] == 'All'].groupby('Measure Names', as_index=True).sum()
     mapped = map_attributes(foo['Measure Values'], mapping, 'MO')
 
     county = res[1]
