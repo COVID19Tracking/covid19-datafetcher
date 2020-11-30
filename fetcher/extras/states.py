@@ -492,9 +492,11 @@ def handle_me(res, mapping):
         partial = extract_arcgis_attributes(result, mapping, 'ME')
         tagged.update(partial)
 
-    # excel
+    # summary csv from tableau
     df = res[1]
-    tagged.update(map_attributes(df.sum(), mapping))
+    df = df[df['County'] == 'All'].set_index('Measure Names')
+    partial = extract_arcgis_attributes(df['Measure Values'], mapping, 'ME')
+    tagged.update(partial)
 
     soup = res[-1]
     th = soup.find("th", string=re.compile("Results from Labs Reporting Electronically"))

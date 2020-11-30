@@ -307,10 +307,14 @@ ME:
   params: {where: TotalCases is not NULL, outFields: '*', orderByFields: Date desc, resultRecordCount: 1, f: json}
   type: arcgis
   desc: Main metrics
-- url: 'https://gateway.maine.gov/dhhs-apps/mecdc_covid/Maine_COVID19_Summary.xlsx'
-  params: null
-  type: xlsx
-  desc: Cases by county (for up-to-date cases)
+# - url: 'https://gateway.maine.gov/dhhs-apps/mecdc_covid/Maine_COVID19_Summary.xlsx'
+#   params: null
+#   type: xlsx
+#   desc: Cases by county (for up-to-date cases)
+- url: https://analytics.maine.gov/t/CDCExternal/views/case-tables-and-summaries/cases-by-county.csv
+  params: {thousands: ','}
+  type: pandas
+  desc: County table (cases, confirmed, probables, death, hosp, recoveries)
 - url: https://www.maine.gov/dhhs/mecdc/infectious-disease/epi/airborne/coronavirus/data.shtml
   params: null
   type: html:soup

@@ -258,11 +258,12 @@ ME:
   Hospitalizations: HOSP
   Recovered: RECOVERED
 
-  DATA_AS_OF_DT: DATE
-  CASES: POSITIVE
-  DEATHS: DEATH
-  # RECOVERIES: RECOVERED  # arcgis is better, again
-  HOSPITALIZATIONS: HOSP
+  # csv from tableau
+  Cases: POSITIVE
+  Confirmed cases: CONFIRMED
+  Probable cases: PROBABLE
+  Deaths: DEATH
+  Recoveries: RECOVERED
 
   # This is all tests lumped, PCR an antibody
   # NegativeTests:
