@@ -306,6 +306,10 @@ MD:
   params: {where: 1=1, outFields: '*', outStatistics: [{"statisticType": "sum", "onStatisticField": "number_of_positives", "outStatisticFieldName": "total_number_of_positives"}], f: json}
   type: arcgis
   desc: PCR Testing and positives
+- url: https://services.arcgis.com/njFNhDsUCentVYJW/arcgis/rest/services/MDCOVID19_SerologyTests/FeatureServer/0/query
+  params: {where: 1=1, outFields: '*', f: json}
+  type: arcgis
+  desc: Antibody
 ME:
 - url: https://services1.arcgis.com/RbMX0mRVOFNTdLzd/ArcGIS/rest/services/Statewide/FeatureServer/0/query
   params: {where: TotalCases is not NULL, outFields: '*', orderByFields: Date desc, resultRecordCount: 1, f: json}
