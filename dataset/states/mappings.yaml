@@ -147,6 +147,11 @@ GU:
   probables: PROBABLE
   SUM_Death: DEATH
 HI:
+  num_hospitalized: CURR_HOSP
+  num_hospitalized_14: HOSP
+  num_hospitalized_vent: CURR_VENT
+  total_covid_icu: CURR_ICU
+
   Date: DATE
   Cases_Tot: CONFIRMED
   Recovered_Tot: RECOVERED

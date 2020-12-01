@@ -290,26 +290,30 @@ def handle_ga(res, mapping):
 
 
 def handle_hi(res, mapping):
-    stats = res[0]
+    tagged = {}
+    for result in res[:1]:
+        partial = extract_arcgis_attributes(result, mapping, debug_state='HI')
+        tagged.update(partial)
+
+    stats = res[1]
     # last row with values
     last_state_row = {}
     for row in stats:
         if row['Region'] == 'State' and row.get('Cases_Tot'):
             last_state_row = row
 
-    tagged = {}
     # expecting the order be old -> new data, so last line is the newest
     for k, v in last_state_row.items():
         if k in mapping:
             tagged[mapping[k]] = v
 
-    testing = res[1]
+    testing = res[2]
     for k, v in testing.sum().items():
         # need to ignore date
         if k != 'Date' and k in mapping:
             tagged[mapping[k]] = v
 
-    probables = res[2]
+    probables = res[3]
     h2 = probables.find('h3', id='probables')
     table = h2.find_next('table')
     probables_index = -1
