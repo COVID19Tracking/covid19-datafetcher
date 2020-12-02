@@ -155,7 +155,6 @@ HI:
   Date: DATE
   Cases_Tot: CONFIRMED
   Recovered_Tot: RECOVERED
-  Hospitalized_Tot: HOSP
   Deaths_Tot: DEATH
   Total Probable Cases: PROBABLE
   New Positive Tests: SPECIMENS_POS
