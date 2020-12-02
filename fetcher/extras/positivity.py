@@ -24,7 +24,7 @@ def handle_ga(res, mapping):
                          parse_dates=['report_date'])
         df = df[df['county'] == 'Georgia']
         sid = 1
-        def get_sid(): "ga-{}".format(sid)
+        def get_sid(): return "ga-{}".format(sid)
 
         # alltime/daily
         latest = df.sort_values('report_date').iloc[-1]
@@ -150,7 +150,7 @@ def handle_wa(res, mapping):
     columns1 = [x for x in columns if not x.startswith('7 day rolling')]
 
     sid = 1
-    def get_sid(): "wa-{}".format(sid)
+    def get_sid(): return "wa-{}".format(sid)
 
     windows = {'Day': columns1, 'Week': columns7}
     for window, columns in windows.items():
@@ -181,7 +181,7 @@ def handle_wi(res, mapping):
     # could be better to send constants from the query def here
 
     sid = 1
-    def get_sid(): "wi-{}".format(sid)
+    def get_sid(): return "wi-{}".format(sid)
 
     for i, df in enumerate(res):
         df.index.name = 'Date'
