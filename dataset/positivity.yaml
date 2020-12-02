@@ -1,9 +1,9 @@
 # @package _group_
 name: positivity
-index: [STATE, TIMESTAMP, UNITS, WINDOW]
+index: [STATE, TIMESTAMP, UNITS, WINDOW, SID]
 extras_module: fetcher.extras.positivity
 
-fields: [STATE, FETCH_TIMESTAMP, TIMESTAMP, DATE,
+fields: [STATE, FETCH_TIMESTAMP, TIMESTAMP, DATE, SID,
 
 TOTAL, POSITIVE, PPR,
 UNITS, WINDOW

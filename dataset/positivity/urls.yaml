@@ -7,6 +7,7 @@ AK:
   constants:
     WINDOW: Day
     UNITS: Tests
+    SID: ak-1
 # The rolling values are rolling 7-day avg (.rolling(7).mean())
 - url: https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Testing_Positivity/FeatureServer/0/query
   params: {where: 1=1, outFields: 'Date_Collected, rolling_positive, rolling_tests, rolling_positivity', f: json}
@@ -15,6 +16,7 @@ AK:
   constants:
     WINDOW: Week
     UNITS: Tests
+    SID: ak-2
 AR:
 - url: https://services.arcgis.com/PwY9ZuZRDiI5nXUB/ArcGIS/rest/services/UPDATED_ADH_COVID19_COUNTY_METRICS/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "pcr_pos_test"}, {"statisticType": "sum", "onStatisticField": "pcr_test"}, {"statisticType": "sum", "onStatisticField": "antigen_test"}, {"statisticType": "sum", "onStatisticField": "antigen_pos_test"}], f: json}
@@ -25,6 +27,7 @@ AR:
     TIMESTAMP: $FETCH_TIMESTAMP
     UNITS: Tests
     WINDOW: Alltime
+    SID: ar-1
 CO:
 - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
   params: {where: Desc_ like 'Daily%PCR%' and Metric = '3-Day Average Percent Positivity', outFields: '*, Value as Value3', orderByFields: 'Attr_Date asc', f: json}
@@ -33,12 +36,14 @@ CO:
   constants:
     WINDOW: 3Days
 #    UNITS:
+    SID: co-1
 - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
   params: {where: Desc_ like 'Daily%PCR%' and Metric = '7-Day Average Percent Positivity', outFields: '*, Value as Value7', orderByFields: Attr_Date, f: json}
   type: arcgis
   desc: Percent Positivity (7d)
   constants:
     WINDOW: Week
+    SID: co-2
 - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
   params: {where: Desc_ like 'Daily%PCR%' and Metric = 'Percent Positivity', outFields: '*', orderByFields: Attr_Date, f: json}
   type: arcgis
@@ -46,6 +51,7 @@ CO:
   constants:
     WINDOW: Day
 #    UNITS: ??
+    SID: co-3
 DC:
 - url: https://dataviz1.dc.gov/t/OCTO/views/Reopening_Metrics/Positivity_dash.csv
   params: {parse_dates: ['Day of Specimen_Coll_Dt','Max. Specimen_Coll_Dt']}
@@ -54,6 +60,7 @@ DC:
   constants:
     WINDOW: Week
     UNITS: Tests
+    SID: dc-1
 GA:
 # method: (positive / total).rolling(7).mean()
 - url: https://ga-covid19.ondemand.sas.com/docs/ga_covid_data.zip
@@ -70,6 +77,7 @@ GU:
   constants:
     WINDOW: Week
     UNITS: Tests
+    SID: gu-1
 - url: https://services2.arcgis.com/FPJlJZYRsD8OhCWA/arcgis/rest/services/COVID19_Dashboard_Counts_by_Date/FeatureServer/0/query
   params: {where: 1=1, outFields: 'date, positive_tests_day, total_tests_day', orderByFields: 'date asc', f: json}
   type: arcgis
@@ -77,6 +85,7 @@ GU:
   constants:
     WINDOW: Day
     UNITS: Tests
+    SID: gu-2
 - url: https://services2.arcgis.com/FPJlJZYRsD8OhCWA/arcgis/rest/services/COVID19_Dashboard_Counts_by_Date/FeatureServer/0/query
   params: {where: 1=1, outFields: 'date, total_tests, total_positive', orderByFields: 'date asc', f: json}
   type: arcgis
@@ -84,6 +93,7 @@ GU:
   constants:
     WINDOW: Alltime
     UNITS: Tests
+    SID: gu-3
 KY:
 - url: https://govstatus.egov.com/kycovid19
   params: null
@@ -135,6 +145,7 @@ VT:
   constants:
     WINDOW: Week
     UNITS: Tests
+    SID: vt-1
 - url: https://services1.arcgis.com/BkFxaEFNwHqX3tAw/arcgis/rest/services/V_EPI_LabSpecimensDaily_PUBLIC/FeatureServer/0/query
   params: {where: 1=1, outFields: 'Date_Received_by_PH, Percent_positive', orderByFields: Date_Received_by_PH asc, f: json}
   type: arcgis
@@ -142,6 +153,7 @@ VT:
   constants:
     # WINDOW: ??
     UNITS: Tests
+    SID: vt-2
 WA:
 # method: there are time series for daily tests and 7-day average
 # the ppr is a division: daily = simple division, weekly = also simple division, because the averaging already done

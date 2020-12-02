@@ -45,6 +45,7 @@ MO:
   Measure Values: PPR
   7-Day Positivity Rate (Dedup. to the Individual): PPR
   7-Day Positivity Rate (Positive Tests / Total Tests): PPR
+  7-Day Positivity Rate (CDC method): PPR
 UT:
   Collection Date: TIMESTAMP
   7-Day Percent Positivity: PPR
