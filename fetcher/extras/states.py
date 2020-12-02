@@ -761,7 +761,7 @@ def handle_nd(res, mapping):
     # by county testing snapshot: for negatives
     county_testing = res[1]
     columns = [k for k, v in mapping.items() if v in [
-        Fields.CONFIRMED.name, Fields.NEGATIVE.name
+        Fields.CONFIRMED.name, Fields.NEGATIVE.name, Fields.DEATH_CONFIRMED.name
         ]]
     values = csv_sum(county_testing, columns=columns)
     tagged.update(map_attributes(values, mapping))
