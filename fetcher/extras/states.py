@@ -890,6 +890,8 @@ def handle_ut(res, mapping):
     # Sometimes there are files for multiple dates, we need the most recent
     specimens_file_prefix = 'Overview_Total Tests by'
     specimens_file_latest = specimens_file_prefix
+    recovered_file = 'Overview_Cumulative COVID-19 Cases'
+    recovered_file_latest = recovered_file
     people_tested_file = 'Overview_Number of People Tested by'
     people_tested_latest = people_tested_file
     test_type = ['PCR/amplification', 'Antigen by DFA/IF']
@@ -917,7 +919,18 @@ def handle_ut(res, mapping):
                               Fields.ANTIGEN_POS_PEOPLE, Fields.ANTIGEN_NEG_PEOPLE,
                               Fields.TOTAL, Fields.ANTIGEN_TOTAL_PEOPLE]
                     people_tested_latest = entry.name
-                if fields:
+                elif entry.name.startswith(recovered_file):
+                    if entry.name < recovered_file_latest:
+                        continue
+                    # recoveries
+                    fields = [Fields.RECOVERED]
+                    recovered_file_latest = entry.name
+                if fields and entry.name.startswith(recovered_file):
+                    df = pd.read_csv(os.path.join(zipdir, entry.name))
+                    last = df['Estimated Recovered *'].iloc[-1]
+                    if Fields.RECOVERED in fields:
+                        tagged[Fields.RECOVERED.name] = last
+                elif fields and not entry.name.startswith(recovered_file):
                     df = pd.read_csv(os.path.join(zipdir, entry.name))
                     summed = df.groupby(['Test Type', 'Result']).sum()
                     i = 0
