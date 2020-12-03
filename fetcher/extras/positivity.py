@@ -163,7 +163,7 @@ def handle_wa(res, mapping):
         pct['TOTAL'] = pct['POSITIVE'] + pct['NEGATIVE']
         pct['UNITS'] = 'Tests'
         pct['WINDOW'] = window
-        pct['SID'] = get_sid
+        pct['SID'] = get_sid()
         sid += 1
         tagged.extend(pct.to_dict(orient='records'))
 
