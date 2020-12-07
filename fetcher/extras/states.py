@@ -490,6 +490,24 @@ def handle_or(res, mapping):
     return mapped
 
 
+def handle_md(res, mapping):
+    tagged = {}
+    for result in res[:-1]:
+        partial = extract_arcgis_attributes(result, mapping, 'MD')
+        tagged.update(partial)
+
+    # Antigen people
+    attributes = [x['attributes'] for x in res[-1]['features']]
+
+    df = pd.DataFrame(attributes).T
+    df.columns = df.iloc[1]
+    df['date'] = pd.to_datetime(df.index, format="d_%m_%d_%Y", errors='coerce')
+    sr = df.sort_values('date', ascending=False).dropna().iloc[0]
+    tagged.update(extract_arcgis_attributes(sr, mapping, 'MD'))
+
+    return tagged
+
+
 def handle_me(res, mapping):
     tagged = {}
     for result in res[:1]:

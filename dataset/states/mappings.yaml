@@ -251,6 +251,9 @@ MD:
   total_released: RECOVERED
   TotalTests: SPECIMENS
   total_number_of_positives: SPECIMENS_POS
+  Num_People_Tested: ANTIGEN_TOTAL_PEOPLE
+  Num_People_Positive_Test: ANTIGEN_POS_PEOPLE
+  Num_People_Negative_Test: ANTIGEN_NEG_PEOPLE
 ME:
   Date: TIMESTAMP
   # This is so unreliable
