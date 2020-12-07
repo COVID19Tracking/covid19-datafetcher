@@ -621,11 +621,14 @@ def handle_mi(res, mapping):
     except Exception as e:
         logging.warning("Exception getting cases by status", e)
 
-    df = pd.read_excel(tests_url)
-    filter_col = 'TestType'
-    summed = df.groupby(filter_col).sum()
-    for m in [pcr, antibody]:
-        tagged[mapping[m]] = summed['Count'][m]
+    try:
+        df = pd.read_excel(tests_url)
+        filter_col = 'TestType'
+        summed = df.groupby(filter_col).sum()
+        for m in [pcr, antibody]:
+            tagged[mapping[m]] = summed['Count'][m]
+    except Exception:
+        logging.warning("[MI] failed to fetch test results")
 
     try:
         df = pd.read_excel(results_url)
