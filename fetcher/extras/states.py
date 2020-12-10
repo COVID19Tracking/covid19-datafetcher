@@ -470,23 +470,6 @@ def handle_or(res, mapping):
             except Exception:
                 logging.warning("OR: failed to parse {} for {}".format(value, name), exc_info=True)
 
-    tables = page.find_all('table')
-    hosp = tables[4]
-    curr_hosp = tables[6]
-
-    td = hosp.find_all("td", limit=2)
-    mapped[Fields.HOSP.name] = atoi(td[1].get_text(strip=True))
-
-    # TODO: Unify this code (data tables)
-    for tr in curr_hosp.find_all("tr"):
-        tds = tr.find_all('td')
-        if len(tds) < 2:
-            continue
-        name = tds[0].get_text(strip=True)
-        value = tds[1].get_text(strip=True)
-        if name in mapping:
-            mapped[mapping[name]] = atoi(value)
-
     return mapped
 
 
