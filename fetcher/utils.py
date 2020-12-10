@@ -240,5 +240,5 @@ def csv_sum(data, columns=None):
     for row in data:
         for k, v in row.items():
             if k in sums:
-                sums[k] += v if isinstance(v, int) else int(v.replace(',', ''))
+                sums[k] += v if isinstance(v, int) else int(float(v.replace(',', '')))
     return sums
