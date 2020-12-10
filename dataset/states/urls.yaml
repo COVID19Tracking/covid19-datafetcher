@@ -432,7 +432,7 @@ ND:
   desc: By county testing (for negatives)
 - url: https://www.health.nd.gov/sites/www/files/documents/Files/MSS/coronavirus/charts-data/CovidTracking.csv
   params: null
-  type: csv
+  type: pandas
   desc: PCR (encounters, specimens, negatives, people, confirmed)
 NE:
 - url: https://gis.ne.gov/enterprise/rest/services/Covid19MapV5/MapServer/2/query

@@ -772,12 +772,7 @@ def handle_nd(res, mapping):
 
     # PCR encounters and other metrics
     pcr = res[2]
-    columns = [k for k, v in mapping.items() if v in [
-        Fields.TOTAL.name, Fields.SPECIMENS_NEG.name, Fields.PCR_TEST_ENCOUNTERS.name,
-        Fields.SPECIMENS.name, Fields.RECOVERED.name
-        ]]
-    values = csv_sum(pcr, columns)
-    partial = map_attributes(values, mapping)
+    partial = map_attributes(pcr.sum(), mapping)
     tagged.update(partial)
 
     return tagged
