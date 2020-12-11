@@ -775,6 +775,10 @@ def handle_nd(res, mapping):
     partial = map_attributes(pcr.sum(), mapping)
     tagged.update(partial)
 
+    # active hosp/icu should not be summed
+    hosp = pcr.groupby('Date').sum().filter(like='Active').iloc[-1]
+    tagged.update(map_attributes(hosp, mapping))
+
     return tagged
 
 

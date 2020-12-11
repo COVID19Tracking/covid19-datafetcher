@@ -431,7 +431,7 @@ ND:
   type: csv
   desc: By county testing (for negatives)
 - url: https://www.health.nd.gov/sites/www/files/documents/Files/MSS/coronavirus/charts-data/CovidTracking.csv
-  params: null
+  params: {parse_dates: ['Date']}
   type: pandas
   desc: PCR (encounters, specimens, negatives, people, confirmed)
 NE:
