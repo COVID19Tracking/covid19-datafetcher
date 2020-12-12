@@ -763,24 +763,16 @@
       <td><a name="TX"/><b>TX</b></td>
       <td>
         
-        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Cases_Service/FeatureServer/8/query?where=1%3D1&amp;outFields=%2A&amp;orderByFields=Date+desc&amp;resultRecordCount=1">
-            Positives
+        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/TX_DSHS_COVID19_Cases_Service/FeatureServer/2/query?where=1%3D1&amp;outFields=%2A&amp;orderByFields=Date+desc&amp;resultRecordCount=1">
+            Cases
         </a><br/>
         
         <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Cases_Service/FeatureServer/8/query?where=CumulativeFatalities+is+not+NULL&amp;outFields=Date%2C+CumulativeFatalities&amp;orderByFields=Date+desc&amp;resultRecordCount=1">
             Death
         </a><br/>
         
-        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_TestData_Service/FeatureServer/3/query?where=1%3D1&amp;outFields=%2A%2C+ViralTests+as+totals&amp;orderByFields=Date+desc&amp;resultRecordCount=1">
-            Tests (PCR + Antibody)
-        </a><br/>
-        
-        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_TestData_Service/FeatureServer/2/query?where=TestType%3D%27PostiveAntibody%27&amp;outFields=%2A%2C+Count_+as+antibody_pos">
-            Positive antibody
-        </a><br/>
-        
-        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_TestData_Service/FeatureServer/2/query?where=TestType%3D%27AntigenPositive%27&amp;outFields=%2A%2C+Count_+as+antigen_pos">
-            Positive antigen
+        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/TX_DSHS_COVID19_TestData_Service/FeatureServer/4/query?where=1%3D1&amp;outFields=%2A&amp;orderByFields=Date+desc&amp;resultRecordCount=1">
+            Tests
         </a><br/>
         
         <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Cases_Service/FeatureServer/7/query?where=1%3D1&amp;outFields=%2A">
@@ -789,6 +781,18 @@
         
         <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID_Hospital_Data/FeatureServer/1/query?where=HospitalData%3D%27COVIDPatientsHospitals%27&amp;outFields=%2A%2C+Count_+as+curr_hosp">
             Curr hosp
+        </a><br/>
+        
+        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/TX_DSHS_COVID19_TestData_Service/FeatureServer/3/query?where=TestType%3D%27PostiveAntibody%27&amp;outFields=%2A%2C+Count_+as+antibody_pos">
+            Antibody positive
+        </a><br/>
+        
+        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/TX_DSHS_COVID19_TestData_Service/FeatureServer/3/query?where=TestType%3D%27AntigenPositive%27&amp;outFields=%2A%2C+Count_+as+antigen_pos">
+            Antigen positive
+        </a><br/>
+        
+        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/TX_DSHS_COVID19_TestData_Service/FeatureServer/6/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27NewPositive%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27OldPositive%27%7D%5D">
+            PCR positives
         </a><br/>
         
         <a href="https://www.dshs.texas.gov/coronavirus/TexasCOVID-19HospitalizationsOverTimebyTSA.xlsx?sheet_name=COVID-19+ICU">
@@ -908,6 +912,6 @@
     </td></tr>
     
     </table>
-    Generated on 2020-12-11 20:34:48.171497
+    Generated on 2020-12-12 02:32:07.450954
   </body>
 </html>
