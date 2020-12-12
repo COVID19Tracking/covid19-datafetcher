@@ -574,26 +574,18 @@ TN:
   params: {where: 1=1, outFields: '*', orderByFields: 'DATE desc', resultRecordCount: 1, f: json}
   type: arcgis
 TX:
-- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Cases_Service/FeatureServer/8/query
+- url: https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/TX_DSHS_COVID19_Cases_Service/FeatureServer/2/query
   params: {where: 1=1, outFields: '*', orderByFields: Date desc, resultRecordCount: 1, f: json}
   type: arcgis
-  desc: Positives
+  desc: Cases
 - url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Cases_Service/FeatureServer/8/query
   params: {where: CumulativeFatalities is not NULL, outFields: 'Date, CumulativeFatalities', orderByFields: Date desc, resultRecordCount: 1, f: json}
   type: arcgis
   desc: Death
-- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_TestData_Service/FeatureServer/3/query
-  params: {where: 1=1, outFields: '*, ViralTests as totals', orderByFields: Date desc, resultRecordCount: 1, f: json}
+- url: https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/TX_DSHS_COVID19_TestData_Service/FeatureServer/4/query
+  params: {where: 1=1, outFields: '*', orderByFields: 'Date desc', resultRecordCount: 1, f: json}
   type: arcgis
-  desc: Tests (PCR + Antibody)
-- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_TestData_Service/FeatureServer/2/query
-  params: {where: TestType='PostiveAntibody', outFields: '*, Count_ as antibody_pos', f: json}
-  type: arcgis
-  desc: Positive antibody
-- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_TestData_Service/FeatureServer/2/query
-  params: {where: TestType='AntigenPositive', outFields: '*, Count_ as antigen_pos', f: json}
-  type: arcgis
-  desc: Positive antigen
+  desc: Tests
 - url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Cases_Service/FeatureServer/7/query
   params: {where: 1=1, outFields: '*', f: json}
   type: arcgis
@@ -602,6 +594,18 @@ TX:
   params: {where: HospitalData='COVIDPatientsHospitals', outFields: '*, Count_ as curr_hosp', f: 'json'}
   type: arcgis
   desc: Curr hosp
+- url: https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/TX_DSHS_COVID19_TestData_Service/FeatureServer/3/query
+  params: {where: TestType='PostiveAntibody', outFields: '*, Count_ as antibody_pos', f: json}
+  type: arcgis
+  desc: Antibody positive
+- url: https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/TX_DSHS_COVID19_TestData_Service/FeatureServer/3/query
+  params: {where: TestType='AntigenPositive', outFields: '*, Count_ as antigen_pos', f: json}
+  type: arcgis
+  desc: Antigen positive
+- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/TX_DSHS_COVID19_TestData_Service/FeatureServer/6/query
+  params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "NewPositive"},{"statisticType": "sum", "onStatisticField": "OldPositive"}], f: json}
+  type: arcgis
+  desc: PCR positives
 - url: https://www.dshs.texas.gov/coronavirus/TexasCOVID-19HospitalizationsOverTimebyTSA.xlsx
   params: {sheet_name: 'COVID-19 ICU'}
   type: xlsx

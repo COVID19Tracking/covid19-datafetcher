@@ -832,9 +832,14 @@ def handle_ma(res, mapping):
 
 def handle_tx(res, mapping):
     tagged = {}
-    for result in res[:-1]:
+    for result in res[:-2]:
         partial = extract_arcgis_attributes(result, mapping, debug_state='TX')
         tagged.update(partial)
+
+    # positive pcr
+    pcr_pos = res[-2]
+    val = sum(pcr_pos['features'][0]['attributes'].values())
+    tagged[Fields.SPECIMENS_POS.name] = val
 
     # last item is the current ICU DataFrame
     df = res[-1]

@@ -518,12 +518,13 @@ TN:
   CASES_PROBABLE: PROBABLE
 TX:
   ViralTests: SPECIMENS
-  totals: TOTAL
   AntibodyTests: ANTIBODY_TOTAL
-  antibody_pos: ANTIBODY_POS
   AntigenTests: ANTIGEN_TOTAL
+  antibody_pos: ANTIBODY_POS
   antigen_pos: ANTIGEN_POS
-  CumulativeCases: POSITIVE
+  totals: TOTAL
+  CumulativeCases: CONFIRMED
+  CumulativeProbable: PROBABLE
   CumulativeFatalities: DEATH
   Recovered: RECOVERED
   death_confirmed: DEATH_CONFIRMED
