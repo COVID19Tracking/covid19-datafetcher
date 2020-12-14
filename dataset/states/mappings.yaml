@@ -575,6 +575,8 @@ VT:
   total_tests: TOTAL
   total_recovered: RECOVERED
   Cumulative_tests: SPECIMENS
+  SUM_confirmed_cases: CONFIRMED
+  SUM_probable_cases: PROBABLE
 WA:
   MAX_CV_Updated: TIMESTAMP
   MAX_CV_State_Cases: POSITIVE

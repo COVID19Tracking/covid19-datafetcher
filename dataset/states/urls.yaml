@@ -668,6 +668,10 @@ VT:
   params: {f: json, resultRecordCount: 1, orderByFields: date DESC, outFields: '*', where: 1=1}
   type: arcgis
   desc: Cases/death/recovered
+- url: https://services1.arcgis.com/BkFxaEFNwHqX3tAw/ArcGIS/rest/services/VIEW_EPI_DailyCount_PUBLIC/FeatureServer/0/query
+  params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"confirmed_cases"},{"statisticType":"sum","onStatisticField":"probable_cases"}], f: json}
+  type: arcgis
+  desc: Cases (probable, confirmed)
 - url: https://services1.arcgis.com/BkFxaEFNwHqX3tAw/ArcGIS/rest/services/VIEW_EMR_Hospitalization_PUBLIC/FeatureServer/0/query
   params: {where: 1=1, outFields: '*, current_hospitalizations+hosp_pui as curr_hosp', orderByFields: date desc, resultRecordCount: 1, f: json}
   type: arcgis
