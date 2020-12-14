@@ -520,11 +520,11 @@
       <td>
         
         <a href="https://services.arcgis.com/qnjIrwR8z5Izc0ij/arcgis/rest/services/COVID_Cases_Production_View/FeatureServer/0/query?outStatistics=%5B%7B%27onStatisticField%27%3A+%27Total%27%2C+%27statisticType%27%3A+%27sum%27%7D%2C+%7B%27onStatisticField%27%3A+%27TotalDeaths%27%2C+%27statisticType%27%3A+%27sum%27%7D%2C+%7B%27onStatisticField%27%3A+%27HospitalizationCount%27%2C+%27statisticType%27%3A+%27sum%27%7D%2C+%7B%27onStatisticField%27%3A+%27TotalRecovered%27%2C+%27statisticType%27%3A+%27sum%27%7D%2C+%7B%27onStatisticField%27%3A+%27LAST_UPDATE%27%2C+%27statisticType%27%3A+%27max%27%7D%5D&amp;where=1%3D1">
-            Cases, death, hospitalization, recovered
+            Cases, death, recovered
         </a><br/>
         
-        <a href="https://services.arcgis.com/qnjIrwR8z5Izc0ij/ArcGIS/rest/services/COVID_Cases_Production_View/FeatureServer/1/query?where=1%3D1&amp;outFields=%2A&amp;orderByFields=ScriptRunDate+desc&amp;resultRecordCount=1">
-            Totals
+        <a href="https://services.arcgis.com/qnjIrwR8z5Izc0ij/arcgis/rest/services/COVID_Cases_Production_View/FeatureServer/1/query?where=1%3D1&amp;outFields=%2A&amp;orderByFields=ScriptRunDate+desc&amp;resultRecordCount=1">
+            Active hosp, Totals
         </a><br/>
         
         <a href="https://services.arcgis.com/qnjIrwR8z5Izc0ij/ArcGIS/rest/services/COVID_Cases_Production_View/FeatureServer/2/query?where=Hospitalization%3D%27Y%27+OR+Hospitalization%3D%27P%27&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27count%27%2C+%27onStatisticField%27%3A+%27OBJECTID%27%2C+%27outStatisticFieldName%27%3A+%27hosp%27%7D%5D">
@@ -775,7 +775,7 @@
             Tests
         </a><br/>
         
-        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Cases_Service/FeatureServer/7/query?where=1%3D1&amp;outFields=%2A">
+        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/TX_DSHS_COVID19_Cases_Service/FeatureServer/4/query?where=CatOrder%3D5&amp;outFields=%2A%2C+Count_+as+Recovered">
             Recoveries
         </a><br/>
         
@@ -867,6 +867,10 @@
             Cases/death/recovered
         </a><br/>
         
+        <a href="https://services1.arcgis.com/BkFxaEFNwHqX3tAw/ArcGIS/rest/services/VIEW_EPI_DailyCount_PUBLIC/FeatureServer/0/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27confirmed_cases%27%7D%2C+%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27probable_cases%27%7D%5D">
+            Cases (probable, confirmed)
+        </a><br/>
+        
         <a href="https://services1.arcgis.com/BkFxaEFNwHqX3tAw/ArcGIS/rest/services/VIEW_EMR_Hospitalization_PUBLIC/FeatureServer/0/query?where=1%3D1&amp;outFields=%2A%2C+current_hospitalizations%2Bhosp_pui+as+curr_hosp&amp;orderByFields=date+desc&amp;resultRecordCount=1">
             Hospitalizations
         </a><br/>
@@ -912,6 +916,6 @@
     </td></tr>
     
     </table>
-    Generated on 2020-12-12 02:32:07.450954
+    Generated on 2020-12-14 20:01:55.176253
   </body>
 </html>
