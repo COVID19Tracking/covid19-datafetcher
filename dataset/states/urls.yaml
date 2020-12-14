@@ -586,8 +586,8 @@ TX:
   params: {where: 1=1, outFields: '*', orderByFields: 'Date desc', resultRecordCount: 1, f: json}
   type: arcgis
   desc: Tests
-- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Cases_Service/FeatureServer/7/query
-  params: {where: 1=1, outFields: '*', f: json}
+- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/TX_DSHS_COVID19_Cases_Service/FeatureServer/4/query
+  params: {where: CatOrder=5, outFields: '*, Count_ as Recovered', f: json}
   type: arcgis
   desc: Recoveries
 - url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID_Hospital_Data/FeatureServer/1/query
