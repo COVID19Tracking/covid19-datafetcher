@@ -332,7 +332,7 @@ MP:
 MS:
   Confirmed: CONFIRMED
 MT:
-  SUM_HospitalizationCount: CURR_HOSP
+  Active_Hospitalizations: CURR_HOSP
   SUM_Total: POSITIVE
   SUM_TotalDeaths: DEATH
   SUM_TotalRecovered: RECOVERED

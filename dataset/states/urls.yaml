@@ -398,11 +398,11 @@ MT:
         statisticType: sum}, {onStatisticField: TotalRecovered, statisticType: sum},
       {onStatisticField: LAST_UPDATE, statisticType: max}], where: 1=1}
   type: arcgis
-  desc: Cases, death, hospitalization, recovered
-- url: https://services.arcgis.com/qnjIrwR8z5Izc0ij/ArcGIS/rest/services/COVID_Cases_Production_View/FeatureServer/1/query
-  params: {where: 1=1, outFields: '*', orderByFields: 'ScriptRunDate desc', resultRecordCount: 1, f: json}
+  desc: Cases, death, recovered
+- url: https://services.arcgis.com/qnjIrwR8z5Izc0ij/arcgis/rest/services/COVID_Cases_Production_View/FeatureServer/1/query
+  params: {where: 1=1, outFields: '*', orderByFields: ScriptRunDate desc, resultRecordCount: 1, f: json}
   type: arcgis
-  desc: Totals
+  desc: Active hosp, Totals
 - url: https://services.arcgis.com/qnjIrwR8z5Izc0ij/ArcGIS/rest/services/COVID_Cases_Production_View/FeatureServer/2/query
   params: {where: Hospitalization='Y' OR Hospitalization='P', outStatistics: [{"statisticType":"count","onStatisticField":"OBJECTID","outStatisticFieldName":"hosp"}], f: json}
   type: arcgis
