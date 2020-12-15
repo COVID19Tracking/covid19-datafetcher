@@ -39,29 +39,6 @@ def handle_ak(res, mapping):
     return tagged
 
 
-def handle_al(res, mapping):
-    '''AL hospitalization has only month-day, need to fix it
-    by adding the correct year (2020)'''
-    mapped = []
-    for result in res[:-1]:
-        partial = extract_arcgis_attributes(result, mapping)
-        mapped.extend(partial)
-
-    cumsum_df = make_cumsum_df(mapped)
-    mapped = cumsum_df.to_dict(orient='records')
-
-    # fix funny dates
-    mapping['__strptime'] = "%m-%d"
-    partial = extract_arcgis_attributes(res[-1], mapping)
-    for x in partial:
-        d = x[DATE]
-        ts = datetime.strptime(d+"-2020", "%m-%d-%Y")
-        x[TS] = ts.timestamp()
-    mapped.extend(partial)
-
-    return mapped
-
-
 def handle_ar(res, mapping):
     # simply a cumsum table
     data = extract_arcgis_attributes(res[0], mapping)

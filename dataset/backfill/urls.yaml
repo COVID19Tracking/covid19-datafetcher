@@ -13,18 +13,29 @@ AK:
   type: arcgis
   desc: PCR tests by specimen collection
 AL:
-- url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/AL_COVID_labtest_antibody_diagnostic_PUBLIC/FeatureServer/2/query
-  params: {where: TestCategory = 'Antigen', orderByField: ReceivedDate asc, groupByFieldsForStatistics: ReceivedDate, outStatistics: [{"statisticType":"sum","onStatisticField":"DiagnosticTest","outStatisticFieldName":"antigen_specimens"}], f: json}
+# Cases by report date
+# - url: https://insightsservices7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/e95c1635/WorkspaceServer/query
+#   params: {outFields: '*', orderByFields: InvDateTxt asc, resultRecordCount: 500, dataset: 89BA1629-243E-EB11-9FB4-0003FF2A432A, f: json}
+#   type: arcgis
+#   data_path: ['features']
+#   desc: Cases by report date
+#   constants:
+#     BY_DATE: Report
+#     METRIC: Cases
+- url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/StatewideTemporal_RunAVG_READONLY/FeatureServer/1/query
+  params: {where: 1=1, outFields: '*', orderByFields: InvDate asc, resultRecordCount: 500, f: json}
   type: arcgis
-  desc: Antigen tests
-- url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/AL_COVID_labtest_antibody_diagnostic_PUBLIC/FeatureServer/2/query
-  params: {where: TestCategory = 'NAAT', orderByField: ReceivedDate asc, groupByFieldsForStatistics: ReceivedDate, outStatistics: [{"statisticType":"sum","onStatisticField":"DiagnosticTest","outStatisticFieldName":"pcr_specimens"}], f: json}
+  desc: Cases (by report date)
+  constants:
+    BY_DATE: Report
+    #METRIC: Cases
+- url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/ArcGIS/rest/services/C19_cumulative_death_statewide_PUBLIC/FeatureServer/1/query
+  params: {where: DeathDate <> 'Unknown', outFields: "*, (DeathDate || '-2020') as date", f: json}
   type: arcgis
-  desc: PCR tests
-- url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/HospitalizedPatientTemporal_READ_ONLY/FeatureServer/1/query
-  params: {where: 1=1, outFields: '*', orderByFields: OBJECTID asc, f: json}
-  type: arcgis
-  desc: Current hospitalizations
+  desc: Death (by date of death)
+  constants:
+    BY_DATE: Death
+    #METRIC: Deaths
 AR:
 - url: https://services.arcgis.com/PwY9ZuZRDiI5nXUB/ArcGIS/rest/services/UPDATED_ADH_COVID19_METRICS_BY_DATE/FeatureServer/0/query
   params: {where: 1=1, outFields: '*', orderByFields: date asc, f: json}

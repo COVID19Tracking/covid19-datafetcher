@@ -1,9 +1,9 @@
 # @package _group_
 name: backfill
-index: [STATE, TIMESTAMP]
+index: [STATE, TIMESTAMP, BY_DATE]
 extras_module: fetcher.extras.backfill
 
-fields: [STATE, FETCH_TIMESTAMP, TIMESTAMP, DATE,
+fields: [STATE, FETCH_TIMESTAMP, TIMESTAMP, DATE, BY_DATE, #METRIC,
   POSITIVE, NEGATIVE, PENDING,
   CURR_HOSP, HOSP, CURR_ICU, ICU, CURR_VENT, VENT,
   RECOVERED, DEATH,
