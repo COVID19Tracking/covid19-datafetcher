@@ -57,10 +57,3 @@ jobs:
             name: Data
             path: |
               _data/az_*
-        - name: Archive video
-          uses: actions/upload-artifact@v2
-          with:
-            name: Video
-            path: |
-              special/az/videos/*
-            retention-days: 10

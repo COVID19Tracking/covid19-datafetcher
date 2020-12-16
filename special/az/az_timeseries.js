@@ -26,7 +26,6 @@ const fastcsv  = require('fast-csv');
     headless: true
   })
   const context = await browser.newContext({
-    recordVideo: { dir: 'videos/' },
     viewport: { width: 2280, height: 1024 } // a nice wide viewport helps ensure we don't skip any days
   })
   const page = await context.newPage()
