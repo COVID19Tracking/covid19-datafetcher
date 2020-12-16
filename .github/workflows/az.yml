@@ -1,8 +1,9 @@
 name: Scrape AZ
 
 on:
+  push:
   schedule:
-    - cron: '0 */8 * * *
+    - cron: '0 */8 * * *'
 
 defaults:
   run:
@@ -17,6 +18,12 @@ jobs:
           command: [diagnostic, serology]
       steps:
         - uses: actions/checkout@v2
+        - name: Checkout data repo
+          uses: actions/checkout@v2
+          with:
+            ref: data
+            token: ${{ secrets.GITHUB_TOKEN }}
+            path: ./_data
         - uses: actions/cache@v2
           with:
             path: ~/.npm
@@ -31,21 +38,29 @@ jobs:
           run: npm install
         - name: Run scraper
           run: |
-            node az_timeseries.js ${{ matrix.command }} > ../../data/ltc_${{ matrix.command }}.csv
+            node az_timeseries.js ${{ matrix.command }} > ../../_data/az_${{ matrix.command }}.csv
         - name: Commit
-          if: github.ref == 'refs/heads/master'
+          # if: github.ref == 'refs/heads/master'
           uses: EndBug/add-and-commit@v5
           with:
-            message: Updating scraped LTC data
-            add: data/ltc_${{ matrix.state }}.csv
+            branch: data
+            cwd: './_data'
+            message: Updating AZ data
+            add: az_${{ matrix.command }}.csv
             author_name: GitHub Actions
             author_email: actions@github.com
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        - name: Archive production artifacts
+        - name: Archive output artifacts
+          uses: actions/upload-artifact@v2
+          with:
+            name: Data
+            path: |
+              _data/az_*
+        - name: Archive video
           uses: actions/upload-artifact@v2
           with:
             name: Video
             path: |
-              data-collection-scripts/ltc-scraper/videos/*
+              special/az/videos/*
             retention-days: 10
