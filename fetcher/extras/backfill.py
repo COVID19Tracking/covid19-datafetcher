@@ -1,10 +1,10 @@
 from datetime import datetime
-import csv
+import os
 import numpy as np
 import pandas as pd
 
 from fetcher.extras.common import MaContextManager
-from fetcher.utils import map_attributes, Fields, extract_arcgis_attributes
+from fetcher.utils import Fields, extract_arcgis_attributes
 
 
 NULL_DATE = datetime(2020, 1, 1)
@@ -34,6 +34,7 @@ def handle_ak(res, mapping):
 
     df = df.rename(columns=mapping).cumsum()
     df[TS] = df.index
+    df['BY_DATE'] = 'Specimen Collection'
 
     tagged = df.to_dict(orient='records')
     return tagged
@@ -57,6 +58,7 @@ def handle_ct(res, mapping):
     df = df.sort_index().cumsum()
     df[TS] = pd.to_datetime(df.index)
     df[TS] = df[TS].values.astype(np.int64) // 10 ** 9
+    df['BY_DATE'] = 'Specimen Collection'
     return df.to_dict(orient='records')
 
 
@@ -73,25 +75,31 @@ def handle_ma(res, mapping):
         filename, field = k.split(":")
         file_mapping[filename][field] = v
 
+    import pdb
+    pdb.set_trace()
     with MaContextManager(res[0]) as zipdir:
         for filename in file_mapping.keys():
-            with open("{}/{}".format(zipdir, filename), 'r') as csvfile:
-                if filename == 'TestingByDate.csv':
-                    # we need the cumsum of all columns
-                    df = pd.read_csv(csvfile)
-                    df = df.rename(columns=file_mapping.get(filename))[
-                        file_mapping.get(filename).values()]
-                    df[DATE] = pd.to_datetime(df[DATE])
-                    df = df.set_index(DATE).cumsum()
-                    df[DATE] = df.index.strftime(mapping.get('__strptime'))
-                    tagged.extend(df.to_dict(orient='records'))
-                    continue
+            if filename.startswith('DateofDeath'):
+                date_fields = ['Date of Death']
+            else:
+                date_fields = ['Date']
+            if filename.endswith('csv'):
+                df = pd.read_csv(os.path.join(zipdir, filename), parse_dates=date_fields)
+            elif filename.endswith('xlsx'):
+                df = pd.read_excel(os.path.join(zipdir, filename), parse_dates=date_fields)
+            # expect it to always exist (we control the file list)
+            by_date = file_mapping[filename].pop('BY_DATE')
+            df = df.rename(columns=file_mapping[filename])[file_mapping[filename].values()]
 
-                reader = csv.DictReader(csvfile, dialect='unix')
-                rows = list(reader)
-                tagged_rows = [map_attributes(r, file_mapping.get(filename), 'MA') for r in rows]
-                tagged.extend(tagged_rows)
+            # need to cumsum TestingByDate file
+            if filename.startswith('TestingByDate'):
+                df = df.set_index('DATE').cumsum()
+                df['DATE'] = df.index
 
+            df['BY_DATE'] = by_date
+            tagged.extend(df.to_dict(orient='records'))
+
+    pdb.set_trace()
     return tagged
 
 
@@ -99,29 +107,52 @@ def handle_md(res, mapping):
     mapped = []
     for result in res[:-1]:
         partial = extract_arcgis_attributes(result, mapping, 'MD')
+        for x in partial:
+            x['BY_DATE'] = 'Report'
         mapped.extend(partial)
 
     # PCR positives
     testing = res[-1]
     testing = extract_arcgis_attributes(testing, mapping, 'MD')
     cumsum_df = make_cumsum_df(testing)
+    cumsum_df['BY_DATE'] = 'Specimen Collection'
     mapped.extend(cumsum_df.to_dict(orient='records'))
     return mapped
 
 
 def handle_mo(res, mapping):
-    # we're getting pretty good data that we need to cumsum
-    # TODO: this can be done elsewhere/by te lib, if there are other use cases
-    mapped = []
-    for result in res:
-        partial = extract_arcgis_attributes(result, mapping, 'MO')
-        mapped.extend(partial)
+    # by report date
+    dfs = [
+        # result index, date index, by-date value
+        (res[0], 'Date Reported', 'Report'),
+        (res[1], 'Test Date', 'Specimen Collection')
+    ]
 
-    # expect the data to be sorted, because the query sorts it
-    # somewhat funny here with building a DF and instantly breaking it
-    cumsum_df = make_cumsum_df(mapped)
-    cumsum_df[Fields.FETCH_TIMESTAMP.name] = datetime.now()
-    return cumsum_df.to_dict('records')
+    mapped = []
+    for mo, date_index, by_date in dfs:
+        mo = mo.pivot(columns='Measure Names', values='Measure Values', index=date_index)
+        mo = mo.iloc[:-1]
+        mo[TS] = pd.to_datetime(mo.index)
+        mo = mo.set_index(TS).sort_index(na_position='first')
+        dates = pd.date_range(end=mo.index.max(), periods=len(mo.index), freq='d')
+        mo.index = dates
+
+        mo = mo.cumsum().rename(columns=mapping)
+        mo['BY_DATE'] = by_date
+        mo[TS] = mo.index
+        mapped.extend(mo.to_dict(orient='records'))
+
+    # death by day of death
+    df = res[2].iloc[:-1].rename(columns={'Measure Values': 'DEATH'})
+    df['date'] = pd.to_datetime(df['Dod'])
+    df = df.set_index('date')[['DEATH']].groupby(
+        by=lambda x: x if x >= datetime(2020, 1, 1) else datetime(2020, 1, 1)) \
+        .sum().sort_index().cumsum()
+    df[TS] = df.index
+    df['BY_DATE'] = 'Death'
+    mapped.extend(df.to_dict(orient='records'))
+
+    return mapped
 
 
 def handle_nd(res, mapping):

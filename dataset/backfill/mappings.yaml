@@ -4,9 +4,9 @@
 # a format string to parse it. The format string mapped in __strptime
 AK:
   Date_Collected: TIMESTAMP
-  tests_total: PCR_BY_COLLECTION_DATE
-  Negative: PCR_NEG_BY_COLLECTION_DATE
-  Positive: PCR_POS_BY_COLLECTION_DATE
+  tests_total: SPECIMENS
+  Negative: SPECIMENS_NEG
+  Positive: SPECIMENS_POS
 AL:
   InvDate: TIMESTAMP
   CummulativeCase: POSITIVE
@@ -31,46 +31,59 @@ CO:
   Date: DATE
   Cases: POSITIVE
   Tested: TOTAL
+  Test_Encounters: PCR_TEST_ENCOUNTERS
   Deaths: DEATH
   Hosp: HOSP
+
   test_encounters: PCR_TEST_ENCOUNTERS
   antibody_totals: ANTIBODY_TOTAL
   Attr_Date: DATE
   __strptime: "%m/%d/%Y"
 
 CT:
-  sum_number_of_tests: PCR_BY_COLLECTION_DATE
-  sum_number_of_positives: PCR_POS_BY_COLLECTION_DATE
-  sum_number_of_negatives: PCR_NEG_BY_COLLECTION_DATE
+  sum_number_of_pcr_tests: SPECIMENS
+  sum_number_of_pcr_positives: SPECIMENS_POS
+  sum_number_of_pcr_negatives: SPECIMENS_NEG
+  sum_number_of_ag_tests: ANTIGEN_TOTAL
+  sum_number_of_ag_positives: ANTIGEN_POS
+  sum_number_of_ag_negatives: ANTIGEN_NEG
   date: DATE
   # 2020-04-17T00:00:00.000
   __strptime: "%Y-%m-%dT%H:%M:%S.000"
 
 MA:
-  # Testing something new here: {filename}:{fieldname} -> mapping
-  "CasesByDate.csv:Date": DATE
-  "CasesByDate.csv:Probable Total": PROBABLE
-  "CasesByDate.csv:Positive Total": POSITIVE
+  "Cases.csv:BY_DATE": Report
+  "Cases.csv:Date": DATE
+  "Cases.csv:Positive Total": CONFIRMED
+  "Cases.csv:Probable Total": PROBABLE
 
+  "CasesByDate.xlsx:BY_DATE": Specimen Collection
+  "CasesByDate.xlsx:Date": DATE
+  "CasesByDate.xlsx:Positive Total": CONFIRMED
+
+  "DateofDeath.xlsx:BY_DATE": Death
+  "DateofDeath.xlsx:Date of Death": DATE
+  "DateofDeath.xlsx:Confirmed Total": DEATH_CONFIRMED
+  "DateofDeath.xlsx:Probable Total": DEATH_PROBABLE
+
+  "DeathsReported.csv:BY_DATE": Report
+  "DeathsReported.csv:Date": DATE
+  "DeathsReported.csv:DeathsConfTotal": DEATH_CONFIRMED
+  "DeathsReported.csv:DeathsProbTotal": DEATH_PROBABLE
+
+  "Testing2.csv:BY_DATE": Report
   "Testing2.csv:Date": DATE
   "Testing2.csv:Molecular Total": TOTAL
-  "Testing2.csv:Serology Total": ANTIBODY_TOTAL
   "Testing2.csv:Molecular All Tests Total": SPECIMENS
+  "Testing2.csv:Antigen Total": ANTIGEN_TOTAL
 
-  "DateofDeath.csv:Date of Death": DATE
-  "DateofDeath.csv:Confirmed Total": DEATH_CONFIRMED_BY_DATE_OF_DEATH
-  "DateofDeath.csv:Probable Total": DEATH_PROBABLE_BY_DATE_OF_DEATH
-
-  "TestingByDate.csv:Date": DATE
-  "TestingByDate.csv:Molecular New": PCR_PEOPLE_BY_COLLECTION_DATE #TOTAL
-  "TestingByDate.csv:All Molecular Tests": PCR_BY_COLLECTION_DATE
-  "TestingByDate.csv:All Positive Molecular Tests": PCR_POS_BY_COLLECTION_DATE
-
-  "TestingByDate.csv:Serology New": ANTIBODY_PEOPLE_BY_COLLECTION_DATE
-  "TestingByDate.csv:Serology Positive New": ANTIBODY_POS_PEOPLE_BY_COLLECTION_DATE
-
-  "TestingByDate.csv:Antigen New": ANTIGEN_PEOPLE_BY_COLLECTION_DATE
-  "TestingByDate.csv:Antigen Positive New": ANTIGEN_POS_PEOPLE_BY_COLLECTION_DATE
+  "TestingByDate.xlsx:BY_DATE": Specimen Collection
+  "TestingByDate.xlsx:Date": DATE
+  "TestingByDate.xlsx:All Molecular Tests": SPECIMENS
+  "TestingByDate.xlsx:All Positive Molecular Tests": SPECIMENS_POS
+  "TestingByDate.xlsx:Molecular New": TOTAL
+  "TestingByDate.xlsx:Antigen Positive New": ANTIGEN_POS_PEOPLE
+  "TestingByDate.xlsx:Antigen New": ANTIGEN_TOTAL_PEOPLE
 
   __strptime: "%m/%d/%Y"
 
@@ -78,28 +91,20 @@ MD:
   NegativeTests: NEGATIVE
   ReportDate: TIMESTAMP
   TotalCases: POSITIVE
-  bedsICU: CURR_ICU
-  bedsTotal: CURR_HOSP
   deaths: DEATH_CONFIRMED
   pDeaths: DEATH_PROBABLE
-  total_hospitalized: HOSP
-  total_released: RECOVERED
   TotalTests: SPECIMENS
+
   # Testing volume:
-  number_of_tests: PCR_BY_COLLECTION_DATE
-  number_of_positives: PCR_POS_BY_COLLECTION_DATE
+  number_of_tests: SPECIMENS
+  number_of_positives: SPECIMENS_POS
   date: TIMESTAMP
 MO:
-  Number_Reported: POSITIVE
-  Date: TIMESTAMP
-  pcr_test_encouter_date: TIMESTAMP
-  pcr_negative: SPECIMENS_NEG
-  pcr_positive: SPECIMENS_POS
-  pcr_total: SPECIMENS
-  ser_test_encouter_date: TIMESTAMP
-  ser_negative: ANTIBODY_NEG
-  ser_positive: ANTIBODY_POS
-  ser_total: ANTIBODY_TOTAL
+  # Report date
+  Total Antigen Tests: ANTIGEN_TOTAL
+  Total Cases: CONFIRMED
+  Total PCR Tests: SPECIMENS
+  Total Serology Tests: ANTIBODY_TOTAL
 MT:
   Total_Tests_Completed: SPECIMENS
   Test_Date: TIMESTAMP

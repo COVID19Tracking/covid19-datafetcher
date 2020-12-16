@@ -128,7 +128,7 @@ def _tag_and_timestamp(state, data, timestamp, dateformat=None):
             data[TS] = datetime.fromtimestamp(ts/1000 if ts > MS_FILTER else ts)
     elif 'DATE' in data and data['DATE'] and dateformat:
         d = data['DATE']
-        data[TS] = datetime.strptime(d, dateformat)
+        data[TS] = d if isinstance(d, datetime) else datetime.strptime(d, dateformat)
     else:
         # TODO: Should I add now time?
         pass
