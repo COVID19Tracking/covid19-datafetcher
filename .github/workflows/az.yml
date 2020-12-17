@@ -2,6 +2,8 @@ name: Scrape AZ
 
 on:
   push:
+    paths:
+      - 'spcial/az/**'
   schedule:
     - cron: '0 */8 * * *'
 
@@ -40,7 +42,7 @@ jobs:
           run: |
             node az_timeseries.js ${{ matrix.command }} > ../../_data/az_${{ matrix.command }}.csv
         - name: Commit
-          # if: github.ref == 'refs/heads/master'
+          if: github.ref == 'refs/heads/master'
           uses: EndBug/add-and-commit@v5
           with:
             branch: data

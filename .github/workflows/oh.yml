@@ -2,6 +2,8 @@ name: Scrape OH
 
 on:
   push:
+    paths:
+      - 'special/oh/**'
   schedule:
     - cron: '0 */8 * * *'
 
@@ -38,7 +40,7 @@ jobs:
           run: |
             python oh_timeseries.py > ../../_data/oh_testing_timeseries.csv
         - name: Commit
-          # if: github.ref == 'refs/heads/master'
+          if: github.ref == 'refs/heads/master'
           uses: EndBug/add-and-commit@v5
           with:
             branch: data
