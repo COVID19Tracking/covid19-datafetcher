@@ -1,9 +1,12 @@
 name: Scrape AZ
 
 on:
+  repository_dispatch:
+    types:
+      - az
   push:
     paths:
-      - 'spcial/az/**'
+      - 'special/az/**'
   schedule:
     - cron: '0 */8 * * *'
 
