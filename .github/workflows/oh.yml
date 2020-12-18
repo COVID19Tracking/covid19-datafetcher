@@ -1,0 +1,59 @@
+name: Scrape OH
+
+on:
+  push:
+    paths:
+      - 'special/oh/**'
+  schedule:
+    - cron: '0 */8 * * *'
+
+defaults:
+  run:
+     working-directory: special/oh
+
+jobs:
+  scrape:
+      runs-on: ubuntu-20.04
+      steps:
+        - uses: actions/checkout@v2
+        - name: Checkout data repo
+          uses: actions/checkout@v2
+          with:
+            ref: data
+            token: ${{ secrets.GITHUB_TOKEN }}
+            path: ./_data
+        - uses: actions/cache@v2
+          with:
+            path: ~/.cache/pip
+            key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+            restore-keys: |
+              ${{ runner.os }}-pip-
+        - name: Set up Python
+          uses: actions/setup-python@v2
+          with:
+            python-version: 3.x
+        - name: Install dependencies
+          run: |
+            python -m pip install --upgrade pip
+            if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        - name: Run scraper
+          run: |
+            python oh_timeseries.py > ../../_data/oh_testing_timeseries.csv
+        - name: Commit
+          if: github.ref == 'refs/heads/master'
+          uses: EndBug/add-and-commit@v5
+          with:
+            branch: data
+            cwd: './_data'
+            message: Updating OH data
+            add: oh_testing_timeseries.csv
+            author_name: GitHub Actions
+            author_email: actions@github.com
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        - name: Archive output artifacts
+          uses: actions/upload-artifact@v2
+          with:
+            name: Data
+            path: |
+              _data/oh_*
