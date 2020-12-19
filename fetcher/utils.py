@@ -25,7 +25,7 @@ class Fields(Enum):
     STATE = "state"
 
     # time
-    FETCH_TIMESTAMP = "fetchTimestamp"
+    FETCH_TIMESTAMP = "fetch_timestamp"
     TIMESTAMP = "timestamp"
     DATE = "date"
 
@@ -33,7 +33,7 @@ class Fields(Enum):
     POSITIVE = "positive"
     NEGATIVE = "negative"
     CONFIRMED = "positiveCasesViral"
-    TOTAL = "totalTestsPeopleViral"
+    TOTAL = "total"  # totalTestsPeopleViral"
     INCONCLUSIVE = "inconclusive"
     PROBABLE = "probableCases"
     PENDING = "pending"
@@ -95,6 +95,12 @@ class Fields(Enum):
     ANTIGEN_PEOPLE_BY_COLLECTION_DATE = 67
     ANTIGEN_POS_PEOPLE_BY_COLLECTION_DATE = 68
 
+    # Meta
+    WINDOW = "window"
+    PPR = "ppr"
+    UNITS = "units"
+    SID = "sid"
+
     @property
     def value(self):
         supervalue = super().value
@@ -104,6 +110,10 @@ class Fields(Enum):
 
     def __repr__(self):
         return self.value
+
+    @classmethod
+    def map(cls):
+        return {f.name: f.value for f in Fields}
 
 
 def request(url, query=None, encoding=None):

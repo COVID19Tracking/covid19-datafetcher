@@ -12,4 +12,14 @@ UNITS, WINDOW
 # Expected values for unit: Tests, People, unknown
 ]
 
+db:
+  store: false
+  table: tpr
+  username: ${env:DB_USERNAME}
+  password: ${env:DB_PASSWORD}
+  db_name: ${env:DB_NAME}
+  host: ${env:DB_HOST,127.0.0.1}
+  port: ${env:DB_PORT,5555}
+  driver: postgresql
+
 

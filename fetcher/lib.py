@@ -151,9 +151,28 @@ def build_dataframe(results, states_to_index, dataset_cfg, output_date_format, f
     return df
 
 
+def save_df_to_db(db_config, df):
+    # verify again that we should store to db
+    if not db_config.store:
+        return
+
+    print("Storing to DB {db_name}.{table}".format(**db_config))
+
+    # import it here to not force it as a dependency if not storing anywhere
+    from sqlalchemy import create_engine
+
+    renames = Fields.map()
+    df.rename(columns=renames, inplace=True)
+    df.index.rename([renames[x] for x in df.index.names], inplace=True)
+    engine_conf = "{driver}://{username}:{password}@{host}:{port}/{db_name}".format(
+        **db_config)
+    engine = create_engine(engine_conf)
+    df.to_sql(db_config.table, engine, if_exists='append', chunksize=200)
+
+
 @hydra.main(config_path='..', config_name="config")
 def main(cfg):
-    print(cfg.dataset.pretty(resolve=True))
+    print(cfg.dataset.pretty())
 
     if cfg.state and isinstance(cfg.state, str):
         cfg.state = cfg.state.split(',')
@@ -164,3 +183,6 @@ def main(cfg):
     # This stores the CSV with the requsted fields in order
     df = build_dataframe(results, cfg.state, cfg.dataset, cfg.output_date_format, cfg.output)
     print(df)
+
+    if 'db' in cfg.dataset and cfg.dataset.db.store:
+        save_df_to_db(cfg.dataset.db, df)

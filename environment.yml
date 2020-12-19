@@ -13,5 +13,6 @@ dependencies:
   - wheel=0.34.2
   - xz=5.2.5
   - zlib=1.2.11
+  - psycopg2
   - pip:
     - -r file:requirements.txt

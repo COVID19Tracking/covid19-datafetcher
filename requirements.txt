@@ -20,3 +20,4 @@ googleapis-common-protos
 oauth2client
 flake8
 pytest
+SQLAlchemy
