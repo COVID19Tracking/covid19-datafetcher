@@ -129,7 +129,7 @@ MT:
   desc: Total tested
 ND:
 - url: https://www.health.nd.gov/sites/www/files/documents/Files/MSS/coronavirus/charts-data/CovidTracking.csv
-  params: {parse_dates: True}
+  params: {parse_dates: ['Date']}
   type: pandas
   desc: PCR (encounters, specimens, negatives, people, confirmed)
 NE:

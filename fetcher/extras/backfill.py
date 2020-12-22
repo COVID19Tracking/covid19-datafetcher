@@ -154,11 +154,9 @@ def handle_mo(res, mapping):
 
 def handle_nd(res, mapping):
     # simply a cumsum table
-    res = res[0]
-    res = res.rename(columns=mapping).set_index('DATE')
-    res = res.cumsum()
+    res = res[0].rename(columns=mapping)
+    res = res.groupby('DATE').sum().filter(mapping.values()).cumsum()
     res['DATE'] = res.index
-    res = res[[v for k, v in mapping.items() if k != '__strptime']]
     records = res.to_dict(orient='records')
     return records
 
