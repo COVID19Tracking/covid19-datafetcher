@@ -75,8 +75,6 @@ def handle_ma(res, mapping):
         filename, field = k.split(":")
         file_mapping[filename][field] = v
 
-    import pdb
-    pdb.set_trace()
     with MaContextManager(res[0]) as zipdir:
         for filename in file_mapping.keys():
             if filename.startswith('DateofDeath'):
@@ -99,7 +97,6 @@ def handle_ma(res, mapping):
             df['BY_DATE'] = by_date
             tagged.extend(df.to_dict(orient='records'))
 
-    pdb.set_trace()
     return tagged
 
 
