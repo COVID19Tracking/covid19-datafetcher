@@ -20,7 +20,7 @@ from bs4 import BeautifulSoup
 
 
 # TODO: It's not used as an effective enum
-# fields
+# TODO: move this to a yaml somewhere
 class Fields(Enum):
     STATE = "state"
 
@@ -100,6 +100,7 @@ class Fields(Enum):
     PPR = "ppr"
     UNITS = "units"
     SID = "sid"
+    BY_DATE = "by_date"
 
     @property
     def value(self):

@@ -21,8 +21,6 @@ AR:
 CA:
   confirmed: POSITIVE
   death: DEATH
-  icu_covid_patients: CURR_ICU
-  hospitalized_covid_patients: CURR_HOSP
   date: DATE
   tested: SPECIMENS
   # "2020-03-20T00:00:00"
@@ -33,7 +31,6 @@ CO:
   Tested: TOTAL
   Test_Encounters: PCR_TEST_ENCOUNTERS
   Deaths: DEATH
-  Hosp: HOSP
 
   test_encounters: PCR_TEST_ENCOUNTERS
   antibody_totals: ANTIBODY_TOTAL
@@ -132,18 +129,11 @@ RI:
   "Cumulative people who tested positive (counts first positive lab per person)": CONFIRMED
   "Cumulative people who have only tested negative (counts first negative lab per person)": NEGATIVE
   "Cumulative people tested (one count per person)": TOTAL
-  "Cumulative hospital admissions": HOSP
-  "Cumulative hospital discharges": RECOVERED
-  "Currently hospitalized": CURR_HOSP
-  "Currently in ICU": CURR_ICU
-  "Currently vented": CURR_VENT
   "Total deaths": DEATH
   Date: DATE
   __strptime: "%m/%d/%Y"
 TN:
   CASES_TOT: POSITIVE
-  HOSPITALIZED_TOT: HOSP
-  RECOV_TOT: RECOVERED
   DEATHS_TOT: DEATH
   DATE: TIMESTAMP
   TEST_POS: SPECIMENS_POS
@@ -153,11 +143,13 @@ TN:
   CASES_PROBABLE: PROBABLE
 TX:
   Date: TIMESTAMP
-  CumulativeCases: POSITIVE
-  CumulativeFatalities: DEATH_BY_DATE_OF_DEATH
-  Hospitalizations: CURR_HOSP
-  ViralTests: SPECIMENS
+  CumulativeCases: CONFIRMED
+  CumulativeProbable: PROBABLE
+  CumulativeFatalities: DEATH
+
   AntibodyTests: ANTIBODY_TOTAL
+  AntigenTests: ANTIGEN_TOTAL
+  ViralTests: SPECIMENS
 VA:
   lab_report_date: DATE
   # "2020-01-26"
