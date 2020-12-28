@@ -167,7 +167,7 @@ def save_df_to_db(db_config, df):
     engine_conf = "{driver}://{username}:{password}@{host}:{port}/{db_name}".format(
         **db_config)
     engine = create_engine(engine_conf)
-    df.to_sql(db_config.table, engine, if_exists='append', chunksize=200)
+    df.to_sql(db_config.table, engine, if_exists='append', chunksize=200, method='multi')
 
 
 @hydra.main(config_path='..', config_name="config")
