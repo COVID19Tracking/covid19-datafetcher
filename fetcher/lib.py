@@ -10,13 +10,13 @@ from fetcher.utils import Fields
 from fetcher.source_utils import fetch_source, process_source_responses
 from fetcher.sources import build_sources
 
-
 # Indices
 TS = 'TIMESTAMP'
 STATE = Fields.STATE.name
 
 site_url = "https://raw.githubusercontent.com/govex/COVID-19/master/data_tables/vaccine_data/raw_data" \
            "/vaccine_data_us_state_timeline.csv "
+
 
 class Fetcher:
     def __init__(self, cfg):
@@ -173,6 +173,7 @@ def save_df_to_db(db_config, df):
     engine = create_engine(engine_conf)
     df.to_sql(db_config.table, engine, if_exists='append', chunksize=200, method='multi')
 
+
 def get_covid_vaccination_data(outputdir):
     """Download COVID Vaccination data in CSV format
     """
@@ -198,6 +199,6 @@ def main(cfg):
 
     # get vaccination data	
     get_covid_vaccination_data(cfg.outputs)
-	
+
     if 'db' in cfg.dataset and cfg.dataset.db.store:
         save_df_to_db(cfg.dataset.db, df)
