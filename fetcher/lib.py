@@ -196,7 +196,6 @@ def main(cfg):
     # This stores the CSV with the requsted fields in order
     df = build_dataframe(results, cfg.state, cfg.dataset, cfg.output_date_format, cfg.output)
     print(df)
-	
     get_covid_vaccination_data(cfg.outputs)
 
     if 'db' in cfg.dataset and cfg.dataset.db.store:
