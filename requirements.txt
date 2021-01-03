@@ -2,7 +2,6 @@ numpy
 pandas
 PyYAML
 jinja2
-xlrd
 urllib3
 beautifulsoup4
 hydra-core==1.0.0rc1
@@ -21,3 +20,4 @@ oauth2client
 flake8
 pytest
 SQLAlchemy
+openpyxl
