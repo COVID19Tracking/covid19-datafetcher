@@ -710,10 +710,7 @@ def handle_nc(res, mapping):
     df = res[-2]
     df['Date'] = pd.to_datetime(df['Date'])
     df['Measure Names'] = df['Measure Names'].str.strip()
-    df = df.pivot(index='Date', columns='Measure Names')
-
-    # deaths are already cumulative, take the latest
-    tagged[Fields.DEATH.name] = df['Measure Values']["NC Deaths"].iloc[-1]
+    df = df.pivot(index='Date', columns='Measure Names', values='Measure Values')
 
     for k, v in df.sum().iteritems():
         if k[1] in mapping:
@@ -722,7 +719,7 @@ def handle_nc(res, mapping):
     df = res[-1]
     df['Date'] = pd.to_datetime(df['Date'])
     df['Measure Names'] = df['Measure Names'].str.strip()
-    df = df.pivot(index='Date', columns='Measure Names')
+    df = df.pivot(index='Date', columns='Measure Names', values='Measure Values')
     for k, v in df.sum().iteritems():
         if k[1] in mapping:
             tagged[mapping[k[1]]] = v + tagged.get(mapping[k[1]], 0)
