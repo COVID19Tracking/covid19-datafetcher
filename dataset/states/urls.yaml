@@ -319,7 +319,7 @@ ME:
 #   params: null
 #   type: xlsx
 #   desc: Cases by county (for up-to-date cases)
-- url: https://analytics.maine.gov/t/CDCExternal/views/case-tables-and-summaries/cases-by-county.csv
+- url: https://analytics.maine.gov/t/CDCExternal/views/case-tables-and-summaries-20201210/cases-by-county.csv
   params: {thousands: ','}
   type: pandas
   desc: County table (cases, confirmed, probables, death, hosp, recoveries)
