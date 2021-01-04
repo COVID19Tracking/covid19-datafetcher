@@ -215,8 +215,8 @@ GU:
   type: arcgis
   desc: Death
 HI:
-- url: https://services9.arcgis.com/aKxrz4vDVjfUwBWJ/arcgis/rest/services/HIEMA_HOSPITAL_DATA_PUBLIC_LATEST/FeatureServer/0/query
-  params: {where: name='State', outFields: '*', f: json}
+- url: https://services9.arcgis.com/aKxrz4vDVjfUwBWJ/arcgis/rest/services/hospital_reporting_cases/FeatureServer/0/query
+  params: {where: name='State', outFields: '*', orderByFields: reportdt desc, resultRecordCount: 1, f: json}
   type: arcgis
   desc: Hospitalization data
 - url: https://services9.arcgis.com/aKxrz4vDVjfUwBWJ/arcgis/rest/services/HIEMA_TEST_DATA_PUBLIC_LATEST/FeatureServer/0/query

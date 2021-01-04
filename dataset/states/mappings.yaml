@@ -148,9 +148,9 @@ GU:
   SUM_Death: DEATH
 HI:
   num_hospitalized: CURR_HOSP
-  num_hospitalized_14: HOSP
-  num_hospitalized_vent: CURR_VENT
+  toDate_num_hospitalized_new_adm: HOSP
   total_covid_icu: CURR_ICU
+  num_hospitalized_vent: CURR_VENT
 
   cumulative_deaths: DEATH
 
