@@ -398,7 +398,7 @@ NH:
   Persons Who Have Been Hospitalized for COVID-19: HOSP
   Current Hospitalizations: CURR_HOSP
   Total Persons Tested  at Selected Laboratories, Polymerase Chain Reaction (PCR)2: TOTAL
-  Number of Persons with COVID-191: CONFIRMED
+  Number of Persons with COVID-191: POSITIVE
   Total Persons Tested  at Selected Laboratories, Antibody Laboratory Tests2: ANTIBODY_TOTAL_PEOPLE
 NJ:
   _date: TIMESTAMP
