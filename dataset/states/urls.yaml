@@ -249,7 +249,7 @@ IN:
   data_path: ['metrics', 'daily_statistics']
   type: json
 - url: https://hub.mph.in.gov/api/3/action/datastore_search_sql
-  params: {sql: 'SELECT sum("COVID_COUNT") as covid_cases, sum("COVID_DEATHS") as deaths, max("DATE") as max_date, sum("COVID_TESTS") as covid_tests, sum("COVID_TESTS_ADMINISTRATED") as covid_tests_adm, sum("COVID_POSITIVE_TESTS_ADMIN") as pos_tests from "afaa225d-ac4e-4e80-9190-f6800c366b58"'}
+  params: {sql: 'SELECT sum("COVID_COUNT") as covid_cases, sum("COVID_DEATHS") as deaths, max("DATE") as max_date, sum("COVID_TESTS") as covid_tests, sum("COVID_TESTS_ADMINISTRATED") as covid_tests_adm2, sum("COVID_POSITIVE_TESTS_ADMIN") as pos_tests from "afaa225d-ac4e-4e80-9190-f6800c366b58"'}
   type: ckan
   data_path: ['result', 'records', 0]
   desc: Tests (total, positives), counts, death
