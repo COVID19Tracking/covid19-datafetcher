@@ -152,13 +152,15 @@ HI:
   num_hospitalized_vent: CURR_VENT
   total_covid_icu: CURR_ICU
 
-  Date: DATE
-  Cases_Tot: CONFIRMED
-  Recovered_Tot: RECOVERED
-  Deaths_Tot: DEATH
+  cumulative_deaths: DEATH
+
+  toDate_positiveAndPresumed: CONFIRMED
+
+  toDate_totaltests: PCR_TEST_ENCOUNTERS
+  toDate_positive: SPECIMENS_POS
+  reportdt: TIMESTAMP
+
   Total Probable Cases: PROBABLE
-  New Positive Tests: SPECIMENS_POS
-  Total Test Encounters: PCR_TEST_ENCOUNTERS
 IA:
   CurrHospitalized: CURR_HOSP
   Deceased: DEATH
