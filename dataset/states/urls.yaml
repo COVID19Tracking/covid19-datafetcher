@@ -578,8 +578,8 @@ TX:
   params: {where: 1=1, outFields: '*', orderByFields: Date desc, resultRecordCount: 1, f: json}
   type: arcgis
   desc: Cases
-- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_Cases_Service/FeatureServer/8/query
-  params: {where: CumulativeFatalities is not NULL, outFields: 'Date, CumulativeFatalities', orderByFields: Date desc, resultRecordCount: 1, f: json}
+- url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/TX_DSHS_COVID19_Cases_Service/FeatureServer/4/query
+  params: {where: CatOrder=3, outFields: '*, Count_ as fatalities', f: json}
   type: arcgis
   desc: Death
 - url: https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/TX_DSHS_COVID19_TestData_Service/FeatureServer/4/query

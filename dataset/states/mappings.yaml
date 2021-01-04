@@ -526,7 +526,7 @@ TX:
   totals: TOTAL
   CumulativeCases: CONFIRMED
   CumulativeProbable: PROBABLE
-  CumulativeFatalities: DEATH
+  fatalities: DEATH
   Recovered: RECOVERED
   death_confirmed: DEATH_CONFIRMED
   Date: TIMESTAMP
