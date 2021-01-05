@@ -408,10 +408,11 @@ NJ:
   _date: TIMESTAMP
   recoveries: RECOVERED
   total_deaths: DEATH_CONFIRMED
-  total_positives: POSITIVE
+  total_positives: CONFIRMED
   # not a mistake:
   total_negatives: SPECIMENS
   SUM_PROBABLE_DEATHS: DEATH_PROBABLE
+  SUM_TOTAL_AG_CASES: PROBABLE
   curr_hosp: CURR_HOSP
   curr_vent: CURR_VENT
   curr_icu: CURR_ICU
