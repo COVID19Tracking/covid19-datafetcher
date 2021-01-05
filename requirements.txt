@@ -21,3 +21,4 @@ flake8
 pytest
 SQLAlchemy
 openpyxl
+xlrd==1.2.0

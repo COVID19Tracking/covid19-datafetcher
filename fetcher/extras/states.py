@@ -969,6 +969,22 @@ def handle_vi(res, mapping):
     return tagged
 
 
+def handle_wa(res, mapping):
+    tagged = {}
+    for result in res[:1]:
+        tagged = extract_arcgis_attributes(result, mapping, 'WA')
+
+    # cases, hosp and death excel
+    names = {
+        'Cases': Fields.POSITIVE,
+        'Hospitalizations': Fields.HOSP}
+    for name, field in names.items():
+        df = res[1][name]
+        tagged[field.name] = df.iloc[-1][name]
+
+    return tagged
+
+
 def handle_wi(res, mapping):
     tagged = {}
     for result in res[:-1]:

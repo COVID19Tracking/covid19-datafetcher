@@ -691,6 +691,10 @@ WA:
 {"statisticType": "max", "onStatisticField": "CV_State_Cases"},
 {"statisticType": "max", "onStatisticField": "CV_State_Deaths"}], f: json}
   type: arcgis
+- url: https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/Cumulative_Count_Cases_Hospitalizations_Deaths.xlsx
+  params: {sheet_name: null, engine: 'xlrd'}
+  type: xlsx
+  desc: Cases, deaths
 WI:
 - url: https://dhsgis.wi.gov/server/rest/services/DHS_COVID19/COVID19_WI/MapServer/11/query
   params: {where: 1=1, outFields: 'DATE,POSITIVE,NEGATIVE,DEATHS,HOSP_YES,IC_YES', returnGeometry: False, orderByFields: Date desc, resultRecordCount: 1, f: json}
