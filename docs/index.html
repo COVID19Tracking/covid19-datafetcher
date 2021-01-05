@@ -621,6 +621,10 @@
             Probable death
         </a><br/>
         
+        <a href="https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/DailyCaseCounts/FeatureServer/0/query?where=1%3D1&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27TOTAL_AG_CASES%27%7D%5D">
+            Probable cases (dashboard adds 48 to this number)
+        </a><br/>
+        
         <a href="https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query?where=survey_period%3E%3Dtimestamp+%272020-04-27+07%3A00%3A00%27+AND+structure_measure_identifier+LIKE+%27%25ischarge%25Excluding+Deaths%25%27&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Value%27%2C+%27outStatisticFieldName%27%3A+%27recoveries%27%7D%5D">
             Discharged (new)
         </a><br/>
@@ -635,10 +639,6 @@
         
         <a href="https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query?where=structure_measure_identifier%3D%27COVID-19+Positive+and+PUI+Patients+Combined+in+a+-+Critical+Care+Bed%27+OR+structure_measure_identifier%3D%27COVID-19+Positive+and+PUI+Patients+Combined+in+a+-+Intensive+Care+Bed%27&amp;orderByFields=survey_period+desc&amp;groupByFieldsForStatistics=survey_period&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Value%27%2C+%27outStatisticFieldName%27%3A+%27curr_icu%27%7D%5D&amp;resultRecordCount=1">
             Critical &amp; Intensive Care
-        </a><br/>
-        
-        <a href="https://maps.arcgis.com/sharing/rest/content/items/0cc7684992b942eb81c21ff3c252c1ee/data">
-            Hospitalizations (embedded in dashboard)
         </a><br/>
         
     </td></tr>
@@ -893,6 +893,10 @@
             link
         </a><br/>
         
+        <a href="https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/Cumulative_Count_Cases_Hospitalizations_Deaths.xlsx?sheet_name=None&amp;engine=xlrd">
+            Cases, deaths
+        </a><br/>
+        
     </td></tr>
     
       <tr id="WI">
@@ -920,6 +924,6 @@
     </td></tr>
     
     </table>
-    Generated on 2021-01-05 04:42:57.408653
+    Generated on 2021-01-05 21:44:22.003172
   </body>
 </html>
