@@ -128,7 +128,9 @@ GA:
   D_CUM: DEATH_CONFIRMED
   H_CUM: HOSP
   cases: CONFIRMED
+  deaths: DEATH_CONFIRMED
   probable_deaths: DEATH_PROBABLE
+  hospitalization: HOSP
   antigen_cases: ANTIGEN_POS_PEOPLE
   SUM_COVID_Patients: CURR_HOSP
   SUM_Patients_Under_Investigation: CURR_HOSP_PUI
