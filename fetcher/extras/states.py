@@ -346,9 +346,6 @@ def handle_dc(res, mapping):
     vent = hospitals.iloc[-1]['Number of ventilators in use by COVID positive inpatients']
     tagged[Fields.CURR_VENT.name] = vent
 
-    import pdb
-    pdb.set_trace()
-
     return tagged
 
 
