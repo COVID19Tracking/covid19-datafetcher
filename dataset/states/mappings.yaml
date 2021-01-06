@@ -541,9 +541,9 @@ UT:
   SUM_COVID_Cases_Total: POSITIVE
   SUM_Hospitalizations: HOSP
   # double mapping here, that's from the site:
+  covid-19-deaths: DEATH
   total-covid-19-cases: POSITIVE
   total-covid-19-hospitalizations: HOSP
-  total-covid-19-deaths: DEATH
   Intubation/Ventilator Use: VENT
   ICU Admissions: ICU
   currently hospitalized: CURR_HOSP
