@@ -330,17 +330,24 @@ def handle_dc(res, mapping):
     for tab in ['Testing', 'Hospitals']:
         subtable = overall[overall['Unnamed: 0'] == tab].T
         subtable.columns = subtable.loc['Unnamed: 1']
-        subtable = subtable.iloc[-1]
+        subtable = subtable.iloc[2:]
+        # need to drop the non-date values at the ending
+        subtable['Date'] = pd.to_datetime(subtable.index, errors='coerce')
+        subtable.index = subtable['Date']
+        subtable.loc[subtable.index.dropna()]
 
-        for name in subtable.index:
+        for name in subtable.iloc[-1].index:
             if name in mapping:
                 tagged[mapping[name]] = subtable[name]
 
     # Need hospitals tab for vent number
-    hospitals = df['Hospital Data']
+    hospitals = df['Hospital Data'].dropna(how='all')
     # TODO: add to mapping
     vent = hospitals.iloc[-1]['Number of ventilators in use by COVID positive inpatients']
     tagged[Fields.CURR_VENT.name] = vent
+
+    import pdb
+    pdb.set_trace()
 
     return tagged
 
