@@ -334,11 +334,11 @@ def handle_dc(res, mapping):
         # need to drop the non-date values at the ending
         subtable['Date'] = pd.to_datetime(subtable.index, errors='coerce')
         subtable.index = subtable['Date']
-        subtable.loc[subtable.index.dropna()]
+        subtable = subtable.loc[subtable.index.dropna()]
 
         for name in subtable.iloc[-1].index:
             if name in mapping:
-                tagged[mapping[name]] = subtable[name]
+                tagged[mapping[name]] = subtable.iloc[-1][name]
 
     # Need hospitals tab for vent number
     hospitals = df['Hospital Data'].dropna(how='all')
