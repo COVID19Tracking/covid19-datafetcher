@@ -15,7 +15,7 @@ import re
 import pandas as pd
 
 from fetcher.utils import map_attributes, Fields, csv_sum, extract_arcgis_attributes
-from fetcher.extras.common import MaContextManager, zipContextManager
+from fetcher.extras.common import MaRawData, zipContextManager
 
 
 def atoi(val):
@@ -757,47 +757,33 @@ def handle_nd(res, mapping):
 def handle_ma(res, mapping):
     tagged = {}
 
-    files = ['DeathsReported.csv', 'Testing2.csv', 'Cases.csv']
+    df = MaRawData(res[0])
+    tabs = ['DeathsReported (Report Date)', 'Testing2 (Report Date)',
+            'Cases (Report Date)', 'Hospitalization from Hospitals']
 
-    with MaContextManager(res[0]) as zipdir:
-        for filename in files:
-            with open(os.path.join(zipdir, filename), 'r') as csvfile:
-                reader = csv.DictReader(csvfile, dialect='unix')
-                rows = list(reader)
-                for rn in range(1, len(rows)):
-                    # find last non-empty
-                    if rows[-rn]['Date']:
-                        last_row = rows[-rn]
-                        break
-                partial = map_attributes(last_row, mapping, 'MA')
-                tagged.update(partial)
-
-        inverse_mapping = {v: k for k, v in mapping.items()}
-        keys = [Fields.HOSP.name, Fields.DEATH.name, Fields.POSITIVE.name]
-        keys = [inverse_mapping[k] for k in keys]
-
-        df = pd.read_excel(open(os.path.join(zipdir, 'Hospitalization from Hospitals.xlsx'), 'rb'))
-        partial = map_attributes(df.iloc[-1].to_dict(), mapping, 'MA')
+    for tab in tabs:
+        # report the last row
+        partial = map_attributes(df[tab].iloc[-1], mapping, 'MA')
         tagged.update(partial)
 
-        df = pd.read_excel(open(os.path.join(zipdir, 'TestingByDate.xlsx'), 'rb'))
-        tagged[Fields.SPECIMENS_POS.name] = df.sum()['All Positive Molecular Tests']
+    # positive pcr
+    tests = df['TestingByDate (Test Date)'].filter(like='All Positive')
+    tagged[Fields.SPECIMENS_POS.name] = tests.sum()['All Positive Molecular Tests']
 
     # weekly report:
-    with MaContextManager(res[0], "Weekly Public Health Report - Raw Data", file_type='xls') as tmpfile:
-        df = pd.read_excel(tmpfile, sheet_name=None)
+    df = MaRawData(res[0], "Weekly Public Health Report - Raw Data")
 
-        # recovered
-        rec = df['Quarantine and Isolation']
-        recovered = rec[rec['Status'] == 'Total Cases Released from Isolation'].iloc[-1]['Residents']
-        tagged[Fields.RECOVERED.name] = recovered
-        antibody = df['Antibody'].sum()
-        tagged[Fields.ANTIBODY_TOTAL_PEOPLE.name] = antibody['Total Tests']
-        tagged[Fields.ANTIBODY_POS_PEOPLE.name] = antibody['Positive Tests']
+    # recovered
+    rec = df['Quarantine and Isolation']
+    recovered = rec[rec['Status'] == 'Total Cases Released from Isolation'].iloc[-1]['Residents']
+    tagged[Fields.RECOVERED.name] = recovered
+    antibody = df['Antibody'].sum()
+    tagged[Fields.ANTIBODY_TOTAL_PEOPLE.name] = antibody['Total Tests']
+    tagged[Fields.ANTIBODY_POS_PEOPLE.name] = antibody['Positive Tests']
 
-        hosp = df['RaceEthnicity']
-        maxdate = hosp['Date'].max()
-        tagged[Fields.HOSP.name] = hosp[hosp['Date'] == maxdate].sum()['Ever Hospitaltized']
+    hosp = df['RaceEthnicity']
+    maxdate = hosp['Date'].max()
+    tagged[Fields.HOSP.name] = hosp[hosp['Date'] == maxdate].sum()['Ever Hospitaltized']
 
     return tagged
 

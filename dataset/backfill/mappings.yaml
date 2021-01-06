@@ -49,38 +49,38 @@ CT:
   __strptime: "%Y-%m-%dT%H:%M:%S.000"
 
 MA:
-  "Cases.csv:BY_DATE": Report
-  "Cases.csv:Date": DATE
-  "Cases.csv:Positive Total": CONFIRMED
-  "Cases.csv:Probable Total": PROBABLE
+  "Cases (Report Date):BY_DATE": Report
+  "Cases (Report Date):Date": DATE
+  "Cases (Report Date):Positive Total": CONFIRMED
+  "Cases (Report Date):Probable Total": PROBABLE
 
-  "CasesByDate.xlsx:BY_DATE": Specimen Collection
-  "CasesByDate.xlsx:Date": DATE
-  "CasesByDate.xlsx:Positive Total": CONFIRMED
+  "CasesByDate (Test Date):BY_DATE": Specimen Collection
+  "CasesByDate (Test Date):Date": DATE
+  "CasesByDate (Test Date):Positive Total": CONFIRMED
 
-  "DateofDeath.xlsx:BY_DATE": Death
-  "DateofDeath.xlsx:Date of Death": DATE
-  "DateofDeath.xlsx:Confirmed Total": DEATH_CONFIRMED
-  "DateofDeath.xlsx:Probable Total": DEATH_PROBABLE
+  "DateofDeath:BY_DATE": Death
+  "DateofDeath:Date of Death": DATE
+  "DateofDeath:Confirmed Total": DEATH_CONFIRMED
+  "DateofDeath:Probable Total": DEATH_PROBABLE
 
-  "DeathsReported.csv:BY_DATE": Report
-  "DeathsReported.csv:Date": DATE
-  "DeathsReported.csv:DeathsConfTotal": DEATH_CONFIRMED
-  "DeathsReported.csv:DeathsProbTotal": DEATH_PROBABLE
+  "DeathsReported (Report Date):BY_DATE": Report
+  "DeathsReported (Report Date):Date": DATE
+  "DeathsReported (Report Date):DeathsConfTotal": DEATH_CONFIRMED
+  "DeathsReported (Report Date):DeathsProbTotal": DEATH_PROBABLE
 
-  "Testing2.csv:BY_DATE": Report
-  "Testing2.csv:Date": DATE
-  "Testing2.csv:Molecular Total": TOTAL
-  "Testing2.csv:Molecular All Tests Total": SPECIMENS
-  "Testing2.csv:Antigen Total": ANTIGEN_TOTAL
+  "Testing2 (Report Date):BY_DATE": Report
+  "Testing2 (Report Date):Date": DATE
+  "Testing2 (Report Date):Molecular Total": TOTAL
+  "Testing2 (Report Date):Molecular All Tests Total": SPECIMENS
+  "Testing2 (Report Date):Antigen Total": ANTIGEN_TOTAL
 
-  "TestingByDate.xlsx:BY_DATE": Specimen Collection
-  "TestingByDate.xlsx:Date": DATE
-  "TestingByDate.xlsx:All Molecular Tests": SPECIMENS
-  "TestingByDate.xlsx:All Positive Molecular Tests": SPECIMENS_POS
-  "TestingByDate.xlsx:Molecular New": TOTAL
-  "TestingByDate.xlsx:Antigen Positive New": ANTIGEN_POS_PEOPLE
-  "TestingByDate.xlsx:Antigen New": ANTIGEN_TOTAL_PEOPLE
+  "TestingByDate (Test Date):BY_DATE": Specimen Collection
+  "TestingByDate (Test Date):Date": DATE
+  "TestingByDate (Test Date):All Molecular Tests": SPECIMENS
+  "TestingByDate (Test Date):All Positive Molecular Tests": SPECIMENS_POS
+  "TestingByDate (Test Date):Molecular New": TOTAL
+  "TestingByDate (Test Date):Antigen Positive New": ANTIGEN_POS_PEOPLE
+  "TestingByDate (Test Date):Antigen New": ANTIGEN_TOTAL_PEOPLE
 
   __strptime: "%m/%d/%Y"
 

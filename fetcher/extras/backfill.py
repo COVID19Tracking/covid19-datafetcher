@@ -1,9 +1,8 @@
 from datetime import datetime
-import os
 import numpy as np
 import pandas as pd
 
-from fetcher.extras.common import MaContextManager
+from fetcher.extras.common import MaRawData
 from fetcher.utils import Fields, extract_arcgis_attributes
 
 
@@ -68,34 +67,34 @@ def handle_ma(res, mapping):
     tagged = []
     # break the mapping to {file -> {mapping}}
     # not the most efficient, but the data is tiny
-    file_mapping = {x.split(":")[0]: {} for x in mapping.keys() if x.find(':') > 0}
+    tab_mapping = {x.split(":")[0]: {} for x in mapping.keys() if x.find(':') > 0}
     for k, v in mapping.items():
         if k.find(':') < 0:
             continue
-        filename, field = k.split(":")
-        file_mapping[filename][field] = v
+        tab, field = k.split(":")
+        tab_mapping[tab][field] = v
 
-    with MaContextManager(res[0]) as zipdir:
-        for filename in file_mapping.keys():
-            if filename.startswith('DateofDeath'):
-                date_fields = ['Date of Death']
-            else:
-                date_fields = ['Date']
-            if filename.endswith('csv'):
-                df = pd.read_csv(os.path.join(zipdir, filename), parse_dates=date_fields)
-            elif filename.endswith('xlsx'):
-                df = pd.read_excel(os.path.join(zipdir, filename), parse_dates=date_fields)
-            # expect it to always exist (we control the file list)
-            by_date = file_mapping[filename].pop('BY_DATE')
-            df = df.rename(columns=file_mapping[filename])[file_mapping[filename].values()]
+    tabs = MaRawData(res[0])
+    for tabname in tab_mapping.keys():
+        if tabname.startswith('DateofDeath'):
+            date_field = 'Date of Death'
+        else:
+            date_field = 'Date'
+        df = tabs[tabname]
+        # handle dates
+        df[date_field] = pd.to_datetime(df[date_field])
 
-            # need to cumsum TestingByDate file
-            if filename.startswith('TestingByDate'):
-                df = df.set_index('DATE').cumsum()
-                df['DATE'] = df.index
+        # expect it to always exist (we control the file list)
+        by_date = tab_mapping[tabname].pop('BY_DATE')
+        df = df.rename(columns=tab_mapping[tabname])[tab_mapping[tabname].values()]
 
-            df['BY_DATE'] = by_date
-            tagged.extend(df.to_dict(orient='records'))
+        # need to cumsum TestingByDate file
+        if tabname.startswith('TestingByDate'):
+            df = df.set_index('DATE').cumsum()
+            df['DATE'] = df.index
+
+        df['BY_DATE'] = by_date
+        tagged.extend(df.to_dict(orient='records'))
 
     return tagged
 
