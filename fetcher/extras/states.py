@@ -570,7 +570,7 @@ def handle_mi(res, mapping):
     results_url = base_url + links[4]['href']
 
     try:
-        df = pd.read_excel(cases_url)
+        df = pd.read_excel(cases_url, engine='xlrd')
         filter_col = 'CASE_STATUS'
         summed = df.groupby(filter_col).sum()
         for m in [cases, deaths]:
