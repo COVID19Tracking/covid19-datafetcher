@@ -774,6 +774,10 @@ def handle_ma(res, mapping):
     tests = df['TestingByDate (Test Date)'].filter(like='All Positive')
     tagged[Fields.SPECIMENS_POS.name] = tests.sum()['All Positive Molecular Tests']
 
+    hosp = df['RaceEthnicityLast2Weeks']
+    maxdate = hosp['Date'].max()
+    tagged[Fields.HOSP.name] = hosp[hosp['Date'] == maxdate].sum()['Ever Hospitaltized']
+
     # weekly report:
     df = MaRawData(res[0], "Weekly Public Health Report - Raw Data")
 
@@ -784,10 +788,6 @@ def handle_ma(res, mapping):
     antibody = df['Antibody'].sum()
     tagged[Fields.ANTIBODY_TOTAL_PEOPLE.name] = antibody['Total Tests']
     tagged[Fields.ANTIBODY_POS_PEOPLE.name] = antibody['Positive Tests']
-
-    hosp = df['RaceEthnicity']
-    maxdate = hosp['Date'].max()
-    tagged[Fields.HOSP.name] = hosp[hosp['Date'] == maxdate].sum()['Ever Hospitaltized']
 
     return tagged
 
