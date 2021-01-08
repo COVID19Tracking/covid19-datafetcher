@@ -12,7 +12,7 @@ AL:
   CummulativeCase: POSITIVE
   date: DATE
   cumTotalDeath: DEATH
-  __strptime: "%m-%d-%Y"
+  __strptime: "%y-%m-%d"
 AR:
   Date: TIMESTAMP
   pcr_tests: SPECIMENS
