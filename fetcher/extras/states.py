@@ -478,7 +478,7 @@ def handle_me(res, mapping):
 
     # summary csv from tableau
     df = res[1]
-    df = df[df['County'] == 'All'].set_index('Measure Names')
+    df = df[df['Patient County'] == 'All'].set_index('Measure Names')
     partial = extract_arcgis_attributes(df['Measure Values'], mapping, 'ME')
     tagged.update(partial)
 
