@@ -561,6 +561,8 @@ VA:
   pos_pcr_testing: SPECIMENS_POS  # should actually be positive testing encounters
   antibody_total: ANTIBODY_TOTAL
   antibody_pos: ANTIBODY_POS
+  antigen_total: ANTIGEN_TOTAL
+  antigen_pos: ANTIGEN_POS
   total_covid_19_patients: CURR_HOSP
   icu_patients: CURR_ICU
   vent_patients: CURR_VENT

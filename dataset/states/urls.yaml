@@ -650,7 +650,7 @@ VA:
   data_path: [0]
   desc: Cases, death (Probable)
 - url: https://data.virginia.gov/resource/3u5k-c2gr.json
-  params: {$query: 'select sum(number_of_pcr_testing) as pcr_testing, sum(number_of_positive_pcr_testing) as pos_pcr_testing, sum(total_number_of_testing) - sum(number_of_pcr_testing) as antibody_total, sum(total_number_of_positive) - sum(number_of_positive_pcr_testing) as antibody_pos'}
+  params: {$query: 'select sum(number_of_pcr_testing) as pcr_testing, sum(number_of_positive_pcr_testing) as pos_pcr_testing, sum(number_of_antibody_testing_encounters) as antibody_total, sum(number_of_positive_antibody_testing_encounters) as antibody_pos, sum(number_of_positive_pcr_testing) as antigen_pos, sum(number_of_antigen_testing_encounters) as antigen_total'}
   type: soda
   data_path: [0]
   desc: Testing data (PCR and antibody)
