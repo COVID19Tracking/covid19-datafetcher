@@ -59,6 +59,8 @@ def main(cfg):
     print(df)
     # rename
     columns_renames = {k: v.value for k, v in Fields.__members__.items()}
+    # one last update
+    columns_renames['TOTAL'] = 'totalTestsPeopleViral'
     data = df.rename(columns=columns_renames). \
         head(cfg.backfill.fill). \
         dropna(axis=1). \
