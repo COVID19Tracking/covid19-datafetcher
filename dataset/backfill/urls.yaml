@@ -85,6 +85,20 @@ GA:
   params: null
   type: zip
   desc: Zip Download
+HI:
+- url: https://services9.arcgis.com/aKxrz4vDVjfUwBWJ/arcgis/rest/services/HIEMA_TEST_DATA_4bfd278536844131bb91a74f289ea395/FeatureServer/0/query
+  params: {where: name = 'State', outFields: '*', orderByFields: reportdt asc, f: json}
+  type: arcgis
+  desc: Testing encounters
+- url: https://services9.arcgis.com/aKxrz4vDVjfUwBWJ/arcgis/rest/services/HIEMA_COVID_DATA_95b9bc52fdd943aa904b3b8ff0d75580/FeatureServer/0/query
+  params: {where: name = 'State', outFields: 'OBJECTID, toDate_positiveAndPresumed, reportdt', orderByFields: reportdt asc, f: json}
+  type: arcgis
+  desc: Cases
+# I'll deal with it later. Do they update futures?
+# - url: https://services9.arcgis.com/aKxrz4vDVjfUwBWJ/arcgis/rest/services/fatality_data/FeatureServer/0/query
+#   params: {where: county = 'State', outFields: '*', orderByFields: week_ending asc, f: json}
+#   type: arcgis
+#   desc: Death
 MA:
 - url: https://www.mass.gov/info-details/covid-19-response-reporting
   params: null

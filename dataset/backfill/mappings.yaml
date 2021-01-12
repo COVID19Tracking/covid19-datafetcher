@@ -86,7 +86,13 @@ GA:
   "epicurve_rpt_date.csv:report_date": TIMESTAMP
   "epicurve_rpt_date.csv:cases_cum": POSITIVE
   "epicurve_rpt_date.csv:deaths_cum": DEATH
-
+HI:
+  reportdt: TIMESTAMP
+  week_ending: TIMESTAMP
+  toDate_totaltests: SPECIMENS
+  toDate_positive: SPECIMENS_POS
+  toDate_positiveAndPresumed: POSITIVE
+  cumulative_deaths: DEATH
 MA:
   "Cases (Report Date):BY_DATE": Report
   "Cases (Report Date):Date": DATE
