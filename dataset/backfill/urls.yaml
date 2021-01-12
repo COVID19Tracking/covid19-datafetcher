@@ -77,9 +77,14 @@ CT:
     BY_DATE: Specimen Collection
 DE:
 - url: https://myhealthycommunity.dhss.delaware.gov/locations/state/download_covid_19_data
-  params: {}
+  params: null
   type: pandas
   desc: All data
+GA:
+- url: https://ga-covid19.ondemand.sas.com/docs/ga_covid_data.zip
+  params: null
+  type: zip
+  desc: Zip Download
 MA:
 - url: https://www.mass.gov/info-details/covid-19-response-reporting
   params: null

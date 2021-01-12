@@ -66,6 +66,26 @@ DE:
   Cumulative Number of Confirmed Positive Cases: CONFIRMED
   Cumulative Number of Positive Cases: POSITIVE
   Cumulative Number of Probable Positive Cases: PROBABLE
+GA:
+  "pcr_positives.csv:BY_DATE": Report
+  "pcr_positives.csv:report_date": TIMESTAMP
+  "pcr_positives.csv:Running total of all PCR tests": SPECIMENS
+
+  "pcr_positives_col.csv:BY_DATE": Specimen Collection
+  "pcr_positives_col.csv:collection_dt": TIMESTAMP
+  "pcr_positives_col.csv:Running total of all PCR tests": SPECIMENS
+  # The file has the same column name twice :(
+  #"pcr_positives_col.csv:": SPECIMENS_POS
+
+  "epicurve_symptom_date.csv:BY_DATE": Symptom Onset
+  "epicurve_symptom_date.csv:symptom date": TIMESTAMP
+  "epicurve_symptom_date.csv:cases_cum": POSITIVE
+  "epicurve_symptom_date.csv:deaths_cum": DEATH
+
+  "epicurve_rpt_date.csv:BY_DATE": Report
+  "epicurve_rpt_date.csv:report_date": TIMESTAMP
+  "epicurve_rpt_date.csv:cases_cum": POSITIVE
+  "epicurve_rpt_date.csv:deaths_cum": DEATH
 
 MA:
   "Cases (Report Date):BY_DATE": Report

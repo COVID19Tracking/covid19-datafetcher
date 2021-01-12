@@ -1,14 +1,25 @@
 from datetime import datetime
+import os
 import numpy as np
 import pandas as pd
 
-from fetcher.extras.common import MaRawData
+from fetcher.extras.common import MaRawData, zipContextManager
 from fetcher.utils import Fields, extract_arcgis_attributes
 
 
 NULL_DATE = datetime(2020, 1, 1)
 DATE = Fields.DATE.name
 TS = Fields.TIMESTAMP.name
+
+
+def build_leveled_mapping(mapping):
+    tab_mapping = {x.split(":")[0]: {} for x in mapping.keys() if x.find(':') > 0}
+    for k, v in mapping.items():
+        if k.find(':') < 0:
+            continue
+        tab, field = k.split(":")
+        tab_mapping[tab][field] = v
+    return tab_mapping
 
 
 def make_cumsum_df(data, timestamp_field=Fields.TIMESTAMP.name):
@@ -94,19 +105,33 @@ def handle_de(res, mapping):
     return tagged
 
 
+def handle_ga(res, mapping):
+    tagged = []
+    file_mapping = build_leveled_mapping(mapping)
+    with zipContextManager(res[0]) as zipdir:
+        for filename in file_mapping.keys():
+            date_fields = [k for k, v in file_mapping[filename].items() if v == 'TIMESTAMP']
+            df = pd.read_csv(os.path.join(zipdir, filename), parse_dates=date_fields)
+            # funny stuff:
+            if filename.startswith('pcr_positive'):
+                # the columns have the same name #facepalm
+                df.columns = ['county', 'TIMESTAMP', '_', 'SPECIMENS', '_',
+                              'SPECIMENS_POS', '_', '_']
+            df = df[df['county'] == 'Georgia']
+            by_date = file_mapping[filename].pop('BY_DATE')
+            df = df.rename(columns=file_mapping[filename])
+            df['BY_DATE'] = by_date
+            tagged.extend(df.to_dict(orient='records'))
+    return tagged
+
+
 def handle_ma(res, mapping):
     '''Returning a list of dictionaries (records)
     '''
     tagged = []
     # break the mapping to {file -> {mapping}}
     # not the most efficient, but the data is tiny
-    tab_mapping = {x.split(":")[0]: {} for x in mapping.keys() if x.find(':') > 0}
-    for k, v in mapping.items():
-        if k.find(':') < 0:
-            continue
-        tab, field = k.split(":")
-        tab_mapping[tab][field] = v
-
+    tab_mapping = build_leveled_mapping(mapping)
     tabs = MaRawData(res[0])
     for tabname in tab_mapping.keys():
         if tabname.startswith('DateofDeath'):
