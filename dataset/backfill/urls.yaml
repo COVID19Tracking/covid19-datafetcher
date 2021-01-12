@@ -75,6 +75,11 @@ CT:
   desc: PCR and antigen tests by collection date
   constants:
     BY_DATE: Specimen Collection
+DE:
+- url: https://myhealthycommunity.dhss.delaware.gov/locations/state/download_covid_19_data
+  params: {}
+  type: pandas
+  desc: All data
 MA:
 - url: https://www.mass.gov/info-details/covid-19-response-reporting
   params: null

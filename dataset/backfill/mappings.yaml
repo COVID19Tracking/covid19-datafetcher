@@ -47,6 +47,25 @@ CT:
   date: DATE
   # 2020-04-17T00:00:00.000
   __strptime: "%Y-%m-%dT%H:%M:%S.000"
+DE:
+  Date: TIMESTAMP
+  Deaths: DEATH
+  Confirmed Deaths: DEATH_CONFIRMED
+  Probable Deaths: DEATH_PROBABLE
+
+  Total Persons Tested: TOTAL
+  Positive Tests: SPECIMENS_POS
+  Total Tests: SPECIMENS
+
+  # By date values:
+  Date used: BY_DATE
+  Test date: Specimen Collection
+  Date reported to state: Report
+  Date of death: Death
+
+  Cumulative Number of Confirmed Positive Cases: CONFIRMED
+  Cumulative Number of Positive Cases: POSITIVE
+  Cumulative Number of Probable Positive Cases: PROBABLE
 
 MA:
   "Cases (Report Date):BY_DATE": Report

@@ -61,6 +61,39 @@ def handle_ct(res, mapping):
     return df.to_dict(orient='records')
 
 
+def handle_de(res, mapping):
+    df = res[0]
+    df['Date'] = pd.to_datetime(df[['Year', 'Month', 'Day']])
+    df = df[df['Statistic'].isin(mapping.keys())]
+
+    # changing the order of operations here is probably better
+
+    def prepare_values(df):
+        df = df.pivot(
+            index=['Date', 'Date used'], values='Value', columns=['Statistic'])
+        df['BY_DATE'] = df.index.get_level_values(1)
+        df = df.droplevel(1)
+        df['Date'] = df.index
+        df = df.replace(mapping).rename(columns=mapping)
+        return df.to_dict(orient='records')
+
+    # Death
+    deaths_df = df[(df['Statistic'].str.find('Death') >= 0) & (df['Unit'] == 'people')]
+    tagged = prepare_values(deaths_df)
+
+    # testing
+    tests_df = df[df['Statistic'].str.find('Test') >= 0]
+    for x in ['people', 'tests']:
+        partial = prepare_values(tests_df[tests_df['Unit'] == x])
+        tagged.extend(partial)
+
+    # cases
+    cases = df[df['Unit'] == 'people'][df['Statistic'].str.find('Cases') >= 0]
+    partial = prepare_values(cases)
+    tagged.extend(partial)
+    return tagged
+
+
 def handle_ma(res, mapping):
     '''Returning a list of dictionaries (records)
     '''
