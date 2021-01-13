@@ -258,6 +258,7 @@ def handle_ri(res, mapping):
 
 def handle_va(res, mapping):
     tests = res[0]
+
     df = pd.DataFrame(tests).rename(columns=mapping).set_index(DATE)
     for c in df.columns:
         # convert to numeric
@@ -265,6 +266,7 @@ def handle_va(res, mapping):
 
     df.index = pd.to_datetime(df.index, errors='coerce', format=mapping.get('__strptime'))
     df.index = df.index.fillna(NULL_DATE)
+    df['BY_DATE'] = 'Specimen Collection'
     df = df.sort_index().cumsum()
     df[TS] = pd.to_datetime(df.index)
     df[TS] = df[TS].values.astype(np.int64) // 10 ** 9

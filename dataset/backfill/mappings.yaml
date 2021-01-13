@@ -205,9 +205,12 @@ TX:
   ViralTests: SPECIMENS
 VA:
   lab_report_date: DATE
-  # "2020-01-26"
-  __strptime: "%Y-%m-%d"
+  # "10/10/2020"
+  __strptime: "%m/%d/%Y"
+
   pcr_testing: PCR_TEST_ENCOUNTERS
   pos_pcr_testing: SPECIMENS_POS  # should actually be positive testing encounters
   antibody_total: ANTIBODY_TOTAL
   antibody_pos: ANTIBODY_POS
+  antigen_total: ANTIGEN_TOTAL
+  antigen_pos: ANTIGEN_POS
