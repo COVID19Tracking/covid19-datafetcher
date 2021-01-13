@@ -266,7 +266,7 @@ def handle_va(res, mapping):
 
     df.index = pd.to_datetime(df.index, errors='coerce', format=mapping.get('__strptime'))
     df.index = df.index.fillna(NULL_DATE)
-    df['BY_DATE'] = 'Specimen Collection'
+    df['BY_DATE'] = 'Test Result'
     df = df.sort_index().cumsum()
     df[TS] = pd.to_datetime(df.index)
     df[TS] = df[TS].values.astype(np.int64) // 10 ** 9
