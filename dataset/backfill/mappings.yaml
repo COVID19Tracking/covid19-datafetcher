@@ -166,6 +166,14 @@ NE:
   AllTestsAsOfThisDate: SPECIMENS
   TotalNotDetectedAsOfThisDate: SPECIMENS_NEG
   TotalPositiveAsOfThisDate: SPECIMENS_POS
+OH:
+  Date: TIMESTAMP
+  Confirmatory Lab Total Tested (Daily): SPECIMENS
+  Confirmatory Lab Total Positive (Daily): SPECIMENS_POS
+  Presumptive Lab Total Tested (Daily): ANTIGEN_TOTAL
+  Presumptive Lab Total Positive (Daily): ANTIGEN_POS
+  Death Due to Illness Count: DEATH
+  Case Count: POSITIVE
 RI:
   # Google doc:
   "Cumulative positive tests (may count people more than once)": SPECIMENS_POS

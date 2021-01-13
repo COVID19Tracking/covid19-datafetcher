@@ -125,6 +125,35 @@ def handle_ga(res, mapping):
     return tagged
 
 
+def handle_oh(res, mapping):
+    testing_url = res[0]['url']
+    df = pd.read_csv(testing_url, parse_dates=['Date'])
+    df = df.set_index('Date').sort_index().cumsum().rename(columns=mapping)
+    df['TIMESTAMP'] = df.index
+    tagged = df.to_dict(orient='records')
+
+    oh = res[1].iloc[:-1]
+    oh['Case Count'] = pd.to_numeric(oh['Case Count'])
+    for x in ['Onset Date', 'Date Of Death']:
+        oh[x] = pd.to_datetime(oh[x], errors='coerce')
+
+    # death
+    death = oh.groupby('Date Of Death').sum().filter(
+        like='Death').sort_index().cumsum().rename(columns=mapping)
+    death['TIMESTAMP'] = death.index
+    death['BY_DATE'] = 'Death'
+    tagged.extend(death.to_dict(orient='records'))
+
+    # cases
+    cases = oh.groupby('Onset Date').sum().filter(
+        like='Case').sort_index().cumsum().rename(columns=mapping)
+    cases['TIMESTAMP'] = cases.index
+    cases['BY_DATE'] = 'Symptom Onset'
+    tagged.extend(cases.to_dict(orient='records'))
+
+    return tagged
+
+
 def handle_ma(res, mapping):
     '''Returning a list of dictionaries (records)
     '''

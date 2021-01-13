@@ -152,6 +152,16 @@ NE:
   params: {where: 1=1, outFields: '*', orderByFields: LAB_REPORT_DATE asc, f: json}
   type: arcgis
   desc: Tests and results by lab report date
+OH:
+# funny times
+- url: https://data.ohio.gov/apigateway-secure/data-portal/download-file/2ad05e55-2b1a-486c-bc07-ecb3be682d29?key=e42285cfa9a0b157b3f1bdaadcac509c44db4cfa0f90735e12b770acb1307b918cee14d5d8e4d4187eb2cab71fc9233bda8ee3eed924b8a3fad33aaa6c8915fe6f3de6f82ad4b995c2359b168ed88fa9
+  params: null
+  type: json
+  desc: Testing
+- url: https://coronavirus.ohio.gov/static/dashboards/COVIDSummaryData.csv
+  params: {thousands: ','}
+  type: pandas
+  desc: Key metrics (cases, death)
 RI:
 - url: 'https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/export?format=csv&gid=1592746937'
   params: {parse_dates: True}
