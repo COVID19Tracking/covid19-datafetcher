@@ -93,6 +93,14 @@ HI:
   toDate_positive: SPECIMENS_POS
   toDate_positiveAndPresumed: POSITIVE
   cumulative_deaths: DEATH
+IN:
+  date: DATE
+  covid_cases: POSITIVE
+  deaths: DEATH
+  tests_administered: SPECIMENS
+  pos_tests_administered: SPECIMENS_POS
+  tested_people: TOTAL
+  positive_by_collection: POSITIVE_BY_SPECIMEN #CONFIRMED
 MA:
   "Cases (Report Date):BY_DATE": Report
   "Cases (Report Date):Date": DATE

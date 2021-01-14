@@ -22,6 +22,18 @@ def build_leveled_mapping(mapping):
     return tab_mapping
 
 
+def prep_df(values, mapping):
+    df = pd.DataFrame(values).rename(columns=mapping).set_index(DATE)
+    for c in df.columns:
+        if c.find('status') >= 0:
+            continue
+        # convert to numeric
+        df[c] = pd.to_numeric(df[c])
+
+    df.index = pd.to_datetime(df.index, errors='coerce')
+    return df
+
+
 def make_cumsum_df(data, timestamp_field=Fields.TIMESTAMP.name):
     df = pd.DataFrame(data)
     df.set_index(timestamp_field, inplace=True)
@@ -122,6 +134,32 @@ def handle_ga(res, mapping):
             df = df.rename(columns=file_mapping[filename])
             df['BY_DATE'] = by_date
             tagged.extend(df.to_dict(orient='records'))
+    return tagged
+
+
+def handle_in(res, mapping):
+    tagged = []
+
+    df = prep_df(res[0]['result']['records'], mapping).sort_index().cumsum()
+
+    # need to assign dating correctly
+    assignments = [
+        ('SPECIMENS', 'Specimen Collection'),
+        ('POSITIVE_BY_SPECIMEN', 'Specimen Collection'),
+        (['POSITIVE', 'DEATH', 'TOTAL'], 'Report'),
+    ]
+
+    for key, by_date in assignments:
+        if isinstance(key, list):
+            subset = df.filter(key)
+        else:
+            subset = df.filter(like=key)
+        if subset.columns[0] == 'POSITIVE_BY_SPECIMEN':
+            subset.columns = ['POSITIVE']
+        subset['BY_DATE'] = by_date
+        subset[TS] = subset.index
+        tagged.extend(subset.to_dict(orient='records'))
+
     return tagged
 
 
@@ -257,19 +295,8 @@ def handle_ri(res, mapping):
 
 
 def handle_va(res, mapping):
-    def prep_df(values):
-        df = pd.DataFrame(values).rename(columns=mapping).set_index(DATE)
-        for c in df.columns:
-            if c.find('status') >= 0:
-                continue
-            # convert to numeric
-            df[c] = pd.to_numeric(df[c])
-
-        df.index = pd.to_datetime(df.index, errors='coerce')
-        return df
-
     tests = res[0]
-    df = prep_df(tests)
+    df = prep_df(tests, mapping)
     df.index = df.index.fillna(NULL_DATE)
     df = df.sort_index().cumsum()
     df[TS] = pd.to_datetime(df.index)
@@ -279,7 +306,7 @@ def handle_va(res, mapping):
 
     # 2nd source is cases and death by status, by report date
     report_date = res[1]
-    df = prep_df(report_date).pivot(
+    df = prep_df(report_date, mapping).pivot(
         columns='case_status', values=['number_of_cases', 'number_of_deaths'])
     df.columns = df.columns.map("-".join)
     df = df.rename(columns=mapping)
@@ -288,7 +315,7 @@ def handle_va(res, mapping):
     tagged.extend(df.to_dict(orient='records'))
 
     event_date = res[2]
-    df = prep_df(event_date).pivot(
+    df = prep_df(event_date, mapping).pivot(
         columns='case_status', values=['number_of_cases', 'number_of_deaths'])
     df.columns = df.columns.map("-".join)
     df = df.sort_index().cumsum()
