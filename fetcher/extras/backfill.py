@@ -146,7 +146,8 @@ def handle_in(res, mapping):
     assignments = [
         ('SPECIMENS', 'Specimen Collection'),
         ('POSITIVE_BY_SPECIMEN', 'Specimen Collection'),
-        (['POSITIVE', 'DEATH', 'TOTAL'], 'Report'),
+        (['POSITIVE', 'TOTAL'], 'Report'),
+        ('DEATH', 'Death'),
     ]
 
     for key, by_date in assignments:

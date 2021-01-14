@@ -101,6 +101,7 @@ IN:
   pos_tests_administered: SPECIMENS_POS
   tested_people: TOTAL
   positive_by_collection: POSITIVE_BY_SPECIMEN #CONFIRMED
+  COVID_DEATHS_CUMSUM: DEATH
 MA:
   "Cases (Report Date):BY_DATE": Report
   "Cases (Report Date):Date": DATE
