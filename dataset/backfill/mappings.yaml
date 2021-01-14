@@ -220,3 +220,5 @@ VA:
   number_of_cases-Probable: PROBABLE
   number_of_deaths-Confirmed: DEATH_CONFIRMED
   number_of_deaths-Probable: DEATH_PROBABLE
+
+  event_date: DATE

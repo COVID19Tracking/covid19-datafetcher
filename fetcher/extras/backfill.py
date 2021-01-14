@@ -278,13 +278,25 @@ def handle_va(res, mapping):
     tagged = df.to_dict(orient='records')
 
     # 2nd source is cases and death by status, by report date
-    cases = res[1]
-    df = prep_df(cases).pivot(
+    report_date = res[1]
+    df = prep_df(report_date).pivot(
         columns='case_status', values=['number_of_cases', 'number_of_deaths'])
     df.columns = df.columns.map("-".join)
     df = df.rename(columns=mapping)
     df[TS] = df.index
     df['BY_DATE'] = 'Report'
     tagged.extend(df.to_dict(orient='records'))
+
+    event_date = res[2]
+    df = prep_df(event_date).pivot(
+        columns='case_status', values=['number_of_cases', 'number_of_deaths'])
+    df.columns = df.columns.map("-".join)
+    df = df.sort_index().cumsum()
+
+    for series, by_date in [('cases', 'Symptom Onset'), ('deaths', 'Death')]:
+        subset = df.filter(like=series).rename(columns=mapping)
+        subset[TS] = subset.index
+        subset['BY_DATE'] = by_date
+        tagged.extend(subset.to_dict(orient='records'))
 
     return tagged

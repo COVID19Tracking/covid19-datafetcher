@@ -203,3 +203,8 @@ VA:
   type: soda
   data_path: []
   desc: Cases, death by report date
+- url: https://data.virginia.gov/resource/9d6i-p8gz.json
+  params: {$query: 'select event_date, case_status, sum(number_of_cases) as number_of_cases, sum(number_of_deaths) as number_of_deaths group by event_date, case_status'}
+  type: soda
+  data_path: []
+  desc: Cases, death by date of symptom onset and death
