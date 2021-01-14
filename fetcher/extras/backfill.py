@@ -257,17 +257,34 @@ def handle_ri(res, mapping):
 
 
 def handle_va(res, mapping):
+    def prep_df(values):
+        df = pd.DataFrame(values).rename(columns=mapping).set_index(DATE)
+        for c in df.columns:
+            if c.find('status') >= 0:
+                continue
+            # convert to numeric
+            df[c] = pd.to_numeric(df[c])
+
+        df.index = pd.to_datetime(df.index, errors='coerce')
+        return df
+
     tests = res[0]
-
-    df = pd.DataFrame(tests).rename(columns=mapping).set_index(DATE)
-    for c in df.columns:
-        # convert to numeric
-        df[c] = pd.to_numeric(df[c])
-
-    df.index = pd.to_datetime(df.index, errors='coerce', format=mapping.get('__strptime'))
+    df = prep_df(tests)
     df.index = df.index.fillna(NULL_DATE)
-    df['BY_DATE'] = 'Test Result'
     df = df.sort_index().cumsum()
     df[TS] = pd.to_datetime(df.index)
     df[TS] = df[TS].values.astype(np.int64) // 10 ** 9
-    return df.to_dict(orient='records')
+    df['BY_DATE'] = 'Test Result'
+    tagged = df.to_dict(orient='records')
+
+    # 2nd source is cases and death by status, by report date
+    cases = res[1]
+    df = prep_df(cases).pivot(
+        columns='case_status', values=['number_of_cases', 'number_of_deaths'])
+    df.columns = df.columns.map("-".join)
+    df = df.rename(columns=mapping)
+    df[TS] = df.index
+    df['BY_DATE'] = 'Report'
+    tagged.extend(df.to_dict(orient='records'))
+
+    return tagged

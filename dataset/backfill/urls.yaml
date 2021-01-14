@@ -196,5 +196,10 @@ VA:
 - url: https://data.virginia.gov/resource/3u5k-c2gr.json
   params: {$query: 'select lab_report_date, sum(number_of_pcr_testing) as pcr_testing, sum(number_of_positive_pcr_testing) as pos_pcr_testing, sum(number_of_antibody_testing_encounters) as antibody_total, sum(number_of_positive_antibody_testing_encounters) as antibody_pos, sum(number_of_positive_antigen_testing_encounters) as antigen_pos, sum(number_of_antigen_testing_encounters) as antigen_total group by lab_report_date'}
   type: soda
-  data_path: [[]]
+  data_path: []
   desc: Testing data (PCR and antibody)
+- url: https://data.virginia.gov/resource/uqs3-x7zh.json
+  params: null
+  type: soda
+  data_path: []
+  desc: Cases, death by report date

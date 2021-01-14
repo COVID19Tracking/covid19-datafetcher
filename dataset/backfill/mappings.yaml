@@ -214,3 +214,9 @@ VA:
   antibody_pos: ANTIBODY_POS
   antigen_total: ANTIGEN_TOTAL
   antigen_pos: ANTIGEN_POS
+
+  report_date: DATE
+  number_of_cases-Confirmed: CONFIRMED
+  number_of_cases-Probable: PROBABLE
+  number_of_deaths-Confirmed: DEATH_CONFIRMED
+  number_of_deaths-Probable: DEATH_PROBABLE
