@@ -782,7 +782,7 @@ def handle_ma(res, mapping):
     df = MaRawData(res[0], "Weekly Public Health Report - Raw Data")
 
     # recovered
-    rec = df['Quarantine and Isolation']
+    rec = df['Quarantine and Isolation'].sort_values('Date')
     recovered = rec[rec['Status'] == 'Total Cases Released from Isolation'].iloc[-1]['Residents']
     tagged[Fields.RECOVERED.name] = recovered
     antibody = df['Antibody'].sum()
