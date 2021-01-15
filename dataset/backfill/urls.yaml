@@ -223,3 +223,16 @@ VA:
   type: soda
   data_path: []
   desc: Cases, death by date of symptom onset and death
+WI:
+- url: https://bi.wisconsin.gov/t/DHS/views/Cumulativecaseswmobile/Cumulativecasesbyday.csv
+  params: {parse_dates: ['Day of Date'], thousands: ","}
+  type: pandas
+  desc: Cases by date confirmed
+- url: https://bi.wisconsin.gov/t/DHS/views/CumulativeDeathsMobile/Cumulativedeathsbyday.csv
+  params: {parse_dates: ['Day of Date'], thousands: ","}
+  type: pandas
+  desc: Death by date reported
+- url: https://bi.wisconsin.gov/t/DHS/views/PercentPositivebyTestPersonandaComparisonandTestCapacity/TestCapacityDashboard.csv
+  params: {parse_dates: ['Day of displaydateonly'], thousands: ','}
+  type: pandas
+  desc: Testing encounters

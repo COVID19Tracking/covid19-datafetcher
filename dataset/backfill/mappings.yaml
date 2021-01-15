@@ -237,3 +237,9 @@ VA:
   number_of_deaths-Probable: DEATH_PROBABLE
 
   event_date: DATE
+WI:
+  Day of Date: DATE
+  Day of displaydateonly: DATE
+  Positive: CONFIRMED
+  Deaths: DEATH_CONFIRMED
+  Totals: PCR_TEST_ENCOUNTERS

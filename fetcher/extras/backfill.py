@@ -10,6 +10,7 @@ from fetcher.utils import Fields, extract_arcgis_attributes
 NULL_DATE = datetime(2020, 1, 1)
 DATE = Fields.DATE.name
 TS = Fields.TIMESTAMP.name
+BY_DATE = Fields.BY_DATE.name
 
 
 def build_leveled_mapping(mapping):
@@ -56,7 +57,7 @@ def handle_ak(res, mapping):
 
     df = df.rename(columns=mapping).cumsum()
     df[TS] = df.index
-    df['BY_DATE'] = 'Specimen Collection'
+    df[BY_DATE] = 'Specimen Collection'
 
     tagged = df.to_dict(orient='records')
     return tagged
@@ -80,7 +81,7 @@ def handle_ct(res, mapping):
     df = df.sort_index().cumsum()
     df[TS] = pd.to_datetime(df.index)
     df[TS] = df[TS].values.astype(np.int64) // 10 ** 9
-    df['BY_DATE'] = 'Specimen Collection'
+    df[BY_DATE] = 'Specimen Collection'
     return df.to_dict(orient='records')
 
 
@@ -94,7 +95,7 @@ def handle_de(res, mapping):
     def prepare_values(df):
         df = df.pivot(
             index=['Date', 'Date used'], values='Value', columns=['Statistic'])
-        df['BY_DATE'] = df.index.get_level_values(1)
+        df[BY_DATE] = df.index.get_level_values(1)
         df = df.droplevel(1)
         df['Date'] = df.index
         df = df.replace(mapping).rename(columns=mapping)
@@ -130,9 +131,9 @@ def handle_ga(res, mapping):
                 df.columns = ['county', 'TIMESTAMP', '_', 'SPECIMENS', '_',
                               'SPECIMENS_POS', '_', '_']
             df = df[df['county'] == 'Georgia']
-            by_date = file_mapping[filename].pop('BY_DATE')
+            by_date = file_mapping[filename].pop(BY_DATE)
             df = df.rename(columns=file_mapping[filename])
-            df['BY_DATE'] = by_date
+            df[BY_DATE] = by_date
             tagged.extend(df.to_dict(orient='records'))
     return tagged
 
@@ -157,7 +158,7 @@ def handle_in(res, mapping):
             subset = df.filter(like=key)
         if subset.columns[0] == 'POSITIVE_BY_SPECIMEN':
             subset.columns = ['POSITIVE']
-        subset['BY_DATE'] = by_date
+        subset[BY_DATE] = by_date
         subset[TS] = subset.index
         tagged.extend(subset.to_dict(orient='records'))
 
@@ -168,7 +169,7 @@ def handle_la(res, mapping):
     df = res[0].rename(columns=mapping).groupby('DATE').sum()
     df = df.sort_index().cumsum()
     df[TS] = df.index
-    df['BY_DATE'] = 'Specimen Collection'
+    df[BY_DATE] = 'Specimen Collection'
     return df.to_dict(orient='records')
 
 
@@ -190,7 +191,7 @@ def handle_ma(res, mapping):
         df[date_field] = pd.to_datetime(df[date_field])
 
         # expect it to always exist (we control the file list)
-        by_date = tab_mapping[tabname].pop('BY_DATE')
+        by_date = tab_mapping[tabname].pop(BY_DATE)
         df = df.rename(columns=tab_mapping[tabname])[tab_mapping[tabname].values()]
 
         # need to cumsum TestingByDate file
@@ -198,7 +199,7 @@ def handle_ma(res, mapping):
             df = df.set_index('DATE').cumsum()
             df['DATE'] = df.index
 
-        df['BY_DATE'] = by_date
+        df[BY_DATE] = by_date
         tagged.extend(df.to_dict(orient='records'))
 
     return tagged
@@ -209,14 +210,14 @@ def handle_md(res, mapping):
     for result in res[:-1]:
         partial = extract_arcgis_attributes(result, mapping, 'MD')
         for x in partial:
-            x['BY_DATE'] = 'Report'
+            x[BY_DATE] = 'Report'
         mapped.extend(partial)
 
     # PCR positives
     testing = res[-1]
     testing = extract_arcgis_attributes(testing, mapping, 'MD')
     cumsum_df = make_cumsum_df(testing)
-    cumsum_df['BY_DATE'] = 'Specimen Collection'
+    cumsum_df[BY_DATE] = 'Specimen Collection'
     mapped.extend(cumsum_df.to_dict(orient='records'))
     return mapped
 
@@ -239,7 +240,7 @@ def handle_mo(res, mapping):
         mo.index = dates
 
         mo = mo.cumsum().rename(columns=mapping)
-        mo['BY_DATE'] = by_date
+        mo[BY_DATE] = by_date
         mo[TS] = mo.index
         mapped.extend(mo.to_dict(orient='records'))
 
@@ -250,7 +251,7 @@ def handle_mo(res, mapping):
         by=lambda x: x if x >= datetime(2020, 1, 1) else datetime(2020, 1, 1)) \
         .sum().sort_index().cumsum()
     df[TS] = df.index
-    df['BY_DATE'] = 'Death'
+    df[BY_DATE] = 'Death'
     mapped.extend(df.to_dict(orient='records'))
 
     return mapped
@@ -281,14 +282,14 @@ def handle_oh(res, mapping):
     death = oh.groupby('Date Of Death').sum().filter(
         like='Death').sort_index().cumsum().rename(columns=mapping)
     death['TIMESTAMP'] = death.index
-    death['BY_DATE'] = 'Death'
+    death[BY_DATE] = 'Death'
     tagged.extend(death.to_dict(orient='records'))
 
     # cases
     cases = oh.groupby('Onset Date').sum().filter(
         like='Case').sort_index().cumsum().rename(columns=mapping)
     cases['TIMESTAMP'] = cases.index
-    cases['BY_DATE'] = 'Symptom Onset'
+    cases[BY_DATE] = 'Symptom Onset'
     tagged.extend(cases.to_dict(orient='records'))
 
     return tagged
@@ -310,7 +311,7 @@ def handle_va(res, mapping):
     df = df.sort_index().cumsum()
     df[TS] = pd.to_datetime(df.index)
     df[TS] = df[TS].values.astype(np.int64) // 10 ** 9
-    df['BY_DATE'] = 'Test Result'
+    df[BY_DATE] = 'Test Result'
     tagged = df.to_dict(orient='records')
 
     # 2nd source is cases and death by status, by report date
@@ -320,7 +321,7 @@ def handle_va(res, mapping):
     df.columns = df.columns.map("-".join)
     df = df.rename(columns=mapping)
     df[TS] = df.index
-    df['BY_DATE'] = 'Report'
+    df[BY_DATE] = 'Report'
     tagged.extend(df.to_dict(orient='records'))
 
     event_date = res[2]
@@ -332,7 +333,30 @@ def handle_va(res, mapping):
     for series, by_date in [('cases', 'Symptom Onset'), ('deaths', 'Death')]:
         subset = df.filter(like=series).rename(columns=mapping)
         subset[TS] = subset.index
-        subset['BY_DATE'] = by_date
+        subset[BY_DATE] = by_date
         tagged.extend(subset.to_dict(orient='records'))
+
+    return tagged
+
+
+def handle_wi(res, mapping):
+    tagged = []
+
+    dating = {0: 'Test Result',
+              1: 'Report'}
+
+    for key, by_date in dating.items():
+        df = res[key].rename(columns=mapping)
+        df[BY_DATE] = by_date
+        df[TS] = df[DATE]
+        tagged.extend(df.to_dict(orient='records'))
+
+    # tests
+    df = res[2].rename(columns=mapping)
+    df = df[df['Measure Names'] == 'Total people tested daily']
+    df = df.set_index('DATE').sort_index().cumsum()
+    df[TS] = df.index
+    df[BY_DATE] = 'Specimen Collection'
+    tagged.extend(df.to_dict(orient='records'))
 
     return tagged
