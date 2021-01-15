@@ -104,10 +104,16 @@ IN:
   params: {sql: 'SELECT "DATE" as date, sum("COVID_COUNT") as covid_cases, sum("COVID_DEATHS") as deaths, sum("COVID_TESTS") as tested_people, sum("COVID_TESTS_ADMINISTRATED") as tests_administered, sum("COVID_POSITIVE_TESTS_ADMIN") as pos_tests_administered, sum("COVID_COUNT_BY_SPECIMEN_COLLECTION_DATE") as positive_by_collection from "afaa225d-ac4e-4e80-9190-f6800c366b58" group by "DATE"'}
   type: ckan
   desc: Cases, death and tests (by mixed dating)
-- url: https://hub.mph.in.gov/api/3/action/datastore_search_sql
-  params: {sql: 'SELECT "DATE", "COVID_DEATHS_CUMSUM" from "182b6742-edac-442d-8eeb-62f96b17773e"'}
-  type: ckan
-  desc: Death (by day of death)
+# Same as previous dataset
+# - url: https://hub.mph.in.gov/api/3/action/datastore_search_sql
+#   params: {sql: 'SELECT "DATE", "COVID_DEATHS_CUMSUM" from "182b6742-edac-442d-8eeb-62f96b17773e"'}
+#   type: ckan
+#   desc: Death (by day of death)
+LA:
+- url: https://ldh.la.gov/assets/oph/Coronavirus/data/LA_COVID_TESTBYDAY_PARISH_PUBLICUSE.xlsx
+  params: {parse_dates: ['Lab Collection Date']}
+  type: xlsx
+  desc: Tests and cases by specimen collection
 MA:
 - url: https://www.mass.gov/info-details/covid-19-response-reporting
   params: null
