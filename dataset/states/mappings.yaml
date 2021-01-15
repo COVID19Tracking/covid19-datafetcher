@@ -355,8 +355,8 @@ NC:
   Cases by Report Date: POSITIVE
   Molecular (PCR) Positive Cases by Specimen Date: CONFIRMED
   Antigen Positive Cases by Specimen Date: PROBABLE
-  Antigen Tests: ANTIGEN_TOTAL
-  Molecular (PCR) Tests: SPECIMENS
+  Antigen Test: ANTIGEN_TOTAL
+  Molecular Test: SPECIMENS
 ND:
   # csvs
   Cases (Confirmed Only): CONFIRMED

@@ -692,16 +692,19 @@ def handle_nc(res, mapping):
     df = df.pivot(index='Date', columns='Measure Names', values='Measure Values')
 
     for k, v in df.sum().iteritems():
-        if k[1] in mapping:
-            tagged[mapping[k[1]]] = v
+        if k in mapping:
+            tagged[mapping[k]] = v
+
+    import pdb
+    pdb.set_trace()
 
     df = res[-1]
     df['Date'] = pd.to_datetime(df['Date'])
     df['Measure Names'] = df['Measure Names'].str.strip()
     df = df.pivot(index='Date', columns='Measure Names', values='Measure Values')
     for k, v in df.sum().iteritems():
-        if k[1] in mapping:
-            tagged[mapping[k[1]]] = v + tagged.get(mapping[k[1]], 0)
+        if k in mapping:
+            tagged[mapping[k]] = v + tagged.get(mapping[k], 0)
 
     return tagged
 
