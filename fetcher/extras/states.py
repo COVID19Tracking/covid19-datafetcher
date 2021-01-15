@@ -387,7 +387,7 @@ def handle_nj(res, mapping):
     mapped[Fields.RECOVERED.name] += 15642
 
     # This magic number math happens on the dashboard
-    mapped[Fields.PROBABLE.name] += 48
+    mapped[Fields.PROBABLE.name] += 58
 
     return mapped
 
