@@ -554,15 +554,6 @@ def handle_mi(res, mapping):
     tagged[Fields.CURR_ICU.name] = atoi(icu)
 
     # TODO: Can use the reverse mapping
-    cases = 'Cases'
-    deaths = 'Deaths'
-    probable = 'Probable'
-    confirmed = 'Confirmed'
-    pcr = 'Diagnostic'
-    antibody = 'Serology'
-    negative = 'Negative'
-    positive = 'Positive'
-
     soup = res[-1]
     h = soup.find("h5", string=re.compile('[dD][aA][tT][aA]'))
     parent = h.find_parent("ul")
@@ -573,29 +564,33 @@ def handle_mi(res, mapping):
     tests_url = base_url + links[3]['href']
     results_url = base_url + links[4]['href']
 
+    import pdb
+    pdb.set_trace()
+
     try:
         df = pd.read_excel(cases_url, engine='xlrd')
         filter_col = 'CASE_STATUS'
         summed = df.groupby(filter_col).sum()
-        for m in [cases, deaths]:
-            for t in [probable, confirmed]:
+        for m in ['Cases', 'Deaths']:
+            for t in ['Confirmed', 'Probable']:
                 tagged[mapping[m+t]] = summed[m][t]
     except Exception as e:
         logging.warning("Exception getting cases by status", e)
 
     try:
-        df = pd.read_excel(tests_url)
+        df = pd.read_excel(tests_url, engine='xlrd')
         filter_col = 'TestType'
         summed = df.groupby(filter_col).sum()
-        for m in [pcr, antibody]:
+        for m in ['Diagnostic', 'Serology']:
             tagged[mapping[m]] = summed['Count'][m]
     except Exception:
         logging.warning("[MI] failed to fetch test results")
 
     try:
-        df = pd.read_excel(results_url)
-        summed = df[[negative, positive]].sum()
-        for x in [negative, positive]:
+        df = pd.read_excel(results_url, engine='xlrd')
+        fields = ['Negative', 'Positive']
+        summed = df[fields].sum()
+        for x in fields:
             tagged[mapping[x]] = summed[x]
     except Exception:
         logging.warning("[MI] Failed to fetch test results")
