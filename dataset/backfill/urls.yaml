@@ -18,14 +18,14 @@ AL:
   type: arcgis
   desc: Cases (by report date)
   constants:
-    BY_DATE: Report
+    DATE_USED: Report
     #METRIC: Cases
 - url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/ArcGIS/rest/services/C19_cumulative_death_statewide_PUBLIC/FeatureServer/1/query
   params: {where: DeathDate <> 'Unknown', outFields: "*, DeathDate as date", f: json}
   type: arcgis
   desc: Death (by date of death)
   constants:
-    BY_DATE: Death
+    DATE_USED: Death
     #METRIC: Deaths
 AR:
 - url: https://services.arcgis.com/PwY9ZuZRDiI5nXUB/ArcGIS/rest/services/UPDATED_ADH_COVID19_METRICS_BY_DATE/FeatureServer/0/query
@@ -39,27 +39,27 @@ CA:
   data_path: ['result', 'records', []]
   desc: Cases, death
   constants:
-    BY_DATE: Report
+    DATE_USED: Report
 - url: https://data.ca.gov/api/3/action/datastore_search
   params: {resource_id: b6648a0d-ff0a-4111-b80b-febda2ac9e09, limit: 500, sort: date desc}
   type: ckan
   data_path: ['result', 'records', []]
   desc: Testing total
   constants:
-    BY_DATE: Report
+    DATE_USED: Report
 CO:
 - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_daily_state_statistics_cumulative/FeatureServer/0/query
   params: {where: Desc_='State Data', outFields: '*', f: json}
   type: arcgis
   desc: Cases, tested, death, hosp
   constants:
-    BY_DATE: Dashboard
+    DATE_USED: Dashboard
 - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
   params: {where: (Metric='Cumulative People Tested at CDPHE State Lab' or Metric='Cumulative People Tested at Non-CDPHE (Commerical) Labs') and Desc_ like 'Daily%', outFields: '*', orderByFields: Attr_Date asc, groupByFieldsForStatistics: Attr_Date, outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "test_encounters"}], f: json}
   type: arcgis
   desc: Test encounters
   constants:
-    BY_DATE: Specimen Collection
+    DATE_USED: Specimen Collection
 # https://data-cdphe.opendata.arcgis.com/datasets/covid19-positivity-data-from-clinical-laboratories
 # "This data represents the total number of tests performed each day and reported to CDPHE"
 - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
@@ -67,14 +67,14 @@ CO:
   type: arcgis
   desc: Antibody total tests
   constants:
-    BY_DATE: Specimen Collection
+    DATE_USED: Specimen Collection
 CT:
 - url: https://data.ct.gov/api/id/qfkt-uahj.json
   params: {$query: 'select date, sum(number_of_pcr_tests), sum(number_of_pcr_positives), sum(number_of_pcr_negatives), sum(number_of_ag_tests), sum(number_of_ag_positives), sum(number_of_ag_negatives) group by date order by date asc'}
   type: soda
   desc: PCR and antigen tests by collection date
   constants:
-    BY_DATE: Specimen Collection
+    DATE_USED: Specimen Collection
 DE:
 - url: https://myhealthycommunity.dhss.delaware.gov/locations/state/download_covid_19_data
   params: null
@@ -125,14 +125,14 @@ MD:
   type: arcgis
   desc: Dashboard numbers
   constants:
-    BY_DATE: Report
+    DATE_USED: Report
 # The daily cumulative total of COVID-19 tests administered in Maryland
 - url: https://services.arcgis.com/njFNhDsUCentVYJW/arcgis/rest/services/MDCOVID19_TestingVolume/FeatureServer/0/query
   params: {where: 1=1, outFields: 'date,number_of_tests,number_of_positives', orderByFields: Date asc, f: json}
   type: arcgis
   desc: PCR Testing and positives
   constants:
-    BY_DATE: Specimen Collection
+    DATE_USED: Specimen Collection
 MI:
 - url: https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html
   params: null
@@ -144,19 +144,19 @@ MO:
   type: pandas
   desc: Cases and tests by report date
   constants:
-    BY_DATE: Report
+    DATE_USED: Report
 - url: https://results.mo.gov/t/COVID19/views/COVID-19DataforDownload/MetricsbyTestDate.csv
   params: {thousands: ','}
   type: pandas
   desc: Tests by test date
   constants:
-    BY_DATE: Specimen Collection
+    DATE_USED: Specimen Collection
 - url: https://results.mo.gov/t/COVID19/views/COVID-19DataforDownload/MetricsbyDateofDeath.csv
   params: {thousands: ','}
   type: pandas
   desc: Death by day of death
   constants:
-    BY_DATE: Death
+    DATE_USED: Death
 MT:
 - url: https://services.arcgis.com/qnjIrwR8z5Izc0ij/ArcGIS/rest/services/COVID_Cases_Production_View/FeatureServer/1/query
   params: {where: 1=1, outFields: '*', orderByFields: ScriptRunDate asc, f: json}
@@ -197,7 +197,7 @@ TX:
   type: arcgis
   desc: Death by day of death
   constants:
-    BY_DATE: Death
+    DATE_USED: Death
 - url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/TX_DSHS_COVID19_Cases_Service/FeatureServer/2/query
   params: {where: 1=1, outFields: 'Date,CumulativeCases,CumulativeProbable', orderByField: Date asc, resultRecordCount: 500, f: json}
   type: arcgis
@@ -207,7 +207,7 @@ TX:
   type: arcgis
   desc: Testing (by specimen collection date)
   constants:
-    BY_DATE: Specimen Collection
+    DATE_USED: Specimen Collection
 # - url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_TestData_Service/FeatureServer/3/query
 #   params: {where: 1=1, outFields: '*', orderByField: Date asc, resultRecordCount: 500, f: json}
 #   type: arcgis

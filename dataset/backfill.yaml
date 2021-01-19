@@ -1,9 +1,9 @@
 # @package _group_
 name: backfill
-index: [STATE, TIMESTAMP, BY_DATE]
+index: [STATE, TIMESTAMP, DATE_USED]
 extras_module: fetcher.extras.backfill
 
-fields: [STATE, FETCH_TIMESTAMP, TIMESTAMP, DATE, BY_DATE, #METRIC,
+fields: [STATE, FETCH_TIMESTAMP, TIMESTAMP, DATE, DATE_USED, #METRIC,
   # Cases
   POSITIVE, CONFIRMED, PROBABLE,
 

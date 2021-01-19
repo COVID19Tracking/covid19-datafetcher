@@ -45,30 +45,15 @@ class Fields(Enum):
     ANTIBODY_NEG_PEOPLE = "negativeTestsPeopleAntibody"
     ANTIBODY_TOTAL_PEOPLE = "totalTestsPeopleAntibody"
 
-    ANTIBODY_BY_COLLECTION_DATE = 110
-    ANTIBODY_POS_BY_COLLECTION_DATE = 111
-    ANTIBODY_NEG_BY_COLLECTION_DATE = 112
-    ANTIBODY_PEOPLE_BY_COLLECTION_DATE = 113
-    ANTIBODY_POS_PEOPLE_BY_COLLECTION_DATE = 114
-
     SPECIMENS = "totalTestsViral"
     SPECIMENS_POS = "positiveTestsViral"
     SPECIMENS_NEG = "negativeTestsViral"
     PCR_TEST_ENCOUNTERS = "totalTestEncountersViral"
 
-    # try a better naming
-    PCR_BY_COLLECTION_DATE = 24
-    PCR_POS_BY_COLLECTION_DATE = 25
-    PCR_NEG_BY_COLLECTION_DATE = 26
-    PCR_PEOPLE_BY_COLLECTION_DATE = 27
-
     # Death
     DEATH = "death"
     DEATH_CONFIRMED = "deathConfirmed"
     DEATH_PROBABLE = "deathProbable"
-    DEATH_BY_DATE_OF_DEATH = 33
-    DEATH_CONFIRMED_BY_DATE_OF_DEATH = 34
-    DEATH_PROBABLE_BY_DATE_OF_DEATH = 35
 
     # Holpitalization
     HOSP = "hospitalizedCumulative"
@@ -88,19 +73,12 @@ class Fields(Enum):
     ANTIGEN_POS_PEOPLE = "positiveTestsPeopleAntigen"
     ANTIGEN_NEG_PEOPLE = "negativeTestsPeopleAntigen"
 
-    # specimens
-    ANTIGEN_BY_COLLECTION_DATE = 64
-    ANTIGEN_POS_BY_COLLECTION_DATE = 65
-    ANTIGEN_NEG_BY_COLLECTION_DATE = 66
-    ANTIGEN_PEOPLE_BY_COLLECTION_DATE = 67
-    ANTIGEN_POS_PEOPLE_BY_COLLECTION_DATE = 68
-
     # Meta
     WINDOW = "window"
     PPR = "ppr"
     UNITS = "units"
     SID = "sid"
-    BY_DATE = "by_date"
+    DATE_USED = "date_used"
 
     @property
     def value(self):
