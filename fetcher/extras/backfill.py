@@ -1,5 +1,6 @@
 from datetime import datetime
 import os
+import re
 import numpy as np
 import pandas as pd
 
@@ -220,6 +221,38 @@ def handle_md(res, mapping):
     cumsum_df[BY_DATE] = 'Specimen Collection'
     mapped.extend(cumsum_df.to_dict(orient='records'))
     return mapped
+
+
+def handle_mi(res, mapping):
+    soup = res[-1]
+    h = soup.find("h5", string=re.compile('[dD][aA][tT][aA]'))
+    parent = h.find_parent("ul")
+    links = parent.find_all("a")
+
+    base_url = 'https://www.michigan.gov'
+    cases_url = base_url + links[1]['href']
+    tests_url = base_url + links[4]['href']
+    tagged = []
+
+    # cases:
+    df = pd.read_excel(cases_url, engine='xlrd', parse_dates=['Date'])
+    df = df.groupby(['Date', 'CASE_STATUS']).sum().filter(like='Cumulative').unstack()
+    df.columns = df.columns.map("-".join)
+
+    like_bydate = [('death', 'Death'), ('Cases', 'Symptom Onset')]
+    for like, by_date in like_bydate:
+        foo = df.filter(like=like)
+        foo[TS] = foo.index
+        foo[BY_DATE] = by_date
+        tagged.extend(foo.to_dict(orient='records'))
+
+    # tests
+    df = pd.read_excel(tests_url, engine='xlrd', parse_dates=['MessageDate'])
+    df = df.groupby('MessageDate').sum().sort_index().cumsum().rename(columns=mapping)
+    df[TS] = df.index
+    tagged.extend(df.to_dict(orient='records'))
+
+    return tagged
 
 
 def handle_mo(res, mapping):

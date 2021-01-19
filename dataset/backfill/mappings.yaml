@@ -156,6 +156,14 @@ MD:
   number_of_tests: SPECIMENS
   number_of_positives: SPECIMENS_POS
   date: TIMESTAMP
+MI:
+  Cases.Cumulative-Confirmed: CONFIRMED
+  Cases.Cumulative-Probable: PROBABLE
+  Deaths.Cumulative-Confirmed: DEATH_CONFIRMED
+  Deaths.Cumulative-Probable: DEATH_PROBABLE
+  Positive: SPECIMENS_POS
+  Negative: SPECIMENS_NEG
+  TOTAL: SPECIMENS
 MO:
   # Report date
   Total Antigen Tests: ANTIGEN_TOTAL

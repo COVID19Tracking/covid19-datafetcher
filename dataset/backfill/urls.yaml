@@ -133,6 +133,11 @@ MD:
   desc: PCR Testing and positives
   constants:
     BY_DATE: Specimen Collection
+MI:
+- url: https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html
+  params: null
+  type: html:soup
+  desc: Main page for links (soup)
 MO:
 - url: https://results.mo.gov/t/COVID19/views/COVID-19DataforDownload/MetricsbyReportDate.csv
   params: {thousands: ','}
