@@ -564,9 +564,6 @@ def handle_mi(res, mapping):
     tests_url = base_url + links[3]['href']
     results_url = base_url + links[4]['href']
 
-    import pdb
-    pdb.set_trace()
-
     try:
         df = pd.read_excel(cases_url, engine='xlrd')
         filter_col = 'CASE_STATUS'
@@ -689,9 +686,6 @@ def handle_nc(res, mapping):
     for k, v in df.sum().iteritems():
         if k in mapping:
             tagged[mapping[k]] = v
-
-    import pdb
-    pdb.set_trace()
 
     df = res[-1]
     df['Date'] = pd.to_datetime(df['Date'])

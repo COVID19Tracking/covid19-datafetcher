@@ -202,7 +202,7 @@ RI:
   "Cumulative positive tests (may count people more than once)": SPECIMENS_POS
   "Cumulative negative tests (may count people more than once)": SPECIMENS_NEG
   "Cumulative total tests completed (may count people more than once)": PCR_TEST_ENCOUNTERS
-  "Cumulative people who tested positive (counts first positive lab per person)": CONFIRMED
+  "Cumulative people who tested positive (counts first positive lab per person)": POSITIVE
   "Cumulative people who have only tested negative (counts first negative lab per person)": NEGATIVE
   "Cumulative people tested (one count per person)": TOTAL
   "Total deaths": DEATH
