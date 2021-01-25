@@ -44,7 +44,7 @@ AL:
       {statisticType: sum, onStatisticField: CONFIRMED, outStatisticFieldName: 'positives'}, {statisticType: sum, onStatisticField: DIED}],
     f: json}
   type: arcgis
-  desc: OLD Tests/positive/death
+  desc: Tests/positive/death (totals)
 - url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/c19v2_labtest_anitbody_diagnostic_v2_PUBLIC/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"AntibodyTest"}, {"statisticType":"sum","onStatisticField":"DiagnosticTest"}], f: json}
   type: arcgis
@@ -65,12 +65,6 @@ AL:
   params: {where: 1=1, orderbyfields: 'DateTxt desc', outFields: '*', resultRecordCount: 1, f: json}
   type: arcgis
   desc: Curr. hosp
-- url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/AL_COVID_labtest_antibody_diagnostic_PUBLIC/FeatureServer/2/query
-  # Swap to this once we de-dup PCR from antigen
-  # params: {where: TestCategory = 'NAAT', outStatistics: [{"statisticType":"sum","onStatisticField":"DiagnosticTest","outStatisticFieldName":"pcr_specimens"}], f: json}
-  params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"DiagnosticTest","outStatisticFieldName":"pcr_specimens"}], f: json}
-  type: arcgis
-  desc: PCR tests
 - url: https://alpublichealth.maps.arcgis.com/sharing/rest/content/items/6d2771faa9da4a2786a509d82c8cf0f7/data
   params: null
   type: json

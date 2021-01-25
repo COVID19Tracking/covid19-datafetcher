@@ -21,7 +21,7 @@ AL:
   CLN_VENT: VENT
   Confirmed_AllWeekdays: CURR_HOSP
   SUM_AntibodyTest: ANTIBODY_TOTAL_PEOPLE
-  SUM_DiagnosticTest: SPECIMENS
+  SUM_DiagnosticTest: TOTAL
 AR:
   SUM_positive: POSITIVE
   SUM_deaths: DEATH
