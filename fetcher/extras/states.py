@@ -472,14 +472,15 @@ def handle_md(res, mapping):
 
 def handle_me(res, mapping):
     tagged = {}
-    for result in res[:1]:
-        partial = extract_arcgis_attributes(result, mapping, 'ME')
-        tagged.update(partial)
-
     # summary csv from tableau
-    df = res[1]
+    df = res[0]
     df = df[df['Patient County'] == 'All'].set_index('Measure Names')
-    partial = extract_arcgis_attributes(df['Measure Values'], mapping, 'ME')
+    partial = map_attributes(df['Measure Values'], mapping, 'ME')
+    tagged.update(partial)
+
+    # hospital capacity
+    df = res[1]
+    partial = map_attributes(df.iloc[0], mapping, 'ME')
     tagged.update(partial)
 
     soup = res[-1]

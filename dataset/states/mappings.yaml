@@ -259,6 +259,10 @@ MD:
   Num_People_Positive_Test: ANTIBODY_POS_PEOPLE
   Num_People_Negative_Test: ANTIBODY_NEG_PEOPLE
 ME:
+  Hospitalized- Total COVID-19 Patients: CURR_HOSP
+  Hospitalized- COVID-19 Patients In Critical Care: CURR_ICU
+  Hospitalized- COVID-19 Patients on Ventilators: CURR_VENT
+
   Date: TIMESTAMP
   # This is so unreliable
   # TotalCases: POSITIVE
@@ -276,12 +280,6 @@ ME:
   Deaths: DEATH
   Recoveries: RECOVERED
 
-  # This is all tests lumped, PCR an antibody
-  # NegativeTests:
-  TotalHospitalized: CURR_HOSP
-  InCriticalCare: CURR_ICU
-  OnVentilator: CURR_VENT
-  PendingTests: PENDING
 MI:
   Recovered: RECOVERED
   SUM_F__in_Critical_Care: CURR_ICU

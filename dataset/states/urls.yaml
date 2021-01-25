@@ -316,10 +316,6 @@ MD:
   type: arcgis
   desc: Antibody
 ME:
-- url: https://services1.arcgis.com/RbMX0mRVOFNTdLzd/ArcGIS/rest/services/Statewide/FeatureServer/0/query
-  params: {where: TotalCases is not NULL, outFields: '*', orderByFields: Date desc, resultRecordCount: 1, f: json}
-  type: arcgis
-  desc: Main metrics
 # - url: 'https://gateway.maine.gov/dhhs-apps/mecdc_covid/Maine_COVID19_Summary.xlsx'
 #   params: null
 #   type: xlsx
@@ -328,6 +324,10 @@ ME:
   params: {thousands: ','}
   type: pandas
   desc: County table (cases, confirmed, probables, death, hosp, recoveries)
+- url: https://gateway.maine.gov/dhhs-apps/mecdc_covid/hospital_capacity.csv
+  params: {thousands: ',', parse_dates: ['Date']}
+  type: pandas
+  desc: Current hospital capacity
 - url: https://www.maine.gov/dhhs/mecdc/infectious-disease/epi/airborne/coronavirus/data.shtml
   params: null
   type: html:soup
