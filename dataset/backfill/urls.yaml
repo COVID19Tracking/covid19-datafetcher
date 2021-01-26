@@ -31,7 +31,7 @@ AR:
 - url: https://services.arcgis.com/PwY9ZuZRDiI5nXUB/ArcGIS/rest/services/UPDATED_ADH_COVID19_METRICS_BY_DATE/FeatureServer/0/query
   params: {where: 1=1, outFields: '*', orderByFields: date asc, f: json}
   type: arcgis
-  desc: Testing (antibody, pcr)
+  desc: Testing (antibody, pcr) and cases
 CA:
 - url: https://data.ca.gov/api/3/action/datastore_search_sql
   params: {sql: 'select date, sum(totalcountdeaths)::INTEGER as death, sum(totalcountconfirmed)::INTEGER as confirmed from "926fd08f-cc91-4828-af38-bd45de97f8c3" group by date order by date desc limit 500'}

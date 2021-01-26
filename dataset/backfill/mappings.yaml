@@ -17,7 +17,8 @@ AR:
   Date: TIMESTAMP
   pcr_tests: SPECIMENS
   antigen_tests: ANTIGEN_TOTAL
-  total_pos: SPECIMENS_POS
+  #total_pos: SPECIMENS_POS # probably incorrect??
+  total_pos: POSITIVE
 CA:
   confirmed: POSITIVE
   death: DEATH
