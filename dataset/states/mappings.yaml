@@ -402,6 +402,12 @@ NH:
   Total Persons Tested  at Selected Laboratories, Polymerase Chain Reaction (PCR)2: TOTAL
   Number of Persons with COVID-191: POSITIVE
   Total Persons Tested  at Selected Laboratories, Antibody Laboratory Tests2: ANTIBODY_TOTAL_PEOPLE
+  Daily New Cases: POSITIVE
+  "Daily New Cases: Antigen": PROBABLE
+  "Daily New Cases: PCR": CONFIRMED
+  "PCR Test Count: Daily Total": SPECIMENS
+  "Antigen Tests Count : Daily Total": ANTIGEN_TOTAL
+  "Antibody Tests Count:Daily Total": ANTIBODY_TOTAL
 NJ:
   _date: TIMESTAMP
   recoveries: RECOVERED

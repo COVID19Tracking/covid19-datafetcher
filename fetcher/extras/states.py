@@ -194,6 +194,10 @@ def handle_nh(res, mapping):
             mapped[mapping[th]] = atoi(re.search("[0-9,]+", td).group(0))
             continue
 
+    # cases + tests
+    for df in res[1:]:
+        mapped.update(map_attributes(df.sum(), mapping, 'NH'))
+
     return mapped
 
 
