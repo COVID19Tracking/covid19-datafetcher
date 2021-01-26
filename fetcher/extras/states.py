@@ -727,7 +727,9 @@ def handle_nd(res, mapping):
         if not strong or len(strong.get_text()) < 10:
             continue
         name = strong.get_text(strip=True)
-        value = cols[1].get_text(strip=True)
+        value = atoi(cols[1].get_text(strip=True))
+        if len(cols) > 2:
+            value += atoi(cols[2].get_text(strip=True))
         if name in mapping:
             tagged[mapping[name]] = atoi(value)
 
