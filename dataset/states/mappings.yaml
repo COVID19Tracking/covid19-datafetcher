@@ -278,7 +278,7 @@ ME:
   Confirmed cases: CONFIRMED
   Probable cases: PROBABLE
   Deaths: DEATH
-  Recoveries: RECOVERED
+  Completed Isolations: RECOVERED
 
 MI:
   Recovered: RECOVERED
