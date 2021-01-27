@@ -315,11 +315,11 @@ MN:
   Total cases hospitalized (cumulative): HOSP
   Total cases hospitalized in ICU (cumulative): ICU
 MO:
-  Total Antigen Tests: ANTIGEN_TOTAL
-  Total Cases: POSITIVE
-  Total PCR Tests: SPECIMENS
-  Total Serology Tests: ANTIBODY_TOTAL
-  Total Deaths: DEATH
+  Confirmed Cases: CONFIRMED
+  "* Antigen Tests": ANTIGEN_TOTAL
+  PCR Tests: SPECIMENS
+  Serology Tests: ANTIBODY_TOTAL
+  Confirmed Deaths: DEATH_CONFIRMED
 MP:
   MAX_reportdt: TIMESTAMP
   SUM_confirmedcases: CONFIRMED

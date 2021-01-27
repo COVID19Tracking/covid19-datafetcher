@@ -630,9 +630,8 @@ def handle_mo(res, mapping):
 
     county = res[1]
     county = county[county['County'] == 'All'].set_index('Measure Names')
-    partial = map_attributes(county['Measure Values'], mapping, 'MO')
+    partial = map_attributes(county['Measure Values'].astype(int), mapping, 'MO')
     mapped.update(partial)
-
     return mapped
 
 
