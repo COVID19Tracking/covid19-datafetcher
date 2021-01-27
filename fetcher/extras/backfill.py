@@ -299,6 +299,25 @@ def handle_nd(res, mapping):
     return records
 
 
+def handle_nh(res, mapping, queries):
+    mapped = []
+
+    # 1st element: non-cumulative cases
+    df = res[0].rename(columns=mapping).set_index(TS).sort_index().cumsum()
+    df[TS] = df.index
+    for k, v in queries[0].constants.items():
+        df[k] = v
+    mapped.extend(df.to_dict(orient='records'))
+
+    for df, query in zip(res[1:], queries[1:]):
+        df = df.rename(columns=mapping)
+        for k, v in query.constants.items():
+            df[k] = v
+        mapped.extend(df.to_dict(orient='records'))
+
+    return mapped
+
+
 def handle_oh(res, mapping):
     testing_url = res[0]['url']
     df = pd.read_csv(testing_url, parse_dates=['Date'])

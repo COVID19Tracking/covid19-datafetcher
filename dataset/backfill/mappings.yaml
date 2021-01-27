@@ -190,6 +190,18 @@ NE:
   AllTestsAsOfThisDate: SPECIMENS
   TotalNotDetectedAsOfThisDate: SPECIMENS_NEG
   TotalPositiveAsOfThisDate: SPECIMENS_POS
+NH:
+  Date of Report: TIMESTAMP
+  Date of Illness Onset: TIMESTAMP
+  Reported Date of Death: TIMESTAMP
+  Daily New Cases: POSITIVE
+  "Daily New Cases: Antigen": PROBABLE
+  "Daily New Cases: PCR": CONFIRMED
+  "Death Count: Cumulative Total": DEATH
+  Date of Lab Report Result: TIMESTAMP
+  "PCR Test Count : Cumulative Total": SPECIMENS
+  "Antigen Tests Count : Cumulative Total": ANTIGEN_TOTAL
+  "Antibody Tests Count : Cumulative Total": ANTIBODY_TOTAL
 OH:
   Date: TIMESTAMP
   Confirmatory Lab Total Tested (Daily): SPECIMENS

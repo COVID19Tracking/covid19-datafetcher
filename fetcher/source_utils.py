@@ -1,4 +1,5 @@
 from datetime import datetime
+import inspect
 import logging
 import typing
 
@@ -51,7 +52,11 @@ def fetch_source(source):
 def process_source_responses(source, results):
     processed_results = []
     if source.extras:
-        processed_results = source.extras(results, source.mapping)
+        # passing queries or not?
+        if len(inspect.signature(source.extras).parameters) > 2:
+            processed_results = source.extras(results, source.mapping, source.queries)
+        else:
+            processed_results = source.extras(results, source.mapping)
     else:
         for i, result in enumerate(results):
             query = source.queries[i]

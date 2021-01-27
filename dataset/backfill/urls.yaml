@@ -172,6 +172,49 @@ NE:
   params: {where: 1=1, outFields: '*', orderByFields: LAB_REPORT_DATE asc, f: json}
   type: arcgis
   desc: Tests and results by lab report date
+NH:
+# - url: https://dashboard.nh.gov/t/DHHS/views/COVID19TrendsDashboard/CasesTotal.csv
+#   params: {thousands: ",", parse_dates: ['Date of Report']}
+#   type: pandas
+#   desc: Cases by report date
+#   constants:
+#     DATE_USED: Report
+- url: https://dashboard.nh.gov/t/DHHS/views/COVID19OverviewDashboard/DailyTrendforNewCases-Data.csv
+  params: {parse_dates: ['Date of Report'], thousands: ','}
+  type: pandas
+  desc: Cases by reprot date (confirmed, probables)
+  constants:
+    DATE_USED: Report
+- url: https://dashboard.nh.gov/t/DHHS/views/COVID19TrendsDashboard/CasesOnsetTotal.csv
+  params: {thousands: ",", parse_dates: ['Date of Illness Onset']}
+  type: pandas
+  desc: Cases by illness onset date
+  constants:
+    DATE_USED: Symptom Onset
+- url: https://dashboard.nh.gov/t/DHHS/views/COVID19TrendsDashboard/DeathsTotal.csv
+  params: {thousands: ",", parse_dates: ['Reported Date of Death']}
+  type: pandas
+  desc: Death by date of death
+  constants:
+    DATE_USED: Death
+- url: https://dashboard.nh.gov/t/DHHS/views/COVID19TrendsDashboard/AntibodyTestTotal-TestBased.csv?SelectedSlicer=Antibody%20Tests
+  params: {thousands: ",", parse_dates: ['Date of Lab Report Result']}
+  type: pandas
+  desc: Antibody tests by date of result
+  constants:
+    DATE_USED: Test Result
+- url: https://dashboard.nh.gov/t/DHHS/views/COVID19TrendsDashboard/AntigenTestTotal-TestBased.csv?SelectedSlicer=Antigen%20Tests
+  params: {thousands: ",", parse_dates: ['Date of Lab Report Result']}
+  type: pandas
+  desc: Antigen tests by date of result
+  constants:
+    DATE_USED: Test Result
+- url: https://dashboard.nh.gov/t/DHHS/views/COVID19TrendsDashboard/PCRTestsTotal-TestBased.csv?SelectedSlicer=PCR%20Tests
+  params: {thousands: ",", parse_dates: ['Date of Lab Report Result']}
+  type: pandas
+  desc: PCR tests by date of result
+  constants:
+    DATE_USED: Test Result
 OH:
 # funny times
 - url: https://data.ohio.gov/apigateway-secure/data-portal/download-file/2ad05e55-2b1a-486c-bc07-ecb3be682d29?key=e42285cfa9a0b157b3f1bdaadcac509c44db4cfa0f90735e12b770acb1307b918cee14d5d8e4d4187eb2cab71fc9233bda8ee3eed924b8a3fad33aaa6c8915fe6f3de6f82ad4b995c2359b168ed88fa9
