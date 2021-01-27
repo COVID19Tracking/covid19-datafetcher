@@ -618,7 +618,7 @@ TX:
   type: arcgis
   desc: Antigen positive
 - url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/TX_DSHS_COVID19_TestData_Service/FeatureServer/6/query
-  params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "NewPositive"},{"statisticType": "sum", "onStatisticField": "OldPositive"}], f: json}
+  params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "NewPositive"},{"statisticType": "sum", "onStatisticField": "OldPositive"}], f: json, cacheHint: false}
   type: arcgis
   desc: PCR positives
 - url: https://www.dshs.texas.gov/coronavirus/TexasCOVID-19HospitalizationsOverTimebyTSA.xlsx
