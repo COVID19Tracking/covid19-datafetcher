@@ -258,6 +258,9 @@ VA:
   number_of_deaths-Probable: DEATH_PROBABLE
 
   event_date: DATE
+VT:
+  Date_Received_by_PH: TIMESTAMP
+  Cumulative_tests: SPECIMENS
 WI:
   Day of Date: DATE
   Day of displaydateonly: DATE

@@ -271,6 +271,13 @@ VA:
   type: soda
   data_path: []
   desc: Cases, death by date of symptom onset and death
+VT:
+- url: https://services1.arcgis.com/BkFxaEFNwHqX3tAw/arcgis/rest/services/VT_COVID_19_PCR_Test_Specimens_by_Day/FeatureServer/0/query
+  params: {where: 1=1, outFields: '*', orderByField: Date_Received_by_PH asc, f: json}
+  type: arcgis
+  desc: PCR tests by specimen collection
+  constants:
+    DATE_USED: Specimen Collection
 WI:
 - url: https://bi.wisconsin.gov/t/DHS/views/Cumulativecaseswmobile/Cumulativecasesbyday.csv
   params: {parse_dates: ['Day of Date'], thousands: ","}
