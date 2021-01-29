@@ -14,6 +14,12 @@ TS = Fields.TIMESTAMP.name
 DATE_USED = Fields.DATE_USED.name
 
 
+def add_query_constants(df, query):
+    for k, v in query.constants.items():
+        df[k] = v
+    return df
+
+
 def build_leveled_mapping(mapping):
     tab_mapping = {x.split(":")[0]: {} for x in mapping.keys() if x.find(':') > 0}
     for k, v in mapping.items():
@@ -255,16 +261,14 @@ def handle_mi(res, mapping):
     return tagged
 
 
-def handle_mo(res, mapping):
-    # by report date
+def handle_mo(res, mapping, queries):
     dfs = [
-        # result index, date index, by-date value
-        (res[0], 'Date Reported', 'Report'),
-        (res[1], 'Test Date', 'Specimen Collection')
+        # result index, date index
+        (res[0], 'Date Reported'),
+        (res[1], 'Test Date')
     ]
-
     mapped = []
-    for mo, date_index, by_date in dfs:
+    for i, (mo, date_index) in enumerate(dfs):
         mo = mo.pivot(columns='Measure Names', values='Measure Values', index=date_index)
         mo = mo.iloc[:-1]
         mo[TS] = pd.to_datetime(mo.index)
@@ -273,18 +277,22 @@ def handle_mo(res, mapping):
         mo.index = dates
 
         mo = mo.cumsum().rename(columns=mapping)
-        mo[DATE_USED] = by_date
+        add_query_constants(mo, queries[i])
         mo[TS] = mo.index
         mapped.extend(mo.to_dict(orient='records'))
 
     # death by day of death
-    df = res[2].iloc[:-1].rename(columns={'Measure Values': 'DEATH'})
-    df['date'] = pd.to_datetime(df['Dod'])
-    df = df.set_index('date')[['DEATH']].groupby(
+    df = res[2].rename(columns={'Measure Values': 'DEATH'}).rename(columns=mapping)
+    df = df[df[TS] != 'All']
+    df[TS] = pd.to_datetime(df[TS])
+    # There are dates that are around ~1940, we aggregate all of them to "before 2020"
+    df = df.set_index(TS)[['DEATH']].groupby(
         by=lambda x: x if x >= datetime(2020, 1, 1) else datetime(2020, 1, 1)) \
-        .sum().sort_index().cumsum()
+        .sum().sort_index(na_position='first').cumsum()
+    dates = pd.date_range(start=df.index.min(), end=df.index.max(), freq='d')
+    df = df.reindex(dates).ffill()
     df[TS] = df.index
-    df[DATE_USED] = 'Death'
+    add_query_constants(df, queries[2])
     mapped.extend(df.to_dict(orient='records'))
 
     return mapped
@@ -305,14 +313,12 @@ def handle_nh(res, mapping, queries):
     # 1st element: non-cumulative cases
     df = res[0].rename(columns=mapping).set_index(TS).sort_index().cumsum()
     df[TS] = df.index
-    for k, v in queries[0].constants.items():
-        df[k] = v
+    add_query_constants(df, queries[0])
     mapped.extend(df.to_dict(orient='records'))
 
     for df, query in zip(res[1:], queries[1:]):
         df = df.rename(columns=mapping)
-        for k, v in query.constants.items():
-            df[k] = v
+        add_query_constants(df, query)
         mapped.extend(df.to_dict(orient='records'))
 
     return mapped

@@ -166,11 +166,12 @@ MI:
   Negative: SPECIMENS_NEG
   TOTAL: SPECIMENS
 MO:
-  # Report date
-  Total Antigen Tests: ANTIGEN_TOTAL
-  Total Cases: CONFIRMED
-  Total PCR Tests: SPECIMENS
-  Total Serology Tests: ANTIBODY_TOTAL
+  Confirmed Cases: CONFIRMED
+  "* Antigen Tests": ANTIGEN_TOTAL
+  PCR Tests: SPECIMENS
+  Serology Tests: ANTIBODY_TOTAL
+  Confirmed Deaths: DEATH_CONFIRMED
+  Date of Death: TIMESTAMP
 MT:
   Total_Tests_Completed: SPECIMENS
   Test_Date: TIMESTAMP
