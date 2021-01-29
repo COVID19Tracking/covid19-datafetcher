@@ -1,0 +1,117 @@
+[
+  {
+    "mode": "NULLABLE",
+    "name": "state",
+    "type": "STRING",
+    "description": "State abbreviation"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "date_used",
+    "type": "STRING",
+    "description": "The date used for this time series; whether it's a series dated by 'Specimen Collection' date, or 'Symptom onset' or 'Date of death', etc"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "timestamp",
+    "type": "DATE",
+    "description": "The date the data points attributed to"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "fetch_timestamp",
+    "type": "TIMESTAMP",
+    "description": "The time when these values were fetched and stored"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "date",
+    "type": "STRING",
+    "description": "String representation of the timestamp field"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "positive",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "positiveCasesViral",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "probableCases",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "death",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "deathConfirmed",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "deathProbable",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "total",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "totalTestsAntibody",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "positiveTestsAntibody",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "negativeTestsAntibody",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "totalTestsViral",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "positiveTestsViral",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "negativeTestsViral",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "totalTestEncountersViral",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "totalTestsAntigen",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "positiveTestsAntigen",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "negativeTestsAntigen",
+    "type": "INTEGER"
+  }
+]
