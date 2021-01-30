@@ -610,13 +610,9 @@ TX:
   type: arcgis
   desc: Curr hosp
 - url: https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/TX_DSHS_COVID19_TestData_Service/FeatureServer/3/query
-  params: {where: TestType='PostiveAntibody', outFields: '*, Count_ as antibody_pos', f: json, cacheHint: false}
+  params: {where: 1=1, outFields: '*', f: json, cacheHint: false}
   type: arcgis
-  desc: Antibody positive
-- url: https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/TX_DSHS_COVID19_TestData_Service/FeatureServer/3/query
-  params: {where: TestType='AntigenPositive', outFields: '*, Count_ as antigen_pos', f: json, cacheHint: false}
-  type: arcgis
-  desc: Antigen positive
+  desc: Dashboard totals
 - url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/TX_DSHS_COVID19_TestData_Service/FeatureServer/6/query
   params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "NewPositive"},{"statisticType": "sum", "onStatisticField": "OldPositive"}], f: json, cacheHint: false}
   type: arcgis

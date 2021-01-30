@@ -527,11 +527,12 @@ TN:
   CASES_CONFIRMED: CONFIRMED
   CASES_PROBABLE: PROBABLE
 TX:
-  ViralTests: SPECIMENS
   AntibodyTests: ANTIBODY_TOTAL
+  PostiveAntibody: ANTIBODY_POS
+  ViralTests: SPECIMENS
   AntigenTests: ANTIGEN_TOTAL
-  antibody_pos: ANTIBODY_POS
-  antigen_pos: ANTIGEN_POS
+  AntigenPositive: ANTIGEN_POS
+
   totals: TOTAL
   CumulativeCases: CONFIRMED
   CumulativeProbable: PROBABLE

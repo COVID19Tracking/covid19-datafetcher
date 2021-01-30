@@ -792,9 +792,14 @@ def handle_ma(res, mapping):
 
 def handle_tx(res, mapping):
     tagged = {}
-    for result in res[:-2]:
+    for result in res[:-3]:
         partial = extract_arcgis_attributes(result, mapping, debug_state='TX')
         tagged.update(partial)
+
+    # dashboard totals
+    totals = res[-3]
+    tagged.update(map_attributes(
+        {x['attributes']['TestType']: x['attributes']['Count_'] for x in totals['features']}, mapping, 'TX'))
 
     # positive pcr
     pcr_pos = res[-2]
