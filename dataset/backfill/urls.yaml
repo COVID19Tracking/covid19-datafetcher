@@ -246,7 +246,7 @@ TX:
   type: arcgis
   desc: Cases (confirmed, probable)
 - url: https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/TX_DSHS_COVID19_TestData_Service/FeatureServer/4/query
-  params: {where: 1=1, outFields: 'Date,ViralTests,AntibodyTests,AntigenTests', orderByFields: Date asc, resultRecordCount: 500, f: json}
+  params: {where: Date <> NULL, outFields: 'Date,ViralTests,AntibodyTests,AntigenTests', orderByFields: Date asc, resultRecordCount: 500, f: json}
   type: arcgis
   desc: Testing (by specimen collection date)
   constants:
