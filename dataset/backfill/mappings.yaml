@@ -211,6 +211,10 @@ OH:
   Presumptive Lab Total Positive (Daily): ANTIGEN_POS
   Death Due to Illness Count: DEATH
   Case Count: POSITIVE
+PA:
+  date: DATE
+  newpcrtest: PCR_TEST_ENCOUNTERS
+  cases: POSITIVE
 RI:
   # Google doc:
   "Cumulative positive tests (may count people more than once)": SPECIMENS_POS

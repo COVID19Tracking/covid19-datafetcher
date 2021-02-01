@@ -225,6 +225,18 @@ OH:
   params: {thousands: ','}
   type: pandas
   desc: Key metrics (cases, death)
+PA:
+- url: https://data.pa.gov/api/id/r6ti-va88.json
+  params: {$query: 'select date, newpcrtests::number order by date asc limit 500'}
+  type: soda
+  desc: PCR Tests encounters
+  constants:
+    DATE_USED: Test Result
+- url: https://data.pa.gov/api/id/j72v-r42c.json
+  params: {$query: 'select date, cases where county = "Pennsylvania" order by date desc limit 500'}
+  type: soda
+  constants:
+    DATE_USED: Report
 RI:
 - url: 'https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/export?format=csv&gid=1592746937'
   params: {parse_dates: True}

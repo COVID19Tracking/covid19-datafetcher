@@ -353,6 +353,23 @@ def handle_oh(res, mapping):
     return tagged
 
 
+def handle_pa(res, mapping, queries):
+    tagged = []
+    for i, data in enumerate(res):
+        df = pd.DataFrame(data).rename(columns=mapping).set_index(DATE).sort_index()
+        df.index = pd.to_datetime(df.index)
+        for c in df.columns:
+            # convert to numeric
+            df[c] = pd.to_numeric(df[c])
+
+        df = df.cumsum()
+        add_query_constants(df, queries[i])
+        df[TS] = df.index
+        tagged.extend(df.to_dict(orient='records'))
+
+    return tagged
+
+
 def handle_ri(res, mapping):
     res = res[0]
     res = res.rename(columns=mapping)
