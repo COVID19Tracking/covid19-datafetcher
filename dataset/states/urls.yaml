@@ -138,6 +138,14 @@ CO:
   params: {where: metric = 'Confirmed cases', outFields: '*, value as cases_confirmed', orderByFields: report_date desc, f: json}
   type: arcgis
   desc: Cases confirmed
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/CDPHE_COVID19_StateLevel_Expanded_Case_Data_Summary/FeatureServer/0/query
+  params: {where: metric = 'Confirmed deaths among cases', outFields: '*, value as confirmed_deaths', orderByFields: report_date desc, f: json}
+  type: arcgis
+  desc: Confirmed deaths
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/CDPHE_COVID19_StateLevel_Expanded_Case_Data_Summary/FeatureServer/0/query
+  params: {where: metric = 'Probable deaths among cases', outFields: '*, value as probable_deaths', orderByFields: report_date desc, f: json}
+  type: arcgis
+  desc: Probable deaths
 CT:
 - url: https://data.ct.gov/api/id/rf3k-f8fg.json
   params: {$query: 'select * order by date desc limit 1'}

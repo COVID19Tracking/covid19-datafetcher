@@ -63,6 +63,8 @@ CO:
   antibody_total: ANTIBODY_TOTAL
   cases_probable: PROBABLE
   cases_confirmed: CONFIRMED
+  confirmed_deaths: DEATH_CONFIRMED
+  probable_deaths: DEATH_PROBABLE
 CT:
   totalcases: POSITIVE
   confirmedcases: CONFIRMED
