@@ -77,7 +77,7 @@ def handle_ar(res, mapping):
     return cumsum_df.to_dict(orient='records')
 
 
-def handle_ct(res, mapping):
+def handle_ct(res, mapping, queries):
     tests = res[0]
     df = pd.DataFrame(tests).rename(columns=mapping).set_index(DATE)
     for c in df.columns:
@@ -88,8 +88,23 @@ def handle_ct(res, mapping):
     df = df.sort_index().cumsum()
     df[TS] = pd.to_datetime(df.index)
     df[TS] = df[TS].values.astype(np.int64) // 10 ** 9
-    df[DATE_USED] = 'Specimen Collection'
-    return df.to_dict(orient='records')
+    add_query_constants(df, queries[0])
+    tagged = df.to_dict(orient='records')
+
+    # by report
+    df = res[1].rename(columns=mapping).sort_values('DATE')
+    add_query_constants(df, queries[1])
+    df[TS] = df['DATE']
+    tagged.extend(df.to_dict(orient='records'))
+
+    # death + cases
+    for i, df in enumerate(res[2:]):
+        df = res[2+i].rename(columns=mapping).set_index('DATE').sort_index().cumsum()
+        add_query_constants(df, queries[2+i])
+        df[TS] = df.index
+        tagged.extend(df.to_dict(orient='records'))
+
+    return tagged
 
 
 def handle_de(res, mapping):

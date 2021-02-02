@@ -75,6 +75,24 @@ CT:
   desc: PCR and antigen tests by collection date
   constants:
     DATE_USED: Specimen Collection
+- url: https://data.ct.gov/api/views/rf3k-f8fg/rows.csv?accessType=DOWNLOAD
+  params: {parse_dates: ['Date']}
+  type: pandas
+  desc: State data by report
+  constants:
+    DATE_USED: Report
+- url: https://data.ct.gov/api/views/abag-bjkj/rows.csv?accessType=DOWNLOAD
+  params: {parse_dates: ['Date of death']}
+  type: pandas
+  desc: Death by date of death
+  constants:
+    DATE_USED: Death
+- url: https://data.ct.gov/api/views/xz44-6swc/rows.csv?accessType=DOWNLOAD
+  params: {parse_dates: ['Date']}
+  type: pandas
+  desc: Cases by date of specimen collection
+  constants:
+    DATE_USED: Specimen Collection
 DE:
 - url: https://myhealthycommunity.dhss.delaware.gov/locations/state/download_covid_19_data
   params: null

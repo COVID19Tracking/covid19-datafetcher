@@ -48,6 +48,21 @@ CT:
   date: DATE
   # 2020-04-17T00:00:00.000
   __strptime: "%Y-%m-%dT%H:%M:%S.000"
+
+  # by report
+  Date: DATE
+  COVID-19 tests reported: SPECIMENS # is it lumped?
+  Total cases: POSITIVE
+  Confirmed cases: CONFIRMED
+  Probable cases: PROBABLE
+  Total deaths: DEATH
+  Confirmed deaths: DEATH_CONFIRMED
+  Probable deaths: DEATH_PROBABLE
+
+  Date of death: DATE
+  Probable: PROBABLE
+  Confirmed: CONFIRMED
+  Total: POSITIVE
 DE:
   Date: TIMESTAMP
   Deaths: DEATH
