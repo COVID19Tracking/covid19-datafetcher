@@ -107,6 +107,21 @@ def handle_ct(res, mapping, queries):
     return tagged
 
 
+def handle_dc(res, mapping, queries):
+    df = res[0]
+
+    # make it pretty
+    df = df[df['Unnamed: 0'] == 'Testing'].T
+    df.columns = df.loc['Unnamed: 1']
+    df = df.iloc[2:]
+
+    df.index = pd.to_datetime(df.index, errors='coerce')
+    df = df.loc[df.index.dropna()].rename(columns=mapping)
+    add_query_constants(df, queries[0])
+    df[TS] = df.index
+    return df.to_dict(orient='records')
+
+
 def handle_de(res, mapping):
     df = res[0]
     df['Date'] = pd.to_datetime(df[['Year', 'Month', 'Day']])

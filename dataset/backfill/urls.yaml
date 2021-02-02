@@ -93,6 +93,13 @@ CT:
   desc: Cases by date of specimen collection
   constants:
     DATE_USED: Specimen Collection
+DC:
+- url: https://dcgov.app.box.com/index.php?rm=box_download_shared_file&vanity_name=DCHealthStatisticsData&file_id=f_645422184765
+  params: {sheet_name: "Overall Stats"}
+  type: xlsx
+  desc: DC dawnload doc
+  constants:
+    DATE_USED: Report
 DE:
 - url: https://myhealthycommunity.dhss.delaware.gov/locations/state/download_covid_19_data
   params: null

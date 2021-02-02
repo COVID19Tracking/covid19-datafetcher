@@ -63,6 +63,11 @@ CT:
   Probable: PROBABLE
   Confirmed: CONFIRMED
   Total: POSITIVE
+DC:
+  Total Overall Number of Tests: PCR_TEST_ENCOUNTERS
+  Total Residents Tested: TOTAL
+  Total Positives: POSITIVE
+  Total Lives Lost: DEATH
 DE:
   Date: TIMESTAMP
   Deaths: DEATH
