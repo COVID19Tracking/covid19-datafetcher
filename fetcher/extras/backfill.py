@@ -155,6 +155,17 @@ def handle_de(res, mapping):
     return tagged
 
 
+def handle_fl(res, mapping, queries):
+    # simply a cumsum table
+    tagged = []
+    for i, data in enumerate(res):
+        df = extract_arcgis_attributes(res[i], mapping)
+        cumsum_df = make_cumsum_df(df)
+        add_query_constants(cumsum_df, queries[i])
+        tagged.extend(cumsum_df.to_dict(orient='records'))
+    return tagged
+
+
 def handle_ga(res, mapping):
     tagged = []
     file_mapping = build_leveled_mapping(mapping)

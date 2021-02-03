@@ -105,6 +105,23 @@ DE:
   params: null
   type: pandas
   desc: All data
+FL:
+- url: https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/ArcGIS/rest/services/Florida_COVID_19_Deaths_by_Day/FeatureServer/0/query
+  params: {where: 1=1, outFields: '*', orderByField: Date asc, f: json, resultRecordCount: 500}
+  type: arcgis
+  desc: Death by day
+  constants:
+    DATE_USED: Death
+- url: https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/ArcGIS/rest/services/Florida_COVID_19_Cases_by_Day_For_Time_Series/FeatureServer/0/query
+  params: {where: county = 'A State', outFields: '*, FREQUENCY as cases', orderByField: Date asc, resultRecordCount: 500, f: json}
+  type: arcgis
+  desc: Cases for time series by ???
+- url: https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/ArcGIS/rest/services/state_daily_testing/FeatureServer/0/query
+  params: {where: 1=1, outFields: '*', orderByField: Date asc, f: json}
+  type: arcgis
+  desc: Test encounters by result date
+  constants:
+    DATE_USED: Test Result
 GA:
 - url: https://ga-covid19.ondemand.sas.com/docs/ga_covid_data.zip
   params: null

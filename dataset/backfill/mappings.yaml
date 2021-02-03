@@ -87,6 +87,13 @@ DE:
   Cumulative Number of Confirmed Positive Cases: CONFIRMED
   Cumulative Number of Positive Cases: POSITIVE
   Cumulative Number of Probable Positive Cases: PROBABLE
+FL:
+  Date: TIMESTAMP
+  Deaths: DEATH
+  cases: POSITIVE
+  Total: PCR_TEST_ENCOUNTERS
+  Negative: SPECIMENS_NEG
+  Positive: SPECIMENS_POS
 GA:
   "pcr_positives.csv:DATE_USED": Report
   "pcr_positives.csv:report_date": TIMESTAMP
