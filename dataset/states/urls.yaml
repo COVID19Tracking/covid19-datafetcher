@@ -118,18 +118,18 @@ CO:
   params: {where: Metric='Cumulative Antibody Tests Performed' AND Desc_ LIKE 'Daily COVID-19 Antibody%', outFields: '*, Value as antibody_total', orderByFields: OBJECTID desc, resultRecordCount: 1, f: json}
   type: arcgis
   desc: Total serological tests
-- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
-  params: {where: Metric='Number of positive tests' AND Desc_ LIKE 'Daily COVID-19 Antibody%',
-    outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "antibody_pos"}],
-    f: json}
-  type: arcgis
-  desc: Positive serological tests
-- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/COVID19_Positivity_Data_from_Clinical_Laboratories/FeatureServer/0/query?where=Metric%3D%27Number+of+negative+tests%27+AND+Desc_+LIKE+%27Daily+COVID-19+Antibody%25%27&outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Value%27%2C+%27outStatisticFieldName%27%3A+%27antibody_neg%27%7D%5D
   params: {where: Metric='Number of negative tests' AND Desc_ LIKE 'Daily COVID-19 Antibody%',
-    outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "antibody_neg"}],
+    outStatistics: [{'statisticType': 'sum', 'onStatisticField': 'Value', 'outStatisticFieldName': 'antibody_neg'}],
     f: json}
   type: arcgis
   desc: Negative serological tests
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/COVID19_Positivity_Data_from_Clinical_Laboratories/FeatureServer/0/query?where=Metric%3D%27Number+of+positive+tests%27+AND+Desc_+LIKE+%27Daily+COVID-19+Antibody%25%27&objectIds=&time=&resultType=none&outFields=&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnDistinctValues=false&cacheHint=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Value%27%2C+%27outStatisticFieldName%27%3A+%27antibody_pos%27%7D%5D%0D%0A&having=&resultOffset=&resultRecordCount=&sqlFormat=none&f=html&token=
+  params: {where: Metric='Number of positive tests' AND Desc_ LIKE 'Daily COVID-19 Antibody%',
+    outStatistics: [{'statisticType': 'sum', 'onStatisticField': 'Value', 'outStatisticFieldName': 'antibody_pos'}],
+    f: json}
+  type: arcgis
+  desc: Positive serological tests
 - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/CDPHE_COVID19_StateLevel_Expanded_Case_Data_Summary/FeatureServer/0/query
   params: {where: metric = 'Probable cases', outFields: '*, value as cases_probable', orderByFields: report_date desc, f: json}
   type: arcgis
