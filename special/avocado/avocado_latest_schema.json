@@ -32,12 +32,15 @@
   {
     "mode": "NULLABLE",
     "name": "positive",
-    "type": "INTEGER"
+    "type": "INTEGER",
+    "description": "Cumulative number of people who have tested positive with either a PCR test or an antigen test"
   },
   {
     "mode": "NULLABLE",
     "name": "positiveCasesViral",
-    "type": "INTEGER"
+    "type": "INTEGER",
+    "description": "Cumulative number of people who have tested positive using a PCR test"
+
   },
   {
     "mode": "NULLABLE",
@@ -47,7 +50,8 @@
   {
     "mode": "NULLABLE",
     "name": "death",
-    "type": "INTEGER"
+    "type": "INTEGER",
+    "description": "Total cumulative number of people that have died"
   },
   {
     "mode": "NULLABLE",
