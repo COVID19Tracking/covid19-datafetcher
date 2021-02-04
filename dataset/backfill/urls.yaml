@@ -47,27 +47,26 @@ CA:
   desc: Testing total
   constants:
     DATE_USED: Report
-# CO:
+CO:
 # - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_daily_state_statistics_cumulative/FeatureServer/0/query
 #   params: {where: Desc_='State Data', outFields: '*', f: json}
 #   type: arcgis
 #   desc: Cases, tested, death, hosp
 #   constants:
 #     DATE_USED: Dashboard
-# - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
-#   params: {where: (Metric='Cumulative People Tested at CDPHE State Lab' or Metric='Cumulative People Tested at Non-CDPHE (Commerical) Labs') and Desc_ like 'Daily%', outFields: '*', orderByFields: Attr_Date asc, groupByFieldsForStatistics: Attr_Date, outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "test_encounters"}], f: json}
-#   type: arcgis
-#   desc: Test encounters
-#   constants:
-#     DATE_USED: Specimen Collection
-# # https://data-cdphe.opendata.arcgis.com/datasets/covid19-positivity-data-from-clinical-laboratories
-# # "This data represents the total number of tests performed each day and reported to CDPHE"
-# - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
-#   params: {where: Metric = 'Cumulative Antibody Tests Performed' and Desc_ like 'Daily%', outFields: 'Attr_Date, Desc_, Metric, Value as antibody_totals', orderByFields: Attr_Date asc, f: json}
-#   type: arcgis
-#   desc: Antibody total tests
-#   constants:
-#     DATE_USED: Specimen Collection
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/COVID19_Positivity_Data_from_Clinical_Laboratories/FeatureServer/0/query
+  params: {where: (Metric='Cumulative People Tested at CDPHE State Lab' or Metric='Cumulative People Tested at Non-CDPHE (Commerical) Labs') and Desc_ like 'Daily%', outFields: '*', orderByFields: OBJECTID asc, groupByFieldsForStatistics: Date, outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "test_encounters"}, {"statisticType": "max", "onStatisticField": "OBJECTID", "outStatisticFieldName": "OBJECTID"}], f: json}
+  type: arcgis
+  desc: Test encounters
+  constants:
+    DATE_USED: Specimen Collection
+# "This data represents the total number of tests performed each day and reported to CDPHE"
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/COVID19_Positivity_Data_from_Clinical_Laboratories/FeatureServer/0/query
+  params: {where: Metric = 'Cumulative Antibody Tests Performed' and Desc_ like 'Daily%', outFields: 'Date, Desc_, Metric, Value as antibody_totals', orderByFields: OBJECTID asc, f: json}
+  type: arcgis
+  desc: Antibody total tests
+  constants:
+    DATE_USED: Specimen Collection
 CT:
 - url: https://data.ct.gov/api/id/qfkt-uahj.json
   params: {$query: 'select date, sum(number_of_pcr_tests), sum(number_of_pcr_positives), sum(number_of_pcr_negatives), sum(number_of_ag_tests), sum(number_of_ag_positives), sum(number_of_ag_negatives) group by date order by date asc'}

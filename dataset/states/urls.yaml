@@ -114,7 +114,7 @@ CO:
   params: {where: 1=1, outFields: '*', resultRecordCount: 1, orderByFields: Date desc, f: json}
   type: arcgis
   desc: Death counts
-- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/COVID19_Positivity_Data_from_Clinical_Laboratories/FeatureServer/0/query
   params: {where: Metric='Cumulative Antibody Tests Performed' AND Desc_ LIKE 'Daily COVID-19 Antibody%', outFields: '*, Value as antibody_total', orderByFields: OBJECTID desc, resultRecordCount: 1, f: json}
   type: arcgis
   desc: Total serological tests
@@ -130,19 +130,19 @@ CO:
     f: json}
   type: arcgis
   desc: Positive serological tests
-- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/CDPHE_COVID19_StateLevel_Expanded_Case_Data_Summary/FeatureServer/0/query
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/CDPHE_COVID19_StateLevel_Expanded_Case_Data/FeatureServer/0/query
   params: {where: metric = 'Probable cases', outFields: '*, value as cases_probable', orderByFields: report_date desc, f: json}
   type: arcgis
   desc: Cases probable
-- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/CDPHE_COVID19_StateLevel_Expanded_Case_Data_Summary/FeatureServer/0/query
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/CDPHE_COVID19_StateLevel_Expanded_Case_Data/FeatureServer/0/query
   params: {where: metric = 'Confirmed cases', outFields: '*, value as cases_confirmed', orderByFields: report_date desc, f: json}
   type: arcgis
   desc: Cases confirmed
-- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/CDPHE_COVID19_StateLevel_Expanded_Case_Data_Summary/FeatureServer/0/query
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/CDPHE_COVID19_StateLevel_Expanded_Case_Data/FeatureServer/0/query
   params: {where: metric = 'Confirmed deaths among cases', outFields: '*, value as confirmed_deaths', orderByFields: report_date desc, f: json}
   type: arcgis
   desc: Confirmed deaths
-- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/CDPHE_COVID19_StateLevel_Expanded_Case_Data_Summary/FeatureServer/0/query
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/CDPHE_COVID19_StateLevel_Expanded_Case_Data/FeatureServer/0/query
   params: {where: metric = 'Probable deaths among cases', outFields: '*, value as probable_deaths', orderByFields: report_date desc, f: json}
   type: arcgis
   desc: Probable deaths
