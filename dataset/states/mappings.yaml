@@ -369,6 +369,7 @@ ND:
   Total PCR tests (new people): TOTAL
   Total PCR tests (susceptible test encounters): PCR_TEST_ENCOUNTERS
   Total PCR tests (specimens): SPECIMENS
+  Total Ag tests (specimens): ANTIGEN_TOTAL
   Total Recovered: RECOVERED
 
   Total Negative: NEGATIVE
