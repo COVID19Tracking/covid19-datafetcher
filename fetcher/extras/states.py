@@ -58,10 +58,10 @@ def handle_fl(res, mapping):
         mapped.update(partial)
 
     # Current hosp csv
-    hosp = res[-1]
-    for r in hosp:
-        if r.get('County') == 'All':
-            mapped[Fields.CURR_HOSP.name] = atoi(r.get('COVID Hospitalizations'))
+    # hosp = res[-1]
+    # for r in hosp:
+    #     if r.get('County') == 'All':
+    #         mapped[Fields.CURR_HOSP.name] = atoi(r.get('COVID Hospitalizations'))
 
     return mapped
 

@@ -180,10 +180,10 @@ FL:
   params: {where: 1=1, outStatistics: [{"statisticType": "sum", "onStatisticField": "Total", "outStatisticFieldName": "pcr_encounters"}], f: json}
   type: arcgis
   desc: PCR Test Encounters
-- url: https://bi.ahca.myflorida.com/t/ABICC/views/Public/COVIDHospitalizationsCounty.csv
-  params: null
-  type: csv
-  desc: Hospitalizations (current)
+# - url: https://bi.ahca.myflorida.com/t/ABICC/views/Public/COVIDHospitalizationsCounty.csv
+#   params: null
+#   type: csv
+#   desc: Hospitalizations (current)
 GA:
 - url: https://services7.arcgis.com/Za9Nk6CPIPbvR1t7/ArcGIS/rest/services/Cumulative_Cases_(Current_Date)/FeatureServer/0/query
   params: {where: NAME = 'All Georgia', outFields: 'DATESTAMP,C_CUM,D_CUM,H_CUM', f: json, returnGeometry: false}
