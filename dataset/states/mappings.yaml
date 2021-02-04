@@ -133,7 +133,8 @@ GA:
   deaths: DEATH_CONFIRMED
   probable_deaths: DEATH_PROBABLE
   hospitalization: HOSP
-  antigen_cases: ANTIGEN_POS_PEOPLE
+  #antigen_cases: ANTIGEN_POS_PEOPLE
+  antigen_cases: PROBABLE
   SUM_COVID_Patients: CURR_HOSP
   SUM_Patients_Under_Investigation: CURR_HOSP_PUI
   Total PCR tests: SPECIMENS
