@@ -186,6 +186,13 @@ def handle_ga(res, mapping):
     return tagged
 
 
+def handle_il(res, mapping, queries):
+    df = res[0].rename(columns=mapping)
+    df[TS] = df[DATE]
+    add_query_constants(df, queries[0])
+    return df.to_dict(orient='records')
+
+
 def handle_in(res, mapping):
     tagged = []
 

@@ -121,6 +121,11 @@ HI:
   toDate_positive: SPECIMENS_POS
   toDate_positiveAndPresumed: POSITIVE
   cumulative_deaths: DEATH
+IL:
+  testDate: DATE
+  total_tested: TOTAL
+  confirmed_cases: POSITIVE
+  deaths: DEATH
 IN:
   date: DATE
   covid_cases: POSITIVE
