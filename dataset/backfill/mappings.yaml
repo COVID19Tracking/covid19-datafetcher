@@ -207,6 +207,14 @@ MO:
 MT:
   Total_Tests_Completed: SPECIMENS
   Test_Date: TIMESTAMP
+NC:
+  Date: DATE
+  Antigen Positive Cases by Specimen Date: "PROBABLE:Specimen Collection"
+  Cases by Report Date: "POSITIVE:Report"
+  Deaths by Date of Death: "DEATH:Death"
+  Molecular (PCR) Positive Cases by Specimen Date: "CONFIRMED:Specimen Collection"
+  Antigen Test: "ANTIGEN_TOTAL:Specimen Collection"
+  Molecular Test: "SPECIMENS:Specimen Collection"
 ND:
   Date: DATE
   __strptime: "%Y-%m-%d"

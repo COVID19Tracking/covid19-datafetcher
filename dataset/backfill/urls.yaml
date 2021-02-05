@@ -211,6 +211,15 @@ MT:
   params: {where: 1=1, outFields: '*', orderByFields: ScriptRunDate asc, f: json}
   type: arcgis
   desc: Total tested
+NC:
+- url: https://public.tableau.com/views/NCDHHS_COVID-19_DataDownload/DailyCasesandDeathsMetrics.csv
+  params: {parse_dates: ['Date'], thousands: ","}
+  type: pandas
+  desc: Cases by report and by specimen collection, death by date of death
+- url: https://public.tableau.com/views/NCDHHS_COVID-19_DataDownload/DailyTestingMetrics.csv
+  params: {parse_dates: ['Date'], thousands: ","}
+  type: pandas
+  desc: Tests by date
 ND:
 - url: https://www.health.nd.gov/sites/www/files/documents/Files/MSS/coronavirus/charts-data/CovidTracking.csv
   params: {parse_dates: ['Date']}

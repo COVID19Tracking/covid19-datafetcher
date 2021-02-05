@@ -346,6 +346,27 @@ def handle_mo(res, mapping, queries):
     return mapped
 
 
+def handle_nc(res, mapping):
+    tagged = []
+
+    for x in res:
+        tot = x.rename(columns=mapping)
+        tot = tot.pivot(
+            columns='Measure Names', values='Measure Values', index=DATE).sort_index()
+
+        for c in tot.columns:
+            tag, dating = mapping.get(c, ":").split(":")
+            if not tag:
+                continue
+
+            df = pd.DataFrame(tot[c].rename(tag)).fillna(0).sort_index().cumsum()
+            df[TS] = df.index
+            df[DATE_USED] = dating
+            tagged.extend(df.to_dict(orient='records'))
+
+    return tagged
+
+
 def handle_nd(res, mapping):
     # simply a cumsum table
     res = res[0].rename(columns=mapping)
