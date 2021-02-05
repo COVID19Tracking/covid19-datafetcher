@@ -235,6 +235,12 @@ NH:
   "PCR Test Count : Cumulative Total": SPECIMENS
   "Antigen Tests Count : Cumulative Total": ANTIGEN_TOTAL
   "Antibody Tests Count : Cumulative Total": ANTIBODY_TOTAL
+NY:
+  test_date: DATE
+  sum_cumulative_number_of_positives: POSITIVE
+  sum_cumulative_number_of_tests: PCR_TEST_ENCOUNTERS
+  # 2020-03-02T00:00:00.000
+  __strptime: "%Y-%m-%dT%H:%M:%S.000"
 OH:
   Date: TIMESTAMP
   Confirmatory Lab Total Tested (Daily): SPECIMENS
