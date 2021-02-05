@@ -293,6 +293,20 @@ VA:
 VT:
   Date_Received_by_PH: TIMESTAMP
   Cumulative_tests: SPECIMENS
+WA:
+  Date of Receipt of First Positive Lab: DATE
+  Cases: POSITIVE
+  Earlierst Specimen Collection Date: DATE
+  Total Cases: POSITIVE
+  Confirmed Cases: CONFIRMED
+  Probable Cases: PROBABLE
+  Deaths: DEATH
+  Date of Death: DATE
+  Day: DATE
+  Positive: SPECIMENS_POS
+  Positive (Data Incomplete): SPECIMENS_POS
+  Negative: SPECIMENS_NEG
+  Negative (Data Incomplete): SPECIMENS_NEG
 WI:
   Day of Date: DATE
   Day of displaydateonly: DATE

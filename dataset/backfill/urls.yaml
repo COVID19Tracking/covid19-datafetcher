@@ -331,6 +331,31 @@ VT:
   desc: PCR tests by specimen collection
   constants:
     DATE_USED: Specimen Collection
+WA:
+- url: https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/Cumulative_Count_Cases_Hospitalizations_Deaths_Vaccinations.xlsx
+  params: {sheet_name: ["Cases"], engine: 'xlrd'}
+  type: xlsx
+  desc: Cases by test result
+  constants:
+    DATE_USED: Test Result
+- url: https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/Cumulative_Count_Cases_Hospitalizations_Deaths_Vaccinations.xlsx
+  params: {sheet_name: ["Deaths"], engine: 'xlrd'}
+  type: xlsx
+  desc: Death by date of death
+  constants:
+    DATE_USED: Death
+- url: https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/EpiCurve_Count_Cases_Hospitalizations_Deaths.xlsx
+  params: {engine: 'xlrd', sheet_name: ["Cases", "Deaths"]}
+  type: xlsx
+  desc: Cases by specimen collection
+  constants:
+    DATE_USED: Specimen Collection
+- url: https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC_Tests_by_Specimen_Collection.xlsx
+  params: {sheet_name: 'State', engine: 'xlrd'}
+  type: xlsx
+  desc: Tests
+  constants:
+    DATE_USED: Specimen Collection
 WI:
 - url: https://bi.wisconsin.gov/t/DHS/views/Cumulativecaseswmobile/Cumulativecasesbyday.csv
   params: {parse_dates: ['Day of Date'], thousands: ","}

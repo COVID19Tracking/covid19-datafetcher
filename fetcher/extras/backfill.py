@@ -455,6 +455,31 @@ def handle_va(res, mapping):
     return tagged
 
 
+def handle_wa(res, mapping, queries):
+    tagged = []
+    for i, dfs in enumerate(res[:-1]):
+        for tab in dfs.keys():
+            df = dfs[tab].rename(columns=mapping).set_index(DATE)
+            df.index = pd.to_datetime(df.index)
+            if i == 2:
+                # we need to calculate a cumulative sum
+                df = df.sort_index().cumsum()
+            df = df.resample('1d').ffill()
+            df[TS] = df.index
+            add_query_constants(df, queries[i])
+            tagged.extend(df.to_dict(orient='records'))
+
+    # last one is testing
+    df = res[-1].rename(columns=mapping).set_index(DATE)
+    df = df.groupby(df.columns.values, axis=1).sum().sort_index().cumsum()
+    df['SPECIMENS'] = df['SPECIMENS_POS'] + df['SPECIMENS_NEG']
+    df[TS] = pd.to_datetime(df.index)
+    add_query_constants(df, queries[-1])
+    tagged.extend(df.to_dict(orient='records'))
+
+    return tagged
+
+
 def handle_wi(res, mapping):
     tagged = []
 
