@@ -382,7 +382,7 @@ def handle_nj(res, mapping):
     to the ArcGIS query
     '''
     mapped = {}
-    for result in res:
+    for result in res[:-1]:
         partial = extract_arcgis_attributes(result, mapping, 'NJ')
         mapped.update(partial)
 
@@ -390,8 +390,10 @@ def handle_nj(res, mapping):
     # it's always the same
     mapped[Fields.RECOVERED.name] += 15642
 
-    # This magic number math happens on the dashboard
-    mapped[Fields.PROBABLE.name] += 58
+    # Find the magic number added to probables
+    widget = res[-1]['widgets'][17]
+    val = atoi(widget.get('valueConversion', {}).get('offset', 0))
+    mapped[Fields.PROBABLE.name] += val
 
     return mapped
 

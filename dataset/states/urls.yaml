@@ -495,7 +495,7 @@ NJ:
 - url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/DailyCaseCounts/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"TOTAL_AG_CASES"}], f: json}
   type: arcgis
-  desc: Probable cases (dashboard adds 48 to this number)
+  desc: Probable cases (dashboard adds a value to this number)
 - url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/PPE_Capacity/FeatureServer/0/query
   params: {where: survey_period>=timestamp '2020-04-27 07:00:00' AND structure_measure_identifier LIKE '%ischarge%Excluding Deaths%', outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "recoveries"}], f: json}
   type: arcgis
@@ -518,6 +518,10 @@ NJ:
   outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "curr_icu"}], resultRecordCount: 1, f: json}
   type: arcgis
   desc: Critical & Intensive Care
+- url: https://njhealth.maps.arcgis.com/sharing/rest/content/items/795729487af44255a1357c73fd8d8b4e/data?f=json
+  params: {}
+  type: json
+  desc: Dashboard json for the funny number added to probables
 NM:
 - url: https://e7p503ngy5.execute-api.us-west-2.amazonaws.com/prod/GetPublicStatewideData
   params: null
