@@ -287,6 +287,8 @@ OH:
   params: null
   type: json
   desc: Testing
+  constants:
+    DATE_USED: Test Result
 - url: https://coronavirus.ohio.gov/static/dashboards/COVIDSummaryData.csv
   params: {thousands: ','}
   type: pandas

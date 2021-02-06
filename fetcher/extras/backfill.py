@@ -398,6 +398,7 @@ def handle_oh(res, mapping):
     df = pd.read_csv(testing_url, parse_dates=['Date'])
     df = df.set_index('Date').sort_index().cumsum().rename(columns=mapping)
     df[TS] = df.index
+    df[DATE_USED] = 'Test Result'
     tagged = df.to_dict(orient='records')
 
     oh = res[1].iloc[:-1]
@@ -408,14 +409,14 @@ def handle_oh(res, mapping):
     # death
     death = oh.groupby('Date Of Death').sum().filter(
         like='Death').sort_index().cumsum().rename(columns=mapping)
-    death['TIMESTAMP'] = death.index
+    death[TS] = death.index
     death[DATE_USED] = 'Death'
     tagged.extend(death.to_dict(orient='records'))
 
     # cases
     cases = oh.groupby('Onset Date').sum().filter(
         like='Case').sort_index().cumsum().rename(columns=mapping)
-    cases['TIMESTAMP'] = cases.index
+    cases[TS] = cases.index
     cases[DATE_USED] = 'Symptom Onset'
     tagged.extend(cases.to_dict(orient='records'))
 
