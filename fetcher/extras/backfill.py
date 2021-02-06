@@ -54,7 +54,7 @@ def make_cumsum_df(data, timestamp_field=Fields.TIMESTAMP.name):
     return cumsum_df
 
 
-def handle_ak(res, mapping):
+def handle_ak(res, mapping, queries):
     tests = res[0]
     collected = [x['attributes'] for x in tests['features']]
     df = pd.DataFrame(collected)
@@ -64,9 +64,17 @@ def handle_ak(res, mapping):
 
     df = df.rename(columns=mapping).cumsum()
     df[TS] = df.index
-    df[DATE_USED] = 'Specimen Collection'
-
+    add_query_constants(df, queries[0])
     tagged = df.to_dict(orient='records')
+
+    # cases
+    cases = pd.DataFrame([x['attributes'] for x in res[1]['features']]).rename(columns=mapping)
+    cases[TS] = pd.to_datetime(cases[TS], unit='ms')
+    cases = cases.set_index(TS).sort_index().cumsum().resample('1d').ffill()
+    cases[TS] = cases.index
+    add_query_constants(cases, queries[1])
+    tagged.extend(cases.to_dict(orient='records'))
+
     return tagged
 
 

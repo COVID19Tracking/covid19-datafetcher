@@ -12,6 +12,14 @@ AK:
   params: {where: 1=1, orderByFields: Date_Collected asc, groupByFieldsForStatistics: 'Date_Collected,Test_Result', outStatistics: [{'statisticType': 'count', 'onStatisticField': 'FID', 'outStatisticFieldName': 'tests_total'}], f: json}
   type: arcgis
   desc: PCR tests by specimen collection
+  constants:
+    DATE_USED: Specimen Collection
+- url: https://services1.arcgis.com/WzFsmainVTuD5KML/ArcGIS/rest/services/Onset_Date/FeatureServer/0/query
+  params: {where: Resident = 'Y', orderByFields: OnsetDate asc, groupByFieldsForStatistics: OnsetDate, outStatistics: [{"statisticType": "count", "onStatisticField": "FID", "outStatisticFieldName": "cases"}], f: json}
+  type: arcgis
+  desc: Cases by onset
+  constants:
+    DATE_USED: Symptom Onset
 AL:
 - url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/StatewideTemporal_RunAVG_READONLY/FeatureServer/1/query
   params: {where: 1=1, outFields: '*', orderByFields: InvDate asc, resultRecordCount: 500, f: json}

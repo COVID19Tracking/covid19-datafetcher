@@ -7,6 +7,8 @@ AK:
   tests_total: SPECIMENS
   Negative: SPECIMENS_NEG
   Positive: SPECIMENS_POS
+  OnsetDate: TIMESTAMP
+  cases: POSITIVE
 AL:
   InvDate: TIMESTAMP
   CummulativeCase: POSITIVE
