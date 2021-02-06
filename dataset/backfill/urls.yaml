@@ -305,6 +305,12 @@ PA:
   type: soda
   constants:
     DATE_USED: Report
+- url: https://data.pa.gov/api/id/fbgu-sqgp.json
+  params: {$query: 'select date, deaths where county = "Pennsylvania" order by date desc limit 500'}
+  type: soda
+  desc: Death by day of death
+  constants:
+    DATE_USED: Death
 RI:
 - url: 'https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/export?format=csv&gid=1592746937'
   params: {parse_dates: True}

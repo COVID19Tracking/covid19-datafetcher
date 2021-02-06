@@ -261,6 +261,7 @@ PA:
   date: DATE
   newpcrtest: PCR_TEST_ENCOUNTERS
   cases: POSITIVE
+  deaths: DEATH
 RI:
   # Google doc:
   "Cumulative positive tests (may count people more than once)": SPECIMENS_POS
