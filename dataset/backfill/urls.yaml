@@ -320,6 +320,8 @@ TN:
   params: {where: 1=1, outFields: '*', orderByFields: 'DATE desc', resultRecordCount: 300, f: json}
   type: arcgis
   desc: Main data
+  constants:
+    DATE_USED: Report
 TX:
 - url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/TX_DSHS_COVID19_Cases_Service/FeatureServer/2/query
   params: {where: 1=1, outFields: 'Date,CumulativeFatalities', orderByField: Date asc, resultRecordCount: 500, f: json}
