@@ -598,6 +598,10 @@ WA:
   MAX_CV_Updated: TIMESTAMP
   MAX_CV_State_Cases: POSITIVE
   MAX_CV_State_Deaths: DEATH
+  Positive: SPECIMEN_POS
+  Positive (Data Incomplete): SPECIMEN_POS
+  Negative: SPECIMEN_NEG
+  Negative (Data Incomplete): SPECIMEN_NEG
 WI:
   DEATHS: DEATH
   HOSP_YES: HOSP

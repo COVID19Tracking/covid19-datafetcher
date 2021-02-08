@@ -970,6 +970,12 @@ def handle_wa(res, mapping):
         df = res[1][name]
         tagged[field.name] = df.iloc[-1][name]
 
+    # tests
+    df = res[-1].rename(columns=mapping)
+    df = df.groupby(df.columns.values, axis=1).sum().sum()
+    # df['SPECIMENS'] = df['SPECIMENS_POS'] + df['SPECIMENS_NEG']
+    tagged.update(df.filter(like='SPECIMEN').to_dict())
+
     return tagged
 
 

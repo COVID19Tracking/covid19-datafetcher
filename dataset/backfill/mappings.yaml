@@ -332,6 +332,10 @@ WA:
 WI:
   Day of Date: DATE
   Day of displaydateonly: DATE
+  Day of Encounter Date: DATE
   Positive: CONFIRMED
   Deaths: DEATH_CONFIRMED
   Totals: PCR_TEST_ENCOUNTERS
+  # From the Weekly by onset date:
+  Running Sum of Distinct count of Incident ID: CONFIRMED
+  Week of Episode Date Trunc: DATE

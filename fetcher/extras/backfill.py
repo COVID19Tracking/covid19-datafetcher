@@ -528,15 +528,12 @@ def handle_wa(res, mapping, queries):
     return tagged
 
 
-def handle_wi(res, mapping):
+def handle_wi(res, mapping, queries):
     tagged = []
 
-    dating = {0: 'Test Result',
-              1: 'Report'}
-
-    for key, by_date in dating.items():
+    for key, df in enumerate(res[:-1]):
         df = res[key].rename(columns=mapping)
-        df[DATE_USED] = by_date
+        add_query_constants(df, queries[key])
         df[TS] = df[DATE]
         tagged.extend(df.to_dict(orient='records'))
 
@@ -545,7 +542,13 @@ def handle_wi(res, mapping):
     df = df[df['Measure Names'] == 'Total people tested daily']
     df = df.set_index(DATE).sort_index().cumsum()
     df[TS] = df.index
-    df[DATE_USED] = 'Specimen Collection'
+    add_query_constants(df, queries[2])
+    tagged.extend(df.to_dict(orient='records'))
+
+    # confirmed by onset
+    df = res[3].rename(columns=mapping).groupby(DATE).sum().sort_index()
+    df[TS] = df.index
+    add_query_constants(df, queries[3])
     tagged.extend(df.to_dict(orient='records'))
 
     return tagged

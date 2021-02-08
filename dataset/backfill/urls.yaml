@@ -410,11 +410,23 @@ WI:
   params: {parse_dates: ['Day of Date'], thousands: ","}
   type: pandas
   desc: Cases by date confirmed
+  constants:
+    DATE_USED: Test Result
 - url: https://bi.wisconsin.gov/t/DHS/views/CumulativeDeathsMobile/Cumulativedeathsbyday.csv
   params: {parse_dates: ['Day of Date'], thousands: ","}
   type: pandas
   desc: Death by date reported
+  constants:
+    DATE_USED: Report
 - url: https://bi.wisconsin.gov/t/DHS/views/PercentPositivebyTestPersonandaComparisonandTestCapacity/TestCapacityDashboard.csv
-  params: {parse_dates: ['Day of displaydateonly'], thousands: ','}
+  params: {parse_dates: ['Day of Encounter Date'], thousands: ','}
   type: pandas
   desc: Testing encounters
+  constants:
+    DATE_USED: Specimen Collection
+- url: https://bi.wisconsin.gov/t/DHS/views/Agegroupovertime/Cases.csv?:isGuestRedirectFromVizportal=y&:embed=y
+  params: {parse_dates: ['Week of Episode Date Trunc'], thousands: ','}
+  type: pandas
+  desc: Cases confirmed by onset date
+  constants:
+    DATE_USED: Symptom Onset
