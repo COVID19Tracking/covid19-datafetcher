@@ -423,7 +423,7 @@ WI:
   type: pandas
   desc: Testing encounters
   constants:
-    DATE_USED: Specimen Collection
+    DATE_USED: Test Result
 - url: https://bi.wisconsin.gov/t/DHS/views/Agegroupovertime/Cases.csv?:isGuestRedirectFromVizportal=y&:embed=y
   params: {parse_dates: ['Week of Episode Date Trunc'], thousands: ','}
   type: pandas
