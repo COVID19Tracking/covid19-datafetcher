@@ -62,15 +62,15 @@ CO:
 #   desc: Cases, tested, death, hosp
 #   constants:
 #     DATE_USED: Dashboard
-- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/COVID19_Positivity_Data_from_Clinical_Laboratories/FeatureServer/0/query
-  params: {where: (Metric='Cumulative People Tested at CDPHE State Lab' or Metric='Cumulative People Tested at Non-CDPHE (Commerical) Labs') and Desc_ like 'Daily%', outFields: '*', orderByFields: OBJECTID asc, groupByFieldsForStatistics: Date, outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "test_encounters"}, {"statisticType": "max", "onStatisticField": "OBJECTID", "outStatisticFieldName": "OBJECTID"}], f: json}
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
+  params: {where: (Metric='Cumulative People Tested at CDPHE State Lab' or Metric='Cumulative People Tested at Non-CDPHE (Commerical) Labs') and Desc_ like 'Daily%', outFields: '*', orderByFields: OBJECTID asc, groupByFieldsForStatistics: Attr_Date, outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "test_encounters"}, {"statisticType": "max", "onStatisticField": "OBJECTID", "outStatisticFieldName": "OBJECTID"}], f: json}
   type: arcgis
   desc: Test encounters
   constants:
     DATE_USED: Specimen Collection
 # "This data represents the total number of tests performed each day and reported to CDPHE"
-- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/COVID19_Positivity_Data_from_Clinical_Laboratories/FeatureServer/0/query
-  params: {where: Metric = 'Cumulative Antibody Tests Performed' and Desc_ like 'Daily%', outFields: 'Date, Desc_, Metric, Value as antibody_totals', orderByFields: OBJECTID asc, f: json}
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
+  params: {where: Metric = 'Cumulative Antibody Tests Performed' and Desc_ like 'Daily%', outFields: 'Attr_Date, Desc_, Metric, Value as antibody_totals', orderByFields: OBJECTID asc, f: json}
   type: arcgis
   desc: Antibody total tests
   constants:
