@@ -130,19 +130,19 @@ CO:
     f: json}
   type: arcgis
   desc: Positive serological tests
-- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/CDPHE_COVID19_StateLevel_Expanded_Case_Data/FeatureServer/0/query
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_state_statistics_cumulative/FeatureServer/0/query
   params: {where: metric = 'Probable cases', outFields: '*, value as cases_probable', orderByFields: report_date desc, f: json}
   type: arcgis
   desc: Cases probable
-- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/CDPHE_COVID19_StateLevel_Expanded_Case_Data/FeatureServer/0/query
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_state_statistics_cumulative/FeatureServer/0/query
   params: {where: metric = 'Confirmed cases', outFields: '*, value as cases_confirmed', orderByFields: report_date desc, f: json}
   type: arcgis
   desc: Cases confirmed
-- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/CDPHE_COVID19_StateLevel_Expanded_Case_Data/FeatureServer/0/query
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_state_statistics_cumulative/FeatureServer/0/query
   params: {where: metric = 'Confirmed deaths among cases', outFields: '*, value as confirmed_deaths', orderByFields: report_date desc, f: json}
   type: arcgis
   desc: Confirmed deaths
-- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/CDPHE_COVID19_StateLevel_Expanded_Case_Data/FeatureServer/0/query
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_state_statistics_cumulative/FeatureServer/0/query
   params: {where: metric = 'Probable deaths among cases', outFields: '*, value as probable_deaths', orderByFields: report_date desc, f: json}
   type: arcgis
   desc: Probable deaths
