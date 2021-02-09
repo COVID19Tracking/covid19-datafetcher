@@ -363,11 +363,15 @@ VA:
   type: soda
   data_path: []
   desc: Testing data (PCR and antibody)
+  constants:
+    DATE_USED: Test Result
 - url: https://data.virginia.gov/resource/uqs3-x7zh.json
   params: null
   type: soda
   data_path: []
   desc: Cases, death by report date
+  constants:
+    DATE_USED: Report
 - url: https://data.virginia.gov/resource/9d6i-p8gz.json
   params: {$query: 'select event_date, case_status, sum(number_of_cases) as number_of_cases, sum(number_of_deaths) as number_of_deaths group by event_date, case_status'}
   type: soda

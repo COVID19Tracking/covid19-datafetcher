@@ -462,14 +462,14 @@ def handle_ri(res, mapping):
     return records
 
 
-def handle_va(res, mapping):
+def handle_va(res, mapping, queries):
     tests = res[0]
     df = prep_df(tests, mapping)
     df.index = df.index.fillna(NULL_DATE)
     df = df.sort_index().cumsum()
     df[TS] = pd.to_datetime(df.index)
     df[TS] = df[TS].values.astype(np.int64) // 10 ** 9
-    df[DATE_USED] = 'Test Result'
+    add_query_constants(df, queries[0])
     tagged = df.to_dict(orient='records')
 
     # 2nd source is cases and death by status, by report date
@@ -479,7 +479,7 @@ def handle_va(res, mapping):
     df.columns = df.columns.map("-".join)
     df = df.rename(columns=mapping)
     df[TS] = df.index
-    df[DATE_USED] = 'Report'
+    add_query_constants(df, queries[1])
     tagged.extend(df.to_dict(orient='records'))
 
     event_date = res[2]
