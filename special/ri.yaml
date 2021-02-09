@@ -27,7 +27,7 @@ creds:
 api:
   staging: True
   url: http://localhost:5000/api/v1/batches/edit
-  username: ctp-bot
+  username: ":ri-bot:"
 
 dataset:
   name: backfill
