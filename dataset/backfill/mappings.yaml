@@ -153,6 +153,10 @@ MA:
   "CasesByDate (Test Date):Date": DATE
   "CasesByDate (Test Date):Positive Total": CONFIRMED
 
+  "CasesByDate_Probable:DATE_USED": Specimen Collection
+  "CasesByDate_Probable:Date": DATE
+  "CasesByDate_Probable:Probable Total": PROBABLE
+
   "DateofDeath:DATE_USED": Death
   "DateofDeath:Date of Death": DATE
   "DateofDeath:Confirmed Total": DEATH_CONFIRMED

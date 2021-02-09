@@ -256,17 +256,11 @@ def handle_ma(res, mapping):
     tab_mapping = build_leveled_mapping(mapping)
     tabs = MaRawData(res[0])
     for tabname in tab_mapping.keys():
-        if tabname.startswith('DateofDeath'):
-            date_field = 'Date of Death'
-        else:
-            date_field = 'Date'
-        df = tabs[tabname]
-        # handle dates
-        df[date_field] = pd.to_datetime(df[date_field])
-
+        df = tabs[tabname].rename(columns=tab_mapping[tabname])
+        df[DATE] = pd.to_datetime(df[DATE])
         # expect it to always exist (we control the file list)
         by_date = tab_mapping[tabname].pop(DATE_USED)
-        df = df.rename(columns=tab_mapping[tabname])[tab_mapping[tabname].values()]
+        df = df[tab_mapping[tabname].values()]
 
         # need to cumsum TestingByDate file
         if tabname.startswith('TestingByDate'):
