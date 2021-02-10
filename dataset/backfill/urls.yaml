@@ -357,7 +357,7 @@ RI:
   type: pandas
 TN:
 - url: https://services1.arcgis.com/HLC8bAygObK4fhPW/arcgis/rest/services/TN_COVID19_Daily/FeatureServer/0/query
-  params: {where: 1=1, outFields: '*', orderByFields: 'DATE desc', resultRecordCount: 300, f: json}
+  params: {where: 1=1, outFields: '*', orderByFields: 'DATE desc', resultRecordCount: 500, f: json}
   type: arcgis
   desc: Main data
   constants:
