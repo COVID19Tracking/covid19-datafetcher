@@ -35,6 +35,10 @@ CO:
   Test_Encounters: PCR_TEST_ENCOUNTERS
   Deaths: DEATH
 
+  deaths: DEATH
+  date: DATE
+  cases: POSITIVE
+
   test_encounters: PCR_TEST_ENCOUNTERS
   antibody_totals: ANTIBODY_TOTAL
   Attr_Date: DATE
@@ -190,6 +194,8 @@ MD:
   deaths: DEATH_CONFIRMED
   pDeaths: DEATH_PROBABLE
   TotalTests: SPECIMENS
+  deathDOD: DEATH_CONFIRMED
+  pDeathDOD: DEATH_PROBABLE
 
   # Testing volume:
   number_of_tests: SPECIMENS

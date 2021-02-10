@@ -56,12 +56,12 @@ CA:
   constants:
     DATE_USED: Report
 CO:
-# - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_daily_state_statistics_cumulative/FeatureServer/0/query
-#   params: {where: Desc_='State Data', outFields: '*', f: json}
-#   type: arcgis
-#   desc: Cases, tested, death, hosp
-#   constants:
-#     DATE_USED: Dashboard
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_daily_state_statistics_cumulative/FeatureServer/0/query
+  params: {where: Desc_='State Data', outFields: '*', f: json}
+  type: arcgis
+  desc: Cases, tested, death, hosp
+  constants:
+    DATE_USED: Dashboard
 - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
   params: {where: (Metric='Cumulative People Tested at CDPHE State Lab' or Metric='Cumulative People Tested at Non-CDPHE (Commerical) Labs') and Desc_ like 'Daily%', outFields: '*', orderByFields: OBJECTID asc, groupByFieldsForStatistics: Attr_Date, outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "test_encounters"}, {"statisticType": "max", "onStatisticField": "OBJECTID", "outStatisticFieldName": "OBJECTID"}], f: json}
   type: arcgis
@@ -75,6 +75,26 @@ CO:
   desc: Antibody total tests
   constants:
     DATE_USED: Specimen Collection
+# Extended State dataset
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/colorado_covid19_state_statistics_cumulative/FeatureServer/0/query
+  params: {where: description = 'Cumulative Deaths Among COVID-19 Cases in Colorado by Date of Death', outFields: '*, value as deaths', orderByFields: ObjectId asc, f: json}
+  type: arcgis
+  desc: Death by day of death
+  constants:
+    DATE_USED: Death
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/colorado_covid19_state_statistics_cumulative/FeatureServer/0/query
+  params: {where: description = 'Cumulative COVID-19 Cases in Colorado by Date of Illness Onset', outFields: '*, value as cases', orderByFields: ObjectId asc, f: json}
+  type: arcgis
+  desc: Cases by illness onset
+  constants:
+    DATE_USED: Symptom Onset
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/colorado_covid19_state_statistics_cumulative/FeatureServer/0/query
+  params: {where: description = 'Cumulative COVID-19 Cases in Colorado by Date Reported to the State', outFields: '*, value as cases', orderByFields: ObjectId asc, f: json}
+  type: arcgis
+  desc: Cases by report date
+  constants:
+    DATE_USED: Report
+# ~ ~ ~
 CT:
 - url: https://data.ct.gov/api/id/qfkt-uahj.json
   params: {$query: 'select date, sum(number_of_pcr_tests), sum(number_of_pcr_positives), sum(number_of_pcr_negatives), sum(number_of_ag_tests), sum(number_of_ag_positives), sum(number_of_ag_negatives) group by date order by date asc'}
@@ -184,7 +204,7 @@ MA:
   desc: None, just need a trigger
 MD:
 - url: https://services.arcgis.com/njFNhDsUCentVYJW/ArcGIS/rest/services/MASTERCaseTracker/FeatureServer/0/query
-  params: {f: json, resultRecordCount: 300, orderByFields: ReportDate desc, outFields: 'ReportDate,TotalCases,NegativeTests,deaths,pdeaths,TotalTests', where: 1=1}
+  params: {f: json, resultRecordCount: 500, orderByFields: ReportDate desc, outFields: 'ReportDate,TotalCases,NegativeTests,deaths,pdeaths,TotalTests', where: 1=1}
   type: arcgis
   desc: Dashboard numbers
   constants:
@@ -196,6 +216,12 @@ MD:
   desc: PCR Testing and positives
   constants:
     DATE_USED: Specimen Collection
+- url: https://services.arcgis.com/njFNhDsUCentVYJW/ArcGIS/rest/services/MASTERCaseTracker/FeatureServer/0/query
+  params: {f: json, resultRecordCount: 500, orderByFields: ReportDate desc, outFields: 'ReportDate,deathDOD, pDeathDOD', where: 1=1}
+  type: arcgis
+  desc: goobar
+  constants:
+    DATE_USED: Death
 MI:
 - url: https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html
   params: null

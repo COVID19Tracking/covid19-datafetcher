@@ -273,20 +273,16 @@ def handle_ma(res, mapping):
     return tagged
 
 
-def handle_md(res, mapping):
-    mapped = []
-    for result in res[:-1]:
-        partial = extract_arcgis_attributes(result, mapping, 'MD')
-        for x in partial:
-            x[DATE_USED] = 'Report'
-        mapped.extend(partial)
+def handle_md(res, mapping, queries):
+    mapped = extract_arcgis_attributes(res[0], mapping, 'MD')
+    for x in mapped:
+        x[DATE_USED] = 'Report'
 
-    # PCR positives
-    testing = res[-1]
-    testing = extract_arcgis_attributes(testing, mapping, 'MD')
-    cumsum_df = make_cumsum_df(testing)
-    cumsum_df[DATE_USED] = 'Specimen Collection'
-    mapped.extend(cumsum_df.to_dict(orient='records'))
+    for i, result in enumerate(res[1:]):
+        data = extract_arcgis_attributes(result, mapping, 'MD')
+        cumsum_df = make_cumsum_df(data)
+        add_query_constants(cumsum_df, queries[i+1])
+        mapped.extend(cumsum_df.to_dict(orient='records'))
     return mapped
 
 
