@@ -255,6 +255,16 @@ NH:
   "PCR Test Count : Cumulative Total": SPECIMENS
   "Antigen Tests Count : Cumulative Total": ANTIGEN_TOTAL
   "Antibody Tests Count : Cumulative Total": ANTIBODY_TOTAL
+NV:
+  "Cases:Specimen\nCollection\nDate": DATE
+  "Cases:Number of\nCases": CONFIRMED
+  "Cases:DATE_USED": Specimen Collection
+  "Tests:Specimen Collection Date": DATE
+  "Tests:Cumulative\nTests": PCR_TEST_ENCOUNTERS
+  "Tests:DATE_USED": Specimen Collection
+  "Deaths:Date of\nDeath": DATE
+  "Deaths:Cumulative\nDeaths": DEATH
+  "Deaths:DATE_USED": Death
 NY:
   test_date: DATE
   sum_cumulative_number_of_positives: POSITIVE

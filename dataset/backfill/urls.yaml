@@ -313,6 +313,11 @@ NH:
   desc: PCR tests by date of result
   constants:
     DATE_USED: Test Result
+NV:
+- url: "https://dpbhpowerbi.blob.core.windows.net/coviddashboard/Nevada%20Dashboard%20Extract.xlsx?sv=2019-12-12&si=coviddashboard-17693E05667&sr=b&sig=lRKVj02dpDf2SG0W22tRrQYqxeQIwDKrmSZa%2B24ZTts%3D"
+  params: {sheet_name: null, engine: 'xlrd'}
+  type: xlsx
+  desc: Cases, deaths and tests
 NY:
 - url: https://health.data.ny.gov/resource/xdss-u53e.json
   params: {$select: 'test_date, sum(cumulative_number_of_positives), sum(cumulative_number_of_tests)', $group: test_date, $order: test_date desc, $limit: 500}

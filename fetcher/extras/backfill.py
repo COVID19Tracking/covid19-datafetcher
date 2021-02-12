@@ -402,6 +402,28 @@ def handle_nh(res, mapping, queries):
     return mapped
 
 
+def handle_nv(res, mapping):
+    mapped = []
+
+    nv = res[0]
+    tab_mapping = build_leveled_mapping(mapping)
+    for tab in tab_mapping.keys():
+        df = nv[tab]
+        date_used = tab_mapping[tab].pop(DATE_USED)
+        df.columns = df.iloc[1]
+        df = df.iloc[2:].rename(columns=tab_mapping[tab]).filter(tab_mapping[tab].values())
+        df[DATE] = pd.to_datetime(df[DATE], errors='coerce')
+        df = df[df[DATE].notna()].set_index(DATE).sort_index()
+        if tab == 'Cases':
+            df = df.cumsum()
+
+        df[DATE_USED] = date_used
+        df[TS] = df.index
+        mapped.extend(df.to_dict(orient='records'))
+
+    return mapped
+
+
 def handle_oh(res, mapping):
     testing_url = res[0]['url']
     df = pd.read_csv(testing_url, parse_dates=['Date'])
