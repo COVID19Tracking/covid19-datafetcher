@@ -303,6 +303,43 @@ TX:
   AntibodyTests: ANTIBODY_TOTAL
   AntigenTests: ANTIGEN_TOTAL
   ViralTests: SPECIMENS
+UT:
+  # cumulative
+  "Overview_COVID-19 Cases by Date of Symptom Onset or Diagnosis:DATE_USED": Symptom Onset
+  "Overview_COVID-19 Cases by Date of Symptom Onset or Diagnosis:Onset Date": DATE
+  "Overview_COVID-19 Cases by Date of Symptom Onset or Diagnosis:Cumulative Cases": POSITIVE
+
+  # not cumulative
+  "Overview_COVID-19 Cases by the Date a Positive Test was Reported to Public Health by LHD:DATE_USED": Test Result
+  "Overview_COVID-19 Cases by the Date a Positive Test was Reported to Public Health by LHD:Date": DATE
+  "Overview_COVID-19 Cases by the Date a Positive Test was Reported to Public Health by LHD:Count": POSITIVE
+
+  # Overview_Cumulative COVID-19 Cases with Estimated Recoveries_2021-02-11.csv
+  # Overview_Seven-Day Rolling Average COVID-19 Cases by Test Report Date_2021-02-11.csv
+
+  # non cumulative: PCR and antigen people
+  "Overview_Number of People Tested by Date:DATE_USED": Specimen Collection
+  "Overview_Number of People Tested by Date:Test Date": DATE
+  "Overview_Number of People Tested by Date:PCR/amplification-NEGATIVE": TOTAL
+  "Overview_Number of People Tested by Date:PCR/amplification-POSITIVE": TOTAL
+  # not storing Antigen unique people for now
+  #"Overview_Number of People Tested by Date:Antigen by DFA/IF-NEGATIVE":
+  #"Overview_Number of People Tested by Date:Antigen by DFA/IF-POSITIVE":
+
+  # cumulative
+  "Overview_Seven-Day Rolling Average Mortality by Date of Death:DATE_USED": Death
+  "Overview_Seven-Day Rolling Average Mortality by Date of Death:Date": DATE
+  "Overview_Seven-Day Rolling Average Mortality by Date of Death:Cumulative Mortalities": Death
+
+  # not cumulative
+  "Overview_Total Tests by Date:DATE_USED": Specimen Collection
+  "Overview_Total Tests by Date:Test Date": DATE
+  "Overview_Total Tests by Date:PCR/amplification-NEGATIVE": SPECIMENS_NEG
+  "Overview_Total Tests by Date:PCR/amplification-POSITIVE": SPECIMENS_POS
+  "Overview_Total Tests by Date:Antigen by DFA/IF-NEGATIVE": ANTIGEN_NEG
+  "Overview_Total Tests by Date:Antigen by DFA/IF-POSITIVE": ANTIGEN_POS
+
+
 VA:
   lab_report_date: DATE
   # "10/10/2020"

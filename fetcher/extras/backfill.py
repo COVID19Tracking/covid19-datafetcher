@@ -458,6 +458,49 @@ def handle_ri(res, mapping):
     return records
 
 
+def handle_ut(res, mapping):
+    zipurl = res[-1]
+    mapped = []
+    tab_mapping = build_leveled_mapping(mapping)
+
+    def find_entry_mapping(name, tab_mappings):
+        for x in tab_mappings.keys():
+            if name.startswith(x):
+                return tab_mappings[x]
+        return None
+
+    with zipContextManager(zipurl) as zipdir:
+        with os.scandir(zipdir) as it:
+            for entry in it:
+                entry_mapping = find_entry_mapping(entry.name, tab_mapping)
+                if not entry_mapping:
+                    continue
+                df = pd.read_csv(os.path.join(zipdir, entry.name))
+                cumulative = any([x.find('umulative') > 0 for x in df.columns])
+                df = df.rename(columns=entry_mapping).set_index(DATE)
+                df.index = pd.to_datetime(df.index)
+                # 1. Special handling for testing files
+                if 'Test Type' in df.columns:
+                    df = df.pivot(columns=['Test Type', 'Result'], values='Count')
+                    df.columns = df.columns.map("-".join)
+                    df = df.rename(columns=entry_mapping).sort_index()
+
+                    # sum columns
+                    df = df.groupby(df.columns.values, axis=1).sum()
+
+                # 2. Decide whether cumulative or not
+                if not cumulative:
+                    df = df.sort_index().cumsum()
+
+                # 3. Add DATE_USED + administrativia
+                df[TS] = df.index
+                df[DATE_USED] = entry_mapping[DATE_USED]
+
+                mapped.extend(df.to_dict(orient='records'))
+
+    return mapped
+
+
 def handle_va(res, mapping, queries):
     tests = res[0]
     df = prep_df(tests, mapping)

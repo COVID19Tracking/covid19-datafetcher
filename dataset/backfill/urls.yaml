@@ -383,6 +383,11 @@ TX:
 #   params: {where: 1=1, outFields: '*', orderByField: Date asc, resultRecordCount: 500, f: json}
 #   type: arcgis
 #   desc: Testing (PCR + Antibody)
+UT:
+- url: https://coronavirus-dashboard.utah.gov/Utah_COVID19_data.zip
+  params: null
+  type: zip
+  desc: Zip download
 VA:
 - url: https://data.virginia.gov/resource/3u5k-c2gr.json
   params: {$query: 'select lab_report_date, sum(number_of_pcr_testing) as pcr_testing, sum(number_of_positive_pcr_testing) as pos_pcr_testing, sum(number_of_antibody_testing_encounters) as antibody_total, sum(number_of_positive_antibody_testing_encounters) as antibody_pos, sum(number_of_positive_antigen_testing_encounters) as antigen_pos, sum(number_of_antigen_testing_encounters) as antigen_total group by lab_report_date'}
