@@ -243,6 +243,10 @@ NE:
   AllTestsAsOfThisDate: SPECIMENS
   TotalNotDetectedAsOfThisDate: SPECIMENS_NEG
   TotalPositiveAsOfThisDate: SPECIMENS_POS
+
+  SP_Collection_DATE: TIMESTAMP
+  cases: CONFIRMED
+
 NH:
   Date of Report: TIMESTAMP
   Date of Illness Onset: TIMESTAMP
