@@ -723,7 +723,7 @@ WI:
   type: arcgis
   desc: Main metrics
 - url: https://bi.wisconsin.gov/t/DHS/views/PercentPositivebyTestPersonandaComparisonandTestCapacity/TestCapacityDashboard.csv
-  params: {parse_dates: ['Day of displaydateonly'], thousands: ','}
+  params: {parse_dates: ['Day of Encounter Date'], thousands: ','}
   type: pandas
   desc: Testing encounters
 WY:

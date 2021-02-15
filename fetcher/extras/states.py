@@ -988,6 +988,6 @@ def handle_wi(res, mapping):
     # testing encounters
     testing = res[-1]
     encounters = [k for k, v in mapping.items() if v == Fields.PCR_TEST_ENCOUNTERS.name][0]
-    value = testing[testing['Measure Names'] == encounters]['Totals'].sum()
+    value = testing[testing['Measure Names'] == encounters]['Number of Tests'].sum()
     tagged[mapping[encounters]] = value
     return tagged
