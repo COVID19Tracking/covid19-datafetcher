@@ -474,9 +474,15 @@ def handle_pa(res, mapping, queries):
 def handle_ri(res, mapping):
     res = res[0]
     res = res.rename(columns=mapping)
+
     res = res[[v for k, v in mapping.items() if k != '__strptime']]
-    # TODO: consider working with DFs directly
+    # tag date_used for deaths
+    deaths = res[[DATE, 'DEATH']]
+    deaths[DATE_USED] = 'Death'
+    res = res.drop(columns='DEATH')
+
     records = res.to_dict(orient='records')
+    records.extend(deaths.to_dict(orient='records'))
     return records
 
 
