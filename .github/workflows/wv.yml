@@ -31,6 +31,10 @@ jobs:
             key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
             restore-keys: |
               ${{ runner.os }}-node-
+        # there's an extremely irritating DNS bug somewhere (https://github.com/actions/virtual-environments/issues/798)
+        # and swapping out the resolver is a weird workaround. Otherwise, app.powerbigov.us won't resolve
+        - name: DNS nonsense
+          run: sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
         - name: Use Node.js
           uses: actions/setup-node@v1
           with:
