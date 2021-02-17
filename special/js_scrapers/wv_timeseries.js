@@ -8,7 +8,7 @@ const { DateTime } = require("luxon");
   const URL = 'https://app.powerbigov.us/view?r=eyJrIjoiOGVkMjJmN2EtMTA5My00MTM0LWExZWUtMTUzMjkwOGNkYjlhIiwidCI6IjhhMjZjZjAyLTQzNGEtNDMxZS04Y2FkLTdlYWVmOTdlZjQ4NCJ9'
   // some setup
   const browser = await chromium.launch({
-    headless: false
+    headless: true
   })
   const context = await browser.newContext()
   const page = await context.newPage()
