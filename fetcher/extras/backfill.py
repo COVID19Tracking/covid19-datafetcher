@@ -304,7 +304,7 @@ def handle_mi(res, mapping):
 
     like_bydate = [('death', 'Death'), ('Cases', 'Symptom Onset')]
     for like, by_date in like_bydate:
-        foo = df.filter(like=like)
+        foo = df.filter(like=like).rename(columns=mapping)
         foo[TS] = foo.index
         foo[DATE_USED] = by_date
         tagged.extend(foo.to_dict(orient='records'))
