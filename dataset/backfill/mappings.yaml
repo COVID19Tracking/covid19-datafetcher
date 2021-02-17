@@ -132,6 +132,11 @@ IL:
   total_tested: TOTAL
   confirmed_cases: POSITIVE
   deaths: DEATH
+
+  molecular_test_count: SPECIMENS
+  serology_test_count: ANTIBODY_TOTAL
+  antigen_test_count: ANTIGEN_TOTAL
+  reportDate: DATE
 IN:
   date: DATE
   covid_cases: POSITIVE

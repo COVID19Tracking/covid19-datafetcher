@@ -209,7 +209,16 @@ def handle_il(res, mapping, queries):
     df = res[0].rename(columns=mapping)
     df[TS] = df[DATE]
     add_query_constants(df, queries[0])
-    return df.to_dict(orient='records')
+    mapped = df.to_dict(orient='records')
+
+    # testing
+    df = pd.DataFrame(res[1].get('test_group_counts')).rename(columns=mapping)
+    df = df[df['regionID'] == 0]
+    df[DATE] = pd.to_datetime(df[DATE])
+    df = df.set_index(DATE).sort_index().cumsum()
+    df[TS] = df.index
+    mapped.extend(df.to_dict(orient='records'))
+    return mapped
 
 
 def handle_in(res, mapping):
