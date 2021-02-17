@@ -376,6 +376,10 @@ VA:
 VT:
   Date_Received_by_PH: TIMESTAMP
   Cumulative_tests: SPECIMENS
+  positive_cases: POSITIVE
+  confirmed_cases: CONFIRMED
+  probable_cases: PROBABLE
+  date: DATE
 WA:
   Date of Receipt of First Positive Lab: DATE
   Cases: POSITIVE

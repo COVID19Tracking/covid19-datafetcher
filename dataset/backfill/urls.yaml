@@ -434,6 +434,12 @@ VT:
   desc: PCR tests by specimen collection
   constants:
     DATE_USED: Specimen Collection
+- url: https://opendata.arcgis.com/datasets/d4af9501d3f04e9d9fe4f47539f39c05_0.csv
+  params: {parse_dates: ['date']}
+  type: pandas
+  desc: Cases (confirmed and probables)
+  constants:
+    DATE_USED: Report
 WA:
 - url: https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/Cumulative_Count_Cases_Hospitalizations_Deaths_Vaccinations.xlsx
   params: {sheet_name: ["Cases"], engine: 'xlrd'}

@@ -564,6 +564,20 @@ def handle_va(res, mapping, queries):
     return tagged
 
 
+def handle_vt(res, mapping, queries):
+    mapped = extract_arcgis_attributes(res[0], mapping, 'VT')
+    for x in mapped:
+        x[DATE_USED] = queries[0].constants[DATE_USED]
+
+    # cases by ??
+    df = res[1].rename(columns=mapping).set_index(DATE).sort_index().cumsum()
+    add_query_constants(df, queries[1])
+    df[TS] = df.index.normalize().tz_localize(None)
+    mapped.extend(df.to_dict(orient='records'))
+
+    return mapped
+
+
 def handle_wa(res, mapping, queries):
     tagged = []
     for i, dfs in enumerate(res[:-1]):

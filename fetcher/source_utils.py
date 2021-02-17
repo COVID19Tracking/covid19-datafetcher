@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date
 import inspect
 import logging
 import typing
@@ -129,7 +129,7 @@ def _tag_and_timestamp(state, data, timestamp, dateformat=None):
     if TS in data and data[TS]:
         # Check whether it's s or ms and convert to datetime
         ts = data[TS]
-        if not isinstance(ts, datetime):
+        if not isinstance(ts, datetime) or not isinstance(ts, date):
             data[TS] = datetime.fromtimestamp(ts/1000 if ts > MS_FILTER else ts)
     elif 'DATE' in data and data['DATE'] and dateformat:
         d = data['DATE']
