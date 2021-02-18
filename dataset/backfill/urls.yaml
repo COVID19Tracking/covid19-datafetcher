@@ -182,6 +182,11 @@ IL:
   desc: Cases by something
   constants:
     DATE_USED: Specimen Collection
+- url: https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetTestingResults
+  params: null
+  type: json
+  desc: Tests by report date
+  # don't know the dating scheme
 IN:
 - url: https://hub.mph.in.gov/api/3/action/datastore_search_sql
   params: {sql: 'SELECT "DATE" as date, sum("COVID_COUNT") as covid_cases, sum("COVID_DEATHS") as deaths, sum("COVID_TESTS") as tested_people, sum("COVID_TESTS_ADMINISTRATED") as tests_administered, sum("COVID_POSITIVE_TESTS_ADMIN") as pos_tests_administered, sum("COVID_COUNT_BY_SPECIMEN_COLLECTION_DATE") as positive_by_collection from "afaa225d-ac4e-4e80-9190-f6800c366b58" group by "DATE"'}
@@ -222,6 +227,17 @@ MD:
   desc: goobar
   constants:
     DATE_USED: Death
+ME:
+- url: https://gateway.maine.gov/dhhs-apps/mecdc_covid/cases_by_county_history.csv
+  params: {parse_dates: ['Date']}
+  type: pandas
+  desc: Cases and death by (unknown) date
+- url: https://analytics.maine.gov/t/CDCExternal/views/covid-19-maine-cdc-dashboard/7_DailyLabResults.csv
+  params: {thousands: ',', parse_dates: ['Day of Lab Received Date']}
+  type: pandas
+  desc: Tests by result date (pcr, antigen)
+  constants:
+    DATE_USED: Test Result
 MI:
 - url: https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html
   params: null
