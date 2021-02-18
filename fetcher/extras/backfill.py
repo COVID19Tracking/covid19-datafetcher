@@ -295,6 +295,23 @@ def handle_md(res, mapping, queries):
     return mapped
 
 
+def handle_me(res, mapping, queries):
+    cases = res[0].rename(columns=mapping).groupby(DATE).sum().sort_index().cumsum()
+    cases[TS] = cases.index
+    mapped = cases.to_dict(orient='records')
+
+    df = res[1].rename(columns=mapping).set_index(DATE)
+    df['positive'] = df['Positive Tests'].fillna(0) + df['Positive Tests Flexible'].fillna(0)
+    df = df.pivot(columns='Type', values=['All Tests', 'positive'])
+    df.columns = df.columns.map(lambda x: "{}-{}".format(x[0], x[1]))
+    df = df.cumsum().rename(columns=mapping)
+    add_query_constants(df, queries[1])
+    df[TS] = df.index
+    mapped.extend(df.to_dict(orient='records'))
+
+    return mapped
+
+
 def handle_mi(res, mapping):
     soup = res[-1]
     h = soup.find("h5", string=re.compile('[dD][aA][tT][aA]'))
@@ -423,6 +440,7 @@ def handle_nv(res, mapping):
         df = df.iloc[2:].rename(columns=tab_mapping[tab]).filter(tab_mapping[tab].values())
         df[DATE] = pd.to_datetime(df[DATE], errors='coerce')
         df = df[df[DATE].notna()].set_index(DATE).sort_index()
+
         if tab == 'Cases':
             df = df.cumsum()
 

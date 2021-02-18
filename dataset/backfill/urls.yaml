@@ -227,6 +227,17 @@ MD:
   desc: goobar
   constants:
     DATE_USED: Death
+ME:
+- url: https://gateway.maine.gov/dhhs-apps/mecdc_covid/cases_by_county_history.csv
+  params: {parse_dates: ['Date']}
+  type: pandas
+  desc: Cases and death by (unknown) date
+- url: https://analytics.maine.gov/t/CDCExternal/views/covid-19-maine-cdc-dashboard/7_DailyLabResults.csv
+  params: {thousands: ',', parse_dates: ['Day of Lab Received Date']}
+  type: pandas
+  desc: Tests by result date (pcr, antigen)
+  constants:
+    DATE_USED: Test Result
 MI:
 - url: https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html
   params: null

@@ -206,6 +206,17 @@ MD:
   number_of_tests: SPECIMENS
   number_of_positives: SPECIMENS_POS
   date: TIMESTAMP
+
+ME:
+  Total_Cases: POSITIVE
+  Deaths: DEATH
+  Date: DATE
+
+  Day of Lab Received Date: DATE
+  All Tests-Antigen: ANTIGEN_TOTAL
+  All Tests-Molecular: SPECIMENS
+  positive-Antigen: ANTIGEN_POS
+  positive-Molecular: SPECIMENS_POS
 MI:
   Cases.Cumulative-Confirmed: CONFIRMED
   Cases.Cumulative-Probable: PROBABLE
