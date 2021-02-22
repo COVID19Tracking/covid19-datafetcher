@@ -192,11 +192,6 @@ def handle_ga(res, mapping):
         for filename in file_mapping.keys():
             date_fields = [k for k, v in file_mapping[filename].items() if v == 'TIMESTAMP']
             df = pd.read_csv(os.path.join(zipdir, filename), parse_dates=date_fields)
-            # funny stuff:
-            if filename.startswith('pcr_positive'):
-                # the columns have the same name #facepalm
-                df.columns = ['county', 'TIMESTAMP', '_', 'SPECIMENS', '_',
-                              'SPECIMENS_POS', '_', '_']
             df = df[df['county'] == 'Georgia']
             by_date = file_mapping[filename].pop(DATE_USED)
             df = df.rename(columns=file_mapping[filename])

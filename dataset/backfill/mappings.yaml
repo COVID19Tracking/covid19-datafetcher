@@ -101,15 +101,19 @@ FL:
   Negative: SPECIMENS_NEG
   Positive: SPECIMENS_POS
 GA:
-  "pcr_positives.csv:DATE_USED": Report
-  "pcr_positives.csv:report_date": TIMESTAMP
-  "pcr_positives.csv:Running total of all PCR tests": SPECIMENS
+  "pcr_antigen.csv:DATE_USED": Report
+  "pcr_antigen.csv:report_date": TIMESTAMP
+  "pcr_antigen.csv:Running total of all PCR tests": SPECIMENS
+  "pcr_antigen.csv:Running total of all Positive PCR tests": SPECIMENS_POS
+  "pcr_antigen.csv:Running total of all Antigen tests": ANTIGEN_TOTAL
+  "pcr_antigen.csv:Running Total of Antigen Positive Tests": ANTIGEN_POS
 
-  "pcr_positives_col.csv:DATE_USED": Specimen Collection
-  "pcr_positives_col.csv:collection_dt": TIMESTAMP
-  "pcr_positives_col.csv:Running total of all PCR tests": SPECIMENS
-  # The file has the same column name twice :(
-  #"pcr_positives_col.csv:": SPECIMENS_POS
+  "pcr_antigen_col.csv:DATE_USED": Specimen Collection
+  "pcr_antigen_col.csv:collection_dt": TIMESTAMP
+  "pcr_antigen_col.csv:Running total of all PCR tests": SPECIMENS
+  "pcr_antigen_col.csv:Running total of all Positive PCR tests": SPECIMENS_POS
+  "pcr_antigen_col.csv:Running total of all Antigen tests": ANTIGEN_TOTAL
+  "pcr_antigen_col.csv:Running Total of Antigen Positive Tests": ANTIGEN_POS
 
   "epicurve_symptom_date.csv:DATE_USED": Symptom Onset
   "epicurve_symptom_date.csv:symptom date": TIMESTAMP
