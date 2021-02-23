@@ -370,7 +370,7 @@ OH:
   desc: Key metrics (cases, death)
 PA:
 - url: https://data.pa.gov/api/id/r6ti-va88.json
-  params: {$query: 'select date, newpcrtests::number order by date asc limit 500'}
+  params: {$query: 'select date, newpcrtests order by date asc limit 500'}
   type: soda
   desc: PCR Tests encounters
   constants:

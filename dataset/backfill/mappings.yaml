@@ -305,7 +305,7 @@ OH:
   Case Count: POSITIVE
 PA:
   date: DATE
-  newpcrtest: PCR_TEST_ENCOUNTERS
+  newpcrtests: PCR_TEST_ENCOUNTERS
   cases: POSITIVE
   deaths: DEATH
 RI:
