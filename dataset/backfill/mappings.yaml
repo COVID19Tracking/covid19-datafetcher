@@ -332,6 +332,8 @@ TN:
   TEST_TOT: SPECIMENS
   CASES_CONFIRMED: CONFIRMED
   CASES_PROBABLE: PROBABLE
+  # date of death
+  cum_deaths_by_dod: DEATH
 TX:
   Date: TIMESTAMP
   CumulativeCases: CONFIRMED

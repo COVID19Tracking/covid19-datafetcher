@@ -403,6 +403,12 @@ TN:
   desc: Main data
   constants:
     DATE_USED: Report
+- url: https://services1.arcgis.com/HLC8bAygObK4fhPW/arcgis/rest/services/TN_COVID19_Daily/FeatureServer/0/query
+  params: {where: 1=1, outFields: 'DATE, TOTAL_DEATHS_BY_DOD as cum_deaths_by_dod', orderByFields: 'DATE desc', resultRecordCount: 500, f: json}
+  type: arcgis
+  desc: Main data
+  constants:
+    DATE_USED: Death
 TX:
 - url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/TX_DSHS_COVID19_Cases_Service/FeatureServer/2/query
   params: {where: 1=1, outFields: 'Date,CumulativeFatalities', orderByField: Date asc, resultRecordCount: 500, f: json}
