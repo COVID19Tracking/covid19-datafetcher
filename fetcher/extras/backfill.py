@@ -75,6 +75,12 @@ def handle_ak(res, mapping, queries):
     add_query_constants(cases, queries[1])
     tagged.extend(cases.to_dict(orient='records'))
 
+    # last item: already cumulative
+    data = extract_arcgis_attributes(res[2], mapping)
+    for x in data:
+        x[DATE_USED] = queries[2].constants[DATE_USED]
+    tagged.extend(data)
+
     return tagged
 
 

@@ -20,6 +20,12 @@ AK:
   desc: Cases by onset
   constants:
     DATE_USED: Symptom Onset
+- url: https://services1.arcgis.com/WzFsmainVTuD5KML/ArcGIS/rest/services/Daily_Cases_Hospitalizations_and_Deaths/FeatureServer/0/query
+  params: {where: 1=1, outFields: 'Date_Reported, Deceased_Cases__Cumulative_, All_Cases__Cumulative_', orderByFields: Date_Reported asc, f: json}
+  type: arcgis
+  desc: Cases and death by report
+  constants:
+    DATE_USED: Report
 AL:
 - url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/StatewideTemporal_RunAVG_READONLY/FeatureServer/1/query
   params: {where: 1=1, outFields: '*', orderByFields: InvDate asc, resultRecordCount: 500, f: json}

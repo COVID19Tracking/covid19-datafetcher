@@ -9,6 +9,10 @@ AK:
   Positive: SPECIMENS_POS
   OnsetDate: TIMESTAMP
   cases: POSITIVE
+  # Cases and death by report
+  Date_Reported: TIMESTAMP
+  Deceased_Cases__Cumulative_: DEATH
+  All_Cases__Cumulative_: POSITIVE
 AL:
   InvDate: TIMESTAMP
   CummulativeCase: POSITIVE
