@@ -349,6 +349,14 @@ NH:
   desc: PCR tests by date of result
   constants:
     DATE_USED: Test Result
+NM:
+- url: https://e7p503ngy5.execute-api.us-west-2.amazonaws.com/prod/GetCvDataByDay
+  params: null
+  type: json
+  data_path: ['data', []]
+  desc: All history, by report
+  constants:
+    DATE_USED: Report
 NV:
 - url: "https://dpbhpowerbi.blob.core.windows.net/coviddashboard/Nevada%20Dashboard%20Extract.xlsx?sv=2019-12-12&si=coviddashboard-17693E05667&sr=b&sig=lRKVj02dpDf2SG0W22tRrQYqxeQIwDKrmSZa%2B24ZTts%3D"
   params: {sheet_name: null, engine: 'xlrd'}

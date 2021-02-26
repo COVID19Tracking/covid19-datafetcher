@@ -283,6 +283,12 @@ NH:
   "PCR Test Count : Cumulative Total": SPECIMENS
   "Antigen Tests Count : Cumulative Total": ANTIGEN_TOTAL
   "Antibody Tests Count : Cumulative Total": ANTIBODY_TOTAL
+NM:
+  date: DATE
+  __strptime: "%Y-%m-%d"
+  deaths: DEATH
+  cases: POSITIVE
+  tests: SPECIMENS
 NV:
   "Cases:Specimen\nCollection\nDate": DATE
   "Cases:Number of\nCases": CONFIRMED
