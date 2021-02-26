@@ -300,6 +300,10 @@ NH:
   "PCR Test Count : Cumulative Total": SPECIMENS
   "Antigen Tests Count : Cumulative Total": ANTIGEN_TOTAL
   "Antibody Tests Count : Cumulative Total": ANTIBODY_TOTAL
+NJ:
+  _date: TIMESTAMP
+  # err, yeah, this is not a mistake
+  total_negatives: SPECIMENS
 NM:
   date: DATE
   __strptime: "%Y-%m-%d"

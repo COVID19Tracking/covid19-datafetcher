@@ -359,6 +359,11 @@ NH:
   desc: PCR tests by date of result
   constants:
     DATE_USED: Test Result
+NJ:
+- url: https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/survey123_cb9a6e9a53ae45f6b9509a23ecdf7bcf/FeatureServer/0/query
+  params: {where: _date > timestamp '2020-05-15', outFields: '*', orderByFields: _date asc, f: json}
+  type: arcgis
+  desc: Tests by unknown date
 NM:
 - url: https://e7p503ngy5.execute-api.us-west-2.amazonaws.com/prod/GetCvDataByDay
   params: null
