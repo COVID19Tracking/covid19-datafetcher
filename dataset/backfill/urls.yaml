@@ -166,6 +166,11 @@ GA:
   params: null
   type: zip
   desc: Zip Download
+GU:
+- url: https://services2.arcgis.com/FPJlJZYRsD8OhCWA/arcgis/rest/services/COVID19_Dashboard_Counts_by_Date/FeatureServer/0/query
+  params: {where: 1=1, outFields: '*', orderByFields: 'date asc', resultRecordCount: 500, f: json}
+  type: arcgis
+  desc: Tests
 HI:
 - url: https://services9.arcgis.com/aKxrz4vDVjfUwBWJ/arcgis/rest/services/HIEMA_TEST_DATA_4bfd278536844131bb91a74f289ea395/FeatureServer/0/query
   params: {where: name = 'State', outFields: '*', orderByFields: reportdt asc, f: json}

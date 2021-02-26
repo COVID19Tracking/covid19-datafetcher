@@ -128,6 +128,13 @@ GA:
   "epicurve_rpt_date.csv:report_date": TIMESTAMP
   "epicurve_rpt_date.csv:cases_cum": POSITIVE
   "epicurve_rpt_date.csv:deaths_cum": DEATH
+GU:
+  date: TIMESTAMP
+  total_tests: SPECIMENS
+  total_deaths: DEATH
+  total_cases: POSITIVE
+  total_positive: SPECIMENS_POS
+  total_negative: SPECIMENS_NEG
 HI:
   reportdt: TIMESTAMP
   week_ending: TIMESTAMP
