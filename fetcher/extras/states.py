@@ -15,13 +15,7 @@ import re
 import pandas as pd
 
 from fetcher.utils import map_attributes, Fields, csv_sum, extract_arcgis_attributes
-from fetcher.extras.common import MaRawData, zipContextManager
-
-
-def atoi(val):
-    if isinstance(val, int):
-        return val
-    return int(val.replace(",", ''))
+from fetcher.extras.common import atoi, MaRawData, zipContextManager
 
 
 def handle_al(res, mapping):

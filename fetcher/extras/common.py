@@ -8,6 +8,12 @@ import urllib
 import urllib.request
 
 
+def atoi(val):
+    if isinstance(val, int):
+        return val
+    return int(val.replace(",", ''))
+
+
 @contextmanager
 def zipContextManager(file_url, archive_type='zip'):
     req = urllib.request.Request(file_url, headers={'User-Agent': 'Mozilla/5.0'})

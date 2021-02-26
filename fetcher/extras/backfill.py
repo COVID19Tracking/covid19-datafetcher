@@ -4,7 +4,7 @@ import re
 import numpy as np
 import pandas as pd
 
-from fetcher.extras.common import MaRawData, zipContextManager
+from fetcher.extras.common import atoi, MaRawData, zipContextManager
 from fetcher.utils import Fields, extract_arcgis_attributes
 
 
@@ -343,6 +343,49 @@ def handle_mi(res, mapping):
     tagged.extend(df.to_dict(orient='records'))
 
     return tagged
+
+
+def handle_mn(res, mapping):
+    mapped = []
+    # Soup time. Yummy!
+    page = res[0]
+
+    table_ids = {
+        'labtable': 'n/a',
+        'casetable': 'Specimen Collection'
+    }
+
+    for table_id, date_used in table_ids.items():
+        table = page.find("table", id=table_id)
+        if not table:
+            continue
+
+        # map table headers to fields
+        headers = table.find_all('th')
+        headers = [h.get_text(strip=True) for h in headers]
+        headers = [mapping.get(h, '') for h in headers]
+
+        for tr in table.find_all('tr'):
+            tds = tr.find_all('td')
+            if not tds:
+                # expected for 1st line
+                continue
+            td_text = [td.get_text(strip=True) for td in tds]
+            values = dict(zip(headers, td_text))
+            if values[DATE].lower().find('unknown') >= 0:
+                # ignore unknown date for now
+                continue
+            row = {}
+            for k, v in values.items():
+                if not k:
+                    continue
+                if k != DATE:
+                    v = atoi(v) if v != '-' else None
+                row[k] = v
+            row[DATE_USED] = date_used
+            mapped.append(row)
+
+    return mapped
 
 
 def handle_mo(res, mapping, queries):

@@ -240,6 +240,16 @@ MI:
   Positive: SPECIMENS_POS
   Negative: SPECIMENS_NEG
   TOTAL: SPECIMENS
+MN:
+  Date reported to MDH: DATE
+  # date: 3/28/20
+  __strptime: "%m/%d/%y"
+  Total approximate number of completed PCR tests (cumulative): SPECIMENS
+  Total approximate number of completed antigen tests (cumulative): ANTIGEN_TOTAL
+  Specimen collection date: DATE
+  Total confirmed cases (cumulative): CONFIRMED
+  Total probable cases (cumulative): PROBABLE
+  Total positive cases (cumulative): POSITIVE
 MO:
   Confirmed Cases: CONFIRMED
   "* Antigen Tests": ANTIGEN_TOTAL

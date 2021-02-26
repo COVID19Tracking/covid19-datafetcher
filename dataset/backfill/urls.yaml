@@ -254,6 +254,11 @@ MI:
   params: null
   type: html:soup
   desc: Main page for links (soup)
+MN:
+- url: https://www.health.state.mn.us/diseases/coronavirus/situation.html
+  params: null
+  type: html:soup
+  desc: State state page, for tests history
 MO:
 - url: https://results.mo.gov/t/COVID19/views/COVID-19DataforDownload/MetricsbyReportDate.csv
   params: {thousands: ','}
