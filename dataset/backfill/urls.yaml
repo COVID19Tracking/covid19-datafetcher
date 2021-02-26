@@ -411,6 +411,13 @@ OH:
   params: {thousands: ','}
   type: pandas
   desc: Key metrics (cases, death)
+OR:
+- url: https://public.tableau.com/views/OregonHealthAuthorityCOVID-19SummaryTable_15889676399110/OregonsTestsOverTimeSummaryTable
+  params: {worksheet: 'Statewide'}
+  type: tableau
+  desc: Tests by ELR date
+  constants:
+    DATE_USED: Test Result
 PA:
 - url: https://data.pa.gov/api/id/r6ti-va88.json
   params: {$query: 'select date, newpcrtests order by date asc limit 500'}

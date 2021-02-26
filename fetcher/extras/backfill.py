@@ -538,6 +538,20 @@ def handle_oh(res, mapping):
     return tagged
 
 
+def handle_or(res, mapping, queries):
+    testing = res[0][0].rename(columns=mapping)
+    testing[DATE] = pd.to_datetime(testing[DATE], errors='coerce')
+    testing = testing[testing[DATE].notna()]
+
+    testing = testing.pivot(
+        index=DATE, columns='Test Result-alias', values='SUM(ELR Count)-alias'
+    ).rename(columns=mapping).sort_index().cumsum()
+    testing[TS] = testing.index
+    add_query_constants(testing, queries[0])
+
+    return testing.to_dict(orient='records')
+
+
 def handle_pa(res, mapping, queries):
     tagged = []
     for i, data in enumerate(res):

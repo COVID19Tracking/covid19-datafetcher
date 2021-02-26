@@ -339,6 +339,12 @@ OH:
   Presumptive Lab Total Positive (Daily): ANTIGEN_POS
   Death Due to Illness Count: DEATH
   Case Count: POSITIVE
+OR:
+  ELR Date: DATE
+  ELR Date-alias: DATE
+  '%all%': SPECIMENS
+  Negative Tests: SPECIMENS_NEG
+  Positive Tests: SPECIMENS_POS
 PA:
   date: DATE
   newpcrtests: PCR_TEST_ENCOUNTERS
