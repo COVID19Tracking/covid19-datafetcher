@@ -4,7 +4,7 @@ import logging
 import typing
 
 from fetcher.utils import Fields, request, request_and_parse, request_csv, request_soup, \
-    request_pandas, extract_attributes, extract_arcgis_attributes
+    request_pandas, request_tableau_scraper, extract_attributes, extract_arcgis_attributes
 
 
 MS_FILTER = datetime(2020, 1, 1, 0, 0).timestamp() * 1000
@@ -29,6 +29,9 @@ def fetch_query(state, query):
             res = request_soup(query.url, query.params, query.encoding)
         elif query.type in ['pandas', 'xls', 'xlsx']:
             res = request_pandas(query)
+        elif query.type.lower() in ['tableau']:
+            # The thing I tried so hard to avoid
+            res = request_tableau_scraper(query)
         else:
             # the default is to send the URL as is
             # TODO: It's used for something, but it's not great

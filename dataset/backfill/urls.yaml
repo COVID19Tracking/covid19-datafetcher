@@ -185,6 +185,11 @@ HI:
 #   params: {where: county = 'State', outFields: '*', orderByFields: week_ending asc, f: json}
 #   type: arcgis
 #   desc: Death
+# ID:
+# - url: https://public.tableau.com/views/DPHIdahoCOVID-19Dashboard/Testing
+#   params: {}
+#   type: Tableau
+#   desc: Testing
 IL:
 # source: http://www.dph.illinois.gov/content/covid-19-cases-tests-and-deaths-day
 - url: https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetIllinoisCases?format=csv
@@ -208,6 +213,15 @@ IN:
 #   params: {sql: 'SELECT "DATE", "COVID_DEATHS_CUMSUM" from "182b6742-edac-442d-8eeb-62f96b17773e"'}
 #   type: ckan
 #   desc: Death (by day of death)
+
+# KS:
+# The values here are partial: it's daily starting from end of Nov, 2020
+# - url: https://public.tableau.com/views/COVID-19TableauVersion2/TestingRates
+#   params: {worksheet: Daily Testing}
+#   type: tableau
+#   desc: Daily testing
+#   constants:
+#     DATE_USED: Specimen Collection
 LA:
 - url: https://ldh.la.gov/assets/oph/Coronavirus/data/LA_COVID_TESTBYDAY_PARISH_PUBLICUSE.xlsx
   params: {parse_dates: ['Lab Collection Date']}
@@ -541,3 +555,11 @@ WI:
   desc: Cases confirmed by onset date
   constants:
     DATE_USED: Symptom Onset
+WY:
+- url: https://public.tableau.com/shared/NTF7GT27S
+#- url: 'https://public.tableau.com/profile/courtney.tillman#!/vizhome/StateandCountyDashboard/Dashboard1'
+  params: {worksheet: Lab by date}
+  type: tableau
+  desc: Testing
+  constants:
+    DATE_USED: Specimen Collection

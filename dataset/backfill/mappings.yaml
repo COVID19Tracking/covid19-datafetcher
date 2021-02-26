@@ -161,6 +161,11 @@ IN:
   tested_people: TOTAL
   positive_by_collection: POSITIVE_BY_SPECIMEN #CONFIRMED
   COVID_DEATHS_CUMSUM: DEATH
+KS:
+  DAY(Laboratory Date): DATE
+  SUM(Daily Total): SPECIMENS
+  SUM(Negative): SPECIMENS_NEG
+  SUM(Positive): SPECIMENS_POS
 LA:
   Lab Collection Date: DATE
   Daily Test Count: SPECIMENS
@@ -457,3 +462,7 @@ WI:
   # From the Weekly by onset date:
   Running Sum of Distinct count of Incident ID: CONFIRMED
   Week of Episode Date Trunc: DATE
+WY:
+  SUM(Number of Negatives): SPECIMENS_NEG
+  SUM(Number of Positives): SPECIMENS_POS
+  DAY(Specimen Collection Date): DATE

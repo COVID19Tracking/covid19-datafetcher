@@ -249,6 +249,19 @@ def handle_in(res, mapping):
     return tagged
 
 
+def handle_ks(res, mapping, queries):
+
+    testing = res[0][0].filter(like='alias')
+    testing.columns = [c.replace('-alias', '') for c in testing.columns]
+    testing = testing.rename(columns=mapping).groupby(DATE).last()
+    testing.index = pd.to_datetime(testing.index)
+    testing[TS] = testing.index
+
+    add_query_constants(testing, queries[0])
+
+    return testing.to_dict(orient='records')
+
+
 def handle_la(res, mapping):
     df = res[0].rename(columns=mapping).groupby(DATE).sum()
     df = df.sort_index().cumsum()
@@ -698,3 +711,15 @@ def handle_wi(res, mapping, queries):
     tagged.extend(df.to_dict(orient='records'))
 
     return tagged
+
+
+def handle_wy(res, mapping, queries):
+    testing = res[0][0].filter(like='alias')
+    testing.columns = [c.replace('-alias', '') for c in testing.columns]
+    testing = testing.rename(columns=mapping).groupby(DATE).last()
+    testing.index = pd.to_datetime(testing.index)
+
+    testing = testing.sort_index().cumsum()
+    testing[TS] = testing.index
+    add_query_constants(testing, queries[0])
+    return testing.to_dict(orient='records')
