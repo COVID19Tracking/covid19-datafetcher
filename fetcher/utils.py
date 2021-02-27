@@ -17,7 +17,6 @@ import urllib.request
 
 import pandas as pd
 from bs4 import BeautifulSoup
-from tableauscraper import TableauScraper
 
 
 # TODO: It's not used as an effective enum
@@ -150,6 +149,9 @@ def request_csv(url, query=None, dialect=None, header=True, encoding=None):
 
 
 def request_tableau_scraper(query):
+    # something despicable here
+    from tableauscraper import TableauScraper
+
     ts = TableauScraper()
     ts.loads(query.url)
     dashboard = ts.getDashboard()
