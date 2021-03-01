@@ -445,10 +445,6 @@ NE:
     outStatistics: [{"statisticType":"count","onStatisticField":"ID","outStatisticFieldName": "death"}], returnGeometry: false, f: json}
   type: arcgis
   desc: Death
-- url: https://gis.ne.gov/enterprise/rest/services/Covid19MapV5/MapServer/1/query
-  params: {f: json, outStatistics: [{onStatisticField: ID, statisticType: count, outStatisticFieldName: total}], where: NE_JURIS='yes', returnGeometry: false}
-  type: arcgis
-  desc: Total
 - url: https://gis.ne.gov/enterprise/rest/services/CovidUpdatePublic/MapServer/0/query
   params: {where: 1=1, outFields: 'hosp_latest_pat_count,hosp_cumulative_total,dash_update_date,rec_latest_pat_count', resultRecordCount: 1, orderByFields: dash_update_date desc, f: json, returnGeometry: false}
   type: arcgis
@@ -457,9 +453,8 @@ NE:
   params: {where: 1=1, outFields: '*', orderByFields: SP_Collection_DATE desc, resultRecordCount: 1, f: json}
   type: arcgis
   desc: Specimens
-- url: https://gis.ne.gov/enterprise/rest/services/Covid19MapV5/MapServer/1/query
-  params: {f: json, outStatistics: [{onStatisticField: ID, statisticType: count}],
-    groupByFieldsForStatistics: lab_status, outFields: '*', where: NE_JURIS='yes', returnGeometry: false}
+- url: https://gis.ne.gov/Enterprise/rest/services/Covid19MapV6/MapServer/1/query
+  params: {f: json, where: 1=1, outFields: '*', orderByFields: ID desc, resultRecordCount: 1}
   type: arcgis
   desc: Lab results residents (pos, inconclusive, neg)
 NH:

@@ -161,15 +161,12 @@ def handle_ne(res, mapping):
         partial = extract_arcgis_attributes(result, mapping, 'NE')
         tagged.update(partial)
     stats = res[-1]
-    if 'features' in stats and len(stats['features']) > 0:
-        attributes = stats['features']
-        for attr in attributes:
-            # expecting {attributes: {lab_status: NAME, COUNT_EXPR0: VALUE}}
-            name = attr['attributes']['lab_status']
-            value = attr['attributes']['COUNT_EXPR0']
-            if name in mapping:
-                tagged[mapping[name]] = value
-
+    # this is where mapping and no "as" support is breaking
+    stats = stats.get('features', [{}])[0].get('attributes')
+    tagged[Fields.POSITIVE.name] = stats['TotalPositiveAsOfThisDate']
+    tagged[Fields.NEGATIVE.name] = stats['TotalNotDetectedAsOfThisDate']
+    tagged[Fields.INCONCLUSIVE.name] = stats['TotalInconclusiveAsOfThisDate']
+    tagged[Fields.TOTAL.name] = stats['AllTestsAsOfThisDate']
     return tagged
 
 
