@@ -157,7 +157,6 @@ def request_tableau_scraper(query):
     dashboard = ts.getDashboard()
     dfs = []
     name = None if not query.params else query.params.get('worksheet', None)
-
     for ws in dashboard.worksheets:
         if name is None:
             dfs.append(ws.data)

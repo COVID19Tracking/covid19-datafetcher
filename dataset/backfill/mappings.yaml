@@ -25,6 +25,11 @@ AR:
   antigen_tests: ANTIGEN_TOTAL
   #total_pos: SPECIMENS_POS # probably incorrect??
   total_pos: POSITIVE
+AZ:
+  DAY(Collection Date)-alias-0: DATE
+  DAY(Collection Date)-alias-1: DATE
+  AGG(p. Choose Test Type)-alias-0: SPECIMENS # and antigen
+  AGG(p. Choose Test Type)-alias-1: ANTIBODY_TOTAL
 CA:
   confirmed: POSITIVE
   death: DEATH

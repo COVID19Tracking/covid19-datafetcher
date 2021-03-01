@@ -46,6 +46,19 @@ AR:
   params: {where: 1=1, outFields: '*', orderByFields: date asc, f: json}
   type: arcgis
   desc: Testing (antibody, pcr) and cases
+AZ:
+- url: 'https://tableau.azdhs.gov/views/ELRv2testlevelandpeopletested/TestsConducted?:isGuestRedirectFromVizportal=y:embed=y&Choose Test Type=Diagnostic'
+  params: {worksheet: 'P1 - Tests by Day (Antigen Language'}
+  type: tableau
+  desc: Tests (pcr + antigen)
+  constants:
+    DATE_USED: Specimen Collection
+- url: 'https://tableau.azdhs.gov/views/ELRv2testlevelandpeopletested/TestsConducted?:isGuestRedirectFromVizportal=y:embed=y&Choose Test Type=Serology'
+  params: {worksheet: 'P1 - Tests by Day (Antigen Language'}
+  type: tableau
+  desc: Tests (antibody)
+  constants:
+    DATE_USED: Specimen Collection
 CA:
 - url: https://data.ca.gov/api/3/action/datastore_search_sql
   params: {sql: 'select date, sum(totalcountdeaths)::INTEGER as death, sum(totalcountconfirmed)::INTEGER as confirmed from "926fd08f-cc91-4828-af38-bd45de97f8c3" group by date order by date desc limit 500'}

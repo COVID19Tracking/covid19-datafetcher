@@ -91,6 +91,21 @@ def handle_ar(res, mapping):
     return cumsum_df.to_dict(orient='records')
 
 
+def handle_az(res, mapping, queries):
+    mapped = []
+    for i, df in enumerate(res[0]):
+        # minor cheating for same column names
+        df.columns = ["{}-{}".format(c, i) for c in df.columns]
+        df = df.rename(columns=mapping)
+        df[DATE] = pd.to_datetime(df[DATE])
+        df = df.set_index(DATE).sort_index().cumsum()
+        df[TS] = df.index
+        add_query_constants(df, queries[i])
+        mapped.extend(df.to_dict(orient='records'))
+
+    return mapped
+
+
 def handle_ct(res, mapping, queries):
     tests = res[0]
     df = pd.DataFrame(tests).rename(columns=mapping).set_index(DATE)
@@ -250,7 +265,6 @@ def handle_in(res, mapping):
 
 
 def handle_ks(res, mapping, queries):
-
     testing = res[0][0].filter(like='alias')
     testing.columns = [c.replace('-alias', '') for c in testing.columns]
     testing = testing.rename(columns=mapping).groupby(DATE).last()
