@@ -581,10 +581,6 @@
             Death
         </a><br/>
         
-        <a href="https://gis.ne.gov/enterprise/rest/services/Covid19MapV5/MapServer/1/query?f=json&amp;outStatistics=%5B%7B%27onStatisticField%27%3A+%27ID%27%2C+%27statisticType%27%3A+%27count%27%2C+%27outStatisticFieldName%27%3A+%27total%27%7D%5D&amp;where=NE_JURIS%3D%27yes%27&amp;returnGeometry=False">
-            Total
-        </a><br/>
-        
         <a href="https://gis.ne.gov/enterprise/rest/services/CovidUpdatePublic/MapServer/0/query?where=1%3D1&amp;outFields=hosp_latest_pat_count%2Chosp_cumulative_total%2Cdash_update_date%2Crec_latest_pat_count&amp;resultRecordCount=1&amp;orderByFields=dash_update_date+desc&amp;f=json&amp;returnGeometry=False">
             Hosp cum/cur, Recovered
         </a><br/>
@@ -593,7 +589,7 @@
             Specimens
         </a><br/>
         
-        <a href="https://gis.ne.gov/enterprise/rest/services/Covid19MapV5/MapServer/1/query?f=json&amp;outStatistics=%5B%7B%27onStatisticField%27%3A+%27ID%27%2C+%27statisticType%27%3A+%27count%27%7D%5D&amp;groupByFieldsForStatistics=lab_status&amp;outFields=%2A&amp;where=NE_JURIS%3D%27yes%27&amp;returnGeometry=False">
+        <a href="https://gis.ne.gov/Enterprise/rest/services/Covid19MapV6/MapServer/1/query?f=json&amp;where=1%3D1&amp;outFields=%2A&amp;orderByFields=ID+desc&amp;resultRecordCount=1">
             Lab results residents (pos, inconclusive, neg)
         </a><br/>
         
@@ -944,6 +940,6 @@
     </td></tr>
     
     </table>
-    Generated on 2021-02-27 10:25:16.092602
+    Generated on 2021-03-01 22:08:06.940752
   </body>
 </html>
