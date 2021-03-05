@@ -88,6 +88,10 @@ AZ:
   params: {where: 1=1, outFields: Deaths, f: json}
   type: arcgis
   desc: Deaths
+# - url: 'https://tableau.azdhs.gov/views/ELRv2testlevelandpeopletested/TestsConducted?%3AisGuestRedirectFromVizportal=y&%3Aembed=y&Choose%20Test%20Type=Diagnostic'
+#   params: null
+#   type: tableau
+#   desc: PCR testing
 CA:
 - url: https://data.ca.gov/api/3/action/datastore_search_sql
   params: {sql: 'select date, sum(totalcountdeaths) as death, sum(totalcountconfirmed) as confirmed from "926fd08f-cc91-4828-af38-bd45de97f8c3" group by date order by date desc limit 1'}
@@ -239,6 +243,11 @@ IA:
 - url: https://services.arcgis.com/vPD5PVLI6sfkZ5E4/arcgis/rest/services/IACOVID19Cases_Demographics/FeatureServer/0/query
   params: {f: json, outFields: '*', where: 1=1}
   type: arcgis
+ID:
+- url: https://public.tableau.com/views/DPHIdahoCOVID-19Dashboard/Testing
+  params: {worksheet: ['Antigen Tests Performed', 'PCR Tests Performed']}
+  type: tableau
+  desc: Tests
 IL:
 - url: http://www.dph.illinois.gov/sitefiles/COVIDTestResults.json
   params: null

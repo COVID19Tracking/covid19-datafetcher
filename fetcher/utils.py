@@ -17,6 +17,7 @@ import urllib.request
 
 import pandas as pd
 from bs4 import BeautifulSoup
+from tableauscraper import TableauScraper
 
 
 # TODO: It's not used as an effective enum
@@ -149,18 +150,16 @@ def request_csv(url, query=None, dialect=None, header=True, encoding=None):
 
 
 def request_tableau_scraper(query):
-    # something despicable here
-    from tableauscraper import TableauScraper
-
     ts = TableauScraper()
     ts.loads(query.url)
     dashboard = ts.getDashboard()
     dfs = []
-    name = None if not query.params else query.params.get('worksheet', None)
+    prefixes = [] if not query.params else query.params.get('worksheet', [])
     for ws in dashboard.worksheets:
-        if name is None:
+        print(ws.name, prefixes)
+        if prefixes is None:
             dfs.append(ws.data)
-        elif ws.name.startswith(name):
+        elif any([ws.name.startswith(n) for n in prefixes]):
             dfs.append(ws.data)
     return dfs
 

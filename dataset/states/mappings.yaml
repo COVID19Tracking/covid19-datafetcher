@@ -173,6 +173,9 @@ IA:
   PeopleTested: TOTAL
   Total_Cases: POSITIVE
   last_updated: TIMESTAMP
+ID:
+  SUM(Antigen Total)-alias: ANTIGEN_TOTAL
+  SUM(Tests performed)-alias: SPECIMENS
 IL:
   confirmed_cases: POSITIVE
   deaths: DEATH

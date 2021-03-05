@@ -209,6 +209,14 @@ def handle_la(res, mapping):
     return tagged
 
 
+def handle_id(res, mapping):
+    # yay, tableau
+    mapped = {}
+    for df in res[0]:
+        mapped.update(map_attributes(df.iloc[-1], mapping))
+    return mapped
+
+
 def handle_in(res, mapping):
     daily_stats = res[0]
     mapped = map_attributes(daily_stats, mapping, 'IN')
