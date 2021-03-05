@@ -988,3 +988,7 @@ def handle_wi(res, mapping):
     value = testing[testing['Measure Names'] == encounters]['Number of Tests'].sum()
     tagged[mapping[encounters]] = value
     return tagged
+
+
+def handle_wv(res, mapping):
+    return map_attributes(res[0].sum(), mapping)

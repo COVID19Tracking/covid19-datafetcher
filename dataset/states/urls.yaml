@@ -730,6 +730,11 @@ WI:
   params: {parse_dates: ['Day of Encounter Date'], thousands: ','}
   type: pandas
   desc: Testing encounters
+WV:
+- url: https://raw.githubusercontent.com/COVID19Tracking/covid19-datafetcher/data/wv_lab_tests.csv
+  params: {thousands: ','}
+  type: pandas
+  desc: Antigen and PCR testing
 WY:
 - url: https://services7.arcgis.com/BAwfvDcDhIO9Rm6L/arcgis/rest/services/COVID_Case_Totals_VIEW/FeatureServer/0/query
   params: {where: 1=1, outStatistics: [{"statisticType":"sum","onStatisticField":"Deaths"},

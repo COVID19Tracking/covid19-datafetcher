@@ -616,6 +616,9 @@ WI:
   NEGATIVE: NEGATIVE
   POSITIVE: POSITIVE
   Total people tested daily: PCR_TEST_ENCOUNTERS
+WV:
+  Confirmatory Lab Test: SPECIMENS
+  Daily Antibody Lab Test: ANTIBODY_TOTAL
 WY:
   SUM_Deaths: DEATH
   SUM_TotalCases: POSITIVE
