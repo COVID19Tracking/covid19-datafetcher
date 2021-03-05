@@ -339,6 +339,9 @@ MP:
   totaltestedcnmi: TOTAL
 MS:
   Confirmed: CONFIRMED
+  PCR tests: SPECIMENS
+  Serology (antibody) tests: ANTIBODY_TOTAL
+  Antigen tests: ANTIGEN_TOTAL
 MT:
   Active_Hospitalizations: CURR_HOSP
   SUM_Total: POSITIVE

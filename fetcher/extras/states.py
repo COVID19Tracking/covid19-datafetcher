@@ -664,14 +664,12 @@ def handle_ms(res, mapping):
             for i, field in enumerate(fields):
                 mapped[field.name] = atoi(tds[i+1].get_text(strip=True))
 
-    fields = [Fields.SPECIMENS, Fields.ANTIBODY_TOTAL, Fields.ANTIGEN_TOTAL]
-    titles = ['pcr', 'antibody', 'antigen']
     testing = tables[1]
-    header = [x.get_text(strip=True) for x in testing.find('tr').find_all('th')]
-    totals = testing.find_all('tr')[-1].find_all('td')
-    for i in range(len(titles)):
-        if header[i+2].lower() == titles[i]:
-            mapped[fields[i].name] = atoi(totals[i+2].get_text(strip=True))
+    for tr in testing.find_all('tr'):
+        tds = tr.find_all('td')
+        title = tds[0].get_text(strip=True).strip()
+        if title in mapping:
+            mapped[mapping[title]] = atoi(tds[1].get_text(strip=True))
 
     return mapped
 
