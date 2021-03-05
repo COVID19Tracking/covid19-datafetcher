@@ -68,14 +68,8 @@ def handle_ky(res, mapping):
 
     # soup time
     soup = res[-1]
-    h3 = soup.find("h3", string=re.compile("Coronavirus Monitoring"))
-    if not h3:
-        # quick fail
-        return tagged
-
-    datadiv = h3.find_next_siblings("div", "row")
-    datadiv = datadiv[1]
-    for item in datadiv.find_all("div", "info-card"):
+    datacards = soup.find_all('div', 'info-card')
+    for item in datacards:
         title = item.find("span", "title")
         value = item.find("span", "number")
         if not value:
@@ -117,7 +111,7 @@ def handle_ky(res, mapping):
         elif title.lower().find("recover") >= 0:
             tagged[Fields.RECOVERED.name] = atoi(value)
 
-    updated = h3.find_next_sibling("p").get_text(strip=True)
+    updated = soup.find('p', string=re.compile('Current as of')).get_text(strip=True)
     tagged[Fields.DATE.name] = updated
 
     return tagged
