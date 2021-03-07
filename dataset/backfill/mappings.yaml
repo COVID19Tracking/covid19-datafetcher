@@ -249,7 +249,7 @@ MI:
   Deaths.Cumulative-Probable: DEATH_PROBABLE
   Positive: SPECIMENS_POS
   Negative: SPECIMENS_NEG
-  TOTAL: SPECIMENS
+  Total: SPECIMENS
 MN:
   Date reported to MDH: DATE
   # date: 3/28/20
