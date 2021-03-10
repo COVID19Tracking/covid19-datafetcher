@@ -20,7 +20,7 @@ const { DateTime } = require("luxon");
   await frame.click('//button[normalize-space(.)=\'Case and Lab Trends\']')
   await frame.click('text="Daily Lab Test"', {button: 'right'})
   await frame.click('text="Show as a table"')
-  await frame.waitForSelector('text="Lab Report Date"')
+  await frame.waitForSelector('text="Confirmatory Lab Test"')
   await frame.waitForTimeout(2000)
 
   // ok let's go. we'll grab all the visible data, add it to `data`, scroll down, and keep doing that until

@@ -30,9 +30,9 @@ const retry = require('async-retry');
     // turns out the data table is actually an image. This is a garbage way of doing it, but just hover over parts
     // of the table image in the hope a tooltip pops up and scrape out the contents of the tooltips
     for (let x = 30; x < x_max; x+= 85) {
-      for (let y = 20; y < y_max; y+= 15) {
+      for (let y = 15; y < y_max; y+= 10) {
         await tableElement.hover({position: {x: x, y: y}})
-        await page.waitForTimeout(1400) // wait for tooltip
+        await page.waitForTimeout(1000) // wait for tooltip
 
         // find the 3 data cells from the tooltip (row header, column header, value)
         let cellData = await frame.$$("div.tab-ubertipTooltip table td:nth-child(3)")
@@ -40,6 +40,7 @@ const retry = require('async-retry');
         for (let i=0; i<cellData.length; i++) {
           cellData[i] = await cellData[i].textContent()
         }
+        console.log(cellData)
 
         // save the data
         if (data[cellData[0]] == undefined) {
