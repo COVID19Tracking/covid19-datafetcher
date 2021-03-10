@@ -598,6 +598,10 @@ SC:
 ] , f: json}
   type: arcgis
   desc: Everything
+- url: https://raw.githubusercontent.com/COVID19Tracking/covid19-datafetcher/data/sc_testing_table.csv
+  params: {thousands: ',', index_col: 'Type'}
+  type: pandas
+  desc: Testing numbers from Tableau
 TN:
 - url: https://services1.arcgis.com/HLC8bAygObK4fhPW/arcgis/rest/services/TN_COVID19_Daily/FeatureServer/0/query
   params: {where: 1=1, outFields: '*', orderByFields: 'DATE desc', resultRecordCount: 1, f: json}

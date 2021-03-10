@@ -783,6 +783,22 @@ def handle_ma(res, mapping):
     return tagged
 
 
+def handle_sc(res, mapping):
+    tagged = {}
+    for result in res[:-1]:
+        partial = extract_arcgis_attributes(result, mapping, debug_state='SC')
+        tagged.update(partial)
+
+    # testing
+    df = res[-1]
+    df = df.unstack()
+    df.index = df.index.map("-".join)
+    partial = map_attributes(df, mapping)
+    tagged.update(partial)
+
+    return tagged
+
+
 def handle_tx(res, mapping):
     tagged = {}
     for result in res[:-3]:

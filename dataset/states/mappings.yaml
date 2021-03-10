@@ -525,6 +525,17 @@ SC:
   COVID patients hospitalized: CURR_HOSP
   COVID patients in ICU: CURR_ICU
   COVID patients ventilated: CURR_VENT
+
+  Negative-Antibody (Serology): ANTIBODY_NEG
+  Negative-Antigen: ANTIGEN_NEG
+  Negative-Viral (Molecular): SPECIMENS_NEG
+  Positive-Antibody (Serology): ANTIBODY_POS
+  Positive-Antigen: ANTIGEN_POS
+  Positive-Viral (Molecular): SPECIMENS_POS
+  All-Antibody (Serology): ANTIBODY_TOTAL
+  All-Antigen: ANTIGEN_TOTAL
+  All-Viral (Molecular): SPECIMENS
+
 TN:
   CASES_TOT: POSITIVE
   HOSPITALIZED_TOT: HOSP
