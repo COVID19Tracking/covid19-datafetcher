@@ -40,7 +40,6 @@ const retry = require('async-retry');
         for (let i=0; i<cellData.length; i++) {
           cellData[i] = await cellData[i].textContent()
         }
-        console.log(cellData)
 
         // save the data
         if (data[cellData[0]] == undefined) {
