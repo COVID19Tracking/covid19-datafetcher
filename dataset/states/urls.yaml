@@ -92,6 +92,10 @@ AZ:
 #   params: null
 #   type: tableau
 #   desc: PCR testing
+- url: https://raw.githubusercontent.com/COVID19Tracking/covid19-datafetcher/data/az_diagnostic.csv
+  params: null
+  type: pandas
+  desc: PCR testing scraped from tableau
 CA:
 - url: https://data.ca.gov/api/3/action/datastore_search_sql
   params: {sql: 'select date, sum(totalcountdeaths) as death, sum(totalcountconfirmed) as confirmed from "926fd08f-cc91-4828-af38-bd45de97f8c3" group by date order by date desc limit 1'}

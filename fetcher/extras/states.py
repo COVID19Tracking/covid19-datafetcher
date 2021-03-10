@@ -41,6 +41,17 @@ def handle_al(res, mapping):
     return tagged
 
 
+def handle_az(res, mapping):
+    mapped = {}
+    for result in res[:-1]:
+        partial = extract_arcgis_attributes(result, mapping, 'AZ')
+        mapped.update(partial)
+    # testing
+    df = res[-1]
+    mapped[Fields.SPECIMENS.name] = df.sum()['value']
+    return mapped
+
+
 def handle_fl(res, mapping):
     '''Need to add the non-FL residents to the totals:
     they separate it for death and hosp"
