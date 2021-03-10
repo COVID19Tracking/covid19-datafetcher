@@ -649,7 +649,7 @@ UT:
   params: null
   type: html:soup
   desc: State page (soup)
-- url: https://coronavirus-dashboard.utah.gov/#hospitalizations-mortality
+- url: https://coronavirus-dashboard.utah.gov/hosp.html
   params: null
   type: html:soup
   desc: Hospitalization page (soup)
