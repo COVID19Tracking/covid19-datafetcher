@@ -1,1 +1,2 @@
 pypdf4
+pdfminer.six
