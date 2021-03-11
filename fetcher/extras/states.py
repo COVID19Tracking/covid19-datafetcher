@@ -422,14 +422,19 @@ def handle_oh(res, mapping):
 
 
 def handle_ok(res, mapping):
+    mapped = {}
+    for result in res[:-1]:
+        partial = map_attributes(result, mapping, 'OK')
+        mapped.update(partial)
+
     # need to sum all values
-    res = res[0]
+    res = res[1]
 
     # sum all fields
     # TODO: functools probably has something nice
     cols = ['Cases', 'Deaths', 'Recovered']
     summed = csv_sum(res, cols)
-    mapped = map_attributes(summed, mapping, 'OK')
+    mapped.update(map_attributes(summed, mapping, 'OK'))
     mapped[Fields.DATE.name] = res[0].get('ReportDate')
     return mapped
 

@@ -551,6 +551,10 @@ OH:
   type: html:soup
   desc: Main page (for soup)
 OK:
+- url: https://notbroken.dev/covid19/ok_pcr_specimens.json
+  params: null
+  type: json
+  desc: PCR specimens
 - url: https://storage.googleapis.com/ok-covid-gcs-public-download/oklahoma_cases_county.csv
   params: null
   type: csv
