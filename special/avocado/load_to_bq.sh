@@ -17,7 +17,7 @@ QUERY_FILE=avocado_latest_query.sql
 OUTPUT_FILE=$(tempfile -p avocado)
 
 # Step 1: store the most recent avocado data as CSV
-psql -h $DB_HOST -p $DB_PORT -U $DB_USERNAME -d $DB_NAME -AF, -f $QUERY_FILE -o $OUTPUT_FILE
+psql -h $DB_HOST -p $DB_PORT -U $DB_USERNAME -d $DB_NAME -AF, -Pfooter=off -f $QUERY_FILE -o $OUTPUT_FILE
 
 
 # Step 3: load the CSV to big query
