@@ -261,7 +261,8 @@ MN:
   Total probable cases (cumulative): PROBABLE
   Total positive cases (cumulative): POSITIVE
 MO:
-  Confirmed Cases: CONFIRMED
+  Confirmed (Positive PCR) Cases: CONFIRMED
+  Probable (Positive Antigen) Cases: PROBABLE
   "* Antigen Tests": ANTIGEN_TOTAL
   PCR Tests: SPECIMENS
   Serology Tests: ANTIBODY_TOTAL
