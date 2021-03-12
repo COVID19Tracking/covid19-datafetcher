@@ -20,7 +20,7 @@ jobs:
       strategy:
         fail-fast: false
         matrix:
-          command: [diagnostic, serology]
+          command: [diagnostic]
       steps:
         - uses: actions/checkout@v2
         - name: Checkout data repo
