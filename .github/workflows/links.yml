@@ -30,18 +30,23 @@ jobs:
         cd main
         eval "$(conda shell.bash hook)"
         conda activate c19-data
+        # states
         python tools/links.py
-
+        # avocado (backfill)
+        python tools/links.py dataset=backfill hydra.run.dir=outputs/avocado
     - name: copy generated links.html
-      run: mv main/outputs/index.html gh-pages/docs/index.html
+      run: |
+        mv main/outputs/index.html gh-pages/docs/index.html
+        mv main/outputs/avocado/index.html gh-pages/docs/avocado/index.html
 
     - name: Compare and commit generated links page
       run: |
           cd gh-pages
+          export FOO=$(git rev-parse master)
           if [ "$(git status --porcelain)" != "" ]; then
             git add -u
             git config user.name github-actions
             git config user.email github-actions@github.com
-            git commit -m "Links from $(git rev-parse master)"
+            git commit -m "Links from $FOO"
             git push
           fi
