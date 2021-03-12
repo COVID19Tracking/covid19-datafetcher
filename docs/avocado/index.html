@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>COVID19: US States Data Links</title>
+
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 80%;
+      }
+
+      table td, table th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      table tr:nth-child(even){background-color: #f2f2f2;}
+      table tr:hover {background-color: #ddd;}
+
+      table th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: darkslategray;
+        color: white;
+      }
+    </style>
+
+  </head>
+  <body>
+    <h1>State Data Sources</h1>
+    <table id="data_sources">
+      <tr>
+        <th>State</th>
+        <th>Query Links</th>
+      </tr>
+      
+      <tr id="AK">
+      <td><a name="AK"/><b>AK</b></td>
+      <td>
+        
+        <a href="https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Tests_Dataset/FeatureServer/0/query?where=1%3D1&amp;orderByFields=Date_Collected+asc&amp;groupByFieldsForStatistics=Date_Collected%2CTest_Result&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27count%27%2C+%27onStatisticField%27%3A+%27FID%27%2C+%27outStatisticFieldName%27%3A+%27tests_total%27%7D%5D">
+            PCR tests by specimen collection
+        </a><br/>
+        
+        <a href="https://services1.arcgis.com/WzFsmainVTuD5KML/ArcGIS/rest/services/Onset_Date/FeatureServer/0/query?where=Resident+%3D+%27Y%27&amp;orderByFields=OnsetDate+asc&amp;groupByFieldsForStatistics=OnsetDate&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27count%27%2C+%27onStatisticField%27%3A+%27FID%27%2C+%27outStatisticFieldName%27%3A+%27cases%27%7D%5D">
+            Cases by onset
+        </a><br/>
+        
+        <a href="https://services1.arcgis.com/WzFsmainVTuD5KML/ArcGIS/rest/services/Daily_Cases_Hospitalizations_and_Deaths/FeatureServer/0/query?where=1%3D1&amp;outFields=Date_Reported%2C+Deceased_Cases__Cumulative_%2C+All_Cases__Cumulative_&amp;orderByFields=Date_Reported+asc">
+            Cases and death by report
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="AL">
+      <td><a name="AL"/><b>AL</b></td>
+      <td>
+        
+        <a href="https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/StatewideTemporal_RunAVG_READONLY/FeatureServer/1/query?where=1%3D1&amp;outFields=%2A&amp;orderByFields=InvDate+asc&amp;resultRecordCount=500">
+            Cases (by report date)
+        </a><br/>
+        
+        <a href="https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/ArcGIS/rest/services/C19_cumulative_death_statewide_PUBLIC/FeatureServer/1/query?where=DeathDate+%3C%3E+%27Unknown%27&amp;outFields=%2A%2C+DeathDate+as+date">
+            Death (by date of death)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="AR">
+      <td><a name="AR"/><b>AR</b></td>
+      <td>
+        
+        <a href="https://services.arcgis.com/PwY9ZuZRDiI5nXUB/ArcGIS/rest/services/UPDATED_ADH_COVID19_METRICS_BY_DATE/FeatureServer/0/query?where=1%3D1&amp;outFields=%2A&amp;orderByFields=date+asc">
+            Testing (antibody, pcr) and cases
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="AZ">
+      <td><a name="AZ"/><b>AZ</b></td>
+      <td>
+        
+        <a href="https://tableau.azdhs.gov/views/ELRv2testlevelandpeopletested/TestsConducted?:isGuestRedirectFromVizportal=y:embed=y&amp;Choose Test Type=Diagnostic?worksheet=P1+-+Tests+by+Day+%28Antigen+Language">
+            Tests (pcr + antigen)
+        </a><br/>
+        
+        <a href="https://tableau.azdhs.gov/views/ELRv2testlevelandpeopletested/TestsConducted?:isGuestRedirectFromVizportal=y:embed=y&amp;Choose Test Type=Serology?worksheet=P1+-+Tests+by+Day+%28Antigen+Language">
+            Tests (antibody)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="CA">
+      <td><a name="CA"/><b>CA</b></td>
+      <td>
+        
+        <a href="https://data.ca.gov/api/3/action/datastore_search_sql?sql=select+date%2C+sum%28totalcountdeaths%29%3A%3AINTEGER+as+death%2C+sum%28totalcountconfirmed%29%3A%3AINTEGER+as+confirmed+from+%22926fd08f-cc91-4828-af38-bd45de97f8c3%22+group+by+date+order+by+date+desc+limit+500">
+            Cases, death
+        </a><br/>
+        
+        <a href="https://data.ca.gov/api/3/action/datastore_search?resource_id=b6648a0d-ff0a-4111-b80b-febda2ac9e09&amp;limit=500&amp;sort=date+desc">
+            Testing total
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="CO">
+      <td><a name="CO"/><b>CO</b></td>
+      <td>
+        
+        <a href="https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_daily_state_statistics_cumulative/FeatureServer/0/query?where=Desc_%3D%27State+Data%27&amp;outFields=%2A">
+            Cases, tested, death, hosp
+        </a><br/>
+        
+        <a href="https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query?where=%28Metric%3D%27Cumulative+People+Tested+at+CDPHE+State+Lab%27+or+Metric%3D%27Cumulative+People+Tested+at+Non-CDPHE+%28Commerical%29+Labs%27%29+and+Desc_+like+%27Daily%25%27&amp;outFields=%2A&amp;orderByFields=OBJECTID+asc&amp;groupByFieldsForStatistics=Attr_Date&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27sum%27%2C+%27onStatisticField%27%3A+%27Value%27%2C+%27outStatisticFieldName%27%3A+%27test_encounters%27%7D%2C+%7B%27statisticType%27%3A+%27max%27%2C+%27onStatisticField%27%3A+%27OBJECTID%27%2C+%27outStatisticFieldName%27%3A+%27OBJECTID%27%7D%5D">
+            Test encounters
+        </a><br/>
+        
+        <a href="https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query?where=Metric+%3D+%27Cumulative+Antibody+Tests+Performed%27+and+Desc_+like+%27Daily%25%27&amp;outFields=Attr_Date%2C+Desc_%2C+Metric%2C+Value+as+antibody_totals&amp;orderByFields=OBJECTID+asc">
+            Antibody total tests
+        </a><br/>
+        
+        <a href="https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/colorado_covid19_state_statistics_cumulative/FeatureServer/0/query?where=description+%3D+%27Cumulative+Deaths+Among+COVID-19+Cases+in+Colorado+by+Date+of+Death%27&amp;outFields=%2A%2C+value+as+deaths&amp;orderByFields=ObjectId+asc">
+            Death by day of death
+        </a><br/>
+        
+        <a href="https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/colorado_covid19_state_statistics_cumulative/FeatureServer/0/query?where=description+%3D+%27Cumulative+COVID-19+Cases+in+Colorado+by+Date+of+Illness+Onset%27&amp;outFields=%2A%2C+value+as+cases&amp;orderByFields=ObjectId+asc">
+            Cases by illness onset
+        </a><br/>
+        
+        <a href="https://services3.arcgis.com/66aUo8zsujfVXRIT/arcgis/rest/services/colorado_covid19_state_statistics_cumulative/FeatureServer/0/query?where=description+%3D+%27Cumulative+COVID-19+Cases+in+Colorado+by+Date+Reported+to+the+State%27&amp;outFields=%2A%2C+value+as+cases&amp;orderByFields=ObjectId+asc">
+            Cases by report date
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="CT">
+      <td><a name="CT"/><b>CT</b></td>
+      <td>
+        
+        <a href="https://data.ct.gov/api/id/qfkt-uahj.json?%24query=select+date%2C+sum%28number_of_pcr_tests%29%2C+sum%28number_of_pcr_positives%29%2C+sum%28number_of_pcr_negatives%29%2C+sum%28number_of_ag_tests%29%2C+sum%28number_of_ag_positives%29%2C+sum%28number_of_ag_negatives%29+group+by+date+order+by+date+asc">
+            PCR and antigen tests by collection date
+        </a><br/>
+        
+        <a href="https://data.ct.gov/api/views/rf3k-f8fg/rows.csv?accessType=DOWNLOAD?parse_dates=%5B%27Date%27%5D">
+            State data by report
+        </a><br/>
+        
+        <a href="https://data.ct.gov/api/views/abag-bjkj/rows.csv?accessType=DOWNLOAD?parse_dates=%5B%27Date+of+death%27%5D">
+            Death by date of death
+        </a><br/>
+        
+        <a href="https://data.ct.gov/api/views/xz44-6swc/rows.csv?accessType=DOWNLOAD?parse_dates=%5B%27Date%27%5D">
+            Cases by date of specimen collection
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="DC">
+      <td><a name="DC"/><b>DC</b></td>
+      <td>
+        
+        <a href="https://dcgov.app.box.com/index.php?rm=box_download_shared_file&amp;vanity_name=DCHealthStatisticsData&amp;file_id=f_645422184765?sheet_name=Overall+Stats">
+            DC dawnload doc
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="DE">
+      <td><a name="DE"/><b>DE</b></td>
+      <td>
+        
+        <a href="https://myhealthycommunity.dhss.delaware.gov/locations/state/download_covid_19_data">
+            All data
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="FL">
+      <td><a name="FL"/><b>FL</b></td>
+      <td>
+        
+        <a href="https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/ArcGIS/rest/services/Florida_COVID_19_Deaths_by_Day/FeatureServer/0/query?where=1%3D1&amp;outFields=%2A&amp;orderByField=Date+asc&amp;resultRecordCount=500">
+            Death by day
+        </a><br/>
+        
+        <a href="https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/ArcGIS/rest/services/Florida_COVID_19_Cases_by_Day_For_Time_Series/FeatureServer/0/query?where=county+%3D+%27A+State%27&amp;outFields=%2A%2C+FREQUENCY+as+cases&amp;orderByField=Date+asc&amp;resultRecordCount=500">
+            Cases for time series by ???
+        </a><br/>
+        
+        <a href="https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/ArcGIS/rest/services/state_daily_testing/FeatureServer/0/query?where=1%3D1&amp;outFields=%2A&amp;orderByField=Date+asc">
+            Test encounters by result date
+        </a><br/>
+        
+        <a href="https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/ArcGIS/rest/services/Florida_COVID19_Case_Line_Data_NEW/FeatureServer/0/query?where=Jurisdiction+%3D+%27FL+Resident%27&amp;groupByFieldsForStatistics=EXTRACT%28YEAR+FROM+EventDate%29%2C+EXTRACT%28MONTH+FROM+EventDate%29%2C+EXTRACT%28DAY+FROM+EventDate%29&amp;outStatistics=%5B%7B%27statisticType%27%3A+%27count%27%2C+%27onStatisticField%27%3A+%27ObjectId%27%2C+%27outStatisticFieldName%27%3A+%27cases%27%7D%5D">
+            Cases by onset date (from caseline table)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="GA">
+      <td><a name="GA"/><b>GA</b></td>
+      <td>
+        
+        <a href="https://ga-covid19.ondemand.sas.com/docs/ga_covid_data.zip">
+            Zip Download
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="GU">
+      <td><a name="GU"/><b>GU</b></td>
+      <td>
+        
+        <a href="https://services2.arcgis.com/FPJlJZYRsD8OhCWA/arcgis/rest/services/COVID19_Dashboard_Counts_by_Date/FeatureServer/0/query?where=1%3D1&amp;outFields=%2A&amp;orderByFields=date+asc&amp;resultRecordCount=500">
+            Tests
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="HI">
+      <td><a name="HI"/><b>HI</b></td>
+      <td>
+        
+        <a href="https://services9.arcgis.com/aKxrz4vDVjfUwBWJ/arcgis/rest/services/HIEMA_TEST_DATA_4bfd278536844131bb91a74f289ea395/FeatureServer/0/query?where=name+%3D+%27State%27&amp;outFields=%2A&amp;orderByFields=reportdt+asc">
+            Testing encounters
+        </a><br/>
+        
+        <a href="https://services9.arcgis.com/aKxrz4vDVjfUwBWJ/arcgis/rest/services/HIEMA_COVID_DATA_95b9bc52fdd943aa904b3b8ff0d75580/FeatureServer/0/query?where=name+%3D+%27State%27&amp;outFields=OBJECTID%2C+toDate_positiveAndPresumed%2C+reportdt&amp;orderByFields=reportdt+asc">
+            Cases
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="IL">
+      <td><a name="IL"/><b>IL</b></td>
+      <td>
+        
+        <a href="https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetIllinoisCases?format=csv?skiprows=1&amp;parse_dates=%5B%27testDate%27%5D">
+            Cases by something
+        </a><br/>
+        
+        <a href="https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetTestingResults">
+            Tests by report date
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="IN">
+      <td><a name="IN"/><b>IN</b></td>
+      <td>
+        
+        <a href="https://hub.mph.in.gov/api/3/action/datastore_search_sql?sql=SELECT+%22DATE%22+as+date%2C+sum%28%22COVID_COUNT%22%29+as+covid_cases%2C+sum%28%22COVID_DEATHS%22%29+as+deaths%2C+sum%28%22COVID_TESTS%22%29+as+tested_people%2C+sum%28%22COVID_TESTS_ADMINISTRATED%22%29+as+tests_administered%2C+sum%28%22COVID_POSITIVE_TESTS_ADMIN%22%29+as+pos_tests_administered%2C+sum%28%22COVID_COUNT_BY_SPECIMEN_COLLECTION_DATE%22%29+as+positive_by_collection+from+%22afaa225d-ac4e-4e80-9190-f6800c366b58%22+group+by+%22DATE%22">
+            Cases, death and tests (by mixed dating)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="LA">
+      <td><a name="LA"/><b>LA</b></td>
+      <td>
+        
+        <a href="https://ldh.la.gov/assets/oph/Coronavirus/data/LA_COVID_TESTBYDAY_PARISH_PUBLICUSE.xlsx?parse_dates=%5B%27Lab+Collection+Date%27%5D">
+            Tests and cases by specimen collection
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="MA">
+      <td><a name="MA"/><b>MA</b></td>
+      <td>
+        
+        <a href="https://www.mass.gov/info-details/covid-19-response-reporting">
+            None, just need a trigger
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="MD">
+      <td><a name="MD"/><b>MD</b></td>
+      <td>
+        
+        <a href="https://services.arcgis.com/njFNhDsUCentVYJW/ArcGIS/rest/services/MASTERCaseTracker/FeatureServer/0/query?resultRecordCount=500&amp;orderByFields=ReportDate+desc&amp;outFields=ReportDate%2CTotalCases%2CNegativeTests%2Cdeaths%2Cpdeaths%2CTotalTests&amp;where=1%3D1">
+            Dashboard numbers
+        </a><br/>
+        
+        <a href="https://services.arcgis.com/njFNhDsUCentVYJW/arcgis/rest/services/MDCOVID19_TestingVolume/FeatureServer/0/query?where=1%3D1&amp;outFields=date%2Cnumber_of_tests%2Cnumber_of_positives&amp;orderByFields=Date+asc">
+            PCR Testing and positives
+        </a><br/>
+        
+        <a href="https://services.arcgis.com/njFNhDsUCentVYJW/ArcGIS/rest/services/MASTERCaseTracker/FeatureServer/0/query?resultRecordCount=500&amp;orderByFields=ReportDate+desc&amp;outFields=ReportDate%2CdeathDOD%2C+pDeathDOD&amp;where=1%3D1">
+            goobar
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="ME">
+      <td><a name="ME"/><b>ME</b></td>
+      <td>
+        
+        <a href="https://gateway.maine.gov/dhhs-apps/mecdc_covid/cases_by_county_history.csv?parse_dates=%5B%27Date%27%5D">
+            Cases and death by (unknown) date
+        </a><br/>
+        
+        <a href="https://analytics.maine.gov/t/CDCExternal/views/covid-19-maine-cdc-dashboard/7_DailyLabResults.csv?thousands=%2C&amp;parse_dates=%5B%27Day+of+Lab+Received+Date%27%5D">
+            Tests by result date (pcr, antigen)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="MI">
+      <td><a name="MI"/><b>MI</b></td>
+      <td>
+        
+        <a href="https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html">
+            Main page for links (soup)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="MN">
+      <td><a name="MN"/><b>MN</b></td>
+      <td>
+        
+        <a href="https://www.health.state.mn.us/diseases/coronavirus/situation.html">
+            State state page, for tests history
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="MO">
+      <td><a name="MO"/><b>MO</b></td>
+      <td>
+        
+        <a href="https://results.mo.gov/t/COVID19/views/COVID-19DataforDownload/MetricsbyReportDate.csv?thousands=%2C">
+            Cases and tests by report date
+        </a><br/>
+        
+        <a href="https://results.mo.gov/t/COVID19/views/COVID-19DataforDownload/MetricsbyTestDate.csv?thousands=%2C">
+            Tests by test date
+        </a><br/>
+        
+        <a href="https://results.mo.gov/t/COVID19/views/COVID-19DataforDownload/MetricsbyDateofDeath.csv?thousands=%2C">
+            Death by day of death
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="MT">
+      <td><a name="MT"/><b>MT</b></td>
+      <td>
+        
+        <a href="https://services.arcgis.com/qnjIrwR8z5Izc0ij/ArcGIS/rest/services/COVID_Cases_Production_View/FeatureServer/1/query?where=1%3D1&amp;outFields=%2A&amp;orderByFields=ScriptRunDate+asc">
+            Total tested
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="NC">
+      <td><a name="NC"/><b>NC</b></td>
+      <td>
+        
+        <a href="https://public.tableau.com/views/NCDHHS_COVID-19_DataDownload/DailyCasesandDeathsMetrics.csv?parse_dates=%5B%27Date%27%5D&amp;thousands=%2C">
+            Cases by report and by specimen collection, death by date of death
+        </a><br/>
+        
+        <a href="https://public.tableau.com/views/NCDHHS_COVID-19_DataDownload/DailyTestingMetrics.csv?parse_dates=%5B%27Date%27%5D&amp;thousands=%2C">
+            Tests by date
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="ND">
+      <td><a name="ND"/><b>ND</b></td>
+      <td>
+        
+        <a href="https://www.health.nd.gov/sites/www/files/documents/Files/MSS/coronavirus/charts-data/CovidTracking.csv?parse_dates=%5B%27Date%27%5D">
+            PCR (encounters, specimens, negatives, people, confirmed)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="NE">
+      <td><a name="NE"/><b>NE</b></td>
+      <td>
+        
+        <a href="https://gis.ne.gov/enterprise/rest/services/Covid19MapV5/MapServer/11/query?where=1%3D1&amp;outFields=%2A&amp;orderByFields=LAB_REPORT_DATE+asc&amp;f=json">
+            Tests and results by lab report date
+        </a><br/>
+        
+        <a href="https://gis.ne.gov/Enterprise/rest/services/Covid19MapV6/MapServer/1/query?where=1%3D1&amp;outFields=%2A&amp;orderByFields=SP_Collection_DATE+asc&amp;resultRecordCount=600&amp;f=json">
+            Cases by specimen collection date
+        </a><br/>
+        
+        <a href="https://gis.ne.gov/Enterprise/rest/services/Covid19MapV6/MapServer/2/query?where=1%3D1&amp;outFields=%2A&amp;orderByFields=SP_Collection_DATE+asc&amp;resultRecordCount=600&amp;f=json">
+            Tests by specimen collection
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="NH">
+      <td><a name="NH"/><b>NH</b></td>
+      <td>
+        
+        <a href="https://dashboard.nh.gov/t/DHHS/views/COVID19OverviewDashboard/DailyTrendforNewCases-Data.csv?parse_dates=%5B%27Date+of+Report%27%5D&amp;thousands=%2C">
+            Cases by reprot date (confirmed, probables)
+        </a><br/>
+        
+        <a href="https://dashboard.nh.gov/t/DHHS/views/COVID19TrendsDashboard/CasesOnsetTotal.csv?thousands=%2C&amp;parse_dates=%5B%27Date+of+Illness+Onset%27%5D">
+            Cases by illness onset date
+        </a><br/>
+        
+        <a href="https://dashboard.nh.gov/t/DHHS/views/COVID19TrendsDashboard/DeathsTotal.csv?thousands=%2C&amp;parse_dates=%5B%27Reported+Date+of+Death%27%5D">
+            Death by date of death
+        </a><br/>
+        
+        <a href="https://dashboard.nh.gov/t/DHHS/views/COVID19TrendsDashboard/AntibodyTestTotal-TestBased.csv?SelectedSlicer=Antibody%20Tests?thousands=%2C&amp;parse_dates=%5B%27Date+of+Lab+Report+Result%27%5D">
+            Antibody tests by date of result
+        </a><br/>
+        
+        <a href="https://dashboard.nh.gov/t/DHHS/views/COVID19TrendsDashboard/AntigenTestTotal-TestBased.csv?SelectedSlicer=Antigen%20Tests?thousands=%2C&amp;parse_dates=%5B%27Date+of+Lab+Report+Result%27%5D">
+            Antigen tests by date of result
+        </a><br/>
+        
+        <a href="https://dashboard.nh.gov/t/DHHS/views/COVID19TrendsDashboard/PCRTestsTotal-TestBased.csv?SelectedSlicer=PCR%20Tests?thousands=%2C&amp;parse_dates=%5B%27Date+of+Lab+Report+Result%27%5D">
+            PCR tests by date of result
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="NJ">
+      <td><a name="NJ"/><b>NJ</b></td>
+      <td>
+        
+        <a href="https://services7.arcgis.com/Z0rixLlManVefxqY/arcgis/rest/services/survey123_cb9a6e9a53ae45f6b9509a23ecdf7bcf/FeatureServer/0/query?where=_date+%3E+timestamp+%272020-05-15%27&amp;outFields=%2A&amp;orderByFields=_date+asc">
+            Tests by unknown date
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="NM">
+      <td><a name="NM"/><b>NM</b></td>
+      <td>
+        
+        <a href="https://e7p503ngy5.execute-api.us-west-2.amazonaws.com/prod/GetCvDataByDay">
+            All history, by report
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="NV">
+      <td><a name="NV"/><b>NV</b></td>
+      <td>
+        
+        <a href="https://dpbhpowerbi.blob.core.windows.net/coviddashboard/Nevada%20Dashboard%20Extract.xlsx?sv=2019-12-12&amp;si=coviddashboard-17693E05667&amp;sr=b&amp;sig=lRKVj02dpDf2SG0W22tRrQYqxeQIwDKrmSZa%2B24ZTts%3D?sheet_name=None&amp;engine=xlrd">
+            Cases, deaths and tests
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="NY">
+      <td><a name="NY"/><b>NY</b></td>
+      <td>
+        
+        <a href="https://health.data.ny.gov/resource/xdss-u53e.json?%24select=test_date%2C+sum%28cumulative_number_of_positives%29%2C+sum%28cumulative_number_of_tests%29&amp;%24group=test_date&amp;%24order=test_date+desc&amp;%24limit=500">
+            Total &amp; positives
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="OH">
+      <td><a name="OH"/><b>OH</b></td>
+      <td>
+        
+        <a href="https://data.ohio.gov/apigateway-secure/data-portal/download-file/2ad05e55-2b1a-486c-bc07-ecb3be682d29?key=e42285cfa9a0b157b3f1bdaadcac509c44db4cfa0f90735e12b770acb1307b918cee14d5d8e4d4187eb2cab71fc9233bda8ee3eed924b8a3fad33aaa6c8915fe6f3de6f82ad4b995c2359b168ed88fa9">
+            Testing
+        </a><br/>
+        
+        <a href="https://coronavirus.ohio.gov/static/dashboards/COVIDSummaryData.csv?thousands=%2C">
+            Key metrics (cases, death)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="OR">
+      <td><a name="OR"/><b>OR</b></td>
+      <td>
+        
+        <a href="https://public.tableau.com/views/OregonHealthAuthorityCOVID-19SummaryTable_15889676399110/OregonsTestsOverTimeSummaryTable?worksheet=Statewide">
+            Tests by ELR date
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="PA">
+      <td><a name="PA"/><b>PA</b></td>
+      <td>
+        
+        <a href="https://data.pa.gov/api/id/r6ti-va88.json?%24query=select+date%2C+newpcrtests+order+by+date+asc+limit+500">
+            PCR Tests encounters
+        </a><br/>
+        
+        <a href="https://data.pa.gov/api/id/j72v-r42c.json?%24query=select+date%2C+cases+where+county+%3D+%22Pennsylvania%22+order+by+date+desc+limit+500">
+            link
+        </a><br/>
+        
+        <a href="https://data.pa.gov/api/id/fbgu-sqgp.json?%24query=select+date%2C+deaths+where+county+%3D+%22Pennsylvania%22+order+by+date+desc+limit+500">
+            Death by day of death
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="RI">
+      <td><a name="RI"/><b>RI</b></td>
+      <td>
+        
+        <a href="https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/export?format=csv&amp;gid=1592746937?parse_dates=True">
+            link
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="TN">
+      <td><a name="TN"/><b>TN</b></td>
+      <td>
+        
+        <a href="https://services1.arcgis.com/HLC8bAygObK4fhPW/arcgis/rest/services/TN_COVID19_Daily/FeatureServer/0/query?where=1%3D1&amp;outFields=%2A&amp;orderByFields=DATE+desc&amp;resultRecordCount=500">
+            Main data
+        </a><br/>
+        
+        <a href="https://services1.arcgis.com/HLC8bAygObK4fhPW/arcgis/rest/services/TN_COVID19_Daily/FeatureServer/0/query?where=1%3D1&amp;outFields=DATE%2C+TOTAL_DEATHS_BY_DOD+as+cum_deaths_by_dod&amp;orderByFields=DATE+desc&amp;resultRecordCount=500">
+            Main data
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="TX">
+      <td><a name="TX"/><b>TX</b></td>
+      <td>
+        
+        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/TX_DSHS_COVID19_Cases_Service/FeatureServer/2/query?where=1%3D1&amp;outFields=Date%2CCumulativeFatalities&amp;orderByField=Date+asc&amp;resultRecordCount=500">
+            Death by day of death
+        </a><br/>
+        
+        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/TX_DSHS_COVID19_Cases_Service/FeatureServer/2/query?where=1%3D1&amp;outFields=Date%2CCumulativeCases%2CCumulativeProbable&amp;orderByField=Date+asc&amp;resultRecordCount=500">
+            Cases (confirmed, probable)
+        </a><br/>
+        
+        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/TX_DSHS_COVID19_TestData_Service/FeatureServer/4/query?where=Date+%3C%3E+NULL&amp;outFields=Date%2CViralTests%2CAntibodyTests%2CAntigenTests&amp;orderByFields=Date+asc&amp;resultRecordCount=500">
+            Testing (by specimen collection date)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="UT">
+      <td><a name="UT"/><b>UT</b></td>
+      <td>
+        
+        <a href="https://coronavirus-dashboard.utah.gov/Utah_COVID19_data.zip">
+            Zip download
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="VA">
+      <td><a name="VA"/><b>VA</b></td>
+      <td>
+        
+        <a href="https://data.virginia.gov/resource/3u5k-c2gr.json?%24query=select+lab_report_date%2C+sum%28number_of_pcr_testing%29+as+pcr_testing%2C+sum%28number_of_positive_pcr_testing%29+as+pos_pcr_testing%2C+sum%28number_of_antibody_testing_encounters%29+as+antibody_total%2C+sum%28number_of_positive_antibody_testing_encounters%29+as+antibody_pos%2C+sum%28number_of_positive_antigen_testing_encounters%29+as+antigen_pos%2C+sum%28number_of_antigen_testing_encounters%29+as+antigen_total+group+by+lab_report_date">
+            Testing data (PCR and antibody)
+        </a><br/>
+        
+        <a href="https://data.virginia.gov/resource/uqs3-x7zh.json">
+            Cases, death by report date
+        </a><br/>
+        
+        <a href="https://data.virginia.gov/resource/9d6i-p8gz.json?%24query=select+event_date%2C+case_status%2C+sum%28number_of_cases%29+as+number_of_cases%2C+sum%28number_of_deaths%29+as+number_of_deaths+group+by+event_date%2C+case_status">
+            Cases, death by date of symptom onset and death
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="VT">
+      <td><a name="VT"/><b>VT</b></td>
+      <td>
+        
+        <a href="https://services1.arcgis.com/BkFxaEFNwHqX3tAw/arcgis/rest/services/VT_COVID_19_PCR_Test_Specimens_by_Day/FeatureServer/0/query?where=1%3D1&amp;outFields=%2A&amp;orderByField=Date_Received_by_PH+asc">
+            PCR tests by specimen collection
+        </a><br/>
+        
+        <a href="https://opendata.arcgis.com/datasets/d4af9501d3f04e9d9fe4f47539f39c05_0.csv?parse_dates=%5B%27date%27%5D">
+            Cases (confirmed and probables)
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="WA">
+      <td><a name="WA"/><b>WA</b></td>
+      <td>
+        
+        <a href="https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/Cumulative_Count_Cases_Hospitalizations_Deaths_Vaccinations.xlsx?sheet_name=%5B%27Cases%27%5D&amp;engine=xlrd">
+            Cases by test result
+        </a><br/>
+        
+        <a href="https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/Cumulative_Count_Cases_Hospitalizations_Deaths_Vaccinations.xlsx?sheet_name=%5B%27Deaths%27%5D&amp;engine=xlrd">
+            Death by date of death
+        </a><br/>
+        
+        <a href="https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/EpiCurve_Count_Cases_Hospitalizations_Deaths.xlsx?engine=xlrd&amp;sheet_name=%5B%27Cases%27%2C+%27Deaths%27%5D">
+            Cases by specimen collection
+        </a><br/>
+        
+        <a href="https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC_Tests_by_Specimen_Collection.xlsx?sheet_name=State&amp;engine=xlrd">
+            Tests
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="WI">
+      <td><a name="WI"/><b>WI</b></td>
+      <td>
+        
+        <a href="https://bi.wisconsin.gov/t/DHS/views/Cumulativecaseswmobile/Cumulativecasesbyday.csv?parse_dates=%5B%27Day+of+Date%27%5D&amp;thousands=%2C">
+            Cases by date confirmed
+        </a><br/>
+        
+        <a href="https://bi.wisconsin.gov/t/DHS/views/CumulativeDeathsMobile/Cumulativedeathsbyday.csv?parse_dates=%5B%27Day+of+Date%27%5D&amp;thousands=%2C">
+            Death by date reported
+        </a><br/>
+        
+        <a href="https://bi.wisconsin.gov/t/DHS/views/PercentPositivebyTestPersonandaComparisonandTestCapacity/TestCapacityDashboard.csv?parse_dates=%5B%27Day+of+Encounter+Date%27%5D&amp;thousands=%2C">
+            Testing encounters
+        </a><br/>
+        
+        <a href="https://bi.wisconsin.gov/t/DHS/views/Agegroupovertime/Cases.csv?:isGuestRedirectFromVizportal=y&amp;:embed=y?parse_dates=%5B%27Week+of+Episode+Date+Trunc%27%5D&amp;thousands=%2C">
+            Cases confirmed by onset date
+        </a><br/>
+        
+    </td></tr>
+    
+      <tr id="WY">
+      <td><a name="WY"/><b>WY</b></td>
+      <td>
+        
+        <a href="https://public.tableau.com/shared/NTF7GT27S?worksheet=Lab+by+date">
+            Testing
+        </a><br/>
+        
+    </td></tr>
+    
+    </table>
+    Generated on 2021-03-12 10:01:43.847595
+  </body>
+</html>
