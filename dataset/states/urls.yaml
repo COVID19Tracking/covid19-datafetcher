@@ -653,7 +653,7 @@ UT:
   {"statisticType": "sum", "onStatisticField": "COVID_Cases_Total"},
   {"statisticType": "sum", "onStatisticField": "Hospitalizations"}], f: json}
   type: arcgis
-- url: https://coronavirus-dashboard.utah.gov/
+- url: https://coronavirus-dashboard.utah.gov/overview.html
   params: null
   type: html:soup
   desc: State page (soup)
