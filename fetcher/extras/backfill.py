@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 
 from fetcher.extras.common import atoi, MaRawData, zipContextManager
-from fetcher.utils import Fields, extract_arcgis_attributes
+from fetcher.utils import Fields, extract_arcgis_attributes, extract_attributes
 
 
 NULL_DATE = datetime(2020, 1, 1)
@@ -101,6 +101,23 @@ def handle_az(res, mapping, queries):
         df = df.set_index(DATE).sort_index().cumsum()
         df[TS] = df.index
         add_query_constants(df, queries[i])
+        mapped.extend(df.to_dict(orient='records'))
+
+    return mapped
+
+
+def handle_ca(res, mapping, queries):
+    # need to cumsum
+    mapped = []
+    import pdb
+    pdb.set_trace()
+    for query, result in zip(queries, res):
+        # extract also maps
+        items = extract_attributes(result, query.data_path, mapping, 'CA')
+        df = prep_df(items, mapping).sort_index(na_position='first').drop(columns=TS).cumsum()
+        df = df.loc[df.index.notna()]
+        add_query_constants(df, query)
+        df[TS] = df.index
         mapped.extend(df.to_dict(orient='records'))
 
     return mapped

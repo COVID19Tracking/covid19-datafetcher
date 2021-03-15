@@ -61,19 +61,37 @@ AZ:
     DATE_USED: Specimen Collection
 CA:
 - url: https://data.ca.gov/api/3/action/datastore_search_sql
-  params: {sql: 'select date, sum(totalcountdeaths)::INTEGER as death, sum(totalcountconfirmed)::INTEGER as confirmed from "926fd08f-cc91-4828-af38-bd45de97f8c3" group by date order by date desc limit 500'}
+  params:
+    sql: SELECT date, reported_cases, reported_deaths, reported_tests from "0545b878-90a8-4b26-a16a-84978354f1a3" WHERE "area_type" = 'State' order by date asc
   type: ckan
   data_path: ['result', 'records', []]
-  desc: Cases, death
+  desc: Cases, death, tests by report
   constants:
     DATE_USED: Report
-- url: https://data.ca.gov/api/3/action/datastore_search
-  params: {resource_id: b6648a0d-ff0a-4111-b80b-febda2ac9e09, limit: 500, sort: date desc}
+- url: https://data.ca.gov/api/3/action/datastore_search_sql
+  params:
+    sql: SELECT date, deaths from "0545b878-90a8-4b26-a16a-84978354f1a3" WHERE "area_type" = 'State' order by date asc
   type: ckan
   data_path: ['result', 'records', []]
-  desc: Testing total
+  desc: Deaths by date of death
   constants:
-    DATE_USED: Report
+    DATE_USED: Death
+- url: https://data.ca.gov/api/3/action/datastore_search_sql
+  params:
+    sql: SELECT date, total_tests, positive_tests from "0545b878-90a8-4b26-a16a-84978354f1a3" WHERE "area_type" = 'State' order by date asc
+  type: ckan
+  data_path: ['result', 'records', []]
+  desc: Tests (total and positive) by specimen collection
+  constants:
+    DATE_USED: Specimen Collection
+- url: https://data.ca.gov/api/3/action/datastore_search_sql
+  params:
+    sql: SELECT date, cases from "0545b878-90a8-4b26-a16a-84978354f1a3" WHERE "area_type" = 'State' order by date asc
+  type: ckan
+  data_path: ['result', 'records', []]
+  desc: Cases by episode date (earliest of date received, date of diagnosis, date of symptom onset, specimen collection date, or date of death)
+  constants:
+    DATE_USED: Symptom Onset
 CO:
 - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_daily_state_statistics_cumulative/FeatureServer/0/query
   params: {where: Desc_='State Data', outFields: '*', f: json}
