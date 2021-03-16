@@ -23,5 +23,9 @@ psql -h $DB_HOST -p $DB_PORT -U $DB_USERNAME -d $DB_NAME -AF, -Pfooter=off -f $Q
 # Step 3: load the CSV to big query
 bq load --skip_leading_rows=1 --replace --source_format=CSV taco.avocado_latest $OUTPUT_FILE  $SCHEMA_FILE
 
+# append it to avocado full
+bq load --skip_leading_rows=1 --source_format=CSV taco.avocado $OUTPUT_FILE  $SCHEMA_FILE
+
+
 # Step 3: Cleanup
 rm $OUTPUT_FILE
