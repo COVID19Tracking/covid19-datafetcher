@@ -62,12 +62,9 @@ def handle_fl(res, mapping):
         partial = extract_arcgis_attributes(result, mapping, 'FL')
         mapped.update(partial)
 
-    # Current hosp csv
-    # hosp = res[-1]
-    # for r in hosp:
-    #     if r.get('County') == 'All':
-    #         mapped[Fields.CURR_HOSP.name] = atoi(r.get('COVID Hospitalizations'))
-
+    # pcr encounters
+    result = res[-1].get('features', [{}])[0].get('attributes')
+    mapped[Fields.PCR_TEST_ENCOUNTERS.name] = sum(result.values())
     return mapped
 
 
