@@ -109,8 +109,6 @@ def handle_az(res, mapping, queries):
 def handle_ca(res, mapping, queries):
     # need to cumsum
     mapped = []
-    import pdb
-    pdb.set_trace()
     for query, result in zip(queries, res):
         # extract also maps
         items = extract_attributes(result, query.data_path, mapping, 'CA')
