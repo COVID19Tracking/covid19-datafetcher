@@ -258,7 +258,7 @@ MN:
   Date reported to MDH: DATE
   # date: 3/28/20
   __strptime: "%m/%d/%y"
-  Total approximate number of completed PCR tests (cumulative): SPECIMENS
+  Total approximate number of completed PCR tests (cumulative): PCR_TEST_ENCOUNTERS
   Total approximate number of completed antigen tests (cumulative): ANTIGEN_TOTAL
   Specimen collection date: DATE
   Total confirmed cases (cumulative): CONFIRMED
