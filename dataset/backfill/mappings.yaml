@@ -147,7 +147,7 @@ GU:
 HI:
   reportdt: TIMESTAMP
   week_ending: TIMESTAMP
-  toDate_totaltests: SPECIMENS
+  toDate_totaltests: PCR_TEST_ENCOUNTERS
   toDate_positive: SPECIMENS_POS
   toDate_positiveAndPresumed: POSITIVE
   cumulative_deaths: DEATH
