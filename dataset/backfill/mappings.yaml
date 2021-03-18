@@ -32,13 +32,13 @@ AZ:
   AGG(p. Choose Test Type)-alias-1: ANTIBODY_TOTAL
 CA:
   date: DATE
-  reported_cases: POSITIVE
+  reported_cases: CONFIRMED
   reported_deaths: DEATH
   reported_tests: SPECIMENS
   deaths: DEATH
   total_tests: SPECIMENS
   positive_tests: SPECIMENS_POS
-  cases: POSITIVE
+  cases: CONFIRMED
   # "2020-03-20"
   __strptime: "%Y-%m-%d"
 CO:
