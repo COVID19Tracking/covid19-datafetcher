@@ -417,7 +417,7 @@ UT:
   # cumulative
   "Overview_Seven-Day Rolling Average Mortality by Date of Death:DATE_USED": Death
   "Overview_Seven-Day Rolling Average Mortality by Date of Death:Date": DATE
-  "Overview_Seven-Day Rolling Average Mortality by Date of Death:Cumulative Mortalities": Death
+  "Overview_Seven-Day Rolling Average Mortality by Date of Death:Cumulative Mortalities": DEATH
 
   # not cumulative
   "Overview_Total Tests by Date:DATE_USED": Specimen Collection
