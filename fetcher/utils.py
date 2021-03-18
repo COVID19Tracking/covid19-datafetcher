@@ -96,13 +96,15 @@ class Fields(Enum):
         return {f.name: f.value for f in Fields}
 
 
-def request(url, query=None, encoding=None):
+def request(url, query=None, encoding=None, method=None):
     if not encoding:
         encoding = 'utf-8'
+    if not method:
+        method = 'GET'
     if query:
         url = "{}?{}".format(url, urllib.parse.urlencode(query))
     res = {}
-    req = urllib.request.Request(url, headers={
+    req = urllib.request.Request(url, method=method, headers={
         'user-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0'
     })
     with urllib.request.urlopen(req) as f:
@@ -127,17 +129,17 @@ def request_soup(url, query=None, encoding=None):
     return BeautifulSoup(res, 'html.parser')
 
 
-def request_and_parse(url, query=None):
-    res = request(url, query)
+def request_and_parse(url, query=None, method=None):
+    # skip cert verification for PR (because who knows why)
+    if getattr(ssl, '_create_unverified_context', None):
+        ssl._create_default_https_context = ssl._create_unverified_context
+
+    res = request(url, query, method=method)
     res = json.loads(res)
     return res
 
 
 def request_csv(url, query=None, dialect=None, header=True, encoding=None):
-    # skip cert verification for VA (because they use some unknown CA)
-    if getattr(ssl, '_create_unverified_context', None):
-        ssl._create_default_https_context = ssl._create_unverified_context
-
     res = request(url, query, encoding)
     if not dialect:
         dialect = 'unix'

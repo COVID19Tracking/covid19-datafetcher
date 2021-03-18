@@ -56,6 +56,7 @@ class Query:
     url: str
     query_type: str
     params: dict = field(default_factory=list)
+    method: str = None
     data_path: list = field(default_factory=list)
     constants: dict = field(default_factory=dict)
     header: bool = True  # Remove this, used only once, and maybe should be stripped

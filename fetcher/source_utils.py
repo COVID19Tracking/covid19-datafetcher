@@ -18,7 +18,7 @@ def fetch_query(state, query):
     res = None
     try:
         if query.type in ['arcgis', 'json', 'ckan', 'soda']:
-            res = request_and_parse(query.url, query.params)
+            res = request_and_parse(query.url, query.params, query.method)
         elif query.type in ['csv']:
             res = request_csv(
                 query.url, query.params,
