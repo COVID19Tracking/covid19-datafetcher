@@ -722,7 +722,8 @@ def handle_wa(res, mapping, queries):
     # last one is testing
     df = res[-1].rename(columns=mapping).set_index(DATE)
     df = df.groupby(df.columns.values, axis=1).sum().sort_index().cumsum()
-    df['SPECIMENS'] = df['SPECIMENS_POS'] + df['SPECIMENS_NEG']
+    df[Fields.PCR_TEST_ENCOUNTERS.name] = \
+        df[Fields.SPECIMENS_POS.name] + df[Fields.SPECIMENS_NEG.name]
     df[TS] = pd.to_datetime(df.index)
     add_query_constants(df, queries[-1])
     tagged.extend(df.to_dict(orient='records'))
