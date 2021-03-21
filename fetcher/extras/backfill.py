@@ -42,10 +42,21 @@ def prep_df(values, mapping):
     return df
 
 
-def make_cumsum_df(data, timestamp_field=Fields.TIMESTAMP.name):
+def make_cumsum_df(data, timestamp_field=Fields.TIMESTAMP.name,
+                   convert_to_num=None, fill_na_val=None):
+    # becoming more and more like pandas with endless kwargs
     df = pd.DataFrame(data)
     df.set_index(timestamp_field, inplace=True)
     df.sort_index(inplace=True)
+
+    # convert to numeric
+    if convert_to_num:
+        for c in convert_to_num:
+            if c in df.columns:
+                df[c] = pd.to_numeric(df[c], errors='coerce')
+                if fill_na_val is not None:
+                    df[c] = df[c].fillna(fill_na_val)
+
     df = df.select_dtypes(exclude=['string', 'object'])
     # .groupby(level=0).last() # can do it here, but not mandatory
 
@@ -204,7 +215,7 @@ def handle_fl(res, mapping, queries):
     tagged = []
     for i, data in enumerate(res[:-1]):
         df = extract_arcgis_attributes(res[i], mapping)
-        cumsum_df = make_cumsum_df(df)
+        cumsum_df = make_cumsum_df(df, convert_to_num=mapping.values(), fill_na_val=0)
         add_query_constants(cumsum_df, queries[i])
         tagged.extend(cumsum_df.to_dict(orient='records'))
 
@@ -342,7 +353,6 @@ def handle_me(res, mapping, queries):
     cases = res[0].rename(columns=mapping).groupby(DATE).sum().sort_index().cumsum()
     cases[TS] = cases.index
     mapped = cases.to_dict(orient='records')
-
     df = res[1].rename(columns=mapping).set_index(DATE)
     df['positive'] = df['Positive Tests'].fillna(0) + df['Positive Tests Flexible'].fillna(0)
     df = df.pivot(columns='Type', values=['All Tests', 'positive'])
