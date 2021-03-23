@@ -294,6 +294,7 @@ ND:
   Total PCR tests (new people): TOTAL
   Total PCR tests (specimens): SPECIMENS
   Total PCR tests (susceptible test encounters): PCR_TEST_ENCOUNTERS
+  Total Ag tests (specimens): ANTIGEN_TOTAL
 NE:
   LAB_REPORT_DATE: TIMESTAMP
   AllTestsAsOfThisDate: SPECIMENS
