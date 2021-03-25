@@ -17,7 +17,7 @@ const retry = require('async-retry');
     // load page, look for the Tableau iframe, click the testing button
     await page.goto(URL)
     await page.waitForSelector('iframe.tableauViz')
-    await page.waitForTimeout(5000)
+    await page.waitForTimeout(10000)
     const frame = await page.frame({url: /.*tableau.*/})
     await frame.click('div[role="button"]:has-text("TESTING")')
 
@@ -32,7 +32,7 @@ const retry = require('async-retry');
     for (let x = 30; x < x_max; x+= 85) {
       for (let y = 15; y < y_max; y+= 10) {
         await tableElement.hover({position: {x: x, y: y}})
-        await page.waitForTimeout(1000) // wait for tooltip
+        await page.waitForTimeout(3000) // wait for tooltip
 
         // find the 3 data cells from the tooltip (row header, column header, value)
         let cellData = await frame.$$("div.tab-ubertipTooltip table td:nth-child(3)")
