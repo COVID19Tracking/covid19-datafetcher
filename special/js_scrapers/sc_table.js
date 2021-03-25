@@ -55,7 +55,7 @@ const retry = require('async-retry');
     if (Object.keys(data).length != 6) { throw Error("not enough rows") }
     for (const key of Object.keys(data)) {
       if (key == "undefined" ) { continue }
-      if (Object.keys(data[key]).length != 3) { throw Error("not enough columns") }
+      if (Object.keys(data[key]).length < 3) { throw Error("not enough columns") }
     }
     return data
   }
