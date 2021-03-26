@@ -438,7 +438,7 @@ OH:
   desc: Testing
   constants:
     DATE_USED: Test Result
-- url: https://coronavirus.ohio.gov/static/dashboards/COVIDSummaryData.csv
+- url: https://coronavirus.ohio.gov/static/dashboards/COVIDDeathData_CountyOfDeath.csv
   params: {thousands: ','}
   type: pandas
   desc: Key metrics (cases, death)

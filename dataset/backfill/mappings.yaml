@@ -349,6 +349,7 @@ OH:
   Presumptive Lab Total Tested (Daily): ANTIGEN_TOTAL
   Presumptive Lab Total Positive (Daily): ANTIGEN_POS
   Death Due to Illness Count: DEATH
+  Death Due To Illness Count - County Of Death: DEATH
   Case Count: POSITIVE
 OR:
   ELR Date: DATE
