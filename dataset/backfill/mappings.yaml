@@ -281,8 +281,9 @@ NC:
   Cases by Report Date: "POSITIVE:Report"
   Deaths by Date of Death: "DEATH:Death"
   Molecular (PCR) Positive Cases by Specimen Date: "CONFIRMED:Specimen Collection"
-  Antigen Test: "ANTIGEN_TOTAL:Specimen Collection"
-  Molecular Test: "SPECIMENS:Specimen Collection"
+
+  Antigen Test: "ANTIGEN_TOTAL"
+  Molecular Test: "SPECIMENS"
 ND:
   Date: DATE
   __strptime: "%Y-%m-%d"

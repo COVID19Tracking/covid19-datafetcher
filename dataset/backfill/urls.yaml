@@ -337,6 +337,8 @@ NC:
   params: {parse_dates: ['Date'], thousands: ","}
   type: pandas
   desc: Tests by date
+  constants:
+    DATE_USED: Specimen Collection
 ND:
 - url: https://www.health.nd.gov/sites/www/files/documents/Files/MSS/coronavirus/charts-data/CovidTracking.csv
   params: {parse_dates: ['Date']}

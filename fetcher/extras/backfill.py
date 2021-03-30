@@ -477,23 +477,33 @@ def handle_mo(res, mapping, queries):
     return mapped
 
 
-def handle_nc(res, mapping):
+def handle_nc(res, mapping, queries):
     tagged = []
-
-    for x in res:
+    for i, x in enumerate(res):
         tot = x.rename(columns=mapping)
         tot = tot.pivot(
             columns='Measure Names', values='Measure Values', index=DATE).sort_index()
 
-        for c in tot.columns:
-            tag, dating = mapping.get(c, ":").split(":")
-            if not tag:
-                continue
+        # testing
+        if 'Daily Tests Total' in tot.columns:
+            # we need to cleanup testing series
+            tot = tot.rename(columns=mapping)
+            tot = tot[tot['SPECIMENS'].notna()].cumsum().resample('1d').ffill()
+            add_query_constants(tot, queries[i])
+            tot[TS] = tot.index
+            tagged.extend(tot.to_dict(orient='records'))
 
-            df = pd.DataFrame(tot[c].rename(tag)).fillna(0).sort_index().cumsum()
-            df[TS] = df.index
-            df[DATE_USED] = dating
-            tagged.extend(df.to_dict(orient='records'))
+        else:
+            # cases and such
+            for c in tot.columns:
+                tag, dating = mapping.get(c, ":").split(":")
+                if not tag:
+                    continue
+
+                df = pd.DataFrame(tot[c].rename(tag)).fillna(0).sort_index().cumsum()
+                df[TS] = df.index
+                df[DATE_USED] = dating
+                tagged.extend(df.to_dict(orient='records'))
 
     return tagged
 
