@@ -108,6 +108,7 @@ DE:
   Cumulative Number of Probable Positive Cases: PROBABLE
 FL:
   Date: TIMESTAMP
+  Date1: TIMESTAMP
   Deaths: DEATH
   cases: POSITIVE
   Total: PCR_TEST_ENCOUNTERS
