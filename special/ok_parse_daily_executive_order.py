@@ -11,7 +11,7 @@ import sys
 
 
 BASE_URL = 'https://oklahoma.gov/content/dam/ok/en/covid19/documents/executive-order-reports'
-REPORT = 'EO - COVID-19 Report - %-m-%-d-%y.pdf'
+REPORT = 'EO - COVID-19 Report - %-m-%d-%y.pdf'
 
 TOTAL_TESTS = 'Total Number of Specimens Tested'
 
