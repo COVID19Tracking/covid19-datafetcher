@@ -345,12 +345,13 @@ ND:
   type: pandas
   desc: PCR (encounters, specimens, negatives, people, confirmed)
 NE:
-- url: https://gis.ne.gov/enterprise/rest/services/Covid19MapV5/MapServer/11/query
-  params: {where: 1=1, outFields: '*', orderByFields: LAB_REPORT_DATE asc, f: json}
-  type: arcgis
-  desc: Tests and results by lab report date
-  constants:
-    DATE_USED: Test Result
+# TODO: fix me, report me
+# - url: https://gis.ne.gov/enterprise/rest/services/Covid19MapV5/MapServer/11/query
+#   params: {where: 1=1, outFields: '*', orderByFields: LAB_REPORT_DATE asc, f: json}
+#   type: arcgis
+#   desc: Tests and results by lab report date
+#   constants:
+#     DATE_USED: Test Result
 - url: https://gis.ne.gov/Enterprise/rest/services/Covid19MapV6/MapServer/1/query
   params: {where: 1=1, outFields: '*', orderByFields: SP_Collection_DATE asc, resultRecordCount: 600, f: json}
   type: arcgis

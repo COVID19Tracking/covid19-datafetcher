@@ -321,6 +321,9 @@ def handle_ma(res, mapping):
     for tabname in tab_mapping.keys():
         df = tabs[tabname].rename(columns=tab_mapping[tabname])
         df[DATE] = pd.to_datetime(df[DATE])
+        # TODO: FIX ME LATER
+        # drop NaT values
+        df = df.loc[df[DATE].notna()]
         # expect it to always exist (we control the file list)
         by_date = tab_mapping[tabname].pop(DATE_USED)
         df = df[tab_mapping[tabname].values()]
