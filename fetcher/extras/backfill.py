@@ -550,6 +550,10 @@ def handle_nv(res, mapping):
         df[DATE] = pd.to_datetime(df[DATE], errors='coerce')
         df = df[df[DATE].notna()].set_index(DATE).sort_index()
 
+        # make all columns numeric
+        for c in df.columns:
+            df[c] = pd.to_numeric(df[c], errors='coerce')
+
         if tab == 'Cases':
             df = df.cumsum()
 
