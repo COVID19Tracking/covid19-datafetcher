@@ -154,7 +154,7 @@ def request_csv(url, query=None, dialect=None, header=True, encoding=None):
 def request_tableau_scraper(query):
     ts = TableauScraper()
     ts.loads(query.url)
-    dashboard = ts.getDashboard()
+    dashboard = ts.getWorkbook()
     dfs = []
     prefixes = [] if not query.params else query.params.get('worksheet', [])
     for ws in dashboard.worksheets:
