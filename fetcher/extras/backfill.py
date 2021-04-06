@@ -491,7 +491,14 @@ def handle_nc(res, mapping, queries):
         if 'Daily Tests Total' in tot.columns:
             # we need to cleanup testing series
             tot = tot.rename(columns=mapping)
+
+            # special thing we do for PCR testing
+            mixed = tot[tot['SPECIMENS'].isna()]['Daily Tests Total'].sort_index().cumsum()
+            mixed = mixed[mixed.notna()]
+            # set the last value in SPECIMENS
+            tot.loc[mixed.idxmax(), 'SPECIMENS'] = mixed.loc[mixed.idxmax()]
             tot = tot[tot['SPECIMENS'].notna()].cumsum().resample('1d').ffill()
+
             add_query_constants(tot, queries[i])
             tot[TS] = tot.index
             tagged.extend(tot.to_dict(orient='records'))
