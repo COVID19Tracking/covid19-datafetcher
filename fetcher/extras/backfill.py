@@ -546,14 +546,21 @@ def handle_nh(res, mapping, queries):
 
 def handle_nv(res, mapping):
     mapped = []
-
     nv = res[0]
     tab_mapping = build_leveled_mapping(mapping)
     for tab in tab_mapping.keys():
         df = nv[tab]
         date_used = tab_mapping[tab].pop(DATE_USED)
-        df.columns = df.iloc[1]
-        df = df.iloc[2:].rename(columns=tab_mapping[tab]).filter(tab_mapping[tab].values())
+        header_index = 1
+        while header_index < 5:
+            potential_headers = df.iloc[header_index].to_string()
+            if potential_headers.find('Date') >= 0:
+                # found headers
+                df.columns = df.iloc[header_index]
+                break
+            header_index += 1
+        df = df.iloc[header_index + 1:].rename(
+            columns=tab_mapping[tab]).filter(tab_mapping[tab].values())
         df[DATE] = pd.to_datetime(df[DATE], errors='coerce')
         df = df[df[DATE].notna()].set_index(DATE).sort_index()
 
