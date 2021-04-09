@@ -219,6 +219,9 @@ def handle_fl(res, mapping, queries):
         add_query_constants(cumsum_df, queries[i])
         tagged.extend(cumsum_df.to_dict(orient='records'))
 
+    # skip the last part, the datalayer is no more
+    return tagged
+
     # The last item is the aggregated case-line data
     df = pd.DataFrame([x['attributes'] for x in res[-1]['features']])
     df = df.rename(
