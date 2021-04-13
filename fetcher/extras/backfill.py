@@ -657,6 +657,24 @@ def handle_ri(res, mapping):
     return records
 
 
+def handle_tn(res, mapping):
+    tagged = []
+    df = res[0]
+
+    df = df.rename(columns=mapping).filter(mapping.values()).set_index('DATE')
+    # separate death by date of death
+    dod = df.loc[:, ['DEATH_BY_DOD']]
+    df = df.drop(columns='DEATH_BY_DOD')
+
+    df_date = [(dod, 'Death'), (df, 'Report')]
+    for d, date_used in df_date:
+        d[DATE_USED] = date_used
+        d[TS] = d.index
+        tagged.append(d.to_dict(orient='records'))
+
+    return tagged
+
+
 def handle_ut(res, mapping):
     zipurl = res[-1]
     mapped = []
