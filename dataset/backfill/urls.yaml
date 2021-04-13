@@ -186,8 +186,14 @@ FL:
   desc: Test encounters by result date
   constants:
     DATE_USED: Test Result
-- url: https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/ArcGIS/rest/services/Florida_COVID19_Case_Line_Data_NEW/FeatureServer/0/query
-  params: {where: Jurisdiction = 'FL Resident', groupByFieldsForStatistics: 'EXTRACT(YEAR FROM EventDate), EXTRACT(MONTH FROM EventDate), EXTRACT(DAY FROM EventDate)', outStatistics: [{"statisticType": "count", "onStatisticField": "ObjectId", "outStatisticFieldName": "cases"}], f: json}
+- url: https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/ArcGIS/rest/services/Case_Data_2020/FeatureServer/0/query
+  params: {where: Jurisdicti = 'FL Resident', groupByFieldsForStatistics: 'EXTRACT(YEAR FROM EventDate), EXTRACT(MONTH FROM EventDate), EXTRACT(DAY FROM EventDate)', outStatistics: [{"statisticType": "count", "onStatisticField": "Case_", "outStatisticFieldName": "cases"}], f: json}
+  type: arcgis
+  desc: Cases by onset date (from caseline table)
+  constants:
+    DATE_USED: Symptom Onset
+- url: https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/ArcGIS/rest/services/Case_Data_2021/FeatureServer/0/query
+  params: {where: Jurisdicti = 'FL Resident', groupByFieldsForStatistics: 'EXTRACT(YEAR FROM EventDate), EXTRACT(MONTH FROM EventDate), EXTRACT(DAY FROM EventDate)', outStatistics: [{"statisticType": "count", "onStatisticField": "Case_", "outStatisticFieldName": "cases"}], f: json}
   type: arcgis
   desc: Cases by onset date (from caseline table)
   constants:

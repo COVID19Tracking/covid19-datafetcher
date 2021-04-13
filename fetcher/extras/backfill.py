@@ -213,21 +213,23 @@ def handle_de(res, mapping):
 def handle_fl(res, mapping, queries):
     # simply a cumsum table
     tagged = []
-    for i, data in enumerate(res[:-1]):
+    for i, data in enumerate(res[:-2]):
         df = extract_arcgis_attributes(res[i], mapping)
         cumsum_df = make_cumsum_df(df, convert_to_num=mapping.values(), fill_na_val=0)
         add_query_constants(cumsum_df, queries[i])
         tagged.extend(cumsum_df.to_dict(orient='records'))
 
-    # skip the last part, the datalayer is no more
-    return tagged
-
     # The last item is the aggregated case-line data
-    df = pd.DataFrame([x['attributes'] for x in res[-1]['features']])
-    df = df.rename(
-        columns={**{'EXPR_1': 'Year', 'EXPR_2': 'Month', 'EXPR_3': 'Day'}, **mapping})
-    df[DATE] = pd.to_datetime(df[['Year', 'Month', 'Day']])
-    df = df.set_index(DATE).sort_index().cumsum()
+    dfs = []
+    for data in res[-2:]:
+        df = pd.DataFrame([x['attributes'] for x in data['features']])
+        df = df.rename(
+            columns={**{'EXPR_1': 'Year', 'EXPR_2': 'Month', 'EXPR_3': 'Day'}, **mapping})
+        df[DATE] = pd.to_datetime(df[['Year', 'Month', 'Day']])
+        df = df.set_index(DATE).sort_index()
+        dfs.append(df)
+    df = pd.concat(dfs, axis=1).filter(like='POSITIVE').fillna(0).sum(axis=1).cumsum()
+    df = df.to_frame()
     add_query_constants(df, queries[-1])
     df[TS] = df.index
     tagged.extend(df.to_dict(orient='records'))
