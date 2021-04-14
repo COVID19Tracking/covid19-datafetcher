@@ -95,7 +95,7 @@ DE:
 
   Total Persons Tested: TOTAL
   Positive Tests: SPECIMENS_POS
-  Total Tests: SPECIMENS
+  Total Tests: PCR_TEST_ENCOUNTERS
 
   # By date values:
   Date used: DATE_USED
