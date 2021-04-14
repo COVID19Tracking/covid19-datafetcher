@@ -46,19 +46,19 @@ AR:
   params: {where: 1=1, outFields: '*', orderByFields: date asc, f: json}
   type: arcgis
   desc: Testing (antibody, pcr) and cases
-AZ:
-- url: 'https://tableau.azdhs.gov/views/ELRv2testlevelandpeopletested/TestsConducted?:isGuestRedirectFromVizportal=y:embed=y&Choose Test Type=Diagnostic'
-  params: {worksheet: 'P1 - Tests by Day (Antigen Language'}
-  type: tableau
-  desc: Tests (pcr + antigen)
-  constants:
-    DATE_USED: Specimen Collection
-- url: 'https://tableau.azdhs.gov/views/ELRv2testlevelandpeopletested/TestsConducted?:isGuestRedirectFromVizportal=y:embed=y&Choose Test Type=Serology'
-  params: {worksheet: 'P1 - Tests by Day (Antigen Language'}
-  type: tableau
-  desc: Tests (antibody)
-  constants:
-    DATE_USED: Specimen Collection
+# AZ:
+# - url: 'https://tableau.azdhs.gov/views/ELRv2testlevelandpeopletested/TestsConducted?:isGuestRedirectFromVizportal=y:embed=y&Choose Test Type=Diagnostic'
+#   params: {worksheet: 'P1 - Tests by Day (Antigen Language'}
+#   type: tableau
+#   desc: Tests (pcr + antigen)
+#   constants:
+#     DATE_USED: Specimen Collection
+# - url: 'https://tableau.azdhs.gov/views/ELRv2testlevelandpeopletested/TestsConducted?:isGuestRedirectFromVizportal=y:embed=y&Choose Test Type=Serology'
+#   params: {worksheet: 'P1 - Tests by Day (Antigen Language'}
+#   type: tableau
+#   desc: Tests (antibody)
+#   constants:
+#     DATE_USED: Specimen Collection
 CA:
 - url: https://data.chhs.ca.gov/api/3/action/datastore_search_sql
   params:
@@ -93,12 +93,13 @@ CA:
   constants:
     DATE_USED: Death
 CO:
-- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_daily_state_statistics_cumulative/FeatureServer/0/query
+#- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_daily_state_statistics_cumulative/FeatureServer/0/query
+- url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/CDPHE_Colorado_COVID19_Daily_State_Statistics/FeatureServer/0/query
   params: {where: Desc_='State Data', outFields: '*', f: json}
   type: arcgis
   desc: Cases, tested, death, hosp
   constants:
-    DATE_USED: Dashboard
+    DATE_USED: Report
 - url: https://services3.arcgis.com/66aUo8zsujfVXRIT/ArcGIS/rest/services/colorado_covid19_laboratory_positivity_data/FeatureServer/0/query
   params: {where: (Metric='Cumulative People Tested at CDPHE State Lab' or Metric='Cumulative People Tested at Non-CDPHE (Commerical) Labs') and Desc_ like 'Daily%', outFields: '*', orderByFields: OBJECTID asc, groupByFieldsForStatistics: Attr_Date, outStatistics: [{"statisticType": "sum", "onStatisticField": "Value", "outStatisticFieldName": "test_encounters"}, {"statisticType": "max", "onStatisticField": "OBJECTID", "outStatisticFieldName": "OBJECTID"}], f: json}
   type: arcgis
