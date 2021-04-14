@@ -504,6 +504,12 @@ def handle_mo(res, mapping, queries):
     return mapped
 
 
+def handle_mp(res, mapping):
+    data = extract_arcgis_attributes(res[0], mapping)
+    cumsum_df = make_cumsum_df(data, fill_na_val=0)
+    return cumsum_df.to_dict(orient='records')
+
+
 def handle_nc(res, mapping, queries):
     tagged = []
     for i, x in enumerate(res):

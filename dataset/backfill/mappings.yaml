@@ -273,6 +273,10 @@ MO:
   Serology Tests: ANTIBODY_TOTAL
   Confirmed Deaths: DEATH_CONFIRMED
   Date of Death: TIMESTAMP
+MP:
+  reportdate: TIMESTAMP
+  totallabpositives: SPECIMENS_POS
+  totalsamplesrun: SPECIMENS
 MT:
   Total_Tests_Completed: SPECIMENS
   Test_Date: TIMESTAMP

@@ -336,6 +336,11 @@ MO:
   desc: Death by day of death
   constants:
     DATE_USED: Death
+MP:
+- url: https://services8.arcgis.com/zkkZCub5I6ydvXQj/ArcGIS/rest/services/Coronavirus_PublicDashboardView/FeatureServer/2/query
+  params: {where: totallabpositives is not NULL or totalsamplesrun is not NULL, outFields: 'OBJECTID,reportdate,positivecases,totaltested,totallabpositives,totalsamplesrun', f: json}
+  type: arcgis
+  desc: Tests, by unknown dating and unknown cadence
 MT:
 - url: https://services.arcgis.com/qnjIrwR8z5Izc0ij/ArcGIS/rest/services/COVID_Cases_Production_View/FeatureServer/1/query
   params: {where: 1=1, outFields: '*', orderByFields: ScriptRunDate asc, f: json}
