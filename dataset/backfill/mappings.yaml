@@ -173,9 +173,9 @@ IN:
   COVID_DEATHS_CUMSUM: DEATH
 KS:
   DAY(Laboratory Date): DATE
-  SUM(Daily Total): SPECIMENS
-  SUM(Negative): SPECIMENS_NEG
-  SUM(Positive): SPECIMENS_POS
+  Daily Total: SPECIMENS
+  Negative: SPECIMENS_NEG
+  Positive: SPECIMENS_POS
 LA:
   Lab Collection Date: DATE
   Daily Test Count: SPECIMENS

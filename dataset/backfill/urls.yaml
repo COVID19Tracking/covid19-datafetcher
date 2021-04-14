@@ -251,7 +251,7 @@ IN:
 #   type: ckan
 #   desc: Death (by day of death)
 
-# KS:
+KS:
 # The values here are partial: it's daily starting from end of Nov, 2020
 # - url: https://public.tableau.com/views/COVID-19TableauVersion2/TestingRates
 #   params: {worksheet: Daily Testing}
@@ -259,6 +259,12 @@ IN:
 #   desc: Daily testing
 #   constants:
 #     DATE_USED: Specimen Collection
+- url: https://public.tableau.com/views/COVID-19TableauVersion2/DailyTestingData
+  params: {worksheet: Daily}
+  type: tableau
+  desc: Daily testing wow
+  constants:
+    DATE_USED: Specimen Collection
 LA:
 - url: https://ldh.la.gov/assets/oph/Coronavirus/data/LA_COVID_TESTBYDAY_PARISH_PUBLICUSE.xlsx
   params: {parse_dates: ['Lab Collection Date']}

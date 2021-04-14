@@ -42,27 +42,43 @@ def prep_df(values, mapping):
     return df
 
 
-def make_cumsum_df(data, timestamp_field=Fields.TIMESTAMP.name,
-                   convert_to_num=None, fill_na_val=None):
-    # becoming more and more like pandas with endless kwargs
-    df = pd.DataFrame(data)
-    df.set_index(timestamp_field, inplace=True)
-    df.sort_index(inplace=True)
+def _yet_another_prep_cumsum_df(df, index_field=Fields.DATE.name,
+                                convert_to_num=None, fill_na_val=None):
+    if df.index.name != index_field:
+        # set the index
+        df = df.set_index(index_field)
 
-    # convert to numeric
+    if not isinstance(df.index, pd.DatetimeIndex):
+        if df.index.name == TS:
+            df.index = pd.to_datetime(df.index, unit='ms')
+        else:
+            df.index = pd.to_datetime(df.index)
+        # normalize
+        df.index = df.index.normalize().tz_localize(None)
+
+    # convert everything to numeric
     if convert_to_num:
-        for c in convert_to_num:
-            if c in df.columns:
+        for c in df.select_dtypes(include=['object', 'string']).columns:
+            if c in convert_to_num:
+                try:
+                    df[c] = df[c].str.replace(',', '')
+                except Exception:
+                    pass
                 df[c] = pd.to_numeric(df[c], errors='coerce')
                 if fill_na_val is not None:
                     df[c] = df[c].fillna(fill_na_val)
 
-    df = df.select_dtypes(exclude=['string', 'object'])
-    # .groupby(level=0).last() # can do it here, but not mandatory
+    # fill in gaps
+    df = df.sort_index().cumsum().resample('1d').ffill()
+    df[TS] = df.index
+    return df
 
-    cumsum_df = df.cumsum()
-    cumsum_df[Fields.TIMESTAMP.name] = cumsum_df.index
-    return cumsum_df
+
+def make_cumsum_df(data, timestamp_field=Fields.TIMESTAMP.name,
+                   convert_to_num=None, fill_na_val=None):
+    # becoming more and more like pandas with endless kwargs
+    df = pd.DataFrame(data)
+    return _yet_another_prep_cumsum_df(df, timestamp_field, convert_to_num, fill_na_val)
 
 
 def handle_ak(res, mapping, queries):
@@ -298,9 +314,12 @@ def handle_in(res, mapping):
 def handle_ks(res, mapping, queries):
     testing = res[0][0].filter(like='alias')
     testing.columns = [c.replace('-alias', '') for c in testing.columns]
-    testing = testing.rename(columns=mapping).groupby(DATE).last()
-    testing.index = pd.to_datetime(testing.index)
-    testing[TS] = testing.index
+    testing = testing.rename(columns=mapping)
+    testing = testing.pivot(columns='Measure Names', values='Measure Values',
+                            index=DATE).rename(columns=mapping)
+    testing = _yet_another_prep_cumsum_df(testing, DATE, mapping.values())
+
+    # make columns numbers
 
     add_query_constants(testing, queries[0])
 
