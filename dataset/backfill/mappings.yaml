@@ -152,6 +152,11 @@ HI:
   toDate_positive: SPECIMENS_POS
   toDate_positiveAndPresumed: POSITIVE
   cumulative_deaths: DEATH
+ID:
+  SUM(Negative): SPECIMENS_NEG
+  SUM(Positive): SPECIMENS_POS
+  SUM(Total): SPECIMENS
+  DAY(Week End): DATE
 IL:
   testDate: DATE
   total_tested: TOTAL

@@ -268,6 +268,15 @@ def handle_ga(res, mapping):
     return tagged
 
 
+def handle_id(res, mapping, queries):
+    testing = res[0][0].filter(like='alias')
+    testing.columns = [c.replace('-alias', '') for c in testing.columns]
+    testing = testing.rename(columns=mapping)
+    df = _yet_another_prep_cumsum_df(testing)
+    add_query_constants(df, queries[0])
+    return df.to_dict(orient='records')
+
+
 def handle_il(res, mapping, queries):
     df = res[0].rename(columns=mapping)
     df[TS] = df[DATE]

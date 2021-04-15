@@ -228,6 +228,13 @@ HI:
 #   params: {}
 #   type: Tableau
 #   desc: Testing
+ID:
+- url: https://public.tableau.com/views/DPHIdahoCOVID-19Dashboard/Testing
+  params: {worksheet: 'Positive'}
+  type: tableau
+  desc: Weekly tests
+  constants:
+    DATE_USED: Specimen Collection
 IL:
 # source: http://www.dph.illinois.gov/content/covid-19-cases-tests-and-deaths-day
 - url: https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetIllinoisCases?format=csv

@@ -157,7 +157,10 @@ def request_tableau_scraper(query):
     dashboard = ts.getWorkbook()
     dfs = []
     prefixes = [] if not query.params else query.params.get('worksheet', [])
+    if isinstance(prefixes, str):
+        prefixes = [prefixes]
     for ws in dashboard.worksheets:
+        print(ws.name)
         if prefixes is None:
             dfs.append(ws.data)
         elif any([ws.name.startswith(n) for n in prefixes]):
