@@ -1,7 +1,14 @@
-# CoViD-19 Data Fetchers
+# COVID-19 Data Fetchers
 Fetch COVID19 data published by US states and territories.
 
 The goal of this project is to fetch the most recent covid19 data from US states and territories, and publish them for easy consumption and use for Covid Tracking Project.
+
+For context, the data collection project started under the following assumptions:
+#. The data to collect is always structured, and comes from APIs dedicated for this task
+#. It’s a short term fix, intended to run for a month, at most two months, but not more
+Both assumptions were broken pretty quickly
+
+
 
 ## TL;DR
 ![Project TL;DR](docs/tldr.png)
