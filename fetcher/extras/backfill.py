@@ -1,4 +1,5 @@
 from datetime import datetime
+import logging
 import os
 import re
 import numpy as np
@@ -6,6 +7,9 @@ import pandas as pd
 
 from fetcher.extras.common import atoi, MaRawData, zipContextManager
 from fetcher.utils import Fields, extract_arcgis_attributes, extract_attributes
+
+
+logger = logging.getLogger(__name__)
 
 
 NULL_DATE = datetime(2020, 1, 1)
@@ -236,19 +240,22 @@ def handle_fl(res, mapping, queries):
         tagged.extend(cumsum_df.to_dict(orient='records'))
 
     # The last item is the aggregated case-line data
-    dfs = []
-    for data in res[-2:]:
-        df = pd.DataFrame([x['attributes'] for x in data['features']])
-        df = df.rename(
-            columns={**{'EXPR_1': 'Year', 'EXPR_2': 'Month', 'EXPR_3': 'Day'}, **mapping})
-        df[DATE] = pd.to_datetime(df[['Year', 'Month', 'Day']])
-        df = df.set_index(DATE).sort_index()
-        dfs.append(df)
-    df = pd.concat(dfs, axis=1).filter(like='POSITIVE').fillna(0).sum(axis=1).cumsum()
-    df = df.to_frame()
-    add_query_constants(df, queries[-1])
-    df[TS] = df.index
-    tagged.extend(df.to_dict(orient='records'))
+    try:
+        dfs = []
+        for data in res[-2:]:
+            df = pd.DataFrame([x['attributes'] for x in data['features']])
+            df = df.rename(
+                columns={**{'EXPR_1': 'Year', 'EXPR_2': 'Month', 'EXPR_3': 'Day'}, **mapping})
+            df[DATE] = pd.to_datetime(df[['Year', 'Month', 'Day']])
+            df = df.set_index(DATE).sort_index()
+            dfs.append(df)
+            df = pd.concat(dfs, axis=1).filter(like='POSITIVE').fillna(0).sum(axis=1).cumsum()
+            df = df.to_frame()
+        add_query_constants(df, queries[-1])
+        df[TS] = df.index
+        tagged.extend(df.to_dict(orient='records'))
+    except Exception as e:
+        logger.warning(str(e))
 
     return tagged
 
