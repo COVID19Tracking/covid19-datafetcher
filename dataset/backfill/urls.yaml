@@ -33,14 +33,18 @@ AL:
   desc: Cases (by report date)
   constants:
     DATE_USED: Report
-    #METRIC: Cases
 - url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/ArcGIS/rest/services/C19_cumulative_death_statewide_PUBLIC/FeatureServer/1/query
   params: {where: DeathDate <> 'Unknown', outFields: "*, DeathDate as date", f: json}
   type: arcgis
   desc: Death (by date of death)
   constants:
     DATE_USED: Death
-    #METRIC: Deaths
+- url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/ArcGIS/rest/services/C19_RiskIndicator_PUBLIC/FeatureServer/3/query
+  params: {where: 1=1, orderByFields: WeekOf desc, groupByFieldsForStatistics: WeekOf, outStatistics: [{"statisticType": "sum", "onStatisticField": "TotalTests"}, {"statisticType": "sum", "onStatisticField": "TestTarget"}], f: json}
+  type: arcgis
+  desc: Tests (pcr + antigen) by collection week
+  constants:
+    DATE_USED: Specimen Collection
 AR:
 - url: https://services.arcgis.com/PwY9ZuZRDiI5nXUB/ArcGIS/rest/services/UPDATED_ADH_COVID19_METRICS_BY_DATE/FeatureServer/0/query
   params: {where: 1=1, outFields: '*', orderByFields: date asc, f: json}

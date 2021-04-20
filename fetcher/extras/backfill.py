@@ -115,6 +115,23 @@ def handle_ak(res, mapping, queries):
     return tagged
 
 
+def handle_al(res, mapping, queries):
+    tagged = []
+    for i, data in enumerate(res[:-1]):
+        data = extract_arcgis_attributes(data, mapping)
+        query_constants = queries[i].constants
+        for x in data:
+            x.update(query_constants)
+        tagged.extend(data)
+
+    tests = pd.DataFrame([x['attributes'] for x in res[-1]['features']]).rename(columns=mapping)
+    tests['DATE'] = '20' + tests['DATE']
+    cumsum_df = _yet_another_prep_cumsum_df(tests)
+    add_query_constants(cumsum_df, queries[-1])
+    tagged.extend(cumsum_df.to_dict(orient='records'))
+    return tagged
+
+
 def handle_ar(res, mapping):
     # simply a cumsum table
     data = extract_arcgis_attributes(res[0], mapping)

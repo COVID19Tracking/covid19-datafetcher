@@ -19,6 +19,9 @@ AL:
   date: DATE
   cumTotalDeath: DEATH
   __strptime: "%y-%m-%d"
+  # weekly specimens
+  WeekOf: DATE
+  SUM_TotalTests: SPECIMENS
 AR:
   Date: TIMESTAMP
   pcr_tests: SPECIMENS
