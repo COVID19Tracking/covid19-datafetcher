@@ -7,7 +7,7 @@ from fetcher.utils import Fields, request, request_and_parse, request_csv, reque
     request_pandas, request_tableau_scraper, extract_attributes, extract_arcgis_attributes
 
 
-MS_FILTER = datetime(2020, 1, 1, 0, 0).timestamp() * 1000
+MS_FILTER = datetime(2019, 12, 30, 0, 0).timestamp() * 1000
 # Indices
 TS = 'TIMESTAMP'
 STATE = Fields.STATE.name

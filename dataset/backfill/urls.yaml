@@ -28,7 +28,7 @@ AK:
     DATE_USED: Report
 AL:
 - url: https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/StatewideTemporal_RunAVG_READONLY/FeatureServer/1/query
-  params: {where: 1=1, outFields: '*', orderByFields: InvDate asc, resultRecordCount: 500, f: json}
+  params: {where: InvDate >= TIMESTAMP '2020-01-01 00:00', outFields: '*', orderByFields: InvDate asc, resultRecordCount: 1000, f: json}
   type: arcgis
   desc: Cases (by report date)
   constants:
@@ -176,13 +176,13 @@ DE:
   desc: All data
 FL:
 - url: https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/ArcGIS/rest/services/Florida_COVID_19_Deaths_by_Day/FeatureServer/0/query
-  params: {where: 1=1, outFields: '*', orderByField: Date asc, f: json, resultRecordCount: 500}
+  params: {where: 1=1, outFields: '*', orderByField: Date asc, f: json, resultRecordCount: 999}
   type: arcgis
   desc: Death by day
   constants:
     DATE_USED: Death
 - url: https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/ArcGIS/rest/services/Florida_COVID_19_Cases_by_Day_For_Time_Series/FeatureServer/0/query
-  params: {where: county = 'A State', outFields: '*, FREQUENCY as cases', orderByField: Date asc, resultRecordCount: 500, f: json}
+  params: {where: county = 'A State', outFields: '*, FREQUENCY as cases', orderByField: Date asc, resultRecordCount: 999, f: json}
   type: arcgis
   desc: Cases for time series by ???
 - url: https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/ArcGIS/rest/services/state_daily_testing/FeatureServer/0/query
@@ -210,7 +210,7 @@ GA:
   desc: Zip Download
 GU:
 - url: https://services2.arcgis.com/FPJlJZYRsD8OhCWA/arcgis/rest/services/COVID19_Dashboard_Counts_by_Date/FeatureServer/0/query
-  params: {where: 1=1, outFields: '*', orderByFields: 'date asc', resultRecordCount: 500, f: json}
+  params: {where: 1=1, outFields: '*', orderByFields: 'date asc', resultRecordCount: 999, f: json}
   type: arcgis
   desc: Tests
 HI:
@@ -289,7 +289,7 @@ MA:
   desc: None, just need a trigger
 MD:
 - url: https://services.arcgis.com/njFNhDsUCentVYJW/ArcGIS/rest/services/MASTERCaseTracker/FeatureServer/0/query
-  params: {f: json, resultRecordCount: 500, orderByFields: ReportDate desc, outFields: 'ReportDate,TotalCases,NegativeTests,deaths,pdeaths,TotalTests', where: 1=1}
+  params: {f: json, resultRecordCount: 999, orderByFields: ReportDate desc, outFields: 'ReportDate,TotalCases,NegativeTests,deaths,pdeaths,TotalTests', where: 1=1}
   type: arcgis
   desc: Dashboard numbers
   constants:
@@ -302,7 +302,7 @@ MD:
   constants:
     DATE_USED: Specimen Collection
 - url: https://services.arcgis.com/njFNhDsUCentVYJW/ArcGIS/rest/services/MASTERCaseTracker/FeatureServer/0/query
-  params: {f: json, resultRecordCount: 500, orderByFields: ReportDate desc, outFields: 'ReportDate,deathDOD, pDeathDOD', where: 1=1}
+  params: {f: json, resultRecordCount: 999, orderByFields: ReportDate desc, outFields: 'ReportDate,deathDOD, pDeathDOD', where: 1=1}
   type: arcgis
   desc: goobar
   constants:
@@ -456,7 +456,7 @@ NV:
   desc: Cases, deaths and tests
 NY:
 - url: https://health.data.ny.gov/resource/xdss-u53e.json
-  params: {$select: 'test_date, sum(cumulative_number_of_positives), sum(cumulative_number_of_tests)', $group: test_date, $order: test_date desc, $limit: 500}
+  params: {$select: 'test_date, sum(cumulative_number_of_positives), sum(cumulative_number_of_tests)', $group: test_date, $order: test_date desc, $limit: 999}
   type: soda
   desc: Total & positives
   data_path: [[]]
@@ -483,18 +483,18 @@ OR:
     DATE_USED: Test Result
 PA:
 - url: https://data.pa.gov/api/id/r6ti-va88.json
-  params: {$query: 'select date, newpcrtests order by date asc limit 500'}
+  params: {$query: 'select date, newpcrtests order by date asc limit 999'}
   type: soda
   desc: PCR Tests encounters
   constants:
     DATE_USED: Test Result
 - url: https://data.pa.gov/api/id/j72v-r42c.json
-  params: {$query: 'select date, cases where county = "Pennsylvania" order by date desc limit 500'}
+  params: {$query: 'select date, cases where county = "Pennsylvania" order by date desc limit 999'}
   type: soda
   constants:
     DATE_USED: Report
 - url: https://data.pa.gov/api/id/fbgu-sqgp.json
-  params: {$query: 'select date, deaths where county = "Pennsylvania" order by date desc limit 500'}
+  params: {$query: 'select date, deaths where county = "Pennsylvania" order by date desc limit 999'}
   type: soda
   desc: Death by day of death
   constants:
@@ -510,23 +510,23 @@ TN:
   desc: All metrics by report and death by DOD
 TX:
 - url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/TX_DSHS_COVID19_Cases_Service/FeatureServer/2/query
-  params: {where: 1=1, outFields: 'Date,CumulativeFatalities', orderByField: Date asc, resultRecordCount: 500, f: json}
+  params: {where: 1=1, outFields: 'Date,CumulativeFatalities', orderByField: Date asc, resultRecordCount: 999, f: json}
   type: arcgis
   desc: Death by day of death
   constants:
     DATE_USED: Death
 - url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/TX_DSHS_COVID19_Cases_Service/FeatureServer/2/query
-  params: {where: 1=1, outFields: 'Date,CumulativeCases,CumulativeProbable', orderByField: Date asc, resultRecordCount: 500, f: json}
+  params: {where: 1=1, outFields: 'Date,CumulativeCases,CumulativeProbable', orderByField: Date asc, resultRecordCount: 999, f: json}
   type: arcgis
   desc: Cases (confirmed, probable)
 - url: https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/TX_DSHS_COVID19_TestData_Service/FeatureServer/4/query
-  params: {where: Date <> NULL, outFields: 'Date,ViralTests,AntibodyTests,AntigenTests', orderByFields: Date asc, resultRecordCount: 500, f: json}
+  params: {where: Date <> NULL, outFields: 'Date,ViralTests,AntibodyTests,AntigenTests', orderByFields: Date asc, resultRecordCount: 999, f: json}
   type: arcgis
   desc: Testing (by specimen collection date)
   constants:
     DATE_USED: Specimen Collection
 # - url: https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/DSHS_COVID19_TestData_Service/FeatureServer/3/query
-#   params: {where: 1=1, outFields: '*', orderByField: Date asc, resultRecordCount: 500, f: json}
+#   params: {where: 1=1, outFields: '*', orderByField: Date asc, resultRecordCount: 999, f: json}
 #   type: arcgis
 #   desc: Testing (PCR + Antibody)
 UT:
