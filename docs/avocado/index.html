@@ -57,7 +57,7 @@
       <td><a name="AL"/><b>AL</b></td>
       <td>
         
-        <a href="https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/StatewideTemporal_RunAVG_READONLY/FeatureServer/1/query?where=1%3D1&amp;outFields=%2A&amp;orderByFields=InvDate+asc&amp;resultRecordCount=500">
+        <a href="https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/StatewideTemporal_RunAVG_READONLY/FeatureServer/1/query?where=InvDate+%3E%3D+TIMESTAMP+%272020-01-01+00%3A00%27&amp;outFields=%2A&amp;orderByFields=InvDate+asc&amp;resultRecordCount=1000">
             Cases (by report date)
         </a><br/>
         
@@ -179,11 +179,11 @@
       <td><a name="FL"/><b>FL</b></td>
       <td>
         
-        <a href="https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/ArcGIS/rest/services/Florida_COVID_19_Deaths_by_Day/FeatureServer/0/query?where=1%3D1&amp;outFields=%2A&amp;orderByField=Date+asc&amp;resultRecordCount=500">
+        <a href="https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/ArcGIS/rest/services/Florida_COVID_19_Deaths_by_Day/FeatureServer/0/query?where=1%3D1&amp;outFields=%2A&amp;orderByField=Date+asc&amp;resultRecordCount=999">
             Death by day
         </a><br/>
         
-        <a href="https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/ArcGIS/rest/services/Florida_COVID_19_Cases_by_Day_For_Time_Series/FeatureServer/0/query?where=county+%3D+%27A+State%27&amp;outFields=%2A%2C+FREQUENCY+as+cases&amp;orderByField=Date+asc&amp;resultRecordCount=500">
+        <a href="https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/ArcGIS/rest/services/Florida_COVID_19_Cases_by_Day_For_Time_Series/FeatureServer/0/query?where=county+%3D+%27A+State%27&amp;outFields=%2A%2C+FREQUENCY+as+cases&amp;orderByField=Date+asc&amp;resultRecordCount=999">
             Cases for time series by ???
         </a><br/>
         
@@ -215,7 +215,7 @@
       <td><a name="GU"/><b>GU</b></td>
       <td>
         
-        <a href="https://services2.arcgis.com/FPJlJZYRsD8OhCWA/arcgis/rest/services/COVID19_Dashboard_Counts_by_Date/FeatureServer/0/query?where=1%3D1&amp;outFields=%2A&amp;orderByFields=date+asc&amp;resultRecordCount=500">
+        <a href="https://services2.arcgis.com/FPJlJZYRsD8OhCWA/arcgis/rest/services/COVID19_Dashboard_Counts_by_Date/FeatureServer/0/query?where=1%3D1&amp;outFields=%2A&amp;orderByFields=date+asc&amp;resultRecordCount=999">
             Tests
         </a><br/>
         
@@ -303,7 +303,7 @@
       <td><a name="MD"/><b>MD</b></td>
       <td>
         
-        <a href="https://services.arcgis.com/njFNhDsUCentVYJW/ArcGIS/rest/services/MASTERCaseTracker/FeatureServer/0/query?resultRecordCount=500&amp;orderByFields=ReportDate+desc&amp;outFields=ReportDate%2CTotalCases%2CNegativeTests%2Cdeaths%2Cpdeaths%2CTotalTests&amp;where=1%3D1">
+        <a href="https://services.arcgis.com/njFNhDsUCentVYJW/ArcGIS/rest/services/MASTERCaseTracker/FeatureServer/0/query?resultRecordCount=999&amp;orderByFields=ReportDate+desc&amp;outFields=ReportDate%2CTotalCases%2CNegativeTests%2Cdeaths%2Cpdeaths%2CTotalTests&amp;where=1%3D1">
             Dashboard numbers
         </a><br/>
         
@@ -311,7 +311,7 @@
             PCR Testing and positives
         </a><br/>
         
-        <a href="https://services.arcgis.com/njFNhDsUCentVYJW/ArcGIS/rest/services/MASTERCaseTracker/FeatureServer/0/query?resultRecordCount=500&amp;orderByFields=ReportDate+desc&amp;outFields=ReportDate%2CdeathDOD%2C+pDeathDOD&amp;where=1%3D1">
+        <a href="https://services.arcgis.com/njFNhDsUCentVYJW/ArcGIS/rest/services/MASTERCaseTracker/FeatureServer/0/query?resultRecordCount=999&amp;orderByFields=ReportDate+desc&amp;outFields=ReportDate%2CdeathDOD%2C+pDeathDOD&amp;where=1%3D1">
             goobar
         </a><br/>
         
@@ -491,7 +491,7 @@
       <td><a name="NY"/><b>NY</b></td>
       <td>
         
-        <a href="https://health.data.ny.gov/resource/xdss-u53e.json?%24select=test_date%2C+sum%28cumulative_number_of_positives%29%2C+sum%28cumulative_number_of_tests%29&amp;%24group=test_date&amp;%24order=test_date+desc&amp;%24limit=500">
+        <a href="https://health.data.ny.gov/resource/xdss-u53e.json?%24select=test_date%2C+sum%28cumulative_number_of_positives%29%2C+sum%28cumulative_number_of_tests%29&amp;%24group=test_date&amp;%24order=test_date+desc&amp;%24limit=999">
             Total &amp; positives
         </a><br/>
         
@@ -525,15 +525,15 @@
       <td><a name="PA"/><b>PA</b></td>
       <td>
         
-        <a href="https://data.pa.gov/api/id/r6ti-va88.json?%24query=select+date%2C+newpcrtests+order+by+date+asc+limit+500">
+        <a href="https://data.pa.gov/api/id/r6ti-va88.json?%24query=select+date%2C+newpcrtests+order+by+date+asc+limit+999">
             PCR Tests encounters
         </a><br/>
         
-        <a href="https://data.pa.gov/api/id/j72v-r42c.json?%24query=select+date%2C+cases+where+county+%3D+%22Pennsylvania%22+order+by+date+desc+limit+500">
+        <a href="https://data.pa.gov/api/id/j72v-r42c.json?%24query=select+date%2C+cases+where+county+%3D+%22Pennsylvania%22+order+by+date+desc+limit+999">
             link
         </a><br/>
         
-        <a href="https://data.pa.gov/api/id/fbgu-sqgp.json?%24query=select+date%2C+deaths+where+county+%3D+%22Pennsylvania%22+order+by+date+desc+limit+500">
+        <a href="https://data.pa.gov/api/id/fbgu-sqgp.json?%24query=select+date%2C+deaths+where+county+%3D+%22Pennsylvania%22+order+by+date+desc+limit+999">
             Death by day of death
         </a><br/>
         
@@ -563,15 +563,15 @@
       <td><a name="TX"/><b>TX</b></td>
       <td>
         
-        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/TX_DSHS_COVID19_Cases_Service/FeatureServer/2/query?where=1%3D1&amp;outFields=Date%2CCumulativeFatalities&amp;orderByField=Date+asc&amp;resultRecordCount=500">
+        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/TX_DSHS_COVID19_Cases_Service/FeatureServer/2/query?where=1%3D1&amp;outFields=Date%2CCumulativeFatalities&amp;orderByField=Date+asc&amp;resultRecordCount=999">
             Death by day of death
         </a><br/>
         
-        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/TX_DSHS_COVID19_Cases_Service/FeatureServer/2/query?where=1%3D1&amp;outFields=Date%2CCumulativeCases%2CCumulativeProbable&amp;orderByField=Date+asc&amp;resultRecordCount=500">
+        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/arcgis/rest/services/TX_DSHS_COVID19_Cases_Service/FeatureServer/2/query?where=1%3D1&amp;outFields=Date%2CCumulativeCases%2CCumulativeProbable&amp;orderByField=Date+asc&amp;resultRecordCount=999">
             Cases (confirmed, probable)
         </a><br/>
         
-        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/TX_DSHS_COVID19_TestData_Service/FeatureServer/4/query?where=Date+%3C%3E+NULL&amp;outFields=Date%2CViralTests%2CAntibodyTests%2CAntigenTests&amp;orderByFields=Date+asc&amp;resultRecordCount=500">
+        <a href="https://services5.arcgis.com/ACaLB9ifngzawspq/ArcGIS/rest/services/TX_DSHS_COVID19_TestData_Service/FeatureServer/4/query?where=Date+%3C%3E+NULL&amp;outFields=Date%2CViralTests%2CAntibodyTests%2CAntigenTests&amp;orderByFields=Date+asc&amp;resultRecordCount=999">
             Testing (by specimen collection date)
         </a><br/>
         
@@ -674,6 +674,6 @@
     </td></tr>
     
     </table>
-    Generated on 2021-04-20 05:29:17.893055
+    Generated on 2021-04-23 00:01:55.938934
   </body>
 </html>
