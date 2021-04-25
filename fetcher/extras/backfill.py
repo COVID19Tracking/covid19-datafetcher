@@ -220,8 +220,8 @@ def handle_de(res, mapping):
     df = df[df['Statistic'].isin(mapping.keys())]
 
     # changing the order of operations here is probably better
-
     def prepare_values(df):
+        df = df.groupby(['Date', 'Date used', 'Statistic'], as_index=False).max()
         df = df.pivot(
             index=['Date', 'Date used'], values='Value', columns=['Statistic'])
         df[DATE_USED] = df.index.get_level_values(1)
