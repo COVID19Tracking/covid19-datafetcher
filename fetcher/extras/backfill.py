@@ -360,11 +360,16 @@ def handle_ks(res, mapping, queries):
 
 
 def handle_la(res, mapping):
-    df = res[0].rename(columns=mapping).groupby(DATE).sum()
-    df = df.sort_index().cumsum()
-    df[TS] = df.index
-    df[DATE_USED] = 'Specimen Collection'
-    return df.to_dict(orient='records')
+    tagged = []
+    for key in res[0]:
+        df = res[0][key]
+        df.columns = ["{}-{}".format(key, c) for c in df.columns]
+        df = df.rename(columns=mapping).groupby(DATE).sum()
+        df = df.sort_index().cumsum()
+        df[TS] = df.index
+        df[DATE_USED] = 'Specimen Collection'
+        tagged.extend(df.to_dict(orient='records'))
+    return tagged
 
 
 def handle_ma(res, mapping):

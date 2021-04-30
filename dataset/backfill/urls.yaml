@@ -279,7 +279,7 @@ KS:
     DATE_USED: Specimen Collection
 LA:
 - url: https://ldh.la.gov/assets/oph/Coronavirus/data/LA_COVID_TESTBYDAY_PARISH_PUBLICUSE.xlsx
-  params: {parse_dates: ['Lab Collection Date']}
+  params: {parse_dates: ['Lab Collection Date'], sheet_name: null}
   type: xlsx
   desc: Tests and cases by specimen collection
 MA:

@@ -185,11 +185,16 @@ KS:
   Negative: SPECIMENS_NEG
   Positive: SPECIMENS_POS
 LA:
-  Lab Collection Date: DATE
-  Daily Test Count: SPECIMENS
-  Daily Negative Test Count: SPECIMENS_NEG
-  Daily Positive Test Count: SPECIMENS_POS
-  Daily Case Count: POSITIVE
+  MOLECULAR-PCR-Lab Collection Date: DATE
+  MOLECULAR-PCR-Daily Test Count: SPECIMENS
+  MOLECULAR-PCR-Daily Negative Test Count: SPECIMENS_NEG
+  MOLECULAR-PCR-Daily Positive Test Count: SPECIMENS_POS
+  ANTIGEN-Lab Collection Date: DATE
+  ANTIGEN-Daily Test Count: ANTIGEN_TOTAL
+  ANTIGEN-Daily Negative Test Count: ANTIGEN_NEG
+  ANTIGEN-Daily Positive Test Count: ANTIGEN_POS
+  ALL TESTS-Lab Collection Date: DATE
+  ALL TESTS-Daily Case Count: POSITIVE
 MA:
   "Cases (Report Date):DATE_USED": Report
   "Cases (Report Date):Date": DATE
