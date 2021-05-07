@@ -456,7 +456,8 @@ OK:
   Deaths: DEATH
   Recovered: RECOVERED
   ReportDate: DATE
-  Total Number of Specimens Tested: SPECIMENS
+  date: DATE
+  Specimens tested, count: SPECIMENS
 OR:
   SUM_Cases: POSITIVE
   SUM_Deaths: DEATH
