@@ -728,7 +728,7 @@ def handle_tn(res, mapping):
 
     df = df.rename(columns=mapping).filter(mapping.values()).set_index('DATE')
     # separate death by date of death
-    dod = df.loc[:, ['DEATH_BY_DOD']]
+    dod = df.loc[:, ['DEATH_BY_DOD']].rename(columns={'DEATH_BY_DOD': 'DEATH'})
     df = df.drop(columns='DEATH_BY_DOD')
 
     df_date = [(dod, 'Death'), (df, 'Report')]
