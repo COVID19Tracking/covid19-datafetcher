@@ -482,6 +482,8 @@ WA:
   Total Cases: POSITIVE
   Confirmed Cases: CONFIRMED
   Probable Cases: PROBABLE
+  CumulativeCount: POSITIVE
+  CumulativeDeath: DEATH
   Deaths: DEATH
   Date of Death: DATE
   Day: DATE
