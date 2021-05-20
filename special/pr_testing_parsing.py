@@ -4,6 +4,50 @@ import re
 import sys
 from datetime import datetime
 
+'''
+This script parses PRs testing file
+https://bioportal.salud.gov.pr/api/administration/reports/minimal-info-unique-tests
+This is a json file, with a record for each test.
+A record looks like this:
+{
+  "collectedDate": "8/26/2020",
+  "reportedDate": "8/26/2020",
+  "ageRange": "10 to 19",
+  "testType": "Total Antibodies",
+  "result": "Negative",
+  "city": "Lares",
+  "createdAt": "12/24/2020 8:23"
+}
+
+Dates:
+  Collection Date
+  Report Date (test result? test repored somewhere?)
+  Record creation date.
+Tests:
+  This file contains (as far as we've seen) 3 types of tests: PCR, antibody, antigen
+
+
+This script parses the file, and generates an aggregated time series.
+It deals with some data mishaps: past and future dates, missing dates.
+Test types are unified and assigned a single test type value (pcr, antigen, antibody), same with results.
+
+The script stops if there were unknown and unparsed values
+
+'''
+
+
+PCR_TESTS = ['MOLECULAR','Molecular']
+ANTIGEN_TESTS = ['ANTIGENO', 'Antigens']
+ANTIBODY_TESTS = ['SEROLOGICAL', 'Serological', 'Serological IgG Only', 'Total Antibodies']
+
+POSITIVE_RESULT = ['Positive', 'Positive IgG Only', 'Positive IgM and IgG',
+                   'Positive IgM Only', 'Positive 2019-nCoV', 'COVID-19 Positive',
+                   'SARS-CoV-2 Positive', 'Presumptive Positive',
+                   'SARS-CoV-2 Presumptive Positive']
+NEGATIVE_RESULT = ['Negative', 'Not Detected', 'COVID-19 Negative',
+                   'SARS-CoV-2 Negative']
+
+
 
 def aggregate(df, field):
     # Start handling the timeseries
@@ -54,19 +98,13 @@ def cleanup(df):
     print("fixed dates")
 
     # Unify test type names
-    df.loc[df["testType"].isin(['MOLECULAR','Molecular']),'testType_parsed'] = 'Molecular'
-    df.loc[df["testType"].isin(['ANTIGENO', 'Antigens']),'testType_parsed'] = 'Antigen'
-    df.loc[df["testType"].isin(['SEROLOGICAL', 'Serological', 'Serological IgG Only', 'Total Antibodies']),'testType_parsed'] = 'Serology'
+    df.loc[df["testType"].isin(PCR_TESTS),'testType_parsed'] = 'Molecular'
+    df.loc[df["testType"].isin(ANTIGEN_TESTS),'testType_parsed'] = 'Antigen'
+    df.loc[df["testType"].isin(ANTIBODY_TESTS),'testType_parsed'] = 'Serology'
 
     # Unify results
-    df.loc[df['result'].isin([
-        'Negative', 'Not Detected', 'COVID-19 Negative',
-        'SARS-CoV-2 Negative']),'result_parsed'] = 'Negative'
-    df.loc[df['result'].isin([
-        'Positive', 'Positive IgG Only', 'Positive IgM and IgG',
-        'Positive IgM Only', 'Positive 2019-nCoV', 'COVID-19 Positive',
-        'SARS-CoV-2 Positive', 'Presumptive Positive',
-        'SARS-CoV-2 Presumptive Positive']), 'result_parsed'] = 'Positive'
+    df.loc[df['result'].isin(NEGATIVE_RESULT),'result_parsed'] = 'Negative'
+    df.loc[df['result'].isin(POSITIVE_RESULT), 'result_parsed'] = 'Positive'
 
     # strip the "not tested" ones
     df = df[df['result'] != 'Not Tested']
