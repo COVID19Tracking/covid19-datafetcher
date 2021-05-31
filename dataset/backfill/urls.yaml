@@ -373,7 +373,7 @@ ND:
   params: {parse_dates: ['Date']}
   type: pandas
   desc: PCR (encounters, specimens, negatives, people, confirmed)
-NE:
+# NE:
 # TODO: fix me, report me
 # - url: https://gis.ne.gov/enterprise/rest/services/Covid19MapV5/MapServer/11/query
 #   params: {where: 1=1, outFields: '*', orderByFields: LAB_REPORT_DATE asc, f: json}
@@ -381,18 +381,18 @@ NE:
 #   desc: Tests and results by lab report date
 #   constants:
 #     DATE_USED: Test Result
-- url: https://gis.ne.gov/Enterprise/rest/services/Covid19MapV6/MapServer/1/query
-  params: {where: 1=1, outFields: '*', orderByFields: SP_Collection_DATE asc, resultRecordCount: 600, f: json}
-  type: arcgis
-  desc: Cases by specimen collection date
-  constants:
-    DATE_USED: Specimen Collection
-- url: https://gis.ne.gov/Enterprise/rest/services/Covid19MapV6/MapServer/2/query
-  params: {where: 1=1, outFields: '*', orderByFields: SP_Collection_DATE asc, resultRecordCount: 600, f: json}
-  type: arcgis
-  desc: Tests by specimen collection
-  constants:
-    DATE_USED: Specimen Collection
+# - url: https://gis.ne.gov/Enterprise/rest/services/Covid19MapV6/MapServer/1/query
+#   params: {where: 1=1, outFields: '*', orderByFields: SP_Collection_DATE asc, resultRecordCount: 600, f: json}
+#   type: arcgis
+#   desc: Cases by specimen collection date
+#   constants:
+#     DATE_USED: Specimen Collection
+# - url: https://gis.ne.gov/Enterprise/rest/services/Covid19MapV6/MapServer/2/query
+#   params: {where: 1=1, outFields: '*', orderByFields: SP_Collection_DATE asc, resultRecordCount: 600, f: json}
+#   type: arcgis
+#   desc: Tests by specimen collection
+#   constants:
+#     DATE_USED: Specimen Collection
 NH:
 # - url: https://dashboard.nh.gov/t/DHHS/views/COVID19TrendsDashboard/CasesTotal.csv
 #   params: {thousands: ",", parse_dates: ['Date of Report']}
