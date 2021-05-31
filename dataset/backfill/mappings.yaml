@@ -4,9 +4,10 @@
 # a format string to parse it. The format string mapped in __strptime
 AK:
   Date_Collected: TIMESTAMP
-  tests_total: SPECIMENS
-  Negative: SPECIMENS_NEG
-  Positive: SPECIMENS_POS
+  All_Tests: SPECIMENS
+  Daily_Positive: SPECIMENS_POS
+  Daily_Negative: SPECIMENS_NEG
+
   OnsetDate: TIMESTAMP
   cases: POSITIVE
   # Cases and death by report

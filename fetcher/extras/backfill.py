@@ -86,17 +86,10 @@ def make_cumsum_df(data, timestamp_field=Fields.TIMESTAMP.name,
 
 
 def handle_ak(res, mapping, queries):
-    tests = res[0]
-    collected = [x['attributes'] for x in tests['features']]
-    df = pd.DataFrame(collected)
-    df = df.pivot(columns='Test_Result', index='Date_Collected')
-    df.columns = df.columns.droplevel()
-    df['tests_total'] = df.sum(axis=1)
-
-    df = df.rename(columns=mapping).cumsum()
-    df[TS] = df.index
-    add_query_constants(df, queries[0])
-    tagged = df.to_dict(orient='records')
+    tests = extract_arcgis_attributes(res[0], mapping)
+    cumsum_tests_df = make_cumsum_df(tests)
+    add_query_constants(cumsum_tests_df, queries[0])
+    tagged = cumsum_tests_df.to_dict(orient='records')
 
     # cases
     cases = pd.DataFrame([x['attributes'] for x in res[1]['features']]).rename(columns=mapping)
