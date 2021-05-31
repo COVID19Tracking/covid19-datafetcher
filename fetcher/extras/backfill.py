@@ -838,6 +838,8 @@ def handle_wa(res, mapping, queries):
         for tab in dfs.keys():
             df = dfs[tab].rename(columns=mapping).set_index(DATE)
             df.index = pd.to_datetime(df.index)
+            if 'County' in df.columns:
+                df = df[df['County'] == 'Statewide']
             if i == 2:
                 # we need to calculate a cumulative sum
                 df = df.sort_index().cumsum()

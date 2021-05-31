@@ -479,6 +479,7 @@ WA:
   Date of Receipt of First Positive Lab: DATE
   Cases: POSITIVE
   Earlierst Specimen Collection Date: DATE
+  Earliest Specimen Collection Date: DATE
   Total Cases: POSITIVE
   Confirmed Cases: CONFIRMED
   Probable Cases: PROBABLE
