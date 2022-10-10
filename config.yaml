@@ -28,6 +28,8 @@ dataset:
 output: ${dataset.name}
 data_root: ${hydra:runtime.cwd}/dataset/${dataset.name}
 output_date_format: "%Y%m%d"
+outputs: ${hydra:runtime.cwd}/outputs
+
 
 # fetch a single state (or a list)
 state: ['AK', 'AL', 'AR', 'AS', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'GU',

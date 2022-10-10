@@ -3,15 +3,19 @@ import logging
 import typing
 import hydra
 import pandas as pd
+import os
+import urllib.request
 
 from fetcher.utils import Fields
 from fetcher.source_utils import fetch_source, process_source_responses
 from fetcher.sources import build_sources
 
-
 # Indices
 TS = 'TIMESTAMP'
 STATE = Fields.STATE.name
+
+site_url = "https://raw.githubusercontent.com/govex/COVID-19/master/data_tables/vaccine_data/raw_data" \
+           "/vaccine_data_us_state_timeline.csv "
 
 
 class Fetcher:
@@ -170,6 +174,15 @@ def save_df_to_db(db_config, df):
     df.to_sql(db_config.table, engine, if_exists='append', chunksize=200, method='multi')
 
 
+def get_covid_vaccination_data(outputdir):
+    """Download COVID Vaccination data in CSV format
+    """
+    if os.path.exists(outputdir + '/' + 'covid_vaccination_US.csv'):
+        os.remove(outputdir + '/' + 'covid_vaccination_US.csv')
+
+    urllib.request.urlretrieve(site_url, os.path.join(outputdir, 'covid_vaccination_US.csv'))
+
+
 @hydra.main(config_path='..', config_name="config")
 def main(cfg):
     print(cfg.dataset.pretty())
@@ -183,6 +196,7 @@ def main(cfg):
     # This stores the CSV with the requsted fields in order
     df = build_dataframe(results, cfg.state, cfg.dataset, cfg.output_date_format, cfg.output)
     print(df)
+    get_covid_vaccination_data(cfg.outputs)
 
     if 'db' in cfg.dataset and cfg.dataset.db.store:
         save_df_to_db(cfg.dataset.db, df)
